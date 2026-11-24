@@ -15,8 +15,8 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/index.html | 723178f03fb4d89f2d75c0a0b78dd0704f2f9633 | 1822 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/loading.html | ba4178b911341971cb2d317bcb3ae0e93911bd46 | 487 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/package.json | 3729872b2736eaf6b66c608c1b40f4e24c25d2fb | 1113 | REVIEWED — root/package/build/config file content read; no dynamic execution |
-| webview-ui/public/apple-touch-icon-precomposed.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | REVIEWED — JSON manifest read; referenced asset mapping cross-check pending |
-| webview-ui/public/apple-touch-icon.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/apple-touch-icon-precomposed.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/apple-touch-icon.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/carpets/carpet_0.png | 67fe2cd77038247a84c1a66fb9592ba3ee41a780 | 394 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/carpets/carpet_1.png | 25c9c0105fc0373cfcf89176101035bf64a5010c | 380 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/carpets/carpet_2.png | 28907dc0181b713bf9da57cfac6148a7f7ca6122 | 363 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
@@ -93,19 +93,19 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_BACK.png | 19921f909ce83565c5ab4164de6bd0f5b1e937af | 290 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_FRONT.png | 392f5a2758abdec2233da837f9c8ab1c271d7d82 | 295 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_SIDE.png | f9c58772117e776e99254fb87cc10d1f941d4d77 | 261 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
-| webview-ui/public/assets/pets/claudio/manifest.json | 767da5eb3a31f03a4f27649c0a8cdaa8e19bd562 | 39 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/assets/pets/claudio/manifest.json | 767da5eb3a31f03a4f27649c0a8cdaa8e19bd562 | 39 | REVIEWED — pet manifest JSON read |
 | webview-ui/public/assets/pets/claudio/pet.png | 9433b28259850d8142e3d8e991b0548d20570f2e | 3267 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
-| webview-ui/public/assets/pets/gitcat/manifest.json | a24e6e3d005a35b5dd7535da5ab61b3651a376f8 | 37 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/assets/pets/gitcat/manifest.json | a24e6e3d005a35b5dd7535da5ab61b3651a376f8 | 37 | REVIEWED — pet manifest JSON read |
 | webview-ui/public/assets/pets/gitcat/pet.png | d2b7f9b5f39ca3d9106908ff206b7176f377627a | 2892 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/walls/wall_0.png | 5530b2452c21671a4124eb2531855cf3e69c5b09 | 1738 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
-| webview-ui/public/banner.png | 8fc2fd94cdf1f9f6e2347c6fea26825e9f3ffd61 | 10752 | INVENTORIED — detailed asset audit pending |
-| webview-ui/public/characters.png | 371401d2a40cdfe89b6af38b991f130c0e9d4981 | 12216 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/banner.png | 8fc2fd94cdf1f9f6e2347c6fea26825e9f3ffd61 | 10752 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/characters.png | 371401d2a40cdfe89b6af38b991f130c0e9d4981 | 12216 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/favicon.ico | dd1c0a695a87dc36eee134181534eafc8d883b4a | 4926 | BINARY HEADER VERIFIED — ICO entries 16×16, 32×32, 48×48 |
 | webview-ui/public/fonts/FSPixelSansUnicode-Regular.ttf | 767a03d1f7417bbfdde1b42ce580b7dcdbd2cc9e | 1077160 | NOT VERIFIED — base64 fetch returned empty; tree size/hash recorded |
-| webview-ui/public/icons/icon-256.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | INVENTORIED — detailed asset audit pending |
-| webview-ui/public/icons/icon-512.png | f596e5507098171db1803199b96707dc93a8c21e | 5057 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/icons/icon-256.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/icons/icon-512.png | f596e5507098171db1803199b96707dc93a8c21e | 5057 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/manifest.webmanifest | 15b9bcef86a7819667804adafae815f9c0c2dcbb | 501 | REVIEWED — JSON parsed; two icon references match PNG IHDR dimensions |
-| webview-ui/public/office.png | 8c770a3c15f4b67264d160b195fe24853234120e | 49958 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/office.png | 8c770a3c15f4b67264d160b195fe24853234120e | 49958 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/Screenshot.jpg | a23439795da5ce4f0bffe11b8fff855700fb6b90 | 111189 | BINARY HEADER VERIFIED — JPEG 1308×521 |
 | webview-ui/README.md | d2e77611fd3d959fee0487c41bd27b318be32b04 | 2555 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/src/App.tsx | 3eb91a2050da5f789223bc0a045a80fc841d60cb | 42910 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
@@ -226,60 +226,60 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/characters/ui/ViewButton.tsx | 9c22f04ee2deb6489666128247122b5588201b7b | 996 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/Wardrobe.tsx | 5fb4e456225f297b23400e26363ae84fe09714a0 | 8912 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/wardrobe.ts | 6d2d2bdd35888b71b515971ff93f78156f45810c | 8926 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/components/AgentCard.tsx | fe7be6e720b6cd8a7f7a3b1e75e209c651fd6723 | 4312 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/AgentCardBar.tsx | 82449d892429b10bd26f1fa7dd9485a281cb9022 | 2573 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/AgentCardList.tsx | e55b618eb2a37382a6c6daf60bb9f67367bf31f3 | 4833 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/BottomToolbar.tsx | 95472e7199aa8236ff2603c1460df1c65b4f8307 | 10051 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/cardBar.ts | 76ac0818de593966b7c73ef60e0c11fde42470a4 | 3043 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/ChangelogModal.tsx | e550bd6d1a15ab95d1777b171c18a8b0aa376a70 | 4744 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/CharacterMugShot.tsx | ed982e8c4d46377685a5c4cdd0a2db0d6836712b | 2401 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/CharacterPicker.tsx | 96d325100bb3e300829696fbefe4d97f65fd117c | 12288 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/ConnectionIndicator.tsx | 805b2b1dde3c69d81f06672a5656e3d86c31307e | 1391 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/DebugView.tsx | ccc1f465d3777b65bfb79c870d5cb6eb3ef95c5e | 6636 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/DirectoryCharactersField.tsx | 8dbc69a8f3fa51090a922af32848cc9d6a65d442 | 6310 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/DirectoryCharacterStrip.tsx | ea7b710df81527fb9ea8306e4208fded8bf0c3e7 | 5768 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/DirectoryModal.tsx | 29318c52dd6bdc50441fb9282bf6a1f3921f9635 | 9181 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/directoryStrip.ts | fe4746c500da2a7ae091324e2f8232dd429655c9 | 1701 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/EditActionBar.tsx | 167f33ecabb947684fd37f4c083ecf75c27e701d | 2187 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/IntroBubble.tsx | 3ecdac98e9e15be0eca5fe1f1ec848828ddee53a | 18970 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/introBubbleGeometry.ts | e8750b34e3459ee3d1ecc0493a473424b2898012 | 4883 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/LaunchDrawer.tsx | a4367269738709c51c0f82bdd82ea801dcfb0091 | 11148 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/LoadingScene.tsx | 764d5b9eb0a3dea6c32979b7e95e6cc439f6ff9b | 7622 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/loadingSceneArt.ts | 2d33cd9f1fad94103f20e22622c3dd58a88bba16 | 3451 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/loadingSceneLayout.ts | a122bbff64ef37b31bbc3daf046a977b01ba0f9f | 7905 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/MigrationNotice.tsx | 0aa1bd3190d5a50d7a20965d9b3250399a90e319 | 1237 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/MobileAgentBar.tsx | 6fc6be39ffb350cfd8090e0252c89f9cb7c7a9e2 | 8624 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/MobileKeyBar.tsx | d3a0d3f03d998577feacc056b6edf458ba456ddc | 8466 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/MobileTerminalPage.tsx | 42f686b412cafc90b4164cf38431cc2a0f2fd26e | 2163 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/SettingsModal.tsx | ca9248f01ba8631a81b0489fcb152203f3b553d3 | 11109 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/statusDot.ts | 23c78e9f495dbcdfc9031f37f95776f8d337d9dc | 556 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/TerminalDrawer.tsx | a2cf945de98cf1ba9838d7fb7c7011ac5d68fd84 | 3843 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/TerminalHideRibbon.tsx | 54f35f46fb05adb34c75c6fddeca595f3dceffa9 | 1945 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/TerminalPane.tsx | ae1cc4daca64ec437f283731e23629e6ecb66375 | 11493 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/TerminalPaneStack.tsx | 5862c638b345dfa430e91c084d7eb6110d543fcb | 3139 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/Tooltip.tsx | 5e2305434b2eb22075dea27fccec0324a942bde6 | 1502 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/ui/Button.tsx | 0b04f4fef6ce11ef28cf18b19e05a491fe6432a1 | 1700 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/Checkbox.tsx | 8688f09731c4456cd7984a29131ebe3df7639722 | 1699 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/ColorPicker.tsx | b4e28664298b0e09e1ec36e3b3292c7e6adaf6e1 | 4737 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/Dropdown.tsx | 6bc0dbb17dbb81c7f390e8535a891827f4fd6d1a | 2890 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/ItemSelect.tsx | f7fa506384023e46c99f0ae333a536c9bde1c25e | 1334 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/MenuItem.tsx | db9a2cd11f5c48828b8cf75af1f284e70198a816 | 531 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/Modal.tsx | 527899e2657f222d4fd9c706d2414c35097ff364 | 3330 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/PickArea.tsx | 6ac096760f5d741376aaa5f82e0ca7d5baa9f8d4 | 1668 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/pickCanvas.ts | 7e8bbee9c3a7d4709f6494e9c1d85ae30e60d823 | 750 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/pixelFont.ts | 61e380a9b24a55f20aa4d6676cb58e73de73223d | 4622 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/pixelGrid.ts | 503040e24020218b4bd198019fcc1101c4c5c891 | 2132 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/PixelIcon.tsx | 62cc03bdc5f29d020c6592b011c6353d5abe051e | 1430 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/pixelIcons.ts | cc824e3123c1e78a4f0df461505904804a8d6c50 | 6109 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/PixelInputText.tsx | 94e7c2b2ed79e2831cdedd20ad3b835530860321 | 876 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/pixelSnap.ts | 93948494c9ea9f9feb519a49c89e5dfcfed007c0 | 1295 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/PixelSvg.tsx | 3eb7a942f1ea8d4a7a56d33e8629f3b0df1954a7 | 1071 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/PixelText.tsx | cd68c015f2b0711633e587a885a5a94c2613c607 | 2089 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/ui/types.ts | f83803bc75e7e3fa75a5d32af352bf4974d4ba7d | 493 | REVIEWED REPORTED — primitive component group |
-| webview-ui/src/components/useCardReorder.ts | 42092b1e069eaa60df8e88f097ba48fa4e4cef0c | 8578 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/VersionIndicator.tsx | ba5a0c3009bfb6f3028a4a5e786d5410eac5c4be | 4292 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/VisualColorPicker.tsx | f24cb4e20c3631ae740fa7c559d716b800213690 | 8840 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
-| webview-ui/src/components/ZoomControls.tsx | 7d3e17ed65d2e533b7e452b680c6f549eea947e5 | 5055 | PARTIAL / REVIEWED REPORTED — coverage varies; see DEEP-AUDIT |
+| webview-ui/src/components/AgentCard.tsx | fe7be6e720b6cd8a7f7a3b1e75e209c651fd6723 | 4312 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/AgentCardBar.tsx | 82449d892429b10bd26f1fa7dd9485a281cb9022 | 2573 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/AgentCardList.tsx | e55b618eb2a37382a6c6daf60bb9f67367bf31f3 | 4833 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/BottomToolbar.tsx | 95472e7199aa8236ff2603c1460df1c65b4f8307 | 10051 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/cardBar.ts | 76ac0818de593966b7c73ef60e0c11fde42470a4 | 3043 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ChangelogModal.tsx | e550bd6d1a15ab95d1777b171c18a8b0aa376a70 | 4744 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/CharacterMugShot.tsx | ed982e8c4d46377685a5c4cdd0a2db0d6836712b | 2401 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/CharacterPicker.tsx | 96d325100bb3e300829696fbefe4d97f65fd117c | 12288 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ConnectionIndicator.tsx | 805b2b1dde3c69d81f06672a5656e3d86c31307e | 1391 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/DebugView.tsx | ccc1f465d3777b65bfb79c870d5cb6eb3ef95c5e | 6636 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/DirectoryCharactersField.tsx | 8dbc69a8f3fa51090a922af32848cc9d6a65d442 | 6310 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/DirectoryCharacterStrip.tsx | ea7b710df81527fb9ea8306e4208fded8bf0c3e7 | 5768 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/DirectoryModal.tsx | 29318c52dd6bdc50441fb9282bf6a1f3921f9635 | 9181 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/directoryStrip.ts | fe4746c500da2a7ae091324e2f8232dd429655c9 | 1701 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/EditActionBar.tsx | 167f33ecabb947684fd37f4c083ecf75c27e701d | 2187 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/IntroBubble.tsx | 3ecdac98e9e15be0eca5fe1f1ec848828ddee53a | 18970 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/introBubbleGeometry.ts | e8750b34e3459ee3d1ecc0493a473424b2898012 | 4883 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/LaunchDrawer.tsx | a4367269738709c51c0f82bdd82ea801dcfb0091 | 11148 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/LoadingScene.tsx | 764d5b9eb0a3dea6c32979b7e95e6cc439f6ff9b | 7622 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/loadingSceneArt.ts | 2d33cd9f1fad94103f20e22622c3dd58a88bba16 | 3451 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/loadingSceneLayout.ts | a122bbff64ef37b31bbc3daf046a977b01ba0f9f | 7905 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/MigrationNotice.tsx | 0aa1bd3190d5a50d7a20965d9b3250399a90e319 | 1237 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/MobileAgentBar.tsx | 6fc6be39ffb350cfd8090e0252c89f9cb7c7a9e2 | 8624 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/MobileKeyBar.tsx | d3a0d3f03d998577feacc056b6edf458ba456ddc | 8466 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/MobileTerminalPage.tsx | 42f686b412cafc90b4164cf38431cc2a0f2fd26e | 2163 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/SettingsModal.tsx | ca9248f01ba8631a81b0489fcb152203f3b553d3 | 11109 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/statusDot.ts | 23c78e9f495dbcdfc9031f37f95776f8d337d9dc | 556 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/TerminalDrawer.tsx | a2cf945de98cf1ba9838d7fb7c7011ac5d68fd84 | 3843 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/TerminalHideRibbon.tsx | 54f35f46fb05adb34c75c6fddeca595f3dceffa9 | 1945 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/TerminalPane.tsx | ae1cc4daca64ec437f283731e23629e6ecb66375 | 11493 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/TerminalPaneStack.tsx | 5862c638b345dfa430e91c084d7eb6110d543fcb | 3139 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/Tooltip.tsx | 5e2305434b2eb22075dea27fccec0324a942bde6 | 1502 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/Button.tsx | 0b04f4fef6ce11ef28cf18b19e05a491fe6432a1 | 1700 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/Checkbox.tsx | 8688f09731c4456cd7984a29131ebe3df7639722 | 1699 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/ColorPicker.tsx | b4e28664298b0e09e1ec36e3b3292c7e6adaf6e1 | 4737 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/Dropdown.tsx | 6bc0dbb17dbb81c7f390e8535a891827f4fd6d1a | 2890 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/ItemSelect.tsx | f7fa506384023e46c99f0ae333a536c9bde1c25e | 1334 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/MenuItem.tsx | db9a2cd11f5c48828b8cf75af1f284e70198a816 | 531 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/Modal.tsx | 527899e2657f222d4fd9c706d2414c35097ff364 | 3330 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/PickArea.tsx | 6ac096760f5d741376aaa5f82e0ca7d5baa9f8d4 | 1668 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/pickCanvas.ts | 7e8bbee9c3a7d4709f6494e9c1d85ae30e60d823 | 750 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/pixelFont.ts | 61e380a9b24a55f20aa4d6676cb58e73de73223d | 4622 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/pixelGrid.ts | 503040e24020218b4bd198019fcc1101c4c5c891 | 2132 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/PixelIcon.tsx | 62cc03bdc5f29d020c6592b011c6353d5abe051e | 1430 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/pixelIcons.ts | cc824e3123c1e78a4f0df461505904804a8d6c50 | 6109 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/PixelInputText.tsx | 94e7c2b2ed79e2831cdedd20ad3b835530860321 | 876 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/pixelSnap.ts | 93948494c9ea9f9feb519a49c89e5dfcfed007c0 | 1295 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/PixelSvg.tsx | 3eb7a942f1ea8d4a7a56d33e8629f3b0df1954a7 | 1071 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/PixelText.tsx | cd68c015f2b0711633e587a885a5a94c2613c607 | 2089 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ui/types.ts | f83803bc75e7e3fa75a5d32af352bf4974d4ba7d | 493 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/useCardReorder.ts | 42092b1e069eaa60df8e88f097ba48fa4e4cef0c | 8578 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/VersionIndicator.tsx | ba5a0c3009bfb6f3028a4a5e786d5410eac5c4be | 4292 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/VisualColorPicker.tsx | f24cb4e20c3631ae740fa7c559d716b800213690 | 8840 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ZoomControls.tsx | 7d3e17ed65d2e533b7e452b680c6f549eea947e5 | 5055 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/constants.ts | 9580f95a5239485b5cb83a6ebe6c3b79010a19cc | 50697 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/conversations/ConversationList.tsx | 5f89f074a4e0bf4f60c926709b6cfd024fe7d94b | 16250 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/conversations/ConversationSearch.tsx | da5eb5efdd143572270909be52e680ae62f56b2c | 7084 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
