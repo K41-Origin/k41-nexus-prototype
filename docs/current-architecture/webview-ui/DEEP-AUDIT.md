@@ -75,21 +75,27 @@ Development: Vite plugin -> core asset build/loader -> decoded JSON endpoints ->
 - WV-VITE-01: custom watcher explicitly handles change; add/unlink invalidation remains unverified.
 - WV-ASSET-04: module-global colorized carpet cache has no visible capacity/eviction bound; impact unmeasured.
 
-## 4. Tests and evidence limits
+## 4. Configuration and static asset integration
+
+All 11 webview-ui root/package/build/config blobs were read or previously reviewed: package scripts/dependencies, Vite/Vitest configs, ESLint config, TypeScript project references, entry HTML, loading preview HTML, README and ignore rules. No build/lint/typecheck was run. The Vitest config uses Node environment, serial file execution and optional Allure reporting; TypeScript app config is strict and includes src, while node config includes Vite config, core asset TS and test TS. The webview package build script is tsc -b followed by vite build.
+
+The default layout has 21×22 = 462 tiles and 462 tileColors; 36 furniture records have integer coordinates inside grid bounds. This structural check does not validate collisions, tile semantics or runtime deserialization.
+
+## 5. Tests and evidence limits
 
 All 54 webview-ui/test files were previously fetched/read and suite/case inventories recorded. Selected tests were examined in more detail across Office, character/cast, terminal/touch, mobile, music, usage, conversations, launch, reconnect and browser assets. No tests were executed. Inventory/assertion inspection is not a passing test result.
 
-## 5. Remaining work — do not repeat completed reads
+## 6. Remaining work — do not repeat completed reads
 
 1. Compare current webview tree with ledger blob SHAs; inspect only changed files and rows marked partial/inventoried/unverified.
 2. Reconcile exact line coverage for large files and any earlier truncated component/hook retrieval.
-3. Finish public asset metadata/integrity inventory. JPEG and ICO dimensions were inspected. TTF fetch returned empty base64 despite tree metadata size 1,077,160 bytes; font internals remain unverified.
+3. Public asset inventory now records all 60 PNG signatures/IHDR dimensions, JPEG dimensions, ICO entries, 25 furniture manifests, 2 pet manifests, webmanifest icon dimensions and default-layout structural counts. TTF fetch returned empty base64 despite tree metadata size 1,077,160 bytes; font internals remain unverified. Full PNG CRC/pixel integrity and runtime deserialization remain untested.
 4. Trace every AsyncAPI ClientMessage/ServerMessage across UI producer/consumer, adapter bridge, server handler/producer, validation, side effects and persistence.
 5. Keep raw terminal frame protocol separate from control-plane messages.
 6. Correlate OfficeState/React state ownership, asset loading, terminal reconnect and disposal across host lifecycles.
 7. Close audit only after all 459 blobs have defensible status and all text files have been fully reviewed.
 
-## 6. Explicit exclusions
+## 7. Explicit exclusions
 
 - No application source changes, refactors, feature removals or dependency/config changes.
 - No tests, build, lint, typecheck or protocol generation executed.
