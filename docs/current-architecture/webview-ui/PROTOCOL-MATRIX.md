@@ -61,7 +61,7 @@ The generated unions contain:
 | directoryRejected | useExtensionMessages | Point-to-point refused save response |
 | directorySuggestions | useExtensionMessages | Directory modal suggestions |
 | conversationsLoaded | useConversations | Conversation sidebar list |
-| conversationSearchResults | ConversationSearch / conversation search state | Search response; exact producer path still to trace |
+| conversationSearchResults | ConversationSearch.tsx | Exact response consumer verified; query, directoryPath and limit must match latest request |
 | terminalAvailability | useExtensionMessages | Standalone PTY availability; VS Code host owns terminals separately |
 | terminalSessionOpened | useExtensionMessages | Standalone terminal session lifecycle |
 | terminalSessionClosed | useExtensionMessages | Standalone terminal session lifecycle |
@@ -72,6 +72,7 @@ The UI consumption is distributed rather than centralized exclusively in useExte
 - Usage messages are delegated to usage/usageStore.ts.
 - Conversation messages are handled by conversations hooks/components.
 - Diagnostics are consumed by DebugView.
+- ConversationSearch.tsx independently subscribes to conversationSearchResults and rejects responses whose query, directoryPath or limit do not match the latest request.
 - The remaining principal office/agent/asset/settings messages are handled in useExtensionMessages.ts.
 
 ## 3. Client-to-server messages
