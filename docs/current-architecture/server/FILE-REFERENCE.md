@@ -1,10 +1,10 @@
 # Server File Reference
 
 **Status:** STATIC INVENTORY RECONCILED — 135 tracked files under `server/`  
-**Baseline:** `89851b12b968fcf30288f1edf4315e6377d51325`  
+**Baseline:** `f1af3e0c36573e4317143969cf43dde642877ba6`  
 **Counts:** 74 files in `server/src/`; 57 files in `server/__tests__/` (including 1 fixture and 1 setup); 4 root support/config files.
 
-This reference covers every tracked blob in the server subtree at the baseline. Responsibilities are summarized from source structure, imports, comments and inspected call paths. Test descriptions identify their apparent scope from file names; they do **not** assert that tests were executed or passed.
+This reference covers every tracked blob in the server subtree at the baseline. All 74 runtime source files were fetched and reviewed; all 57 test/support files were fetched and their suites/cases inventoried; all 4 root support/config files were reviewed. Responsibilities are summarized from source, imports, comments and inspected call paths. Test descriptions identify their apparent scope; they do **not** assert that tests were executed or passed. See [Deep Audit Findings](DEEP-AUDIT.md) for architectural findings and remaining verification.
 
 ## Runtime source — `server/src/` (74 files)
 
