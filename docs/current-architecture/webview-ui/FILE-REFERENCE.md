@@ -218,7 +218,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/characters/ui/ItemTools.tsx | 68cc48ad0097c7b4ee3096fa02f7447c0d465cb8 | 5447 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/pixelCanvas.ts | c570bffd712422fc8130c9ae0c33aeb43ea82c80 | 5867 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/PixelEditor.tsx | e422e2c2958d5c23c222b83c0bd5c03f53754a49 | 16518 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/Roster.tsx | f92a91c7fce45bd5f9af08a7ddcfd040c051db76 | 9293 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/ui/Roster.tsx | f92a91c7fce45bd5f9af08a7ddcfd040c051db76 | 9293 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
 | webview-ui/src/characters/ui/SaveButton.tsx | d96773f83779aecc12d3ba64ea43f6fbcdf84ea8 | 675 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/SpriteCanvas.tsx | e4c199fa8873f867aace1ef2efd85e9e53f5c555 | 1091 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/Stage.tsx | 951954909bacc2ed6f9e722be90ba7dd45a52918 | 10571 | REVIEWED REPORTED — verify exact line coverage before closure |
@@ -229,11 +229,11 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/components/AgentCard.tsx | fe7be6e720b6cd8a7f7a3b1e75e209c651fd6723 | 4312 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/AgentCardBar.tsx | 82449d892429b10bd26f1fa7dd9485a281cb9022 | 2573 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/AgentCardList.tsx | e55b618eb2a37382a6c6daf60bb9f67367bf31f3 | 4833 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/BottomToolbar.tsx | 95472e7199aa8236ff2603c1460df1c65b4f8307 | 10051 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/BottomToolbar.tsx | 95472e7199aa8236ff2603c1460df1c65b4f8307 | 10051 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
 | webview-ui/src/components/cardBar.ts | 76ac0818de593966b7c73ef60e0c11fde42470a4 | 3043 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/ChangelogModal.tsx | e550bd6d1a15ab95d1777b171c18a8b0aa376a70 | 4744 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/CharacterMugShot.tsx | ed982e8c4d46377685a5c4cdd0a2db0d6836712b | 2401 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/CharacterPicker.tsx | 96d325100bb3e300829696fbefe4d97f65fd117c | 12288 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/CharacterPicker.tsx | 96d325100bb3e300829696fbefe4d97f65fd117c | 12288 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
 | webview-ui/src/components/ConnectionIndicator.tsx | 805b2b1dde3c69d81f06672a5656e3d86c31307e | 1391 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/DebugView.tsx | ccc1f465d3777b65bfb79c870d5cb6eb3ef95c5e | 6636 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/DirectoryCharactersField.tsx | 8dbc69a8f3fa51090a922af32848cc9d6a65d442 | 6310 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
@@ -241,7 +241,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/components/DirectoryModal.tsx | 29318c52dd6bdc50441fb9282bf6a1f3921f9635 | 9181 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/directoryStrip.ts | fe4746c500da2a7ae091324e2f8232dd429655c9 | 1701 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/EditActionBar.tsx | 167f33ecabb947684fd37f4c083ecf75c27e701d | 2187 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/IntroBubble.tsx | 3ecdac98e9e15be0eca5fe1f1ec848828ddee53a | 18970 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/IntroBubble.tsx | 3ecdac98e9e15be0eca5fe1f1ec848828ddee53a | 18970 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
 | webview-ui/src/components/introBubbleGeometry.ts | e8750b34e3459ee3d1ecc0493a473424b2898012 | 4883 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/LaunchDrawer.tsx | a4367269738709c51c0f82bdd82ea801dcfb0091 | 11148 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/LoadingScene.tsx | 764d5b9eb0a3dea6c32979b7e95e6cc439f6ff9b | 7622 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
