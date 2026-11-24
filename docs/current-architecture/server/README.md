@@ -1,6 +1,8 @@
 # Server — Current Architecture
 
-**Status:** STATIC SOURCE AUDIT DOCUMENTED — runtime verification pending  
+**Status:** DEEP STATIC SOURCE AUDIT DOCUMENTED — runtime verification pending
+
+**Coverage:** 74/74 runtime source files reviewed; 57/57 test/support files fetched and suite cases inventoried; 4/4 root support/config files reviewed. See [Deep Audit Findings](DEEP-AUDIT.md).  
 **Audited baseline:** `89851b12b968fcf30288f1edf4315e6377d51325`  
 **Inventory:** 135 tracked files (132 TypeScript, 2 JSON, 1 HTTP); includes 76 source/config/support files and 59 test/support files.
 
