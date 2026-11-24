@@ -282,11 +282,11 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/components/ZoomControls.tsx | 7d3e17ed65d2e533b7e452b680c6f549eea947e5 | 5055 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/constants.ts | 9580f95a5239485b5cb83a6ebe6c3b79010a19cc | 50697 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/conversations/ConversationList.tsx | 5f89f074a4e0bf4f60c926709b6cfd024fe7d94b | 16250 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
-| webview-ui/src/conversations/ConversationSearch.tsx | da5eb5efdd143572270909be52e680ae62f56b2c | 7084 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
+| webview-ui/src/conversations/ConversationSearch.tsx | da5eb5efdd143572270909be52e680ae62f56b2c | 7084 | REVIEWED — conversationSearchResults correlation and searchConversations request path verified |
 | webview-ui/src/conversations/ConversationSidebar.tsx | 08cff2d2fa11c8cb452ea3cdce438ba687606065 | 3391 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/conversations/recent.ts | 1aa092943dbcb83621368e66f6f5ebc4c5a63e59 | 834 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/conversations/timeAgo.ts | 8d02f7097b245b1e95face8d90756dee8281019a | 667 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
-| webview-ui/src/conversations/useConversations.ts | e360d9eb264502582c7a07f205fb0fc82910c8a3 | 2971 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
+| webview-ui/src/conversations/useConversations.ts | e360d9eb264502582c7a07f205fb0fc82910c8a3 | 2971 | REVIEWED — requestConversations, conversationsLoaded and refresh lifecycle verified |
 | webview-ui/src/conversations/useConversationSidebar.ts | 1ce57afac2fb74b45f31238789c9f3313b355c6a | 1337 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/hooks/drawerWidth.ts | 4fa3b94f7e900af62e2eaafa26c4e6cb2257537f | 989 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
 | webview-ui/src/hooks/introTourState.ts | f64a1f9c2c598f812360413f958783fe1d90c2c5 | 5148 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
