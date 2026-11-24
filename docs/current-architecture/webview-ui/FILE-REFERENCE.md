@@ -17,87 +17,87 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/package.json | 3729872b2736eaf6b66c608c1b40f4e24c25d2fb | 1113 | INVENTORIED — review pending |
 | webview-ui/public/apple-touch-icon-precomposed.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | INVENTORIED — detailed asset audit pending |
 | webview-ui/public/apple-touch-icon.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | INVENTORIED — detailed asset audit pending |
-| webview-ui/public/assets/carpets/carpet_0.png | 67fe2cd77038247a84c1a66fb9592ba3ee41a780 | 394 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/carpets/carpet_1.png | 25c9c0105fc0373cfcf89176101035bf64a5010c | 380 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/carpets/carpet_2.png | 28907dc0181b713bf9da57cfac6148a7f7ca6122 | 363 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/carpets/carpet_0.png | 67fe2cd77038247a84c1a66fb9592ba3ee41a780 | 394 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/carpets/carpet_1.png | 25c9c0105fc0373cfcf89176101035bf64a5010c | 380 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/carpets/carpet_2.png | 28907dc0181b713bf9da57cfac6148a7f7ca6122 | 363 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/default-layout-1.json | 2954e54dede76f70dcf284a703b4c7c2b6ae4cc7 | 14425 | INVENTORIED — detailed asset audit pending |
-| webview-ui/public/assets/floors/floor_0.png | 8d7a03f6ec7d803f1bbc9ad66c99413952091b01 | 1719 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_1.png | 157e09447a325aafe9acc92a6ef4c3a1cd4638e8 | 3590 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_2.png | 0802a3aefc90702acce77281ea02adb1ff09cd98 | 3590 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_3.png | af976465e32a3ab3cc08f7e1eea79eafd4dcd612 | 3594 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_4.png | 470fc91a37e1a6ab22a1887258a6558ef84c2fe0 | 3594 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_5.png | 7517dcbd20172867a65bdabf01716eaaf83a65ca | 3597 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_6.png | fef67c4f8e7621616fd2bfab9e3c0d4e808b61d2 | 3597 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_7.png | d06893948c00690c94bacbdae177726ff6183904 | 3596 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/floors/floor_8.png | 49ec35c31bed8448a70ecb1a2243255297e97bb0 | 3592 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/BIN/BIN.png | a378be46f9e062cd6ceae5276495c32d874fc081 | 252 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/floors/floor_0.png | 8d7a03f6ec7d803f1bbc9ad66c99413952091b01 | 1719 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_1.png | 157e09447a325aafe9acc92a6ef4c3a1cd4638e8 | 3590 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_2.png | 0802a3aefc90702acce77281ea02adb1ff09cd98 | 3590 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_3.png | af976465e32a3ab3cc08f7e1eea79eafd4dcd612 | 3594 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_4.png | 470fc91a37e1a6ab22a1887258a6558ef84c2fe0 | 3594 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_5.png | 7517dcbd20172867a65bdabf01716eaaf83a65ca | 3597 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_6.png | fef67c4f8e7621616fd2bfab9e3c0d4e808b61d2 | 3597 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_7.png | d06893948c00690c94bacbdae177726ff6183904 | 3596 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/floors/floor_8.png | 49ec35c31bed8448a70ecb1a2243255297e97bb0 | 3592 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/BIN/BIN.png | a378be46f9e062cd6ceae5276495c32d874fc081 | 252 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/BIN/manifest.json | 768d2ffd8c1f4890917615792905490b66115076 | 227 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/BOOKSHELF/BOOKSHELF.png | 165f4181486219978edbde1d505fc938161cda58 | 388 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/BOOKSHELF/BOOKSHELF.png | 165f4181486219978edbde1d505fc938161cda58 | 388 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/BOOKSHELF/manifest.json | c92161fd66e3a35942323b5ced910729e89f4e84 | 238 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/CACTUS/CACTUS.png | bbe4568b8bec175eec4327831cbc4ac1beabf790 | 558 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/CACTUS/CACTUS.png | bbe4568b8bec175eec4327831cbc4ac1beabf790 | 558 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/CACTUS/manifest.json | 8e53f90631c34f7ceff584f97a08df5e8114bec8 | 234 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/CLOCK/CLOCK.png | 549db9405fdb3155f0c43fb9c8eeb2d5cce1396d | 304 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/CLOCK/CLOCK.png | 549db9405fdb3155f0c43fb9c8eeb2d5cce1396d | 304 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/CLOCK/manifest.json | b49a000eb2cf4c82e734bffc2c8680ebcc11dc58 | 230 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/COFFEE_TABLE/COFFEE_TABLE.png | b1bae849ecaeda3e993903e379b47ecba26634e9 | 274 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/COFFEE_TABLE/COFFEE_TABLE.png | b1bae849ecaeda3e993903e379b47ecba26634e9 | 274 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/COFFEE_TABLE/manifest.json | 9aecce7f790e228d5121831a652b83f0f3386050 | 246 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/COFFEE/COFFEE.png | ebc245418c489a25174ca7b78b3db216c4fef1bb | 223 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/COFFEE/COFFEE.png | ebc245418c489a25174ca7b78b3db216c4fef1bb | 223 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/COFFEE/manifest.json | 817abe99ea8e7a561ef6379f183ebffbee24aa90 | 233 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/CUSHIONED_BENCH/CUSHIONED_BENCH.png | 9785551e4c59555ca04efaab39e2b6e40c7c356a | 250 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/CUSHIONED_BENCH/CUSHIONED_BENCH.png | 9785551e4c59555ca04efaab39e2b6e40c7c356a | 250 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/CUSHIONED_BENCH/manifest.json | 6ab3b9932555e9382ee8f4e3b6d55091eed7c27e | 253 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_BACK.png | e2bce3b7a58c8602f509ee0da9e51bc720451f43 | 205 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_FRONT.png | 3e6848a4ac6c151a20d4cdfd7202e394f12eece5 | 247 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_SIDE.png | 242cb432d3de69fce5733442dbb5460389a1503c | 255 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_BACK.png | e2bce3b7a58c8602f509ee0da9e51bc720451f43 | 205 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_FRONT.png | 3e6848a4ac6c151a20d4cdfd7202e394f12eece5 | 247 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_SIDE.png | 242cb432d3de69fce5733442dbb5460389a1503c | 255 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/CUSHIONED_CHAIR/manifest.json | 7d2c32f65d12f713a65c252254d8f083cf44db20 | 976 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/DESK/DESK_FRONT.png | 1d6b4406ce40ff4c29257fcd97c631cce899f516 | 310 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/DESK/DESK_SIDE.png | c9adb6691d0e16aa1d1a724791975779c9e25a2b | 278 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/DESK/DESK_FRONT.png | 1d6b4406ce40ff4c29257fcd97c631cce899f516 | 310 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/DESK/DESK_SIDE.png | c9adb6691d0e16aa1d1a724791975779c9e25a2b | 278 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/DESK/manifest.json | 0f2a098c57c8a150193d84359c84c48f1b1205f8 | 649 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/DOUBLE_BOOKSHELF/DOUBLE_BOOKSHELF.png | f406a7b29483acd4ff72ccd6d7fed9907aea094d | 627 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/DOUBLE_BOOKSHELF/DOUBLE_BOOKSHELF.png | f406a7b29483acd4ff72ccd6d7fed9907aea094d | 627 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/DOUBLE_BOOKSHELF/manifest.json | 78eaac126fc0c8021015280addd4378ca07eb1c7 | 252 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/HANGING_PLANT/HANGING_PLANT.png | 538e1e909aa3f64ba9064686e887187cbb8c7d05 | 693 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/HANGING_PLANT/HANGING_PLANT.png | 538e1e909aa3f64ba9064686e887187cbb8c7d05 | 693 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/HANGING_PLANT/manifest.json | 03cd6b75464eb06aafba1a2fd1695961033affae | 246 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/LARGE_PAINTING/LARGE_PAINTING.png | f97e17b4be3e4667a9d2a761494e65fce7bad3dd | 1056 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/LARGE_PAINTING/LARGE_PAINTING.png | f97e17b4be3e4667a9d2a761494e65fce7bad3dd | 1056 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/LARGE_PAINTING/manifest.json | b47db847e8010ef8962030890c2d6b94b91756c0 | 248 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/LARGE_PLANT/LARGE_PLANT.png | f70812372e1f8b2d35b6110a409ff1443a40769e | 1285 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/LARGE_PLANT/LARGE_PLANT.png | f70812372e1f8b2d35b6110a409ff1443a40769e | 1285 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/LARGE_PLANT/manifest.json | fb2bf5f36561f9d719a4f41259bb5ea73e30fe51 | 245 | REVIEWED — furniture manifests parsed |
 | webview-ui/public/assets/furniture/PC/manifest.json | 4e7a90cb92a0788771bd6fb615414ef247ce37fa | 2025 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/PC/PC_BACK.png | 773c1fd5fa4889836e2dc0db7b7cd05ad790f945 | 349 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/PC/PC_FRONT_OFF.png | ad93288181d2f0e2fc3b6671b31b57d62b9b5c9a | 427 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/PC/PC_FRONT_ON_1.png | 7ed915bee741b5ca12f4109b84197f91842510cb | 479 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/PC/PC_FRONT_ON_2.png | fe2e6ce4f377e85f24af221eb15efa4f1aaeea80 | 476 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/PC/PC_FRONT_ON_3.png | db81e3c1eec7dd0c8d27cd915ad861f89238eaf3 | 485 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/PC/PC_SIDE.png | 794466d90ce4cc2b2223dbdf1cb2b411c5bab553 | 451 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/PC/PC_BACK.png | 773c1fd5fa4889836e2dc0db7b7cd05ad790f945 | 349 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/PC/PC_FRONT_OFF.png | ad93288181d2f0e2fc3b6671b31b57d62b9b5c9a | 427 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/PC/PC_FRONT_ON_1.png | 7ed915bee741b5ca12f4109b84197f91842510cb | 479 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/PC/PC_FRONT_ON_2.png | fe2e6ce4f377e85f24af221eb15efa4f1aaeea80 | 476 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/PC/PC_FRONT_ON_3.png | db81e3c1eec7dd0c8d27cd915ad861f89238eaf3 | 485 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/PC/PC_SIDE.png | 794466d90ce4cc2b2223dbdf1cb2b411c5bab553 | 451 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/PLANT_2/manifest.json | 93b200b16c6564a0239b53196db77ae37815f755 | 234 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/PLANT_2/PLANT_2.png | 87c899bd8678e473404d3f1e5f39adc4478ff289 | 543 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/PLANT_2/PLANT_2.png | 87c899bd8678e473404d3f1e5f39adc4478ff289 | 543 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/PLANT/manifest.json | 885866af8b09e97454c837f1e91c0705db84d3ce | 232 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/PLANT/PLANT.png | 5e6613e3ffc05896f0433436ef1faf2b8c007ffb | 703 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/PLANT/PLANT.png | 5e6613e3ffc05896f0433436ef1faf2b8c007ffb | 703 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/POT/manifest.json | 83c624c55635d2b8b1051a89a47b211274099ce5 | 228 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/POT/POT.png | 183c390a816eae3b1014be2ba350253fb8dd71f0 | 288 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/POT/POT.png | 183c390a816eae3b1014be2ba350253fb8dd71f0 | 288 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/SMALL_PAINTING_2/manifest.json | 8ed7e3e8aedacc744943286475004b2ddaf0f0ab | 251 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/SMALL_PAINTING_2/SMALL_PAINTING_2.png | 7afdfb27027a6ce5ddb225cf505b000e1b0c596c | 473 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/SMALL_PAINTING_2/SMALL_PAINTING_2.png | 7afdfb27027a6ce5ddb225cf505b000e1b0c596c | 473 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/SMALL_PAINTING/manifest.json | c3b8cded89e75a2117b4cba19bd3f19ff6d75015 | 248 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/SMALL_PAINTING/SMALL_PAINTING.png | 66017ba7710aec9b2bdb09d8b1db0dd67a2427ca | 473 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/SMALL_PAINTING/SMALL_PAINTING.png | 66017ba7710aec9b2bdb09d8b1db0dd67a2427ca | 473 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/SMALL_TABLE/manifest.json | eed5383ffe3cd8502973c9679da6011373cc4afd | 692 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/SMALL_TABLE/SMALL_TABLE_FRONT.png | dbbc97eb92fc799d2c192be4ff3016393319df9e | 240 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/SMALL_TABLE/SMALL_TABLE_SIDE.png | 675490c5d7f70367ae6f228a297a7f44ab2bcc4d | 225 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/SMALL_TABLE/SMALL_TABLE_FRONT.png | dbbc97eb92fc799d2c192be4ff3016393319df9e | 240 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/SMALL_TABLE/SMALL_TABLE_SIDE.png | 675490c5d7f70367ae6f228a297a7f44ab2bcc4d | 225 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/SOFA/manifest.json | ecee707e40f227c06390f04fb4ca632433ed3dd9 | 888 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/SOFA/SOFA_BACK.png | 996fa46677852da3eff9f12d17c5ac4b87eae443 | 192 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/SOFA/SOFA_FRONT.png | 9170c8a3954b4c6f2a1ba2fb35cd32dfec89ca43 | 210 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/SOFA/SOFA_SIDE.png | 77d1621665cef1121a90bb5a6d9df685436ca589 | 255 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/SOFA/SOFA_BACK.png | 996fa46677852da3eff9f12d17c5ac4b87eae443 | 192 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/SOFA/SOFA_FRONT.png | 9170c8a3954b4c6f2a1ba2fb35cd32dfec89ca43 | 210 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/SOFA/SOFA_SIDE.png | 77d1621665cef1121a90bb5a6d9df685436ca589 | 255 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/TABLE_FRONT/manifest.json | 1adefc09f02fa7ab0d6795c79276894eea8a0159 | 238 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/TABLE_FRONT/TABLE_FRONT.png | 2d32ea0fafbb5be6876ae16bc65a2ac3af1f45c4 | 400 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/TABLE_FRONT/TABLE_FRONT.png | 2d32ea0fafbb5be6876ae16bc65a2ac3af1f45c4 | 400 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/WHITEBOARD/manifest.json | 49a1069f71cbb327ec868951b0c1bd70391f99dc | 240 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/WHITEBOARD/WHITEBOARD.png | c4b7484aa593f15327981741841dac92b09c7aca | 336 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/WHITEBOARD/WHITEBOARD.png | c4b7484aa593f15327981741841dac92b09c7aca | 336 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/WOODEN_BENCH/manifest.json | 40230b3b5292c5a0b70baad8f349aecb3b597f5e | 247 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/WOODEN_BENCH/WOODEN_BENCH.png | e439027c1d9ffffe5f2f364b4ff10ac8bc72312d | 208 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/WOODEN_BENCH/WOODEN_BENCH.png | e439027c1d9ffffe5f2f364b4ff10ac8bc72312d | 208 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/furniture/WOODEN_CHAIR/manifest.json | 4b6730a12210a51506e6caa2cfa2ed164ecce8a1 | 952 | REVIEWED — furniture manifests parsed |
-| webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_BACK.png | 19921f909ce83565c5ab4164de6bd0f5b1e937af | 290 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_FRONT.png | 392f5a2758abdec2233da837f9c8ab1c271d7d82 | 295 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_SIDE.png | f9c58772117e776e99254fb87cc10d1f941d4d77 | 261 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_BACK.png | 19921f909ce83565c5ab4164de6bd0f5b1e937af | 290 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_FRONT.png | 392f5a2758abdec2233da837f9c8ab1c271d7d82 | 295 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_SIDE.png | f9c58772117e776e99254fb87cc10d1f941d4d77 | 261 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/pets/claudio/manifest.json | 767da5eb3a31f03a4f27649c0a8cdaa8e19bd562 | 39 | INVENTORIED — detailed asset audit pending |
-| webview-ui/public/assets/pets/claudio/pet.png | 9433b28259850d8142e3d8e991b0548d20570f2e | 3267 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/pets/claudio/pet.png | 9433b28259850d8142e3d8e991b0548d20570f2e | 3267 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/pets/gitcat/manifest.json | a24e6e3d005a35b5dd7535da5ab61b3651a376f8 | 37 | INVENTORIED — detailed asset audit pending |
-| webview-ui/public/assets/pets/gitcat/pet.png | d2b7f9b5f39ca3d9106908ff206b7176f377627a | 2892 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
-| webview-ui/public/assets/walls/wall_0.png | 5530b2452c21671a4124eb2531855cf3e69c5b09 | 1738 | BINARY INVENTORY PARTIAL — per-file evidence to reconcile |
+| webview-ui/public/assets/pets/gitcat/pet.png | d2b7f9b5f39ca3d9106908ff206b7176f377627a | 2892 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
+| webview-ui/public/assets/walls/wall_0.png | 5530b2452c21671a4124eb2531855cf3e69c5b09 | 1738 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/banner.png | 8fc2fd94cdf1f9f6e2347c6fea26825e9f3ffd61 | 10752 | INVENTORIED — detailed asset audit pending |
 | webview-ui/public/characters.png | 371401d2a40cdfe89b6af38b991f130c0e9d4981 | 12216 | INVENTORIED — detailed asset audit pending |
 | webview-ui/public/favicon.ico | dd1c0a695a87dc36eee134181534eafc8d883b4a | 4926 | BINARY HEADER VERIFIED — ICO entries 16×16, 32×32, 48×48 |
