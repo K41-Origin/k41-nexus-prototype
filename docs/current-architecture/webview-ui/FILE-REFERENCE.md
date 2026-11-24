@@ -10,17 +10,17 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 
 | Path | Baseline blob SHA | Bytes | Status |
 |---|---|---:|---|
-| webview-ui/.gitignore | a547bf36d8d11a4f89c59c144f24795749086dd1 | 253 | INVENTORIED — review pending |
-| webview-ui/eslint.config.js | 93781c994f6a2e888e86d5574224a4ef4574fcb0 | 1931 | INVENTORIED — review pending |
-| webview-ui/index.html | 723178f03fb4d89f2d75c0a0b78dd0704f2f9633 | 1822 | INVENTORIED — review pending |
-| webview-ui/loading.html | ba4178b911341971cb2d317bcb3ae0e93911bd46 | 487 | INVENTORIED — review pending |
-| webview-ui/package.json | 3729872b2736eaf6b66c608c1b40f4e24c25d2fb | 1113 | INVENTORIED — review pending |
-| webview-ui/public/apple-touch-icon-precomposed.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | INVENTORIED — detailed asset audit pending |
+| webview-ui/.gitignore | a547bf36d8d11a4f89c59c144f24795749086dd1 | 253 | REVIEWED — root/package/build/config file content read; no dynamic execution |
+| webview-ui/eslint.config.js | 93781c994f6a2e888e86d5574224a4ef4574fcb0 | 1931 | REVIEWED — root/package/build/config file content read; no dynamic execution |
+| webview-ui/index.html | 723178f03fb4d89f2d75c0a0b78dd0704f2f9633 | 1822 | REVIEWED — root/package/build/config file content read; no dynamic execution |
+| webview-ui/loading.html | ba4178b911341971cb2d317bcb3ae0e93911bd46 | 487 | REVIEWED — root/package/build/config file content read; no dynamic execution |
+| webview-ui/package.json | 3729872b2736eaf6b66c608c1b40f4e24c25d2fb | 1113 | REVIEWED — root/package/build/config file content read; no dynamic execution |
+| webview-ui/public/apple-touch-icon-precomposed.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | REVIEWED — JSON manifest read; referenced asset mapping cross-check pending |
 | webview-ui/public/apple-touch-icon.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | INVENTORIED — detailed asset audit pending |
 | webview-ui/public/assets/carpets/carpet_0.png | 67fe2cd77038247a84c1a66fb9592ba3ee41a780 | 394 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/carpets/carpet_1.png | 25c9c0105fc0373cfcf89176101035bf64a5010c | 380 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/carpets/carpet_2.png | 28907dc0181b713bf9da57cfac6148a7f7ca6122 | 363 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
-| webview-ui/public/assets/default-layout-1.json | 2954e54dede76f70dcf284a703b4c7c2b6ae4cc7 | 14425 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/assets/default-layout-1.json | 2954e54dede76f70dcf284a703b4c7c2b6ae4cc7 | 14425 | REVIEWED — JSON parsed; grid/tile/color counts and furniture coordinates validated |
 | webview-ui/public/assets/floors/floor_0.png | 8d7a03f6ec7d803f1bbc9ad66c99413952091b01 | 1719 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/floors/floor_1.png | 157e09447a325aafe9acc92a6ef4c3a1cd4638e8 | 3590 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/assets/floors/floor_2.png | 0802a3aefc90702acce77281ea02adb1ff09cd98 | 3590 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
@@ -104,10 +104,10 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/public/fonts/FSPixelSansUnicode-Regular.ttf | 767a03d1f7417bbfdde1b42ce580b7dcdbd2cc9e | 1077160 | NOT VERIFIED — base64 fetch returned empty; tree size/hash recorded |
 | webview-ui/public/icons/icon-256.png | 9d7154cbc4ef79c2cf08efa054120c9886c38fdf | 3420 | INVENTORIED — detailed asset audit pending |
 | webview-ui/public/icons/icon-512.png | f596e5507098171db1803199b96707dc93a8c21e | 5057 | INVENTORIED — detailed asset audit pending |
-| webview-ui/public/manifest.webmanifest | 15b9bcef86a7819667804adafae815f9c0c2dcbb | 501 | INVENTORIED — detailed asset audit pending |
+| webview-ui/public/manifest.webmanifest | 15b9bcef86a7819667804adafae815f9c0c2dcbb | 501 | REVIEWED — JSON parsed; two icon references match PNG IHDR dimensions |
 | webview-ui/public/office.png | 8c770a3c15f4b67264d160b195fe24853234120e | 49958 | INVENTORIED — detailed asset audit pending |
 | webview-ui/public/Screenshot.jpg | a23439795da5ce4f0bffe11b8fff855700fb6b90 | 111189 | BINARY HEADER VERIFIED — JPEG 1308×521 |
-| webview-ui/README.md | d2e77611fd3d959fee0487c41bd27b318be32b04 | 2555 | INVENTORIED — review pending |
+| webview-ui/README.md | d2e77611fd3d959fee0487c41bd27b318be32b04 | 2555 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/src/App.tsx | 3eb91a2050da5f789223bc0a045a80fc841d60cb | 42910 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/browserMock.ts | 335caac9b428de7801b0c5c680eaab2dd7a1f290 | 8750 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/changelogData.ts | a7a9c67afa47a0fdab0c63de91a25e9ead3389be | 12006 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
@@ -464,8 +464,8 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/test/usageStore.test.ts | 301c057bd160e6b02762a940c0ed6d54da3b5677 | 2562 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/wardrobeLabels.test.ts | 756676f90fa1195937dd4dd7db6fcbdf041481ca | 1723 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/workstations.test.ts | 331448e5cdc5ce20f27f682cc433e19c80f417c7 | 6992 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/tsconfig.app.json | 23fe8cc3ddc9a92928117665db2ea1432b1605d7 | 767 | INVENTORIED — review pending |
-| webview-ui/tsconfig.json | 1ffef600d959ec9e396d5a260bd3f5b927b2cef8 | 119 | INVENTORIED — review pending |
-| webview-ui/tsconfig.node.json | a98025607ec565eca8fa09f18336ba2ced07939b | 834 | INVENTORIED — review pending |
+| webview-ui/tsconfig.app.json | 23fe8cc3ddc9a92928117665db2ea1432b1605d7 | 767 | REVIEWED — root/package/build/config file content read; no dynamic execution |
+| webview-ui/tsconfig.json | 1ffef600d959ec9e396d5a260bd3f5b927b2cef8 | 119 | REVIEWED — root/package/build/config file content read; no dynamic execution |
+| webview-ui/tsconfig.node.json | a98025607ec565eca8fa09f18336ba2ced07939b | 834 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/vite.config.ts | b47531773bf6fea57fe6d46a6291133371aa56ea | 4848 | REVIEWED REPORTED — dynamic watcher behavior not tested |
-| webview-ui/vitest.config.ts | 3ed45c68d601468600716a0fd69b8cdb12739f16 | 1077 | INVENTORIED — review pending |
+| webview-ui/vitest.config.ts | 3ed45c68d601468600716a0fd69b8cdb12739f16 | 1077 | REVIEWED — root/package/build/config file content read; no dynamic execution |
