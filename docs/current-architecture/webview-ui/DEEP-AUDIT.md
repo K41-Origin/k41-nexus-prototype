@@ -59,7 +59,7 @@ Previously examined component groups include agent cards, launch/settings/direct
 - WV-C05: SettingsModal combines local settings, transport, import/export and usage bridge.
 - WV-C07: useExtensionMessages is a high-coupling orchestration hook.
 - WV-C08: incoming server-message runtime validation is inconsistent.
-- WV-APP-01: isEditDirty callback may be stale inside long-lived subscription; reconnect snapshot could overwrite unsaved layout. Static only; no runtime reproduction.
+- WV-APP-01 (Medium–High, static finding): confirmed stale closure. App.tsx creates isEditDirty with dependencies [editor.isEditMode, editor.isDirty] and passes it to useExtensionMessages. The long-lived message subscription reads it in layoutLoaded handling but depends only on getOfficeState; exhaustive-deps is explicitly suppressed. The first callback closure is retained (normally false/false), so later dirty edits may not block external/reconnect layoutLoaded snapshots. Static path verified; runtime reproduction/test not run.
 
 ### Mobile, music, conversations, usage and transport
 
