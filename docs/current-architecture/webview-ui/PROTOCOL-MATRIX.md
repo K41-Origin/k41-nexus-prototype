@@ -146,13 +146,23 @@ Validation is inconsistent across boundaries:
 
 This correlates with server finding F-08 and webview finding WV-C08. The exact validation matrix per field and all side effects remains open.
 
-## 5. Ordering and handshake invariants
+## 5. Conversation request/response path — verified
+
+- useConversations sends requestConversations while the sidebar is open; the server requires both ctx.ptyManager and a conversationProvider, then replies with conversationsLoaded to the requesting socket.
+- ConversationSearch.tsx sends searchConversations with query, optional directoryPath and limit. The server normalizes the query with conversationQueryFrom(), searches the configured directories/live sessions and replies with conversationSearchResults to the requesting socket.
+- ConversationSearch.tsx accepts a response only when query, directoryPath and limit still match the current request, preventing stale responses from replacing the active search.
+- resumeConversation is accepted only when runtime, PTY manager and conversation provider are available; resumeRequest() validates/resolves the request and launchStandaloneAgent() launches the resumed session.
+- PixelAgentsViewProvider does not implement these three conversation request types. The current UI gates the conversation sidebar/menu on terminalAvailable, which is a standalone PTY capability; this is an intentional host capability split in the inspected code, not a missing VS Code conversation handler.
+
+These request/response messages are point-to-point, unlike shared agent/layout/settings broadcasts.
+
+## 6. Ordering and handshake invariants
 
 VS Code handshake sends provider capabilities, settings and area mappings before restoring agents; area mappings must arrive before agent creation so preferred Area seat placement can be applied. Card order is sent before restored agents. Character profiles/recent characters are sent before dependent assets/layout. Furniture assets are loaded before layout is sent.
 
 The adapter buffers broadcasts until webviewReady; the buffer is capped at 1,000 and drops the oldest entry on overflow. On readiness, buffered messages flush before initial snapshot messages. These orderings are behaviorally significant and must be preserved in future architecture work.
 
-## 6. Open protocol audit tasks
+## 7. Open protocol audit tasks
 
 1. Trace the producer of every ServerMessage variant to the exact server/adapter function and determine broadcast vs point-to-point recipient.
 2. Trace every ClientMessage producer from UI component/hook to transport and host ingress.
@@ -161,6 +171,6 @@ The adapter buffers broadcasts until webviewReady; the buffer is capped at 1,000
 5. Confirm whether conversation search response is consumed and how stale requests are correlated.
 6. Add explicit runtime validation strategy only after the audit; no implementation changes are authorized in this phase.
 
-## 7. Exclusions
+## 8. Exclusions
 
 No source code was changed. No tests, build, lint, typecheck or live WebSocket/postMessage runtime experiments were executed. This matrix is a static routing map, not proof that every message path has been exercised.
