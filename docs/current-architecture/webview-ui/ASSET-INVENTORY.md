@@ -106,6 +106,17 @@ All 25 furniture manifest.json files were previously fetched/read. Their referen
 
 Furniture manifests: BIN, BOOKSHELF, CACTUS, CLOCK, COFFEE, COFFEE_TABLE, CUSHIONED_BENCH, CUSHIONED_CHAIR, DESK, DOUBLE_BOOKSHELF, HANGING_PLANT, LARGE_PAINTING, LARGE_PLANT, PC, PLANT, PLANT_2, POT, SMALL_PAINTING, SMALL_PAINTING_2, SMALL_TABLE, SOFA, TABLE_FRONT, WHITEBOARD, WOODEN_BENCH, WOODEN_CHAIR.
 
+
+## JSON asset/layout validation
+
+- public/assets/default-layout-1.json parsed successfully.
+- Version: 1; grid: 21 columns × 22 rows.
+- tiles: 462 entries, matching cols × rows.
+- tileColors: 462 entries, matching cols × rows.
+- Furniture records: 36; every record's col/row coordinates are integer values inside the grid bounds.
+- public/manifest.webmanifest parsed successfully and declares two PNG icons: icons/icon-256.png?v=2 (256×256) and icons/icon-512.png?v=2 (512×512). Both files' PNG IHDR dimensions match the declared sizes.
+- This is structural validation only. Furniture placement collision/overlap rules, tile semantic validity and runtime deserialization were not executed.
+
 ## Validation boundary
 
 - PNG checks validate signature and IHDR dimensions only; full PNG decode, CRC, color profile, transparency and pixel-level content checks were not performed here.
