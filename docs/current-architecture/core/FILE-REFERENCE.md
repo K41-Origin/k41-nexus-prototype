@@ -1,6 +1,6 @@
 # Core File Reference
 
-**Status:** AUDITED — all 26 tracked files under `core/` inventoried from the recursive Git tree and inspected at source level. Generated source is explicitly marked. The repository contains 1 YAML specification and 25 TypeScript files.
+**Status:** AUDITED — all 28 tracked files under `core/` inventoried from the recursive Git tree and inspected at source level. Generated source is explicitly marked. The repository contains 1 YAML specification and 27 TypeScript files.
 
 ## Protocol and package surface
 
@@ -178,3 +178,8 @@
 - Root scripts run type-checking and lint over core; server and webview test suites may exercise core functions indirectly.
 - **OPEN:** Exact test-to-core-function coverage has not yet been mapped. Do not claim every core function has a direct unit test.
 - **OPEN:** Build/test commands were not run during this documentation audit.
+
+
+## Inventory reconciliation
+
+The recursive Git tree for `core/` was re-fetched during the second-pass audit. It reports `truncated: false` and exactly 27 blobs under `core/src/` plus `core/asyncapi.yaml` (28 tracked files total). All 27 source paths and the YAML specification were individually fetched successfully in the second pass. Every one of the 27 TypeScript paths appears as a dedicated file-reference heading above. The prior count of 26 files / 25 TypeScript files was incorrect; this corrected count is authoritative for this audited branch snapshot.
