@@ -1,7 +1,7 @@
 # Webview UI Module Audit Record
 
-**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation; 34/34 ClientMessage and 46/46 ServerMessage variants statically traced; field-level validation/authorization/persistence/side-effect static audit completed in GOV-WEBVIEW-011; runtime/cross-client verification remains open.  
-**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-011` (2026-11-25)  
+**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation; 34/34 ClientMessage and 46/46 ServerMessage variants statically traced; field-level validation/authorization/persistence/side-effect static audit completed in GOV-WEBVIEW-011; static lifecycle/reconnect/state-reconciliation trace completed in GOV-WEBVIEW-012; runtime/cross-client verification remains open.  
+**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-012` (2026-11-25)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
 **Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
 **Latest source verification:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`, per GOV-WEBVIEW-002/008 evidence)  
@@ -100,3 +100,18 @@ The next work is (authoritative continuation pointer; older continuation notes i
 - The five standalone-unhandled ClientMessage variants are explicitly reconciled with VS Code host actions/local browser behavior. focusAgent is sent by App in both runtimes; standalone intentionally no-ops the server-side action.
 - Existing WV-C08 / server F-08 remain the canonical validation gap. Runtime schema enforcement, complete field-by-field authorization, and some shared-setting fan-out questions remain open.
 - No source, test, build, package, asset or configuration files were modified; no tests/build/lint/typecheck/runtime experiments were executed.
+
+
+## Latest continuation — GOV-WEBVIEW-012
+
+- Static cross-layer lifecycle tracing is complete for standalone control-plane reconnect/snapshot replay, VS Code iframe readiness and restore ordering, and the separate per-agent terminal data plane.
+- Fresh recursive source tree: 856 entries / 739 blobs / 117 trees; `truncated=false`. Webview ledger 459/459 and adapter ledger 8/8 path/blob SHA pairs match with zero missing/extra/mismatched entries. Server tree contains 135 blobs; selected cross-layer source SHAs match the tree and server governance records its prior 135/135 reconciliation.
+- Existing `WV-RESYNC-01` is extended with a VS Code first-hydration ordering path; its canonical ID is preserved. New `WV-RESYNC-02` records replay of all queued ClientMessages after standalone reconnect without expiry/idempotency classification. Both are OPEN static findings.
+- `WV-APP-01`, `WV-TR-01`, `WV-PROTO-01/02/03`, adapter `A-03/A-05/A-06`, and server `F-01/F-03/F-05` remain open; no duplicates or closures.
+- No tests, builds, lint, typecheck, browser/VS Code runtime, reconnect fault injection or PTY experiments were executed. No application source was modified.
+
+## Next work
+
+1. Determine the intended policy for commands issued during control-plane disconnection and the authoritative order for VS Code agent restore/snapshot/layout.
+2. Preserve and cross-link `WV-RESYNC-01/02`, `WV-APP-01`, `WV-TR-01`, `WV-PROTO-01/02/03` and adapter/server lifecycle findings.
+3. Runtime reproduction requires explicit authorization. Do not repeat the completed producer-consumer or field-level protocol audits.
