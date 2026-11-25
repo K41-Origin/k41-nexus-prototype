@@ -1093,3 +1093,4 @@ All seven changed audit documents were fetched again after publication and blob 
 ### Next continuation
 
 Resolve BUILD-008 and BUILD-009 trust boundaries first. Then verify organization-level branch rules, repository Actions default token permissions, secret scopes/environment protections, npm trusted publisher configuration and release artifact attestations when the required settings access is available. Preserve BUILD-001–BUILD-013 and all existing E2E/server/adapter/webview IDs.
+NaN
