@@ -600,9 +600,55 @@ Continue with the **47 `FETCHED / INVENTORIED` test files**, inspecting complete
 
 The blob SHA for every row is recorded in [FILE-REFERENCE.md](FILE-REFERENCE.md); this table records the test intent and assertion scope without duplicating the ledger.
 
-| Test file | Assertion scope / implementation area |
-|---|---|
-
+| Test file | Blob SHA | Assertion scope / implementation area |
+|---|---|---|
+| `webview-ui/test/cardBar.test.ts` | `39e3b000b1aef67abd7f0f342330af44437c0944` | Card variant precedence, eligible card order, close affordance and pointer reorder. |
+| `webview-ui/test/castHistory.test.ts` | `3de1c964733ca76f8472906d15572f1d4313ef85` | History grouping, explicit steps, undo/redo frame state, step limit and clear. |
+| `webview-ui/test/characterSheet.test.ts` | `8e3c4de80cedafb49046afd15a6c578b1a51a04b` | Current/legacy PNG decode, sprite slicing, legacy widening and invalid dimensions. |
+| `webview-ui/test/characterTemplatesVersion.test.ts` | `b34861e202e317340a3e6402f03602f4a6c8b8e0` | Template replacement notification/version, sprite lookup and unsubscribe. |
+| `webview-ui/test/clipboardKeys.test.ts` | `6fd711c2e492c7fa7695104c90ce18952e47373a` | Platform/modifier clipboard routing, selection-aware copy, copy-as-text and OSC 52 validation. |
+| `webview-ui/test/contextGauge.test.ts` | `a4b3cc4c4a96f3169afde059e3128af6df5924a1` | Threshold colors, remaining-share clamping, invalid inputs and OfficeState zero-context propagation. |
+| `webview-ui/test/conversationsRecent.test.ts` | `56e1c4a7d27821aec41b4c7c780217c0825f88d7` | Cross-directory recent ordering, limit and directory association. |
+| `webview-ui/test/despawnSeat.test.ts` | `f9354dd17f64bde82d6990f9f77cfa75350f0557` | Seat release across despawn/layout rebuild, reassignment and helper seat exclusion. |
+| `webview-ui/test/directoryStrip.test.ts` | `fdc1cc3089fc2eade4f468ee86c6c3393f570045` | Default/priority/random directory ordering, overflow silhouette and deleted-character filtering. |
+| `webview-ui/test/edgeSwipe.test.ts` | `01da285159b5c81c02a374dd02a5acc3658afa7e` | Edge arming, opt-out, native blocking, drag/commit thresholds, cancellation and touch identity. |
+| `webview-ui/test/editorActions.test.ts` | `b27ca7b3529a019a542fc0bc701d0672da662fff` | Furniture-group rotation, rider collision validation and grid bounds. |
+| `webview-ui/test/editorState.test.ts` | `e2122f1b8c0da2e0390aef840a518602e0235ab0` | Copied placement color precedence, absent color preservation and palette handoff. |
+| `webview-ui/test/flowCopy.test.ts` | `4d8c35241b72d6516dd3c101288b577631a6b017` | Terminal copy reflow, structural/indent preservation, broken URLs and selection offsets. |
+| `webview-ui/test/greeter.test.ts` | `116ae19c1446e888eb763214d13249f48dec357f` | Greeter spawn/despawn, idempotence, camera, non-agent/persistence and render invariants. |
+| `webview-ui/test/greeterCharacter.test.ts` | `b164d53b18a95d88198afbcca6db780084312b2a` | Greeter profile identity through rename/reorder and fallback. |
+| `webview-ui/test/helperFollow.test.ts` | `f952914e490d06cbf12331b3f98465e41d4b2064` | Helper following, lead seat anchor, work pose, spacing and stand-up delay. |
+| `webview-ui/test/inputArea.test.ts` | `af99bc832e212079e6865c1c20b3924ac5b7f83d` | Prompt input-area row detection and rule recognition. |
+| `webview-ui/test/introBubbleGeometry.test.ts` | `bd969a0f7869f787f2a3833be47eec3bf08632cf` | Bubble anchor/clamp, tail geometry, unmeasured state and camera caps. |
+| `webview-ui/test/introTour.test.ts` | `86fab0a9080ba5336818bcd014b81d18f2505642` | Consent reducer races, provider correlation, install verdict, revised choice and reset. |
+| `webview-ui/test/keyboardViewport.test.ts` | `c84215e44d8a718b1ea82cef06186777870b3bed` | Keyboard detection across viewport resize models, focus, orientation and dismissal. |
+| `webview-ui/test/launchLatch.test.ts` | `b4eda6652c842ddee7e68a75f68469dd490d2e93` | Launch terminal response latch and timeout boundaries. |
+| `webview-ui/test/launchMenus.test.ts` | `958bcd3ea604559a65e47b5f3b9acd0762fee037` | Drawer/roster state transitions, pick retention and invalidation. |
+| `webview-ui/test/layoutSerializer.test.ts` | `bdc28518315db12c7c0981701baff3d52ff67a89` | Pets migration, tileColors regeneration, legacy void migration and idempotence. |
+| `webview-ui/test/musicComposer.test.ts` | `ad5eb57cda316b2bc0dd5f99a332840e5246f8b4` | Seeded song output, song-code roundtrip/fingerprints, duration/monophony and mood distribution. |
+| `webview-ui/test/officeBlink.test.ts` | `ad40215944dbb2e5bec43e638130cfc28d5f040c` | Blink gap/focus/duration irregularity and inter-character desynchronization assertion. |
+| `webview-ui/test/officeBlinkSprites.test.ts` | `6b8b14673e493221060913b8d04f2cb992debfc5` | Blink sprite differences, repeat sprite variants and permanently closed eyes. |
+| `webview-ui/test/officeCanvasCursor.test.ts` | `5bde5502619ceede4d3e6603a47885eada49151a` | Cursor priority for character/pet hit, seat reassignment and default. |
+| `webview-ui/test/petEntity.test.ts` | `0897047475e5b1cf3d1595b669d66962b983a34c` | Pet idle/walk/follow FSM, target loss, timing, animation and defensive cases. |
+| `webview-ui/test/pieceItems.test.ts` | `31a96bd13dee646e00dd70346f4679b58f8f53e1` | Sprite-sheet per-cell edit extraction for additions, recolor, erase and no-op. |
+| `webview-ui/test/pixelFont.test.ts` | `18531e885497d230b876dd6cf4bdc72ac1c5b158` | Glyph label segmentation/geometry, month glyph coverage and timeAgo. |
+| `webview-ui/test/pixelGrid.test.ts` | `9ad8c421ba795f37e127eb8f8d276ecd57aabc09` | Grid/color run aggregation, offsets, clear-cell and lit bounds. |
+| `webview-ui/test/pixelSnap.test.ts` | `e6e9e8a165b37c379832ebfecbb0473f5b6cdf33` | Device-pixel rounding, minimum size and float precision. |
+| `webview-ui/test/playerFit.test.ts` | `ffafbaecc2feac7a724bd171bb8d86f604beba9e` | Music player responsive fit and terminal drawer width bounds. |
+| `webview-ui/test/playerSheet.test.ts` | `2142af5f2536c21bf3bfce214bd10b6454471cbf` | Player sheet touch slop, axis lock, clamping, flick and settle. |
+| `webview-ui/test/recentCharacters.test.ts` | `061396d8d16006d6fae1a4e8f045539babd657dd` | Roster recency order and duplicate/out-of-range filtering. |
+| `webview-ui/test/seatedIdle.test.ts` | `a82c8f9bb099e7ba81dc1abcd8482043658d844d` | Agent/helper seated sprite state and restored/replayed activity. |
+| `webview-ui/test/selectionButtons.test.ts` | `b58db130650c087b139bc4e833f594bfc78edae6` | Selection button hit geometry, placement and edge bounds. |
+| `webview-ui/test/selectionMath.test.ts` | `110632affff46ab5a788e99770f191b83a9b7b86` | Word/range selection, anchor extension, handle clamping, cell mapping and pill geometry. |
+| `webview-ui/test/slideTransitions.test.ts` | `43beb2021446681e7d2954107aef3da3a3cf319d` | Panel/content transition timing and reduced-motion instant behavior. |
+| `webview-ui/test/teammateSeating.test.ts` | `4f84bd6b7ebea60bdad715d0ee9842198fca90c0` | Lead seat anchor vs live tile and seatless fallback. |
+| `webview-ui/test/terminalLinks.test.ts` | `9454e202fc3d1a8c781824faac6769c7993b2a20` | HTTP(S) opener allowlist, wrapped xterm URL/cell detection and regex behavior. |
+| `webview-ui/test/touchGesture.test.ts` | `fce4e63d43ace5db03782479e4a7980f3f0ca94f` | Touch reducer multi-touch, long-press, tap/URL, scroll/flick, handles and paste. |
+| `webview-ui/test/trackpad.test.ts` | `8bf930c4a4bd3545c634fc62b0579bd60c7c7bb2` | Trackpad axis lock, pause-based axis switching, accumulation and edge acceleration. |
+| `webview-ui/test/usageBarView.test.ts` | `6259843f93d04290a98b705a2093caa5c10065ea` | Usage percentage/reset/freshness, duration formatting and heartbeat period. |
+| `webview-ui/test/usageStore.test.ts` | `301c057bd160e6b02762a940c0ed6d54da3b5677` | Provider status arrival sequence, malformed top-level input, limits and pending response. |
+| `webview-ui/test/wardrobeLabels.test.ts` | `756676f90fa1195937dd4dd7db6fcbdf041481ca` | Wardrobe part labels/tab summary and hue normalization. |
+| `webview-ui/test/workstations.test.ts` | `331448e5cdc5ce20f27f682cc433e19c80f417c7` | Chair-PC pairing, orientation/uniqueness and active-seat PC state. |
 
 ### WV-TEST-01 — Blink desynchronization test does not simulate concurrent independent clocks
 
