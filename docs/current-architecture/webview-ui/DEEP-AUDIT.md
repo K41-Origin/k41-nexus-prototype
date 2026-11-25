@@ -523,3 +523,58 @@ No new stable-ID defect finding was added from this pass. The review confirms UI
 ### Next continuation point
 
 The 9 character UI reported-review rows are closed at the source-review evidence level. **7 reported-review source rows remain elsewhere in `webview-ui/src/`**, in addition to 7 `FETCHED / REVIEWED REPORTED` rows requiring their own coverage reconciliation, 47 inventoried-only tests, 143 binary-header-only assets and 1 unverified font. Continue with the 7 other source rows; do not re-review the 115 character subtree files without changed SHAs or a new cross-module question.
+
+
+## 15. Remaining webview source coverage — GOV-WEBVIEW-008 (2026-11-25)
+
+**Source baseline:** `main` at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Recursive tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Scope:** the seven remaining `FETCHED / REVIEWED REPORTED` source rows in `webview-ui/src/`.
+
+### Governance and inventory reconciliation
+
+- Re-read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, webview module record, DEEP-AUDIT and FILE-REFERENCE before source inspection.
+- Reconciled the complete webview subtree against FILE-REFERENCE: **459/459 blobs**, 0 missing paths, 0 extra paths and 0 SHA mismatches.
+- The seven rows labelled `FETCHED / REVIEWED REPORTED` were the same seven remaining source rows referred to by the prior continuation note; they were not two separate groups. The earlier wording implying two independent groups is corrected by this session.
+- All seven files were individually re-fetched in full at the source baseline. Their current blob SHAs match the ledger; each complete file was statically reviewed and its line coverage is now recorded.
+
+### Files directly reviewed
+
+| File | Blob SHA | Lines |
+|---|---|---:|
+| `webview-ui/src/changelogData.ts` | `a7a9c67afa47a0fdab0c63de91a25e9ead3389be` | 1–341 |
+| `webview-ui/src/constants.ts` | `9580f95a5239485b5cb83a6ebe6c3b79010a19cc` | 1–880 |
+| `webview-ui/src/index.css` | `daa1fcad26dbb03a9fa4ef0e1cf16389b7577b33` | 1–697 |
+| `webview-ui/src/loadingPreview.tsx` | `9cd3169706acf23a2b3ea4a7d92fdc8b41fc855b` | 1–14 |
+| `webview-ui/src/notificationSound.ts` | `f30c00d2463e79724e7d57ad56420d92b2625211` | 1–128 |
+| `webview-ui/src/runtime.ts` | `39316cd1563dc344232832f90fb23c82dff4c0c4` | 1–28 |
+| `webview-ui/src/testHooks.ts` | `e2f7fe210be54bd6448c7735b0baaf29dfe9ca32` | 1–352 |
+
+### Cross-reference observations
+
+- `App.tsx:54–66` imports and installs `installTestHooks` only when `isE2E` is true. The test hook namespace and `OfficeState.prototype.addAgent` wrapper in `testHooks.ts:139–140, 324–352` are therefore gated by the E2E harness at the observed application entry point.
+- `ChangelogModal.tsx:1–6, 44–48` consumes `changelogEntries`, `toMajorMinor` and the repository/Discord URLs from `changelogData.ts`; the contributor links use `target="_blank"` with `rel="noopener noreferrer"`.
+- `main.tsx:1` and `loadingPreview.tsx:2` both import the shared `index.css`; `loading.html:12` mounts the dev-only loading preview. `LoadingScene.tsx` consumes the loading constants and `loadLoadingArt()`.
+- `useExtensionMessages.ts:8, 634, 647` consumes `playDoneSound` and `playPermissionSound`; both functions guard unavailable audio and catch failures around context creation/resume/playback.
+- `runtime.ts` uses a `typeof` check for the optional `acquireVsCodeApi` global and gates E2E diagnostics on the preloaded `__PIXEL_AGENTS_E2E` flag. These paths were inspected statically only.
+
+### WV-C17 — Reduced-motion preference does not suppress two continuous UI animations
+
+- **Severity:** Low. **Confidence:** High.
+- **Status:** SOURCE-VERIFIED / STATIC-FINDING / OPEN; no browser accessibility or motion-preference runtime check performed.
+- **Affected files:** `webview-ui/src/index.css`, with consumers in `ConnectionIndicator.tsx`, `DebugView.tsx`, `ToolOverlay.tsx` and `usage/PixelHeart.tsx`.
+- **Evidence:** `index.css:303–306` assigns an infinite `pixel-pulse` animation; its keyframes are at `:404–410`. The reduced-motion blocks at `:432–435` and `:635–646` disable `pixel-pop` and the listed menu/modal animations, but do not disable `.pixel-pulse`. Separately, `:656–670` defines the usage-heart animation and `:692–696` applies it infinitely; neither reduced-motion block disables `.usage-heart-beat`. Consumers include `ConnectionIndicator.tsx:34`, `DebugView.tsx:39`, `ToolOverlay.tsx:313`, and `PixelHeart.tsx:59–74`.
+- **Technical explanation:** when the operating system/browser advertises `prefers-reduced-motion: reduce`, these two CSS animation paths remain active because the media-query overrides do not include their classes or animation names.
+- **Impact:** users who request reduced motion may continue to see pulsing connection/activity indicators and the repeating usage-heart animation.
+- **Remaining uncertainty:** no target-browser verification was run; product intent for these two status/feedback animations has not been documented in the inspected source. This is an accessibility concern, not a claim of a runtime failure.
+
+### Review result and execution limits
+
+- The seven remaining reported-review source rows are now `REVIEWED`; the ledger contains no remaining `FETCHED / REVIEWED REPORTED` or `REVIEWED REPORTED` rows.
+- No additional finding was warranted for changelog data, constants, loading preview, sound dispatch, runtime detection or E2E hooks.
+- No tests, build, lint, typecheck, browser/VS Code runtime, accessibility audit or audio experiment was executed.
+- No application source, test, configuration, dependency or asset file was modified.
+
+### Next continuation point
+
+Continue with the **47 `FETCHED / INVENTORIED` test files**, inspecting complete assertions and mapping them to implementation without executing them. Then continue ClientMessage/ServerMessage producer-consumer tracing, host lifecycle/reconnect, and the outstanding 143 binary-header-only assets plus the unverified font. Preserve all existing `WV-` findings and keep runtime verification open.
