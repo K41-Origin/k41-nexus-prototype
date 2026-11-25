@@ -74,7 +74,7 @@ jobs:
           import { validateReleaseIdentity } from './scripts/npm-package-contract.mjs';
 
           const manifest = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-          const latestVersion = execFileSync('npm', ['view', manifest.name, 'dist-tags.latest', '--json'], { encoding: 'utf8' }).trim();
+          const latestVersion = JSON.parse(execFileSync('npm', ['view', manifest.name, 'dist-tags.latest', '--json'], { encoding: 'utf8' }).trim());
           let exactVersionExists = false;
           try {
             execFileSync('npm', ['view', `${manifest.name}@${manifest.version}`, 'dist.integrity', '--json'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
