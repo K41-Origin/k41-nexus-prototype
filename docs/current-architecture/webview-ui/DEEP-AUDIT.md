@@ -95,6 +95,19 @@ All 54 webview-ui/test files were previously fetched/read and suite/case invento
 6. Correlate OfficeState/React state ownership, asset loading, terminal reconnect and disposal across host lifecycles.
 7. Close audit only after all 459 blobs have defensible status and all text files have been fully reviewed.
 
+
+
+## Binary integrity continuation — GOV-ASSET-CRC-001 (2026-11-26)
+
+**Verification source:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; complete recursive tree `97940dabd84264b6281917b11928ebae6156752c`, `truncated=false`. Webview subtree: 459 blobs; 459/459 path/blob-SHA pairs match this ledger.
+
+- **PNG:** 141 tracked PNG paths represent 132 unique blob SHAs. Every unique PNG blob was fetched as base64 and checked for byte-size agreement, PNG signature, bounded chunk lengths, IHDR/IDAT/IEND presence, and CRC-32 for every chunk. All 132 unique blobs passed those checks. Duplicate paths share the same verified blob SHA.
+- **One non-canonical tail:** `webview-ui/public/assets/pets/gitcat/pet.png` has two trailing zero bytes after a valid IEND chunk. All chunk CRCs pass. This is recorded as an observation, not a reproduced rendering defect.
+- **ICO:** `favicon.ico` directory bounds are valid; all three embedded PNG images (16×16, 32×32, 48×48) have valid signatures, bounded chunks, IEND and chunk CRCs.
+- **JPEG:** `Screenshot.jpg` has valid SOI, baseline SOF0 (1308×521, 3 components), SOS and EOI markers; byte size matches the tree.
+- **Still not full decode:** this execution environment has no zlib/PNG/JPEG decoder or local repository checkout. PNG IDAT streams and JPEG entropy-coded pixels were not decompressed/rendered. Therefore this evidence is stronger than header-only validation but does not claim pixel-level decode or browser loading.
+- **TTF:** the font blob is present in the current tree (1,077,160 bytes; SHA `767a03d1f7417bbfdde1b42ce580b7dcdbd2cc9e`), but the GitHub connector returned empty base64 for this >1 MB blob. SFNT table directory, checksums, name tables, cmap/glyph coverage and font parser validation remain OPEN.
+
 ## 7. Explicit exclusions
 
 - No application source changes, refactors, feature removals or dependency/config changes.
