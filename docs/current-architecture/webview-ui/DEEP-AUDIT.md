@@ -282,3 +282,116 @@ This is a completed **historical evidence reconciliation**, not a completed cont
 - All 62 have unchanged source blob SHAs at the selected source baseline.
 - Next source-review work must target the missing evidence: fetch and inspect only those files/ranges whose complete prior coverage cannot be established, record exact line ranges and cross-references, then promote only verified rows.
 - No source code was modified. No tests, build, lint, typecheck, or runtime experiment was executed.
+
+
+## 12. Incremental static review — GOV-WEBVIEW-005 (2026-11-25)
+
+### Governance and repository state
+
+- Governance documents reviewed before source/documentation updates: governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, webview module record, webview README, DEEP-AUDIT and FILE-REFERENCE.
+- Documentation branch: `docs/hybrid-llm-engine-direction`, starting commit `9c64638df8d4048f404e62193a3fbe1327d88252`.
+- Source branch: `main`, commit `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- Recursive source tree: `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`.
+- The `webview-ui/src/components/` subtree contains 54 blobs; all 54 paths are represented in FILE-REFERENCE and all component blob SHAs match the ledger.
+- Scope of this session: direct full-content review of the 32 component rows that GOV-WEBVIEW-004 had left as reported-review due to missing historical per-file line evidence. The other 22 component files already had REVIEWED evidence and were not repeated.
+
+### Files fully re-fetched and statically reviewed
+
+| Path | Blob SHA | Lines | Result |
+|---|---|---:|---|
+| `webview-ui/src/components/directoryStrip.ts` | `fe4746c500da2a7ae091324e2f8232dd429655c9` | 1–46 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/introBubbleGeometry.ts` | `e8750b34e3459ee3d1ecc0493a473424b2898012` | 1–109 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/loadingSceneArt.ts` | `2d33cd9f1fad94103f20e22622c3dd58a88bba16` | 1–97 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/loadingSceneLayout.ts` | `a122bbff64ef37b31bbc3daf046a977b01ba0f9f` | 1–223 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/MigrationNotice.tsx` | `0aa1bd3190d5a50d7a20965d9b3250399a90e319` | 1–35 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/MobileAgentBar.tsx` | `6fc6be39ffb350cfd8090e0252c89f9cb7c7a9e2` | 1–196 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/MobileKeyBar.tsx` | `d3a0d3f03d998577feacc056b6edf458ba456ddc` | 1–196 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/statusDot.ts` | `23c78e9f495dbcdfc9031f37f95776f8d337d9dc` | 1–11 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/TerminalHideRibbon.tsx` | `54f35f46fb05adb34c75c6fddeca595f3dceffa9` | 1–52 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/Tooltip.tsx` | `5e2305434b2eb22075dea27fccec0324a942bde6` | 1–39 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/Button.tsx` | `0b04f4fef6ce11ef28cf18b19e05a491fe6432a1` | 1–57 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/Checkbox.tsx` | `8688f09731c4456cd7984a29131ebe3df7639722` | 1–57 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/ColorPicker.tsx` | `b4e28664298b0e09e1ec36e3b3292c7e6adaf6e1` | 1–159 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/Dropdown.tsx` | `6bc0dbb17dbb81c7f390e8535a891827f4fd6d1a` | 1–82 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/ItemSelect.tsx` | `f7fa506384023e46c99f0ae333a536c9bde1c25e` | 1–54 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/MenuItem.tsx` | `db9a2cd11f5c48828b8cf75af1f284e70198a816` | 1–21 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/Modal.tsx` | `527899e2657f222d4fd9c706d2414c35097ff364` | 1–92 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/PickArea.tsx` | `6ac096760f5d741376aaa5f82e0ca7d5baa9f8d4` | 1–45 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/pickCanvas.ts` | `7e8bbee9c3a7d4709f6494e9c1d85ae30e60d823` | 1–22 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/pixelFont.ts` | `61e380a9b24a55f20aa4d6676cb58e73de73223d` | 1–128 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/pixelGrid.ts` | `503040e24020218b4bd198019fcc1101c4c5c891` | 1–72 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/PixelIcon.tsx` | `62cc03bdc5f29d020c6592b011c6353d5abe051e` | 1–48 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/pixelIcons.ts` | `cc824e3123c1e78a4f0df461505904804a8d6c50` | 1–339 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/PixelInputText.tsx` | `94e7c2b2ed79e2831cdedd20ad3b835530860321` | 1–34 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/pixelSnap.ts` | `93948494c9ea9f9feb519a49c89e5dfcfed007c0` | 1–25 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/PixelSvg.tsx` | `3eb7a942f1ea8d4a7a56d33e8629f3b0df1954a7` | 1–42 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/PixelText.tsx` | `cd68c015f2b0711633e587a885a5a94c2613c607` | 1–58 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ui/types.ts` | `f83803bc75e7e3fa75a5d32af352bf4974d4ba7d` | 1–14 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/useCardReorder.ts` | `42092b1e069eaa60df8e88f097ba48fa4e4cef0c` | 1–224 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/VersionIndicator.tsx` | `ba5a0c3009bfb6f3028a4a5e786d5410eac5c4be` | 1–126 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/VisualColorPicker.tsx` | `f24cb4e20c3631ae740fa7c559d716b800213690` | 1–254 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+| `webview-ui/src/components/ZoomControls.tsx` | `7d3e17ed65d2e533b7e452b680c6f549eea947e5` | 1–156 | Full content re-fetched and statically reviewed; ledger promoted to REVIEWED |
+
+This promotes the 32 previously reported component rows to REVIEWED. Together with the 22 previously reviewed component rows, the component directory is now **54/54 REVIEWED**. This is source-content coverage, not runtime or behavioral certification.
+
+### Cross-component paths considered
+
+- Agent-card rendering, selection, status and ordering: `AgentCard`, `AgentCardBar`, `AgentCardList`, `cardBar`, `statusDot`, `useCardReorder`.
+- Mobile launch and roster interaction: `MobileAgentBar`, `LaunchDrawer`, directory and character picker components.
+- Terminal lifecycle and mobile input: `TerminalPane`, `TerminalPaneStack`, `TerminalDrawer`, `MobileTerminalPage`, `MobileKeyBar`.
+- Modal and settings consumers: `Modal`, `SettingsModal`, `DirectoryModal`, `ChangelogModal`.
+- Intro and loading render paths: `IntroBubble`, `introBubbleGeometry`, `LoadingScene`, `loadingSceneArt`, `loadingSceneLayout`.
+- Shared visual primitives: all 18 files under `components/ui/`.
+
+### Static findings and future technical priorities
+
+#### WV-C12 — Touch cancellation shares the touch-end completion path
+
+- **Status:** STATIC-FINDING / OPEN; runtime manifestation not reproduced.
+- **Affected file:** `webview-ui/src/components/useCardReorder.ts`.
+- **Evidence:** lines 150–162 define `onTouchEnd`; the handler commits a drag through `drop()` at 154–157 or invokes `onTouchTap` at 159–161. Lines 164–170 register the same handler for both `touchend` and `touchcancel`.
+- **Technical concern:** a cancelled gesture is treated as a completed gesture. Depending on the current phase, cancellation can commit a reorder or invoke the tap callback.
+- **Impact:** potential unintended card selection/reordering in touch interactions; the mobile consumer uses `onTouchTap` to preserve terminal keyboard focus (`MobileAgentBar.tsx:86–91, 178–189`).
+- **Future priority:** distinguish cancellation from successful touch completion and add assertion coverage for cancellation in pending and dragging phases.
+- **Uncertainty:** no browser/mobile runtime reproduction or test execution.
+
+#### WV-C13 — Modal dialog semantics and focus lifecycle need verification
+
+- **Status:** STATIC-FINDING / OPEN; accessibility behavior not runtime-tested.
+- **Affected file:** `webview-ui/src/components/ui/Modal.tsx`.
+- **Evidence:** lines 24–41 implement stacked Escape handling; lines 57–88 render backdrop, wrapper and panel. The panel element at 75–77 has no visible `role="dialog"` or `aria-modal="true"`; this component also contains no focus-trap, initial-focus or focus-return logic.
+- **Technical concern:** visual modal behavior and Escape handling do not by themselves establish accessible dialog semantics or keyboard focus containment.
+- **Impact:** keyboard and assistive-technology users may not receive a correctly announced or contained modal interaction.
+- **Future priority:** assess dialog semantics, focus entry/containment/return and background interaction across all Modal consumers.
+- **Uncertainty:** consumer-level focus behavior and browser/screen-reader behavior have not been runtime-verified.
+
+#### WV-C14 — Loading-art rejection has no local recovery path
+
+- **Status:** STATIC-FINDING / OPEN; failure path not runtime-reproduced.
+- **Affected files:** `webview-ui/src/components/loadingSceneArt.ts`, `webview-ui/src/components/LoadingScene.tsx`.
+- **Evidence:** `loadingSceneArt.ts:61–65, 77–95` caches the load Promise in module scope and aggregates required decodes; `LoadingScene.tsx:118–124` attaches only a fulfillment handler to `loadLoadingArt()`.
+- **Technical concern:** a rejected decode Promise remains cached and is not handled by the component. A later call reuses the same rejected Promise.
+- **Impact:** loading art can remain unavailable for the lifetime of the module after a required asset decode fails, with an unhandled rejection and no component-level fallback visible in the inspected path.
+- **Future priority:** assess an explicit error/fallback state and retry/cache-reset policy.
+- **Uncertainty:** actual asset failure behavior and host-level error handling were not exercised.
+
+#### Additional evidence for WV-C03 / WV-C06 — card reorder mouse-listener cleanup
+
+- **Status:** STATIC-FINDING evidence expansion; existing finding IDs retained.
+- **Affected file:** `webview-ui/src/components/useCardReorder.ts`.
+- **Evidence:** lines 175–203 attach `mousemove` and `mouseup` to `window`; removal occurs inside `onUp` at 188–190. The unmount cleanup at 205–210 clears only the pending timer.
+- **Technical concern:** if the component unmounts before `mouseup`, the active window listeners are not removed by the hook cleanup.
+- **Future priority:** assess listener ownership and cancellation cleanup. This extends WV-C03/WV-C06; no new duplicate ID is created.
+- **Uncertainty:** runtime manifestation and host teardown conditions are not reproduced.
+
+### Updated coverage and execution limits
+
+- Component source coverage: **54/54 REVIEWED** (22 previously reviewed; 32 directly re-fetched and reviewed in this session).
+- All 54 component paths and blob SHAs match FILE-REFERENCE at the selected source tip.
+- No application source, assets, dependencies or configuration were modified.
+- No tests, build, lint, typecheck, protocol generation, browser/VS Code runtime or accessibility experiment was executed.
+- All four technical priorities above remain audit observations/open evidence, not implementation tasks performed in this session.
+
+### Next continuation point
+
+Continue webview source audit with the remaining **30 reported-review rows**: 14 hooks, 9 character UI files and 7 other source files. After source coverage, continue test assertion review (47 inventoried-only files), ClientMessage/ServerMessage producer-consumer tracing, host lifecycle/reconnect verification and outstanding binary/font evidence. Do not repeat the 54 component files unless a source SHA changes or a specific cross-module question requires it.
