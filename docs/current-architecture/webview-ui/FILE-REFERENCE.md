@@ -1,12 +1,13 @@
 # Webview UI — File Audit Ledger
 
 **Baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
-**Inventory:** recursive Git tree; truncated=false  
-**Tracked blobs:** 459 (302 src, 92 public, 54 tests, 11 root/package/config).
+**Last SHA reconciliation:** 2026-11-25 at `8fc045de9ddae905cc131498d918ddbd64cc8bca` (tree `6c65c2127b2fdf3742f76b317d43e9faccb61506)); recursive tree `truncated: false`.  
+**Inventory:** 459 tracked blobs (302 src, 92 public, 54 tests, 11 root/package/config).  
+**Reconciliation result:** 459/459 ledger paths and blob SHAs match the current tree; 0 missing, 0 extra, 0 mismatched, and 0 source changes against the baseline.
 
 Compare current blob SHA before any re-read. Unchanged files with reviewed status must not be re-read for the same purpose; continue only documented gaps/cross-references. Changed files require targeted re-audit.
 
-Statuses are conservative. REVIEWED REPORTED preserves previous session work without overstating exact line coverage. INVENTORIED does not mean audited.
+Statuses are conservative. REVIEWED REPORTED preserves previous session work without overstating exact line coverage. INVENTORIED does not mean audited. The reconciliation above verifies file identity and coverage in the ledger; it does not promote any review status.
 
 | Path | Baseline blob SHA | Bytes | Status |
 |---|---|---:|---|

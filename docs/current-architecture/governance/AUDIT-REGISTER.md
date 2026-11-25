@@ -1,6 +1,6 @@
 # Repository Audit Register
 
-**Status snapshot:** 2026-11-25 (core and server inventory reconciled at `d571b69d03b6993ab14d66f0d11d5a3d79a52a5b`)  
+**Status snapshot:** 2026-11-25 — core, server and webview-ui inventories reconciled at `8fc045de9ddae905cc131498d918ddbd64cc8bca`.  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
 **Governance branch:** `docs/hybrid-llm-engine-direction`  
 **Source branch for current-state audit:** `main` unless a module record explicitly declares another baseline.
@@ -12,10 +12,12 @@ This register is the consolidated index. Detailed findings remain in their ownin
 | Ref | Commit | Purpose |
 |---|---|---|
 | `main` | `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` | Current application source reference at governance initialization |
-| `docs/hybrid-llm-engine-direction` | `13354f1a74b75b9ab3d8982544414134b1940ae3` | Audit documentation and governance record branch |
-| Core source snapshot | `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1` | Historical inventory root; all 28 core blob SHAs individually re-fetched and matched at governance branch tip `c522dbdac525b226ec84afa5b7c829289ea1949f` |
+| `docs/hybrid-llm-engine-direction` | `8fc045de9ddae905cc131498d918ddbd64cc8bca` | Latest governance/documentation branch tip before this webview consolidation |
+| Core source snapshot | `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1` | Historical core inventory root; all 28 core blob SHAs reconciled |
+| Server source snapshot | `f1af3e0c36573e4317143969cf43dde642877ba6` | Canonical server audit baseline; all 135 server blob SHAs reconciled |
+| Webview UI source snapshot | `4dd14d612fd37d89ffbbc977959f572395c4eec8` | Canonical webview audit baseline; all 459 webview blob SHAs reconciled at the governance branch tip |
 
-The core source blob SHAs at the governance branch tip match the recorded core audit snapshot. This confirms source identity for `core/` at that branch tip; it does not imply that the two branch histories have been fully walked or merged.
+The core, server and webview source blob identities have been reconciled at the stated snapshots. This does not imply runtime correctness, test success, or that divergent branch histories have been merged.
 
 ## Module status
 
@@ -23,7 +25,7 @@ The core source blob SHAs at the governance branch tip match the recorded core a
 |---|---|---|---|
 | `core/` | **AUDITED — 28/28 files individually re-fetched; SHA and file-reference reconciliation complete** | [Core audit record](modules/core.md), [core file reference](../core/FILE-REFERENCE.md) | Cross-layer consumer/runtime verification remains open |
 | `server/` | **AUDITED — 135/135 tracked files reconciled; source SHAs unchanged; 9/9 architecture docs fetched** | [Server governance record](modules/server.md), [deep audit](../server/DEEP-AUDIT.md), [file reference](../server/FILE-REFERENCE.md) | Preserve F-01–F-08; runtime/test verification remains open |
-| `webview-ui/` | **IN PROGRESS** | [Webview deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Continue from SHA reconciliation and documented cross-module gaps; do not repeat reviewed files |
+| `webview-ui/` | **IN PROGRESS — 459/459 paths and blob SHAs reconciled; historical content-review coverage still has open gaps** | [Webview governance record](modules/webview-ui.md), [deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Continue exact line-coverage reconciliation, protocol tracing and remaining binary/test evidence; do not repeat unchanged reviewed files |
 | `adapters/` | **NOT AUDITED as a module** | Pending | Audit host lifecycle, ownership, activation/deactivation, protocol bridges and disposal |
 | `e2e/` | **INVENTORY / SAMPLING PENDING** | Preliminary audit and tree inventory | Review fixtures, test assertions, host workflows and coverage gaps |
 | `scripts/` | **INVENTORY / IMPLEMENTATION REVIEW PENDING** | Preliminary audit and tree inventory | Review generation, build, packaging, validation and release side effects |
@@ -35,8 +37,8 @@ The core source blob SHAs at the governance branch tip match the recorded core a
 
 ## Current open workstreams
 
-1. Finish `webview-ui/` without repeating unchanged reviewed files.
-2. Audit `adapters/` as the next major module, correlating it with completed server/core records.
+1. Continue `webview-ui/` from the recorded line-coverage, reconnect/seat reconciliation, protocol, test-inventory and binary gaps.
+2. Audit `adapters/` as the next major module, correlating it with completed core/server/webview records.
 3. Review test suites and scripts as evidence of intended behavior, not as proof of correctness until executed.
 4. Build the system dependency/lifecycle map from source references and runtime observations.
 5. Run targeted tests/build/runtime experiments only when authorized and record exact commands/results.

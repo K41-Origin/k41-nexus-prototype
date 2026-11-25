@@ -26,7 +26,7 @@ Counts exclude directory entries. Recursive tree was not truncated.
 
 ### Office
 
-44 files under src/office were previously fetched/reviewed: canvas, overlays, cursor/touch, editor, OfficeState, characters, pets, game loop, renderer, selection, layout serializer/catalog/tile map/workstations, floor/wall/carpet tiles, sprite data/cache, types and utilities. Large files were chunked.
+44 files under src/office were previously fetched/reviewed: canvas, overlays, cursor/touch, editor, OfficeState, characters, pets, game loop, renderer, selection, layout serializer/catalog/tile map/workstations, floor/wall/carpet tiles, sprite data/cache, types and utilities.
 - WV-O01 (Medium): reassignSeat can unassign old seat before validating target; possible inconsistent assignment on failure.
 - WV-O02 (Low–Medium): pet-follow comment excludes subagents but implementation does not filter them.
 - WV-O03 (Low–Medium): paintTile validates linear index, not row/column separately; reachability pending.
@@ -59,7 +59,7 @@ Previously examined component groups include agent cards, launch/settings/direct
 - WV-C05: SettingsModal combines local settings, transport, import/export and usage bridge.
 - WV-C07: useExtensionMessages is a high-coupling orchestration hook.
 - WV-C08: incoming server-message runtime validation is inconsistent.
-- WV-APP-01 (Medium–High, static finding): confirmed stale closure. App.tsx creates isEditDirty with dependencies [editor.isEditMode, editor.isDirty] and passes it to useExtensionMessages. The long-lived message subscription reads it in layoutLoaded handling but depends only on getOfficeState; exhaustive-deps is explicitly suppressed. The first callback closure is retained (normally false/false), so later dirty edits may not block external/reconnect layoutLoaded snapshots. Static path verified; runtime reproduction/test not run.
+- WV-APP-01 (Medium–High, static finding): App creates isEditDirty with dependencies [editor.isEditMode, editor.isDirty] and passes it to useExtensionMessages. The long-lived message subscription reads the callback in layoutLoaded handling but depends only on getOfficeState; exhaustive-deps is explicitly suppressed. The first callback closure is retained (normally false/false), so later dirty edits may not block external/reconnect layoutLoaded snapshots. Static path verified; runtime reproduction/test not run.
 
 ### Mobile, music, conversations, usage and transport
 
@@ -101,3 +101,44 @@ All 54 webview-ui/test files were previously fetched/read and suite/case invento
 - No tests, build, lint, typecheck or protocol generation executed.
 - No runtime, browser, VS Code host or live terminal experiment performed.
 - This is a progress record, not a claim that webview-ui audit is complete.
+
+## 8. Incremental continuation — GOV-WEBVIEW-001 (2026-11-25)
+
+### Repository and coverage reconciliation
+
+At governance branch commit `8fc045de9ddae905cc131498d918ddbd64cc8bca`, recursive tree `6c65c2127b2fdf3742f76b317d43e9faccb61506` returned `truncated: false`. The webview subtree contains 459 blobs (302 src, 92 public, 54 test, 11 root/package/config). Compared with baseline commit `4dd14d612fd37d89ffbbc977959f572395c4eec8`, there are 0 additions, 0 removals and 0 changed blob SHAs. The ledger has 459 rows: no missing paths, extra paths or SHA mismatches.
+
+This closes the **inventory/SHA reconciliation task only**. It does not close content-review gaps. The exact status distribution is recorded in FILE-REFERENCE and governance/modules/webview-ui.md. In particular, the 118 reported-review rows still need precise line-coverage reconciliation, 54 tests remain inventoried rather than executed, and the font remains unverified.
+
+### Targeted reconnect/snapshot trace
+
+Relevant source identities at the verification snapshot:
+
+| Path | Blob SHA | Inspected range / purpose |
+|---|---|---|
+| `webview-ui/src/hooks/useExtensionMessages.ts` | `649025df90edef84d24c40556cee2ea007e15ccf` | reconnect setup and handler ranges 1–90, 250–980; snapshot/layout handling |
+| `webview-ui/src/transport/onReconnect.ts` | `030ae419587d5f3b69b78d74cf295811087e2bcd` | full 14-line helper |
+| `webview-ui/src/office/engine/existingAgents.ts` | `f23ff3f79f5fc6baf37f2915f8ff6abde107ce35` | reconciliation and stale-agent logic |
+| `webview-ui/src/office/engine/officeState.ts` | `1afd778f4c72f1901ef91266e29a89f117e180c7` | `rebuildFromLayout`, `syncAgent`, subagent detach |
+| `server/src/clientMessageHandler.ts` | `d7ae8235ee75de63b1716a4b67f27d69023f5d96` | `handleWebviewReady` snapshot ordering |
+
+The standalone server's `handleWebviewReady` sends `existingAgents` at lines 747–752, then `layoutLoaded` at 754–757, then replays agent activity at 759–762. The webview reconnect callback marks `resyncPending` and sends `webviewReady`; `existingAgents` consumes that flag, runs stale-agent/subagent cleanup, and calls `reconcileExistingAgents`. Since the layout has already been loaded in a live reconnecting page, `layoutReadyRef.current` is true. Existing characters therefore take the immediate `syncAgent` path before the new layout snapshot arrives.
+
+### WV-RESYNC-01 — Snapshot seat may not be applied against a stale layout
+
+- **Severity / confidence:** Medium / Medium.
+- **State:** OPEN — STATIC-FINDING; not runtime reproduced.
+- **Evidence:**
+  - `server/src/clientMessageHandler.ts:747–757` — server emits the agent snapshot before the new layout snapshot.
+  - `webview-ui/src/hooks/useExtensionMessages.ts:469–500` — reconnect snapshot is reconciled while the already-loaded layout flag is true.
+  - `webview-ui/src/office/engine/existingAgents.ts:88–97` — an already-visible agent calls `syncAgent` immediately.
+  - `webview-ui/src/office/engine/officeState.ts:647–650` — `syncAgent` only changes seat when the requested seat ID already exists in the current `this.seats`.
+  - `webview-ui/src/office/engine/officeState.ts:170–176, 204–239` — the following `rebuildFromLayout` replaces the seat map and preserves each character's current seat when that ID exists in the incoming layout; it does not retain/retry a snapshot seat ID that was absent from the old layout.
+- **Trigger / preconditions:** A client reconnects after a layout change; the server snapshot assigns an existing agent to a seat ID that is absent from the client's stale layout, while that client's previous seat ID still exists in the incoming layout.
+- **Technical impact:** The agent can remain assigned to its old seat even though the authoritative snapshot names the new seat. This is a client-side state reconciliation risk; no server persistence corruption is established.
+- **Test evidence:** `existingAgents.test.ts` checks the reconciliation decision with a fake office; `subagentResync.test.ts` checks `syncAgent` when both seat IDs already exist. Neither inspected test covers a requested seat absent from the pre-snapshot layout but present in the incoming layout. Tests were read, not executed.
+- **Remaining uncertainty:** Confirm reachability across all layout/seat persistence flows and determine whether a later message corrects the assignment. A focused integration test or authorized runtime reproduction is needed before treating the behavior as reproduced.
+
+### Next continuation point
+
+Continue from the 118 reported-review rows and protocol producer/consumer gaps without rereading unchanged, fully reviewed files. The reconnect seat scenario above is now a specific open question; do not duplicate WV-APP-01, which separately records the stale `isEditDirty` closure affecting `layoutLoaded`.

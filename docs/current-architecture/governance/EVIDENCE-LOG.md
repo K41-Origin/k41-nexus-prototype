@@ -145,3 +145,54 @@ README's older inventory arithmetic/baseline wording was inconsistent with DEEP-
 ### Continuation
 
 Use `governance/modules/server.md` as governance summary, `server/DEEP-AUDIT.md` as detailed finding owner, and `server/FILE-REFERENCE.md` as per-file inventory. Do not duplicate the 135-file manifest or F-01–F-08 analysis in register/evidence log. Reopen unchanged source only for a concrete cross-module question, changed SHA, or authorized verification.
+
+
+## 2026-11-25 — GOV-WEBVIEW-001: webview-ui inventory and governance reconciliation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Branch:** `docs/hybrid-llm-engine-direction`  
+**Verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
+**Verification tree:** `6c65c2127b2fdf3742f76b317d43e9faccb61506`  
+**Historical source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
+**Scope:** full tracked `webview-ui/` subtree, existing webview architecture documentation, and the recorded reconnect/snapshot continuation question.
+
+### Tree and ledger reconciliation
+
+- Recursive tree: `truncated: false`.
+- Inventory: **459 blobs** = 302 `src/`, 92 `public/`, 54 `test/`, 11 root/package/build/config.
+- Compared current tree with the baseline tree (`2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`): **0 added, 0 removed, 0 changed blob SHAs**.
+- Reconciled current tree against `FILE-REFERENCE.md`: **459/459 exact path + blob SHA matches**, 0 missing, 0 extra, 0 mismatches.
+- The ledger status distribution is 143 `REVIEWED`, 61 `FETCHED / REVIEWED REPORTED`, 57 `REVIEWED REPORTED`, 54 `FETCHED / INVENTORIED`, 143 `BINARY HEADER VERIFIED`, and 1 `NOT VERIFIED`. These sum to 459. Reported-review and inventoried states are not silently upgraded by tree reconciliation.
+- All ten webview architecture documents were fetched and confirmed non-empty: README, FILE-REFERENCE, DEEP-AUDIT, ASSET-INVENTORY, PROTOCOL-MATRIX, MODULE-OVERVIEW, STATE-MANAGEMENT, RENDERING-ENGINE, DEPENDENCIES and TRANSPORT.
+
+### Targeted reconnect/snapshot source trace
+
+The following relevant source files were fetched at the verification snapshot:
+
+| Path | Blob SHA | Scope |
+|---|---|---|
+| `webview-ui/src/hooks/useExtensionMessages.ts` | `649025df90edef84d24c40556cee2ea007e15ccf` | Ranges 1–90 and 250–980; reconnect setup, snapshot and layout handling |
+| `webview-ui/src/transport/onReconnect.ts` | `030ae419587d5f3b69b78d74cf295811087e2bcd` | Full helper |
+| `webview-ui/src/office/engine/existingAgents.ts` | `f23ff3f79f5fc6baf37f2915f8ff6abde107ce35` | Reconciliation and stale-agent logic |
+| `webview-ui/src/office/engine/officeState.ts` | `1afd778f4c72f1901ef91266e29a89f117e180c7` | Layout rebuild, seat sync and subagent detach |
+| `server/src/clientMessageHandler.ts` | `d7ae8235ee75de63b1716a4b67f27d69023f5d96` | Standalone `webviewReady` snapshot ordering |
+| `webview-ui/test/onReconnect.test.ts` | `344ffa982c77b11cba8529942ce55cc18febff83` | Reconnect callback unit-test inventory |
+| `webview-ui/test/existingAgents.test.ts` | `11914967532cda8fa8bc62e84613e5f56bfdb80a` | Agent reconciliation assertions |
+| `webview-ui/test/subagentResync.test.ts` | `186ac30aa58919e0affda0b8a25ba849bb3825a6` | OfficeState subagent resync assertions |
+
+Static trace: reconnect sets `resyncPending` and sends `webviewReady`. Standalone `handleWebviewReady` emits `existingAgents` before `layoutLoaded`, then replays activity. Because the webview already has a loaded layout during reconnect, existing agents are reconciled immediately against the old seat map before the new layout is applied.
+
+### Finding recorded
+
+- `WV-RESYNC-01`: possible stale-seat retention when the server snapshot names a seat absent from the client's pre-reconnect layout, while the client's old seat remains in the incoming layout. The static control flow supports the risk; no runtime reproduction was performed. Detailed evidence, preconditions, impact and uncertainty are recorded in `webview-ui/DEEP-AUDIT.md`.
+
+### Verification boundaries
+
+- Static source/document inspection and Git tree/blob comparison only.
+- No tests, build, lint, typecheck, protocol generation, browser, VS Code host, WebSocket fault injection or runtime experiments executed.
+- The test files above were read, not executed.
+- No application source, assets, package manifest or configuration changed. Only audit documentation and governance records are included in this documentation commit.
+
+### Continuation
+
+Continue with the exact line-coverage gaps in the 118 reported-review rows, the 54 test files inventoried but not fully reconciled, the unverified TTF font, and the ClientMessage/ServerMessage producer-consumer/validation matrix. Preserve existing WV findings and do not repeat unchanged files already reviewed for the same question.
