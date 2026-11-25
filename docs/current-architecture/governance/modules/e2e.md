@@ -1,6 +1,6 @@
 # E2E Module Audit Record
 
-**Status:** IN PROGRESS — inventory and SHA reconciliation complete; 47/47 blobs fetched; 21/21 spec files structurally inventoried; assertion-level and cross-module review remains open.  
+**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); E2E-003–E2E-006 are OPEN test-quality findings; harness source and cross-module review remain open.  
 **Source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
 **Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated=false`).  
 **Latest documentation snapshot before publication:** `docs/hybrid-llm-engine-direction@cbf2d7ed7f711bc44fb619e43d86c560e1cf7d7e`.  
@@ -25,14 +25,19 @@
 - 47/47 path/blob-SHA pairs match the documentation-branch snapshot.
 - 21 spec files contain 152 test declarations; all 152 have `@area:` tags, matching the generated inventory in the source E2E README.
 - Eight platform skip guards were inventoried separately from the 152 declarations.
-- Test assertions are structurally inventoried; assertion-level review is still IN PROGRESS.
+- Assertion-level review is complete for all 21 spec files (TEST-INVENTORIED); no tests were executed.
+- Four assertion-quality gaps E2E-003–E2E-006 are recorded in the deep audit.
 - No tests, builds, lint, typecheck or runtime experiments were executed.
 
 ## Findings
 
-Preserve E2E-001 and E2E-002 in [DEEP-AUDIT.md](../../e2e/DEEP-AUDIT.md):
+Preserve E2E-001 through E2E-006 in [DEEP-AUDIT.md](../../e2e/DEEP-AUDIT.md):
 - **E2E-001:** standalone process termination fallback does not reliably escalate after SIGTERM; static, OPEN.
 - **E2E-002:** standalone port-0 allocation closes the socket before the CLI binds; static race, OPEN.
+- **E2E-003:** seeded-layout Areas gate test is confounded by the host Directory gate; assertion gap, OPEN.
+- **E2E-004:** carpet/furniture coexistence test does not assert same-coordinate furniture; assertion gap, OPEN.
+- **E2E-005:** mobile modal fit test omits vertical bounds; assertion gap, OPEN.
+- **E2E-006:** pet persistence test verifies count, not restored identities/types; assertion gap, OPEN.
 
 Do not duplicate these detailed records in the register. Cross-link canonical findings in the owning modules: server F-01/F-03/F-05; adapters A-03/A-05/A-06; webview WV-RESYNC-01/02, WV-APP-01, WV-TR-01 and WV-PROTO-01/02/03; server F-08 / webview WV-C08.
 
