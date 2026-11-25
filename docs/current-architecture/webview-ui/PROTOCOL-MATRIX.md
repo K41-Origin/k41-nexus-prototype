@@ -299,3 +299,99 @@ All 46 variants in the AsyncAPI ServerMessage union are accounted for. “Broadc
 - All findings and mappings above are static source-derived. They do not establish that a browser/VS Code runtime reproduces the conditional multi-client effects.
 - No tests, build, lint, typecheck, protocol generation, browser, VS Code host, multi-client WebSocket, PTY or reconnect experiment was executed.
 - No source, test, package, configuration or asset file was modified.
+
+
+## 14. GOV-WEBVIEW-011 — Field-level validation, authorization, persistence and side effects
+
+**Status:** STATIC TRACE COMPLETE for the 34 ClientMessage variants. This is not runtime verification.  
+**Source ref:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`. The selected source files below were fetched from that ref; their blob SHAs are recorded in the session evidence log.  
+**Contract:** `core/asyncapi.yaml` is the declarative source of truth. Its per-message schemas specify required fields/types, but no runtime validator is wired into either inbound host boundary. A TypeScript interface or AsyncAPI schema does not validate arbitrary JSON at runtime.
+
+### 14.1 Per-message field and handling matrix
+
+| ClientMessage | Contract fields | Runtime validation at ingress/handler | Authorization | Persistence / side effect / response |
+|---|---|---|---|---|
+| `webviewReady` | `type` | Discriminator only; no payload fields | Allowed to read-only clients | Sends handshake snapshots; may invoke external-agent restore and runtime ref synchronization; no user-config write |
+| `launchAgent` | optional `directoryPath:string`, `palette:integer>=0` | Palette normalized through `rosterPick`; directoryPath is cast, not checked for string/existence | Privileged gate; standalone additionally requires runtime + PTY manager | Spawns PTY/process, creates agent, persists agent state, updates recent-character roster; no explicit launch ack |
+| `focusAgent` | `id:integer` | No explicit type/range check; standalone server intentionally no-ops, UI handles drawer focus; VS Code Map lookup + terminal focus | Privileged gate on standalone | Focuses terminal only; no durable write |
+| `closeAgent` | `id:integer` | No explicit type/range check; store lookup limits effect to an existing numeric key | Privileged gate | Disposes PTY / terminal or dismisses and removes observed agent; lifecycle broadcast via store events |
+| `saveAgentSeats` | `seats:object<string,SeatAssignment>`; optional palette/repeat/seatId per item | Standalone checks only truthiness of top-level seats; palette/repeat ranges are checked only for agents lacking palette; nested item shape and seatId are not validated. A null item can throw during property access. Raw map is still passed to adapter persistence and conversation-look recording. VS Code persists raw `message.seats` directly. | Privileged gate | Persists per-agent seat metadata and session look; no explicit ack or broadcast. Partial in-memory mutations can precede a malformed later item throwing |
+| `saveLayout` | `layout:object` | Standalone checks truthiness then casts; VS Code casts directly. No version/tile/nested-layout validation on this message | Privileged gate | Atomic JSON write helper catches/logs failure; standalone enables watcher reporting; VS Code watcher can notify other panels; no explicit success/rejection ack |
+| `saveCharacterProfiles` | `profiles:array`, `saveId:string`, optional `items:array` | Shared parser validates profile and wardrobe-item structures; missing saveId is tolerated by helper for older clients despite schema required | Privileged gate | Writes wardrobe items then profiles via atomic per-file writes; updates caches/remaps agent looks/shared refs; success broadcast includes saveId; refusal/write failure replies to sender with current persisted/cache state |
+| `setSoundEnabled` | `enabled:boolean` | No runtime boolean check in either host | Privileged gate | Per-host setting write; no broadcast or ack |
+| `setLastSeenVersion` | `version:string` | Standalone/VS Code cast to string; no runtime check | Privileged gate | Per-host setting write; no broadcast or ack |
+| `setAlwaysShowLabels` | `enabled:boolean` | No runtime boolean check | Privileged gate | Per-host setting write; no broadcast or ack |
+| `setGhostHeadlessAgents` | `enabled:boolean` | No runtime boolean check | Privileged gate | Per-host setting write; no broadcast or ack |
+| `setHooksEnabled` | `providerId:string`, `enabled:boolean` | Provider ID resolved against registry; enabled is cast/passed without boolean guard | Privileged gate; VS Code embedded webview trusted host boundary | Async install/uninstall; preference persisted only if re-read install state equals requested value; sends actual hooksStatus to requester; errors logged/reported by host |
+| `hooksConsentResponse` | `providerId:string`, `choice:install\|notNow\|never` | Provider ID registry check; shared consent executor narrows exact choices and treats unknown choice as no-op | Privileged gate; consent request is not sent to read-only standalone client | May install/uninstall hooks, persist grant/decline/preference, update runtime ref; reports actual status; async |
+| `setUsageBridgeEnabled` | `providerId:string`, `enabled:boolean` | Requires registered provider with usageBridge and boolean enabled | Privileged gate | Async provider settings/status-line modification; successful status broadcast; error status point-to-point |
+| `setHooksInfoShown` | `type` only | No caller field; host hardcodes true | Privileged gate | Persists per-host setting; no ack |
+| `setWatchAllSessions` | `enabled:boolean` | Cast only; no runtime boolean guard | Privileged gate | Persists setting and mutates runtime scanner ref; VS Code may dismiss/remove external agents when switched off; no ack/broadcast |
+| `exportLayout` | `type` only | No caller fields | Standalone route absent; VS Code host action | Reads saved layout, opens native save dialog, writes user-selected file; no protocol ack |
+| `importLayout` | `type` only | Native file JSON parse; validates only `version===1` and `tiles` is array, not nested tile schema | Standalone route absent; VS Code host action | Writes layout and sends layoutLoaded; dialog/parse errors shown natively |
+| `exportFile` | `filename:string`, `dataBase64:string` | No complete runtime schema/size/base64 validation observed at message dispatch | VS Code host action; standalone route absent (browser downloads locally) | Opens native save dialog and writes decoded file data to user-selected destination |
+| `openSessionsFolder` | `type` only | No caller fields | VS Code host action; standalone route absent | Opens known sessions folder if it exists; no durable config write |
+| `addExternalAssetDirectory` | optional `path:string` (standalone); omitted for VS Code picker | Standalone only checks truthiness, not string/path existence/directory; VS Code obtains folder through native picker | Privileged gate on standalone; embedded host action | Mutates shared config, reloads assets, sends directory/assets messages to requester. `writeConfig` result is ignored |
+| `removeExternalAssetDirectory` | `path:string` | Standalone only checks truthiness; no string/path shape guard | Privileged gate / VS Code host action | Filters shared config, reloads assets, sends requester-only messages. `writeConfig` result is ignored |
+| `saveAreaMappings` | `mappings:object<string,string[]>` | Standalone checks non-null object only (arrays pass); adapter casts directly. No validation of each key/value/area label | Privileged gate | Writes host-namespaced areaMappings; no ack or broadcast; sender optimistic update only. See WV-PROTO-01 |
+| `saveCardOrder` | `order:integer[]` | Shared parser requires array, filters safe non-negative integers, deduplicates and caps length; then filters to existing agent IDs | Privileged gate | Persists through StateAdapter; broadcasts canonical cardOrderLoaded if persistence adapter exists |
+| `setShowAreas` | `enabled:boolean` | Cast only; no runtime boolean guard | Privileged gate | Per-host setting write; no ack/broadcast |
+| `setBypassPermissions` | `enabled:boolean` | Explicit boolean guard and adapter existence check | Privileged gate | Persists per-host launch permission posture; broadcasts read-back value to all clients |
+| `setShowHostDirectories` | `enabled:boolean` | Explicit boolean guard and adapter existence check | Privileged gate | Persists per-host setting; broadcasts refreshed directories list |
+| `saveDirectory` | `name:string`, `path:string`; optional previousPath, characters, characterOrder | Type-narrows name/path/previousPath; expands tilde, requires existing directory, normalizes/deduplicates paths; parses character defaults/order | Privileged gate | Shared machine-wide config write; checks writeConfig result; success broadcasts directoriesLoaded then sender-only directorySaved; failure sender-only directoryRejected |
+| `removeDirectory` | `path:string` | Requires string; normalized path; removal is bookkeeping only | Privileged gate | Shared config write checked; success broadcasts directoriesLoaded; failure replies directoryRejected |
+| `requestDirectorySuggestions` | `type` only | No caller fields | Privileged gate | Filesystem/transcript-derived suggestions; requester-only response; no persistence |
+| `requestConversations` | optional `limits:ConversationLimit[]` | Shared helper normalizes/clamps requested limits; no mutation | Privileged gate and standalone PTY/provider availability | Reads transcript/session metadata; requester-only conversationsLoaded |
+| `searchConversations` | `query:string`, optional directoryPath, `limit:integer` | Shared query helper validates/normalizes query and limit; no mutation | Privileged gate and standalone PTY/provider availability | Searches transcript titles; requester-only conversationSearchResults |
+| `resumeConversation` | `sessionId:string`, `directoryPath:string` | UUID pattern; string directory; provider capability; rejects already-running session and missing transcript | Privileged gate and standalone runtime + PTY/provider availability | Launches/resumes PTY using transcript and remembered look; no explicit result ack |
+| `requestDiagnostics` | `type` only | No caller fields | Privileged gate | Reads current agent diagnostics; requester-only response |
+
+### 14.2 Authorization model
+
+- Standalone authorization is connection-scoped: the HTTP/WebSocket handshake determines `privileged`; `handleClientMessage` refuses every message except `webviewReady` when false. This is fail-closed for newly added message types. The UI's `officeAccess` flag is presentation, not enforcement.
+- The gate is not field-level authorization. A privileged token grants the whole command surface, including filesystem directory selection, process launch/close, provider settings mutation, layout/config persistence and diagnostics. No per-directory ownership or per-message capability scopes were observed.
+- VS Code webview messages are dispatched directly by `onDidReceiveMessage`; no parallel token gate or comprehensive runtime schema validator exists there. This is an extension-host trust boundary, not proof that the payload is structurally valid.
+- Usage snapshots/reports are separately withheld from read-only clients. Terminal raw-frame WebSocket auth remains a distinct data plane.
+
+### 14.3 Persistence and side-effect conclusions
+
+- **Durable, shared machine-wide:** character profiles/wardrobe items, external asset directory list, user Directories, hook consent/preferences, recent character roster, conversation looks, layout file. **Host-namespaced:** settings and area mappings. **Adapter/session state:** agent seats and card order. **Runtime-only:** scanner refs, focus, current agent activity, UI state.
+- Strongest input boundaries are shared profile/wardrobe parsers, directory path validation, card-order normalization, conversation query/UUID validation, provider-ID lookup, strict boolean guards on bypass/show-host/usage-bridge and consent executor's exact enum handling.
+- The weakest boundaries are saveAgentSeats, saveLayout/importLayout nested data, saveAreaMappings, general setting toggles, setHooksEnabled.enabled and external asset directory paths. The contract schema is stricter than the actual handler in these cases.
+- Several mutation paths are fire-and-forget or do not confirm durable write success. In particular external asset directory add/remove ignore writeConfig's boolean result but send externalAssetDirectoriesUpdated and initiate asset reload. Settings/layout/area/seat writes generally have no explicit negative acknowledgement; the UI can remain optimistic until a later handshake or snapshot.
+- Character profile save uses atomic writes per file, not a transaction spanning wardrobe-items.json and characters.json. The items file/cache can be updated before a later profiles write fails; refusal is therefore not guaranteed to roll back the first file.
+- saveAreaMappings and external asset reload remain distinct from normal store broadcasts; see WV-PROTO-01/02.
+
+## 15. Extended validation finding and new persistence finding
+
+### WV-C08 / F-08 — Runtime validation gap (extended evidence; existing canonical finding)
+
+Do not create a duplicate finding. GOV-WEBVIEW-011 extends the existing cross-layer finding with these concrete cases:
+
+1. `saveAgentSeats`: standalone only partially validates palette/repeat before still persisting the raw object; VS Code persists the raw object directly. Nested null/primitive values and malformed seatId are not rejected as a whole.
+2. `saveAreaMappings`: standalone accepts any non-null object (including arrays) and casts nested values; VS Code casts directly. `parseAreaMappings` is a read-time coercion, not ingress validation.
+3. `saveLayout` and VS Code import: opaque object is accepted without validating layout/tile structure; import only checks version and tiles-array existence.
+4. General settings toggles and `setHooksEnabled.enabled` do not enforce the declared boolean/string field types at runtime.
+5. `addExternalAssetDirectory` / `removeExternalAssetDirectory` use truthiness rather than string/path validation in standalone.
+
+**Impact:** malformed privileged payloads can cause partial state mutation, malformed persisted values, ignored settings, or a client/server state divergence. No unauthenticated write is implied: standalone mutation still requires a privileged connection.  
+**Verification:** SOURCE-VERIFIED / STATIC-FINDING; not test-executed or runtime-reproduced.  
+**Remaining uncertainty:** exact behavior of malformed values depends on StateAdapter implementation, filesystem permissions and subsequent config normalization; no malicious-client experiment was run.
+
+### WV-PROTO-03 — External asset directory changes report success after a failed config write
+
+- **Severity:** Low. **Confidence:** High. **State:** OPEN.
+- **Affected files:** `server/src/clientMessageHandler.ts`; `adapters/vscode/PixelAgentsViewProvider.ts`; `server/src/configPersistence.ts`.
+- **Evidence:** standalone add/remove mutate the object returned by readConfig, call writeConfig, then send externalAssetDirectoriesUpdated and invoke onReloadAssets without checking its boolean result. VS Code add/remove follows the same write-then-reload/report pattern. writeConfig explicitly returns false when the atomic write fails.
+- **Technical explanation:** the response is constructed from the in-memory candidate config, not a verified read-back. If persistence fails, the client may display the candidate directory list and receive reload messages even though a subsequent read/handshake returns the prior on-disk list.
+- **Impact:** transient false success and UI/assets state divergence after filesystem/config write failure.
+- **Verification:** SOURCE-VERIFIED / STATIC-FINDING; no write-failure fault injection.
+- **Remaining uncertainty:** the precise UI symptom depends on the reload callback and timing; no runtime failure was induced.
+
+## 16. Verification boundary and next step
+
+- 34/34 ClientMessage variants have field, validation, authorization, persistence/side-effect and response behavior statically classified.
+- The 34/34 and 46/46 producer-consumer mapping from GOV-WEBVIEW-010 is reused; it was not repeated.
+- Selected source blobs are reconciled against the documented `main@56f354f` baseline. A fresh recursive tree was not available through the repository connector in this session, so current whole-repository TREE-VERIFIED status is inherited as DOC-RECORDED from GOV-WEBVIEW-008 rather than newly claimed.
+- No tests, builds, lint, typecheck, protocol generation, browser/VS Code runtime, write-failure injection or multi-client experiment was executed. No application source was modified.
+- Next logical audit: lifecycle/reconnect and cross-client state reconciliation; runtime experiments remain gated on explicit authorization.
