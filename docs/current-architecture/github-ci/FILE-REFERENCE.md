@@ -10,7 +10,7 @@
 | `.github/FUNDING.yml` | 100644 | 43 | 3 | `4633651078f09de9adab763e1e88a14d89a8df70` | SOURCE-VERIFIED |
 | `.github/ISSUE_TEMPLATE/bug_report.yml` | 100644 | 2,599 | 85 | `f8de707d3148b5b2dbcf8480e9e7ddda776e4dfd` | SOURCE-VERIFIED |
 | `.github/ISSUE_TEMPLATE/config.yml` | 100644 | 213 | 6 | `9a83ca0cd2a69a4ac8eacfdede3446948e4f2140` | SOURCE-VERIFIED |
-| `.github/ISSUE_TEMPLATE/feature_request.yml` | 100644 | 1,650 | 54 | `231488cd4ca2df7bbc466755dd3206f11c95975b` | SOURCE-VERIFIED |
+| `.github/ISSUE_TEMPLATE/feature_request.yml` | 100644 | 1,652 | 54 | `231488cd4ca2df7bbc466755dd3206f11c95975b` | SOURCE-VERIFIED |
 | `.github/dependabot.yml` | 100644 | 814 | 27 | `58ddf528590ac1c90104f05e5641459feaa53827` | SOURCE-VERIFIED |
 | `.github/pull_request_template.md` | 100644 | 1,049 | 45 | `e380dd4e0d876c1f7ea43303e2ae2e61f6c3cdcf` | SOURCE-VERIFIED |
 | `.github/workflows/ci.yml` | 100644 | 24,566 | 683 | `79cbf4d0835327f67fec623b3b41651f41ed72f4` | SOURCE-VERIFIED |
