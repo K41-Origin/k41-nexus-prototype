@@ -110,7 +110,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/public/Screenshot.jpg | a23439795da5ce4f0bffe11b8fff855700fb6b90 | 111189 | BINARY HEADER VERIFIED — JPEG 1308×521 |
 | webview-ui/README.md | d2e77611fd3d959fee0487c41bd27b318be32b04 | 2555 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/src/App.tsx | 3eb91a2050da5f789223bc0a045a80fc841d60cb | 42910 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
-| webview-ui/src/browserMock.ts | 335caac9b428de7801b0c5c680eaab2dd7a1f290 | 8750 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
+| webview-ui/src/browserMock.ts | 335caac9b428de7801b0c5c680eaab2dd7a1f290 | 8750 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-003; browser-mock asset fallback and dispatch flow traced |
 | webview-ui/src/changelogData.ts | a7a9c67afa47a0fdab0c63de91a25e9ead3389be | 12006 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/characters/art/artColors.ts | 793a52107a0e9704cf5e4c657b52e56d3851bf04 | 967 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/art/beard/full_beard.png | ea50d209e15eb2176eb804604e72c25acefe7458 | 1247 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
@@ -315,7 +315,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/hooks/useTerminalDrawer.ts | 2913c2331ad4bee5f127a249502a394bfb414980 | 10246 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/index.css | daa1fcad26dbb03a9fa4ef0e1cf16389b7577b33 | 19712 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/loadingPreview.tsx | 9cd3169706acf23a2b3ea4a7d92fdc8b41fc855b | 364 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
-| webview-ui/src/main.tsx | 223bbf51073edc73b9646be0e9618b11ea1ac250 | 810 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
+| webview-ui/src/main.tsx | 223bbf51073edc73b9646be0e9618b11ea1ac250 | 810 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-003; dev-only browser-mock bootstrap verified |
 | webview-ui/src/mobile/edgeSwipe.ts | 37b4fbc95728f573cef28b8ae9c5792f32352652 | 7439 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/mobile/keyboardViewport.ts | bd8d9e880ffefbef922d335b2b72abde520c01db | 2884 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/mobile/MobileMenu.tsx | 24c49d3bebe365753451128e1c5dd35a845fe889 | 7450 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
@@ -411,7 +411,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/usage/usageBarView.ts | b85fb9e51a42d4c590f18693a3bad20e1db113a0 | 3104 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/usage/usageStore.ts | 7330bf9bd856d32dfef20633f7dc391b4a2644e2 | 2842 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/usage/useUsageBridge.ts | 270909fcba42e615b95d6229b66d61b1224f9072 | 2168 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
-| webview-ui/test/build-subpath.test.ts | 6531f84f343232b656cd9265d701a478babd4277 | 4933 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/build-subpath.test.ts | 6531f84f343232b656cd9265d701a478babd4277 | 4933 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-003; not executed |
 | webview-ui/test/cardBar.test.ts | 39e3b000b1aef67abd7f0f342330af44437c0944 | 2615 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/castHistory.test.ts | 3de1c964733ca76f8472906d15572f1d4313ef85 | 2181 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/castSync.test.ts | 2a0c507d8173811995c8b6578079d29b20acdc04 | 9866 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
@@ -422,7 +422,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/test/contextGauge.test.ts | a4b3cc4c4a96f3169afde059e3128af6df5924a1 | 2734 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/conversationsRecent.test.ts | 56e1c4a7d27821aec41b4c7c780217c0825f88d7 | 936 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/despawnSeat.test.ts | f9354dd17f64bde82d6990f9f77cfa75350f0557 | 3311 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/dev-assets.test.ts | 44c181de7e7f63904143d6e7ccdf3b0fc33bb0b7 | 3507 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/dev-assets.test.ts | 44c181de7e7f63904143d6e7ccdf3b0fc33bb0b7 | 3507 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-003; not executed |
 | webview-ui/test/directoryStrip.test.ts | fdc1cc3089fc2eade4f468ee86c6c3393f570045 | 1524 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/edgeSwipe.test.ts | 01da285159b5c81c02a374dd02a5acc3658afa7e | 5852 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/editorActions.test.ts | b27ca7b3529a019a542fc0bc701d0672da662fff | 4289 | FETCHED / INVENTORIED — assertions catalogued; not executed |
@@ -468,5 +468,5 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/tsconfig.app.json | 23fe8cc3ddc9a92928117665db2ea1432b1605d7 | 767 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/tsconfig.json | 1ffef600d959ec9e396d5a260bd3f5b927b2cef8 | 119 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/tsconfig.node.json | a98025607ec565eca8fa09f18336ba2ced07939b | 834 | REVIEWED — root/package/build/config file content read; no dynamic execution |
-| webview-ui/vite.config.ts | b47531773bf6fea57fe6d46a6291133371aa56ea | 4848 | REVIEWED REPORTED — dynamic watcher behavior not tested |
+| webview-ui/vite.config.ts | b47531773bf6fea57fe6d46a6291133371aa56ea | 4848 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-003; watcher add/unlink behavior remains open |
 | webview-ui/vitest.config.ts | 3ed45c68d601468600716a0fd69b8cdb12739f16 | 1077 | REVIEWED — root/package/build/config file content read; no dynamic execution |
