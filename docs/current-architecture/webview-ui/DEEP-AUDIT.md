@@ -241,3 +241,44 @@ Cross-reference reads (not counted as new webview ledger rows):
 ### Next continuation point
 
 Continue from the remaining 62 reported-review source rows by reconciling their historical line-level evidence, then review the 47 remaining test files as needed. Keep protocol producer/consumer validation and the open WV findings in scope; do not reread unchanged files already fully reviewed for the same question.
+
+
+## 11. Historical reported-review reconciliation — GOV-WEBVIEW-004 (2026-11-25)
+
+### Governance and repository state
+
+- Governance documentation reviewed before source/ledger reconciliation: governance README, audit register, audit method, evidence log, webview module record, webview README, DEEP-AUDIT and FILE-REFERENCE.
+- Source branch/baseline: `main`, commit `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- Recursive Git tree response: `truncated: false`; 459 `webview-ui/` blob entries.
+- Documentation branch before this session: `docs/hybrid-llm-engine-direction`, latest known commit `2614502f8983977ed850c1a8a9b840689c6aa183`.
+- The 62 reported-review ledger paths were compared against the source tree. All 62 paths exist and all 62 blob SHAs match the ledger. No changed or missing path was found in this subset.
+
+### Historical evidence inspected
+
+The historical DEEP-AUDIT records broad subsystem-level claims, not a per-file line-range manifest:
+- 44 files under `src/office` had been fetched/reviewed, with large files chunked.
+- 14 `src/terminal` and 2 `src/touch` files were reported reviewed.
+- Character profile/cast/history/wardrobe/renderer logic and major character UI were examined, but the audit explicitly says some large UI fetch outputs were truncated and corresponding ledger entries remain `REVIEWED REPORTED`.
+- Component and hook groups are named broadly, while the same document says exact coverage varies and is represented conservatively in FILE-REFERENCE.
+
+Git history for FILE-REFERENCE was also checked across commits `1165d32dc85fe578b3e2a9feb137bf524b3953ad`, `07ca3b67e0640aee1a93af5f1c48e5445695a47f`, `13354f1a74b75b9ab3d8982544414134b1940ae3`, `65502c86523bca71625a86194b898e3c8b84182a` and `d15dbb41666b2ac7420e4ebe88456c250c10298f`. The reported-review statuses and their absence of file-specific line ranges persist across those ledger versions. The commit titled `close component tail coverage gaps` changed audit documentation only; its ledger diff did not provide per-file line-range evidence for the 62 rows.
+
+### Reconciliation result
+
+| Ledger group | Rows | Reconciliation |
+|---|---:|---|
+| `src/characters/ui/` | 9 | Historical subsystem review reported; exact per-file line coverage not recoverable |
+| `src/components/` | 32 | Prior component inspection reported; exact per-file range/cross-reference evidence not recoverable |
+| `src/hooks/` | 14 | Prior hook review reported; lifecycle/cross-module follow-up and exact per-file coverage remain |
+| Other source files (`changelogData.ts`, `constants.ts`, `index.css`, `loadingPreview.tsx`, `notificationSound.ts`, `runtime.ts`, `testHooks.ts`) | 7 | Historical review claim recorded; no exact per-file line-range evidence recovered |
+| **Total** | **62** | **All SHA-reconciled; none can safely be promoted to REVIEWED from historical documentation alone** |
+
+This is a completed **historical evidence reconciliation**, not a completed content review of the 62 files. No claim is made that all 62 files were re-fetched or re-read in GOV-WEBVIEW-004. Their ledger statuses remain reported-review and have been annotated to preserve this distinction. Do not downgrade them to INVENTORIED: historical inspection is documented, but its exact coverage is insufficiently evidenced for REVIEWED.
+
+### Consequence and next action
+
+- 39 rows remain `FETCHED / REVIEWED REPORTED`.
+- 23 rows remain `REVIEWED REPORTED`.
+- All 62 have unchanged source blob SHAs at the selected source baseline.
+- Next source-review work must target the missing evidence: fetch and inspect only those files/ranges whose complete prior coverage cannot be established, record exact line ranges and cross-references, then promote only verified rows.
+- No source code was modified. No tests, build, lint, typecheck, or runtime experiment was executed.
