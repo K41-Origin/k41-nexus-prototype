@@ -2,7 +2,7 @@
 
 **Status:** ACTIVE — governance baseline established; module records are populated as audits are verified.  
 **Initial module recorded:** `core/`  
-**Governance publication branch (pre-consolidation):** `docs/hybrid-llm-engine-direction`; intended canonical branch after consolidation: `main`  
+**Canonical governance branch:** `main@beb404fe2aa14506926f6065186387ef734beaac` (documentation consolidation PR #1 merged).  
 **Documentation HEAD at the start of GOV-DOCGOV-001:** `02b3118edf38713cc55b581a916fd61dea8bfd1b`  
 **Current source verification snapshot:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
 **Webview source verification snapshot:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`
