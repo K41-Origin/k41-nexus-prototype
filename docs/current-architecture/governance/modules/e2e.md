@@ -1,6 +1,6 @@
 # E2E Module Audit Record
 
-**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); E2E-003–E2E-006 are OPEN test-quality findings; full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); targeted cross-module review remains open.  
+**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); E2E-003–E2E-006 are OPEN test-quality findings; full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); targeted lifecycle/hook/reconnect/persistence/test-hook cross-module static trace complete (GOV-E2E-004); scripts/CI review remains open.  
 **Source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
 **Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated=false`).  
 **Latest documentation snapshot before publication:** `docs/hybrid-llm-engine-direction@cbf2d7ed7f711bc44fb619e43d86c560e1cf7d7e`.  
@@ -32,7 +32,7 @@
 
 ## Findings
 
-Preserve E2E-001 through E2E-008 in [DEEP-AUDIT.md](../../e2e/DEEP-AUDIT.md):
+Preserve E2E-001 through E2E-009 in [DEEP-AUDIT.md](../../e2e/DEEP-AUDIT.md):
 - **E2E-001:** standalone process termination fallback does not reliably escalate after SIGTERM; static, OPEN.
 - **E2E-002:** standalone port-0 allocation closes the socket before the CLI binds; static race, OPEN.
 - **E2E-003:** seeded-layout Areas gate test is confounded by the host Directory gate; assertion gap, OPEN.
@@ -41,8 +41,9 @@ Preserve E2E-001 through E2E-008 in [DEEP-AUDIT.md](../../e2e/DEEP-AUDIT.md):
 - **E2E-006:** pet persistence test verifies count, not restored identities/types; assertion gap, OPEN.
 - **E2E-007:** `PIXEL_AGENTS_E2E_RUN_ID=..` escapes the intended artifact namespace and broadens recursive Allure cleanup; static, OPEN.
 - **E2E-008:** stale VS Code download lock has no owner/PID recovery and can block setup for ten minutes; static, OPEN.
+- **E2E-009:** mock scenario queue uses an unlocked cross-process read-modify-write claim; concurrent mock Claude processes can duplicate/lose scenarios; static, OPEN.
 
-Do not duplicate these detailed records in the register. Cross-link canonical findings in the owning modules: server F-01/F-03/F-05; adapters A-03/A-05/A-06; webview WV-RESYNC-01/02, WV-APP-01, WV-TR-01 and WV-PROTO-01/02/03; server F-08 / webview WV-C08.
+Do not duplicate these detailed records in the register. Cross-link canonical findings in the owning modules: server F-01/F-03/F-04/F-05/F-09; adapters A-03/A-05/A-06; webview WV-RESYNC-01/02, WV-APP-01, WV-TR-01 and WV-PROTO-01/02/03; server F-08 / webview WV-C08. GOV-E2E-004 records the lifecycle, hook, reconnect, persistence and test-hook boundary trace without duplicating those findings.
 
 ## Next action
 
