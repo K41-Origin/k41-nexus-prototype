@@ -31,7 +31,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [Adapters audit record](modules/adapters.md) | VS Code adapter static audit coverage, A-01–A-10, source baseline and remaining integration gaps |
 | [E2E audit record](modules/e2e.md) | E2E inventory, assertion-review status, E2E-001–E2E-009 and cross-module coverage gaps |
 | [Scripts audit record](modules/scripts.md) | Complete 14/14 scripts inventory, source review, BUILD-001–BUILD-007 and tooling gaps |
-| [GitHub CI/release audit record](modules/github-ci.md) | Complete 10/10 `.github/` inventory, workflow permissions/triggers, secret boundaries, artifact provenance and BUILD-008–BUILD-014 |
+| [GitHub CI/release audit record](modules/github-ci.md) | Complete 10/10 `.github/` inventory, workflow permissions/triggers, secret boundaries, artifact provenance and BUILD-008–BUILD-013 |
 
 ## Existing technical records retained
 
