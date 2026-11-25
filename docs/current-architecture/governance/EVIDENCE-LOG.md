@@ -1466,3 +1466,55 @@ The current-architecture index previously displayed only the historical module b
 - No tests, build, typecheck, lint, package, dependency/SBOM generation, CI dispatch, release rehearsal, OIDC operation or runtime experiment was executed.
 - BUILD-008/009 remain OPEN pending negative/positive workflow verification and merge. Infrastructure remains PARTIAL; system dependency map remains STATIC MAP IN PROGRESS; Architecture/ADR remains PARTIAL with 12 future-engine decisions OPEN.
 - Branch merge/closure was not performed.
+
+
+## 2026-11-26 — GOV-TECH-VERIFY-001: authorized verification attempt and execution blockers
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Target source:** `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`  
+**Base:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Scope:** authorized technical-verification attempt, static workflow control-flow review, and evidence recording. No application/workflow changes.
+
+### Governance and source reconciliation
+
+- Reused governance and historical records reviewed in the preceding continuation: active governance lives under `docs/current-architecture/governance/`; historical GOV-GHCI-001/002 and GOV-INFRA-001/GOV-DEPMAP-001/GOV-ADR-001 remain the evidence baseline.
+- Re-fetched remediation source files and verified:
+  - `package.json` blob `66efe28fd2927466c5f8283c6e26fe63da427079`
+  - `.nvmrc` blob `2bd5a0a98a36cc08ada88b804d3be047e6aa5b8a` (Node 22)
+  - `.github/workflows/ci.yml` blob `8dc8cdf30e2cb1857708a8bd601807c08df34368`
+  - `.github/workflows/publish-extension.yml` blob `0b408f04d6b7c47d1405b9259d257fd21bdcb15d`
+- Root package scripts identify typecheck, lint, format, webview/server/package-contract tests, extension/webview builds, npm package verification and E2E execution targets. These are inventory only, not execution results.
+
+### Execution attempt and observed blockers
+
+- Queried GitHub Actions runs for branch `security/remediate-build-008-009`: API returned `total_count=0`, no workflow runs.
+- Queried commit check-runs for `86d3b1d...`: `total_count=0`; commit status endpoint returned `total_count=0` and `state=pending`.
+- Available GitHub connector operations expose workflow-run/job/artifact reads and log retrieval, but no workflow dispatch or remote command execution action.
+- Attempted an isolated repository clone to `/tmp/k41-nexus-prototype`; clone could not resolve `github.com` (`Could not resolve host: github.com`). No working tree was obtained.
+- Therefore no safe execution environment was available to install dependencies or run project commands. This is an environment/tool-access blocker, not a test failure.
+
+### Static finding discovered during verification review
+
+- Added **BUILD-014** to the CI/release deep audit: `validate_spec`, `messages_drift` and `e2e_inventory_drift` in the remediation branch CI workflow use `continue-on-error: true` (workflow lines 56-82), but the final gate exports/checks only checkout, setup, install, typecheck, lint, webview tests, format, build, npm package and server tests (lines 209-233).
+- The source comments label the protocol checks as blocking, but their outcomes are not consumed by the final gate. This is a HIGH-confidence STATIC-FINDING; no failed workflow step was executed or reproduced.
+- Affected workflow blob: `8dc8cdf30e2cb1857708a8bd601807c08df34368`.
+- Recommended correction is to make these steps naturally fail the job or explicitly include their outcomes in the final gate and summary. No source fix was applied.
+
+### Results and verification labels
+
+- **TREE-VERIFIED:** remediation tree was previously verified complete (856 entries, `truncated=false`); only the two workflow blobs differ from main.
+- **SOURCE-VERIFIED:** package manifest, Node version selector and both remediation workflows re-fetched at the recorded blob identities.
+- **STATIC-FINDING:** BUILD-014 recorded; BUILD-008/009 implementation remains static-only.
+- **TEST-INVENTORIED:** project command inventory re-confirmed from `package.json`.
+- **TEST-EXECUTED:** none.
+- **BUILD / TYPECHECK / LINT / PACKAGE / E2E EXECUTED:** none.
+- **RUNTIME-REPRODUCED:** none.
+- **Workflow negative tests / release positive rehearsal / OIDC / registry publication:** not run.
+
+### Documentation publication
+
+- Updated `github-ci/DEEP-AUDIT.md` with BUILD-014.
+- Updated `governance/modules/github-ci.md` and consolidated `governance/AUDIT-REGISTER.md` to include BUILD-014 as OPEN.
+- No application source, package manifest, dependency, workflow, GitHub setting or release state was changed.
+- BUILD-008/009 remain OPEN pending actual PR/manual negative workflow tests, controlled release positive rehearsal, and GitHub/npm settings evidence. BUILD-014 remains OPEN pending source correction and workflow verification.
+- This entry must be re-fetched after commit to verify its final blob SHA. No merge or branch closure was performed.
