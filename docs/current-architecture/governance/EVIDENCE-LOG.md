@@ -558,3 +558,42 @@ The audit register's adapter continuation gate was stale: it requested SHA recon
 ### Next continuation point
 
 Continue the 47 webview test files still marked `FETCHED / INVENTORIED` at assertion level, or select a specific cross-module protocol/lifecycle trace. Do not repeat unchanged reviewed source files. Adapter A-01–A-10 remain static findings pending authorized dynamic verification.
+
+
+## 2026-11-25 — GOV-WEBVIEW-009: assertion-level review of 47 inventoried tests
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, recursive `truncated: false`  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction` — `fd998227336bb3f196d0a26caeea72dc96d7a9a0`  
+**Scope:** all 47 test files previously `FETCHED / INVENTORIED` under `webview-ui/test/`. Their paths and blob SHAs are recorded in the updated webview `FILE-REFERENCE.md`; complete assertion maps are in `webview-ui/DEEP-AUDIT.md` section 16.
+
+### Work performed
+
+- Read current governance and webview audit records before source inspection.
+- Reconciled the current webview inventory against the 459-row ledger; the active source tree is complete and the 47 test file SHAs match their recorded identities.
+- Individually fetched and read all 47 test sources, including helper/setup code and assertions. The complete file-by-file assertion scope is documented in DEEP-AUDIT section 16.
+- Promoted all 47 rows from `FETCHED / INVENTORIED` to `TEST-INVENTORIED`. With the 7 previously TEST-INVENTORIED files, the resulting status is 54/54 test files reviewed at assertion level; 0 remain FETCHED / INVENTORIED.
+- Added `WV-TEST-01`, a low-severity static test-quality finding: `officeBlink.test.ts` compares sequential simulations sharing one already-advanced PRNG, rather than interleaving two independently initialized blink clocks. The production blink implementation is not thereby declared defective.
+- Recorded coverage limits and correlations with existing `WV-C08`, `WV-TR-01`, `WV-RESYNC-01`, `WV-C12` and other open findings; no duplicate issue IDs were created.
+
+### Evidence classification and limits
+
+- **TREE-VERIFIED:** complete source tree and 47 test paths/blob identities.
+- **SOURCE-VERIFIED:** test source content fetched and reviewed at the stated source commit; `officeBlink.test.ts` lines 25–38, 71–75 and `blink.ts` lines 29–50 support WV-TEST-01.
+- **TEST-INVENTORIED:** all 47 formerly inventoried-only test files now have assertion-level review evidence.
+- **OPEN:** tests were not executed; assertions do not prove runtime behavior or integration coverage.
+- No npm/Vitest command, build, lint, typecheck, browser/VS Code host, mobile device or accessibility experiment was run.
+- No application source or test file was modified.
+
+### Consolidated status
+
+- Webview: 459/459 path/SHA reconciled.
+- Source status: 261 REVIEWED; no reported-review source rows remain.
+- Tests: 54 TEST-INVENTORIED; 0 FETCHED / INVENTORIED.
+- Assets: 143 BINARY HEADER VERIFIED; 1 NOT VERIFIED font.
+- Existing findings remain open; `WV-TEST-01` is added and open.
+
+### Next continuation point
+
+Continue UI → adapter → server ClientMessage/ServerMessage tracing, field validation, authorization, persistence, side effects and handshake order. Then continue targeted lifecycle/reconnect and binary/font verification. Do not re-read unchanged REVIEWED source or TEST-INVENTORIED test files for the same question. Dynamic test execution remains outside scope unless explicitly authorized.
