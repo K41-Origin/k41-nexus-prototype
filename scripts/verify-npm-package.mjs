@@ -84,14 +84,36 @@ async function waitFor(check, description) {
   );
 }
 
+function waitForChildClose(child, timeoutMs) {
+  return new Promise((resolve) => {
+    if (child.exitCode !== null || child.signalCode !== null) {
+      resolve(true);
+      return;
+    }
+    const onClose = () => {
+      clearTimeout(timer);
+      resolve(true);
+    };
+    const timer = setTimeout(() => {
+      child.removeListener('close', onClose);
+      resolve(false);
+    }, timeoutMs);
+    child.once('close', onClose);
+  });
+}
+
 async function stopChild(child) {
-  if (child.exitCode !== null) return;
+  if (child.exitCode !== null || child.signalCode !== null) return;
+
+  const gracefulClose = waitForChildClose(child, 3_000);
   child.kill('SIGTERM');
-  await Promise.race([
-    new Promise((resolve) => child.once('close', resolve)),
-    new Promise((resolve) => setTimeout(resolve, 3_000)),
-  ]);
-  if (child.exitCode === null) child.kill('SIGKILL');
+  if (await gracefulClose) return;
+
+  const forcedClose = waitForChildClose(child, 3_000);
+  child.kill('SIGKILL');
+  if (!(await forcedClose)) {
+    throw new Error('npm package smoke child did not close after SIGKILL');
+  }
 }
 
 async function verifyInstalledTarball(tarballPath) {

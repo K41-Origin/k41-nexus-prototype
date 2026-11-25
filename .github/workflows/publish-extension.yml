@@ -6,51 +6,99 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Package without publishing'
+        description: 'Build and verify only; manual dispatch can never publish'
         type: boolean
-        default: false
+        default: true
+        required: true
 
 concurrency:
   group: publish-extension
   cancel-in-progress: false
 
 jobs:
-  publish:
+  build-and-verify:
+    name: Build and Verify Release Artifacts
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     permissions:
-      contents: write
+      contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Reject manual publication mode
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" != "true" ]; then
+            echo "::error::Manual dispatch is verification-only. Publish through a GitHub Release."
+            exit 1
+          fi
 
       - name: Verify Release Commit Is on Main
         if: github.event_name == 'release'
         shell: bash
         run: |
-          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main || {
             echo "::error::Release tag must point to a commit on main."
             exit 1
-          fi
+          }
 
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
       - name: Check types and lint
         run: npm run check-types && npm run lint
 
+      - name: Verify npm Release Identity
+        if: github.event_name == 'release'
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_REF: ${{ github.ref }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
+          import fs from 'node:fs';
+          import { validateReleaseIdentity } from './scripts/npm-package-contract.mjs';
+
+          const manifest = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const latestVersion = JSON.parse(execFileSync('npm', ['view', manifest.name, 'dist-tags.latest', '--json'], { encoding: 'utf8' }).trim());
+          let exactVersionExists = false;
+          try {
+            execFileSync('npm', ['view', `${manifest.name}@${manifest.version}`, 'dist.integrity', '--json'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+            exactVersionExists = true;
+          } catch (error) {
+            const output = `${error.stdout ?? ''}\n${error.stderr ?? ''}`;
+            if (!output.includes('E404')) throw error;
+          }
+
+          validateReleaseIdentity({
+            manifest,
+            releaseTag: process.env.RELEASE_TAG,
+            ref: process.env.RELEASE_REF,
+            latestVersion,
+            exactVersionExists,
+          });
+          NODE
+
+      - name: Run Unit Tests
+        run: npm test
+
       - name: Package VSIX for Verification
         id: package-vsix
-        uses: HaaLeo/publish-vscode-extension@v2
+        uses: HaaLeo/publish-vscode-extension@1b8df468b849f76a143b8c18bf0ffa2075398d12 # v2.1.0
         with:
           pat: dry-run
           registryUrl: https://marketplace.visualstudio.com
@@ -62,92 +110,128 @@ jobs:
           VSIX_PATH: ${{ steps.package-vsix.outputs.vsixPath }}
         run: xvfb-run -a node scripts/verify-vsix-package.mjs "$VSIX_PATH"
 
-      - name: Publish Verified VSIX to VS Code Marketplace
-        uses: HaaLeo/publish-vscode-extension@v2
+      - name: Build and Verify npm Artifact
+        run: npm run verify:npm-package -- --output-dir "$RUNNER_TEMP/npm-package"
+
+      - name: Stage Release Artifacts
+        shell: bash
+        env:
+          VSIX_PATH: ${{ steps.package-vsix.outputs.vsixPath }}
+        run: |
+          artifact_dir="$RUNNER_TEMP/release-artifacts"
+          mkdir -p "$artifact_dir"
+          test -f "$VSIX_PATH"
+          cp "$VSIX_PATH" "$artifact_dir/extension.vsix"
+          cp "$RUNNER_TEMP/npm-package/"*.tgz "$artifact_dir/"
+          cp "$RUNNER_TEMP/npm-package/package-metadata.json" "$artifact_dir/"
+          printf '%s\n' "$GITHUB_SHA" > "$artifact_dir/source-commit.txt"
+          printf '%s\n' "$GITHUB_REF" > "$artifact_dir/source-ref.txt"
+
+      - name: Upload Verified Release Artifacts
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: verified-release-artifacts
+          path: ${{ runner.temp }}/release-artifacts/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish-vsix:
+    name: Publish Verified VSIX
+    if: github.event_name == 'release' && github.event.action == 'published'
+    needs: build-and-verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Download Verified Release Artifacts
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: verified-release-artifacts
+          path: ${{ runner.temp }}/release-artifacts
+
+      - name: Publish to VS Code Marketplace
+        uses: HaaLeo/publish-vscode-extension@1b8df468b849f76a143b8c18bf0ffa2075398d12 # v2.1.0
         with:
           pat: ${{ secrets.VSCE_PAT }}
           registryUrl: https://marketplace.visualstudio.com
-          extensionFile: ${{ steps.package-vsix.outputs.vsixPath }}
+          extensionFile: ${{ runner.temp }}/release-artifacts/extension.vsix
           skipDuplicate: true
-          dryRun: ${{ inputs.dry_run }}
 
-      - name: Publish Verified VSIX to Open VSX
-        uses: HaaLeo/publish-vscode-extension@v2
+      - name: Publish to Open VSX
+        uses: HaaLeo/publish-vscode-extension@1b8df468b849f76a143b8c18bf0ffa2075398d12 # v2.1.0
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
           registryUrl: https://open-vsx.org
-          extensionFile: ${{ steps.package-vsix.outputs.vsixPath }}
+          extensionFile: ${{ runner.temp }}/release-artifacts/extension.vsix
           skipDuplicate: true
-          dryRun: ${{ inputs.dry_run }}
 
-      - name: Upload VSIX to Release
-        if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v3
+      - name: Upload VSIX to GitHub Release
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3
         with:
-          files: ${{ steps.package-vsix.outputs.vsixPath }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: ${{ runner.temp }}/release-artifacts/extension.vsix
 
   publish-npm:
-    name: Verify and Publish npm Package
+    name: Publish Verified npm Artifact
+    if: github.event_name == 'release' && github.event.action == 'published'
+    needs: build-and-verify
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
+    environment: npm-publish
     permissions:
       contents: read
       id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
+      - name: Download Verified Release Artifacts
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
-          fetch-depth: 0
-
-      - name: Verify Release Commit Is on Main
-        if: github.event_name == 'release'
-        shell: bash
-        run: |
-          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
-            echo "::error::Release tag must point to a commit on main."
-            exit 1
-          fi
+          name: verified-release-artifacts
+          path: ${{ runner.temp }}/release-artifacts
 
       - name: Setup Node for Trusted Publishing
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: '22.x'
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
-      - name: Install Trusted-Publishing npm CLI
-        run: npm install --global "npm@^11.5.1"
+      - name: Install pinned npm CLI without lifecycle scripts
+        run: npm install --global --ignore-scripts npm@11.5.1
 
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Verify Trusted-Publishing Toolchain
-        run: |
-          node -e "const semver = require('semver'); const npm = require('child_process').execFileSync('npm', ['--version'], { encoding: 'utf8' }).trim(); if (!semver.satisfies(process.version, '>=22.14.0') || !semver.satisfies(npm, '>=11.5.1')) { throw new Error('Trusted publishing requires Node >=22.14.0 and npm >=11.5.1'); } console.log('Node', process.version, 'npm', npm);"
-
-      - name: Run Unit Tests
-        run: npm test
-
-      - name: Build and Verify npm Artifact
-        id: npm-package
+      - name: Verify npm artifact integrity and publication decision
+        id: npm_artifact
         shell: bash
         run: |
-          output_dir="$RUNNER_TEMP/npm-package"
-          npm run verify:npm-package -- --output-dir "$output_dir"
-          echo "metadata=$output_dir/package-metadata.json" >> "$GITHUB_OUTPUT"
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
+          import { execFileSync } from 'node:child_process';
+          import fs from 'node:fs';
+          import path from 'node:path';
 
-      - name: Upload Verified npm Artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: npm-package-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/npm-package/
-          if-no-files-found: error
-          retention-days: 7
+          const dir = path.join(process.env.RUNNER_TEMP, 'release-artifacts');
+          const metadata = JSON.parse(fs.readFileSync(path.join(dir, 'package-metadata.json'), 'utf8'));
+          const tarballs = fs.readdirSync(dir).filter((name) => name.endsWith('.tgz'));
+          if (tarballs.length !== 1) throw new Error(`Expected exactly one npm tarball, found ${tarballs.length}`);
+          const tarball = path.join(dir, tarballs[0]);
+          const integrity = `sha512-${crypto.createHash('sha512').update(fs.readFileSync(tarball)).digest('base64')}`;
+          if (metadata.integrity !== integrity) throw new Error('npm tarball integrity does not match build metadata');
+          if (metadata.filename !== tarballs[0]) throw new Error('npm tarball filename does not match build metadata');
+          if (typeof metadata.id !== 'string' || !metadata.id.includes('@')) throw new Error('npm artifact metadata has an invalid package identity');
 
-      - name: Publish Verified Artifact to npm
-        if: github.event_name == 'release' && github.event.action == 'published'
-        run: >-
-          node scripts/publish-npm-package.mjs
-          --metadata "${{ steps.npm-package.outputs.metadata }}"
-          --tag "${{ github.event.release.tag_name }}"
-          --ref "${{ github.ref }}"
+          let publishedIntegrity = null;
+          try {
+            publishedIntegrity = execFileSync('npm', ['view', metadata.id, 'dist.integrity', '--json'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim().replace(/^"|"$/g, '');
+          } catch (error) {
+            const output = `${error.stdout ?? ''}\n${error.stderr ?? ''}`;
+            if (!output.includes('E404')) throw error;
+          }
+          if (publishedIntegrity && publishedIntegrity !== integrity) throw new Error('Published npm version exists with different integrity');
+          const decision = publishedIntegrity === integrity ? 'skip' : 'publish';
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `decision=${decision}\n`);
+          console.log(`Verified ${metadata.id} (${integrity}); decision=${decision}`);
+          NODE
+
+      - name: Publish npm artifact with provenance
+        if: steps.npm_artifact.outputs.decision == 'publish'
+        run: npm publish "$RUNNER_TEMP"/release-artifacts/*.tgz --provenance --access public
