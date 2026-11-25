@@ -46,3 +46,18 @@
 All 8 integration files were individually fetched and statically reviewed for the stated scope. No test or script was executed.
 
 **Metadata correction:** the recursive Git tree reports `.github/workflows/ci.yml` as 24,588 bytes. The earlier 24,566 value in this ledger was inaccurate; the blob SHA and 683-line review identity are unchanged.
+
+
+## Remediation branch verification snapshot
+
+**Branch:** `security/remediate-build-008-009`  
+**HEAD:** `86d3b1dbddae7605e5e2092886c12982f8e4bf58`  
+**Base:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Tree:** 856 entries, `truncated=false`. Only these two tracked workflow blobs differ from the base tree within the remediation change set.
+
+| Path | Mode | Bytes | Lines | Blob SHA | Remediation review |
+|---|---:|---:|---:|---|---|
+| `.github/workflows/ci.yml` | 100644 | 16,167 | 451 | `8dc8cdf30e2cb1857708a8bd601807c08df34368` | TREE-VERIFIED / SOURCE-VERIFIED — privileged preview jobs removed |
+| `.github/workflows/publish-extension.yml` | 100644 | 6,627 | 238 | `0b408f04d6b7c47d1405b9259d257fd21bdcb15d` | TREE-VERIFIED / SOURCE-VERIFIED — release-only isolated publisher design |
+
+These are branch-specific remediation identities, not replacements for the historical `main@56f354f` audit baseline above. The workflow files were fetched after the final branch update. No workflow parser, actionlint, tests, build, lint, typecheck or runtime execution was performed.
