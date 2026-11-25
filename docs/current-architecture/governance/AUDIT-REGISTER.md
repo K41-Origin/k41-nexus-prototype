@@ -1,6 +1,6 @@
 # Repository Audit Register
 
-**Status snapshot:** 2026-11-25 — GOV-WEBVIEW-012 static cross-layer lifecycle/reconnect/state-reconciliation trace consolidated; source branch `main` points to `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; module baselines remain individually scoped below.  
+**Status snapshot:** 2026-11-25 — GOV-GHCI-001 `.github/` CI/release static audit complete (10/10; BUILD-008–BUILD-013 OPEN); GOV-SCRIPTS-001 `scripts/` static audit complete (14/14; BUILD-001–BUILD-007 OPEN); source branch `main` points to `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; module baselines remain individually scoped below.  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
 **Governance branch:** `docs/hybrid-llm-engine-direction`  
 **Source branch for current-state audit:** `main` unless a module record explicitly declares another baseline.
