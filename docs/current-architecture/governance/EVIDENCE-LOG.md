@@ -954,7 +954,7 @@ The full E2E harness static review is complete. Continue targeted cross-module s
 
 ### Documentation publication
 
-Updated server DEEP-AUDIT and server module record; E2E DEEP-AUDIT, E2E module record and E2E README; consolidated AUDIT-REGISTER; appended this EVIDENCE-LOG entry. After publication, each changed document must be fetched again and its blob SHA plus key status/finding markers verified.
+Updated server DEEP-AUDIT and server module record; E2E DEEP-AUDIT, E2E module record and E2E README; consolidated AUDIT-REGISTER; appended this EVIDENCE-LOG entry. All seven changed documents were re-fetched after publication; blob SHA and required F-09/E2E-009/GOV-E2E-004/status markers were checked. Verified pre-final-log-update blob SHAs: server DEEP-AUDIT `22adda23b9f000abeb752d0794bca9db36494245`; server module `b3f52d852cd4fadb690ebf8e0b5331c7a3106f56`; E2E DEEP-AUDIT `83be5b0513115d9b140aa8c3015d3ed3c7220a3f`; E2E module `b616128a3a7beac7cffff2bdc1bd5908d6101852`; E2E README `625e437b192598605857bb6c7a18f3f1bf1e39b5`; AUDIT-REGISTER `45f4b034a7b1abeadd66a2bcdb5d0058344669f5`. The evidence log itself is re-fetched after this final append.
 
 ### Execution and modification limits
 
