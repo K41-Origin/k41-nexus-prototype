@@ -1751,6 +1751,42 @@ function ensureGroups() {
   if (data && !data.groups) data.groups = []
 }
 
+// Reject invalid cyclic group hierarchies before they can reach recursive consumers.
+function validateGroupGraph(groups) {
+  const membersById = new Map();
+  for (const group of groups) {
+    if (!group || typeof group.id !== 'string' || !group.id) {
+      throw new Error('Every group must have a non-empty string ID');
+    }
+    if (membersById.has(group.id)) {
+      throw new Error('Duplicate group ID: ' + group.id);
+    }
+    membersById.set(group.id, Array.isArray(group.members) ? group.members : []);
+  }
+
+  const visiting = new Set();
+  const visited = new Set();
+  function visit(groupId, trail = []) {
+    if (visiting.has(groupId)) {
+      const cycleStart = trail.indexOf(groupId);
+      const cycle = trail.slice(cycleStart).concat(groupId);
+      throw new Error('Circular group reference: ' + cycle.join(' → '));
+    }
+    if (visited.has(groupId)) return;
+
+    visiting.add(groupId);
+    for (const member of membersById.get(groupId) || []) {
+      if (typeof member !== 'string' || !member.startsWith('@')) continue;
+      const childId = member.slice(1);
+      if (membersById.has(childId)) visit(childId, trail.concat(groupId));
+    }
+    visiting.delete(groupId);
+    visited.add(groupId);
+  }
+
+  for (const groupId of membersById.keys()) visit(groupId);
+}
+
 // Find the group that contains a given asset
 function findGroupForAsset(asset) {
   if (!data || !data.groups || !asset.groupId) return null
@@ -1766,14 +1802,19 @@ function findParentGroup(groupId) {
 // Resolve all leaf asset IDs from a member reference
 // If starts with '@' → find the group, recursively resolve its members
 // Otherwise → return [memberId] (it's a leaf asset)
-function resolveGroupAssets(memberId) {
+function resolveGroupAssets(memberId, ancestors = new Set()) {
   if (memberId.startsWith('@')) {
     const gid = memberId.slice(1)
+    if (ancestors.has(gid)) {
+      throw new Error('Circular group reference while resolving: ' + [...ancestors, gid].join(' → '))
+    }
     const group = data.groups.find(g => g.id === gid)
     if (!group) return []
+    const nextAncestors = new Set(ancestors)
+    nextAncestors.add(gid)
     const results = []
     for (const mid of group.members) {
-      results.push(...resolveGroupAssets(mid))
+      results.push(...resolveGroupAssets(mid, nextAncestors))
     }
     return results
   }
@@ -1973,7 +2014,7 @@ function updateGroupMembershipDisplay(asset) {
     '<div><b>Group ID:</b> ' + escHtml(group.id) + '</div>' +
     '<div><b>Type:</b> ' + typeLabel + '</div>' +
     (schemeLabel ? '<div><b>Scheme:</b> ' + schemeLabel + '</div>' : '') +
-    '<div><b>Role:</b> ' + role + '</div>' +
+    '<div><b>Role:</b> ' + escHtml(role) + '</div>' +
     '<div><b>Category:</b> ' + escHtml(catLabel) + '</div>' +
     (flagsStr ? '<div><b>Flags:</b> ' + escHtml(flagsStr.trim()) + '</div>' : '') +
     '<div><b>Members:</b> ' + group.members.length + '</div>' +
@@ -2443,6 +2484,16 @@ document.getElementById('btn-create-group').onclick = () => {
 
   // Validate hierarchy: state groups cannot contain rotation groups, etc.
   const groupUnits = units.filter(u => u.type === 'group')
+  const proposedGroups = (data.groups || []).filter(g => g.id !== editingGroupId).concat({
+    id: groupId,
+    members: groupUnits.map(u => '@' + u.groupId)
+  })
+  try {
+    validateGroupGraph(proposedGroups)
+  } catch (err) {
+    showGroupValidation(err.message)
+    return
+  }
   for (const gu of groupUnits) {
     if (groupCreatorType === 'state' && gu.groupType === 'rotation') {
       showGroupValidation('State groups cannot contain rotation groups')
@@ -3405,7 +3456,7 @@ function collectExportItems() {
     for (const mid of group.members) {
       leafIds.push(...resolveGroupAssets(mid))
     }
-    const leafAssets = leafIds.map(id => data.assets.find(a => a.id === id)).filter(Boolean)
+    const leafAssets = leafIds.map(id => data.assets.find(a => a.id === id)).filter(asset => asset && !asset.discard)
     if (leafAssets.length === 0) continue
 
     for (const id of leafIds) groupedAssetIds.add(id)
