@@ -52,8 +52,8 @@ The 459 ledger rows currently classify as:
 | Ledger status | Files | Meaning |
 |---|---:|---|
 | `REVIEWED` | 199 | Prior review plus 53 complete source-file reviews in GOV-WEBVIEW-002 and three complete source-file reviews in GOV-WEBVIEW-003 |
-| `FETCHED / REVIEWED REPORTED` | 39 | Prior review reported; exact line-coverage reconciliation remains |
-| `REVIEWED REPORTED` | 23 | Prior review reported; exact line-coverage reconciliation remains |
+| `FETCHED / REVIEWED REPORTED` | 39 | GOV-WEBVIEW-004: SHA matched; historical per-file line coverage not evidenced; direct verification remains |
+| `REVIEWED REPORTED` | 23 | GOV-WEBVIEW-004: SHA matched; historical per-file line coverage not evidenced; direct verification remains |
 | `TEST-INVENTORIED` | 7 | Complete test source/assertions inspected in GOV-WEBVIEW-002/003; not executed |
 | `FETCHED / INVENTORIED` | 47 | Test files fetched/inventoried; complete assertion review remains; not executed |
 | `BINARY HEADER VERIFIED` | 143 | Header/signature/metadata checks only, as specified per file |
@@ -71,9 +71,9 @@ The existing documentation remains the technical source for module details. This
 
 Preserve existing `WV-` findings and their states in [DEEP-AUDIT.md](../../webview-ui/DEEP-AUDIT.md). The reconnect trace in GOV-WEBVIEW-001 adds `WV-RESYNC-01`, a static finding about applying a server seat snapshot while the client still has its pre-reconnect layout. It remains open and is not runtime reproduced.
 
-The next work is:
+The historical evidence reconciliation is complete: all 62 reported-review rows match the source baseline by path/blob SHA, but historical records do not establish exact per-file line coverage. Do not promote any of these rows based on subsystem-level notes alone.\n\nThe next work is:
 
-1. Reconcile exact line coverage for the remaining 62 `FETCHED / REVIEWED REPORTED` and `REVIEWED REPORTED` rows. Inspect only missing ranges and recorded gaps.
+1. Perform targeted direct source verification for the remaining 62 reported-review rows, prioritizing the 32 component files with uncertain/truncated historical coverage and the 14 hooks with lifecycle follow-up. Record exact line ranges and cross-references; promote only files whose complete content is verified.
 2. Review the remaining 47 test files beyond inventory where needed; map assertions to implementation and keep execution separate.
 3. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server.
 4. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
