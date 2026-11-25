@@ -56,7 +56,7 @@ jobs:
         id: validate_spec
         if: always() && steps.install_dependencies.outcome == 'success'
         run: npm run asyncapi:validate
-        continue-on-error: true
+        # Blocking check: a validation error must fail the job.
 
       - name: Generated messages drift check
         id: messages_drift
@@ -67,7 +67,7 @@ jobs:
             echo "::error::core/src/messages.ts is out of sync with core/asyncapi.yaml. Run 'npm run asyncapi:generate' locally and commit the result."
             exit 1
           fi
-        continue-on-error: true
+        # Blocking check: generated protocol drift must fail the job.
 
       - name: E2E inventory drift check
         id: e2e_inventory_drift
@@ -78,7 +78,7 @@ jobs:
             echo "::error::e2e/README.md inventory is out of sync with the test suite. Run 'npm run e2e:inventory' locally and commit the result."
             exit 1
           fi
-        continue-on-error: true
+        # Blocking check: stale inventory must fail the job.
 
       # --- Quality Checks (blocking) ---
 
@@ -168,6 +168,9 @@ jobs:
           CHECKOUT: ${{ steps.checkout.outcome }}
           SETUP_NODE: ${{ steps.setup_node.outcome }}
           INSTALL_DEPENDENCIES: ${{ steps.install_dependencies.outcome }}
+          VALIDATE_SPEC: ${{ steps.validate_spec.outcome }}
+          MESSAGES_DRIFT: ${{ steps.messages_drift.outcome }}
+          E2E_INVENTORY_DRIFT: ${{ steps.e2e_inventory_drift.outcome }}
           TYPE_CHECK: ${{ steps.type_check.outcome }}
           LINT: ${{ steps.lint.outcome }}
           WEBVIEW_TEST: ${{ steps.webview_test.outcome }}
@@ -192,6 +195,9 @@ jobs:
             echo "| Checkout | $(status "$CHECKOUT") |"
             echo "| Setup Node | $(status "$SETUP_NODE") |"
             echo "| Install dependencies | $(status "$INSTALL_DEPENDENCIES") |"
+            echo "| **AsyncAPI validation** | $(status "$VALIDATE_SPEC") |"
+            echo "| **Generated messages drift** | $(status "$MESSAGES_DRIFT") |"
+            echo "| **E2E inventory drift** | $(status "$E2E_INVENTORY_DRIFT") |"
             echo "| **Type check** | $(status "$TYPE_CHECK") |"
             echo "| **Lint** | $(status "$LINT") |"
             echo "| **Webview tests** | $(status "$WEBVIEW_TEST") |"
@@ -221,6 +227,7 @@ jobs:
         run: |
           failed=0
           for step in CHECKOUT SETUP_NODE INSTALL_DEPENDENCIES \
+                      VALIDATE_SPEC MESSAGES_DRIFT E2E_INVENTORY_DRIFT \
                       TYPE_CHECK LINT \
                       WEBVIEW_TEST FORMAT_CHECK BUILD NPM_PACKAGE SERVER_TEST; do
             val=$(printenv "$step" 2>/dev/null || echo "skipped")
