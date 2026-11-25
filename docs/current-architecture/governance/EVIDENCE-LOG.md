@@ -1229,3 +1229,29 @@ The following additional records were aligned after the initial append above:
 **Changed document set for post-publication verification:** governance README, AUDIT-REGISTER, EVIDENCE-LOG, module records for E2E/scripts/github-ci/webview-ui, webview README and ASSET-INVENTORY, E2E README, legacy scripts README/FILE-REFERENCE aliases, adapters DEPENDENCIES, infrastructure README/CI-CD, and SYSTEM-DEPENDENCY-MAP.
 
 The current branch tip and each changed file's resulting blob SHA must be fetched after this append. This entry records the intended verification scope; it does not claim the post-publication verification until that fetch has occurred.
+
+
+### GOV-DOCGOV-001 — post-publication verification completed
+
+The documentation branch ref was re-fetched after all reconciliation updates and pointed to `3461ee250c654e08beb3083a90546e68ebc48a62`. All changed files in the session were then re-fetched from the branch; the committed contents and resulting blob SHAs are:
+
+| Path | Verified blob SHA |
+|---|---|
+| `governance/README.md` | `d1ed12d4b36ed390aa145d5f749bd8615bc74ba6` |
+| `governance/AUDIT-REGISTER.md` | `896dc0d7c6c04ef6d6efba294f0b96c5ddb0ca77` |
+| `governance/EVIDENCE-LOG.md` (pre-verification append) | `ce7c9b9a6f23a5c164ab8b26025997e530a4d7ef` |
+| `governance/modules/e2e.md` | `b38933d02bc8203b16ec378dea1317f0b4f1327e` |
+| `governance/modules/scripts.md` | `e727df47c8d728e80051769b86932e91d9bee193` |
+| `governance/modules/github-ci.md` | `808a6eaca2c82b844f464563fd809f96bd9b5897` |
+| `governance/modules/webview-ui.md` | `40dbf69e53008f12900e1865398ae0ed4bd5fea9` |
+| `webview-ui/README.md` | `b75ab9d4e4578de3842bc8cea5b78392cfa8f49a` |
+| `webview-ui/ASSET-INVENTORY.md` | `e9240843a5093ce2492c679d0a113123528235c9` |
+| `e2e/README.md` | `2d1795fa25279bc2be192659d8eb5fc5408459d4` |
+| `scripts/README.md` (legacy alias) | `5939b790a500f430a4f3f2ecb9a0c12c017933a5` |
+| `scripts/FILE-REFERENCE.md` (legacy alias) | `6166eb69f4ea23949e5a5fe502cb9afcd0c42414` |
+| `adapters/DEPENDENCIES.md` | `6743be44249dfe8efed605fd42eb70ee4b8db1de` |
+| `infrastructure/README.md` | `45b913842d891231cdcc0d953d3aa6f8ba559594` |
+| `infrastructure/CI-CD.md` | `ba31ce7d767f71e2a55f65a69a394074d1ef6c2b` |
+| `SYSTEM-DEPENDENCY-MAP.md` | `0382c1e79f237d26ddffe06e1ea2b0d2752ca16a` |
+
+All 16 paths returned the expected updated content and blob SHA. The evidence-log blob listed above is the version fetched before this final verification append; this current entry must itself be fetched once after commit to verify its final blob SHA. No application source changed.
