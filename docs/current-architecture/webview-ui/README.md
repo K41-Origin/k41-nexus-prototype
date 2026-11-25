@@ -1,10 +1,10 @@
 # Webview UI — Current Architecture
 
-**Status:** IN PROGRESS — inventory/SHA reconciliation complete; static content and cross-layer audit remain open.  
-**Baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
-**Latest SHA reconciliation:** 8fc045de9ddae905cc131498d918ddbd64cc8bca — 459/459 ledger paths and blob SHAs match.
+**Status:** IN PROGRESS — static source, test assertion, protocol producer-consumer, field-level contract and cross-layer lifecycle/reconnect reviews are complete for their recorded scopes. Runtime/cross-client verification and one font binary remain open.
+**Historical baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`.
+**Latest source verification:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated=false`. The 459/459 path/blob identities remain unchanged.
 
-The audit is tracked against a fixed repository baseline. Do not repeat unchanged files already reviewed; consult the per-file blob-SHA ledger first.
+The governance module record is the consolidated status owner. This README is navigation and scope context; detailed evidence remains in the deep audit and file ledger.
 
 ## Audit records
 
@@ -19,12 +19,27 @@ The audit is tracked against a fixed repository baseline. Do not repeat unchange
 - [Transport](TRANSPORT.md)
 - [Dependencies](DEPENDENCIES.md)
 
-## Current scope
+## Current coverage
 
-The inventory contains 302 files under src/, 92 under public/, 54 tests and 11 root/package/build/config files. Previous work covered Office, terminal/touch, character/wardrobe, mobile, music, conversations, usage, transport and major application/component/hook areas. Coverage and outstanding verification are differentiated in FILE-REFERENCE.md and DEEP-AUDIT.md.
+The 459 tracked blobs comprise 302 files under `src/`, 92 under `public/`, 54 test files and 11 root/package/build/config files.
 
-All 459 tracked paths and blob SHAs have been reconciled against the fixed baseline with no additions, removals or changes. This confirms inventory identity, not complete content review. The ledger still contains 118 reported-review rows requiring exact line-coverage reconciliation, 54 inventoried test files, and one unverified font.
+The latest governance record reports:
+- 261 source/config rows `REVIEWED`;
+- 54 test files with assertion-level `TEST-INVENTORIED` review (not executed);
+- 143 binary assets with header/signature-level verification only;
+- 1 binary font (`public/fonts/FSPixelSansUnicode-Regular.ttf`) whose internals remain `NOT VERIFIED`;
+- 34/34 ClientMessage and 46/46 ServerMessage variants statically traced;
+- all 34 ClientMessage variants covered by field-level validation/authorization/persistence/side-effect review;
+- cross-layer lifecycle, reconnect and state-reconciliation static trace recorded in GOV-WEBVIEW-012.
 
-The 60 public PNG files have signature and IHDR dimension records. The TTF font internals, complete asset pixel/CRC integrity, manifest references and protocol producer/consumer side-effect matrix remain open.
+The former 118 reported-review rows and 54 inventory-only test rows are no longer open: source review and assertion-level review were completed in GOV-WEBVIEW-005–009. Do not repeat unchanged files.
 
-No application source has been modified. No tests, build, lint, typecheck or runtime experiments have been executed. Do not mark the module complete until every text file has defensible review coverage, binary assets have appropriate metadata/purpose records, and the control-plane protocol matrix is complete.
+## Remaining verification
+
+- Runtime reconnect/resync, cross-client synchronization and state reconciliation for WV-RESYNC-01/02 and WV-PROTO-01/02/03.
+- Runtime behavior and lifecycle verification for WV-APP-01 and WV-TR-01.
+- Retrieval and internal inspection of the TTF font binary.
+- Full binary decode/integrity and runtime asset loading; prior PNG checks establish signature/IHDR dimensions only, not full decode or CRC integrity.
+- Browser accessibility/rendering and multi-client behavior.
+
+No tests, build, lint, typecheck, browser/VS Code host or runtime experiments were executed in the recorded static audit. Do not mark the module complete until the open evidence is obtained and recorded.
