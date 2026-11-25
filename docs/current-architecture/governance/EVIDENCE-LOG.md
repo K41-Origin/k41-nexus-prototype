@@ -325,3 +325,48 @@ This session closes the historical **reconciliation** question, not the source-c
 - No 62-file full source reread was claimed or performed in this session.
 - No tests, build, lint, typecheck, or runtime experiment executed.
 - No application source, assets, configuration or dependencies modified.
+
+
+## 2026-11-25 — GOV-WEBVIEW-005: complete components deep static review
+
+### Governance and repository state
+
+- Governance reviewed before source review and documentation updates: governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, webview module record, webview README, DEEP-AUDIT and FILE-REFERENCE.
+- Documentation branch at session start: `docs/hybrid-llm-engine-direction`, commit `9c64638df8d4048f404e62193a3fbe1327d88252`.
+- Source branch: `main`, commit `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- Recursive source tree: `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`.
+- The `webview-ui/src/components/` tree contains 54 blobs. FILE-REFERENCE contains 54 corresponding component rows: 0 missing, 0 extra and 0 blob-SHA mismatches.
+
+### Files fully re-fetched and reviewed
+
+GOV-WEBVIEW-004 had left 32 component rows as reported-review because exact per-file line evidence was not present in the historical records. This session re-fetched the full content and performed static review for all 32. Exact path, blob SHA and line range are recorded in [DEEP-AUDIT.md](../webview-ui/DEEP-AUDIT.md#12-incremental-static-review--gov-webview-005), and each corresponding FILE-REFERENCE row is now REVIEWED.
+
+The 32 files are:
+- `directoryStrip.ts`, `introBubbleGeometry.ts`, `loadingSceneArt.ts`, `loadingSceneLayout.ts`, `MigrationNotice.tsx`, `MobileAgentBar.tsx`, `MobileKeyBar.tsx`, `statusDot.ts`.
+- `TerminalHideRibbon.tsx`, `Tooltip.tsx`.
+- All 18 files under `components/ui/`.
+- `useCardReorder.ts`, `VersionIndicator.tsx`, `VisualColorPicker.tsx`, `ZoomControls.tsx`.
+
+The other 22 component files already had REVIEWED status and were not repeated. Therefore the component subtree is now 54/54 REVIEWED.
+
+### Findings and future priorities
+
+- `WV-C12` — `useCardReorder.ts:150–170`: the same completion handler is registered for `touchend` and `touchcancel`; cancellation may be treated as tap or drop depending on gesture phase. STATIC-FINDING / OPEN.
+- `WV-C13` — `components/ui/Modal.tsx:24–41, 57–88`: Escape stacking exists, but the rendered panel has no visible dialog role/aria-modal declaration and the component contains no focus entry/trap/return lifecycle. STATIC-FINDING / OPEN.
+- `WV-C14` — `loadingSceneArt.ts:61–95` and `LoadingScene.tsx:118–124`: the cached load Promise can remain rejected and the component attaches no rejection handler/fallback in the inspected path. STATIC-FINDING / OPEN.
+- Additional evidence for existing `WV-C03/WV-C06`: `useCardReorder.ts:175–210` installs window mouse listeners and removes them only from mouseup; the unmount cleanup clears only the timer. Existing finding IDs retained.
+
+These are audit observations and future technical priorities only. No fixes were attempted and no runtime behavior was claimed as reproduced.
+
+### Updated coverage and limits
+
+- Ledger rows promoted: 32.
+- Component subtree: 54/54 REVIEWED (22 previously REVIEWED + 32 newly verified).
+- Remaining reported-review rows across webview source: 30 (14 hooks, 9 character UI files, 7 other source files).
+- Existing 47 FETCHED / INVENTORIED test rows remain unreviewed at assertion level; test execution remains separate.
+- No tests, build, lint, typecheck, protocol generation, browser/VS Code runtime or accessibility experiment executed.
+- No application source, assets, configuration, dependencies or generated files modified.
+
+### Continuation
+
+Continue with the remaining 30 reported-review source rows, prioritizing the 14 hooks and their lifecycle/cross-module behavior. Then continue the 47 test assertion reviews, protocol producer-consumer tracing, host lifecycle/reconnect analysis and outstanding binary/font evidence. Do not repeat the 54 component files unless their source SHA changes or a new cross-module question requires it.
