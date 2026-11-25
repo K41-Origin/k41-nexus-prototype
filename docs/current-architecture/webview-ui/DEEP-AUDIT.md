@@ -578,3 +578,71 @@ The 9 character UI reported-review rows are closed at the source-review evidence
 ### Next continuation point
 
 Continue with the **47 `FETCHED / INVENTORIED` test files**, inspecting complete assertions and mapping them to implementation without executing them. Then continue ClientMessage/ServerMessage producer-consumer tracing, host lifecycle/reconnect, and the outstanding 143 binary-header-only assets plus the unverified font. Preserve all existing `WV-` findings and keep runtime verification open.
+
+
+## 16. Assertion-level review of remaining webview tests — GOV-WEBVIEW-009 (2026-11-25)
+
+**Source branch:** `main` at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, recursive `truncated: false`  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction` at `fd998227336bb3f196d0a26caeea72dc96d7a9a0`  
+**Scope:** all 47 webview test files previously classified `FETCHED / INVENTORIED`; complete test source fetched and assertions reviewed.  
+**Explicit exclusions:** no test execution, build, lint, typecheck, browser/VS Code runtime, source modification or test modification.
+
+### Coverage reconciliation and result
+
+- Re-read current governance and webview audit ownership documents before investigation.
+- Reconciled the 47 ledger entries against the active source tree and individually re-fetched all 47 test files at `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- All 47 current blob SHAs matched the ledger; no missing, changed or untracked test path was found.
+- Complete assertions and helper setup were inspected. The tests were mapped to the implementation modules they import; coverage themes and limitations are summarized below.
+- All 47 ledger rows are promoted to `TEST-INVENTORIED`. Together with the 7 already in that status, all 54 tracked webview test files now have assertion-level inventory/review evidence. **None has been executed in this session.**
+
+### Per-file assertion map
+
+The blob SHA for every row is recorded in [FILE-REFERENCE.md](FILE-REFERENCE.md); this table records the test intent and assertion scope without duplicating the ledger.
+
+| Test file | Assertion scope / implementation area |
+|---|---|
+
+
+### WV-TEST-01 — Blink desynchronization test does not simulate concurrent independent clocks
+
+- **Severity:** Low. **Confidence:** High.
+- **State:** OPEN — TEST-INVENTORIED / STATIC TEST-FINDING; no test execution or runtime experiment.
+- **Affected test:** `webview-ui/test/officeBlink.test.ts`.
+- **Related implementation:** `webview-ui/src/office/engine/blink.ts`.
+- **Evidence:** test helper `run()` creates and advances one blinker using the supplied random function (`officeBlink.test.ts:25–38`). The test named “two characters started together blink out of step” creates one RNG at line 72, then runs the entire first 30-second simulation before running the second 30-second simulation with the same already-advanced RNG at lines 73–75. The implementation creates a separate clock in `startBlink()` and advances each clock in `tickBlink()` (`blink.ts:29–50`).
+- **Technical explanation:** the assertion compares two sequential simulations consuming disjoint portions of one PRNG stream. It does not instantiate two blinkers at the same start time and advance them interleaved. Therefore, it can pass because the second simulation receives later random draws, without proving the stated concurrent desynchronization invariant.
+- **Impact:** regression protection for “independent character clocks stay out of step” is weaker than the test name and implementation comment imply. This is a test-quality gap, not evidence that production blink behavior is defective.
+- **Suggested verification shape (not implemented):** create two blinker states at the same logical start, give them controlled distinct random streams (or deterministic interleaved draws), and tick both on each frame before comparing their blink timelines.
+- **Remaining uncertainty:** no tests were run; this finding assesses test construction statically only.
+
+### Cross-test coverage gaps and existing finding correlation
+
+1. The majority of this test set exercises pure functions, reducers and domain-state methods. It does not establish component DOM behavior, browser event wiring, VS Code postMessage behavior, WebSocket dispatch, host persistence or actual mobile Safari gesture behavior.
+2. `touchGesture.test.ts` and `edgeSwipe.test.ts` exercise reducers with synthetic events; they do not verify browser listener registration/cancellation semantics or real device gesture arbitration. Preserve existing `WV-C12` and lifecycle questions; do not infer runtime reproduction.
+3. `usageStore.test.ts` checks malformed top-level identifiers and status sequencing, but does not comprehensively assert malformed nested `usageLimits` payload shapes. This aligns with the existing validation gap `WV-C08` / server `F-08`; no duplicate finding is created.
+4. `terminalLinks.test.ts` gives useful scheme-allowlist and xterm-buffer coverage, but the tests use a mocked opener; they do not verify host/browser external-link policy or actual navigation.
+5. `characterSheet.test.ts`, `officeBlinkSprites.test.ts` and `wardrobeLabels.test.ts` load real repository assets/manifests in their test setup. Their assertions are inspected, but the PNG decoding and fixture availability paths remain unexecuted in this audit.
+6. `musicComposer.test.ts` includes deterministic seeded song fingerprints but also a probabilistic mood-distribution assertion using repeated `Math.random` calls; its execution stability and distribution thresholds remain unverified.
+7. The test suite does not close the existing application-level reconnect, transport subscriber exception, dirty-layout snapshot, runtime schema-validation or host lifecycle findings. Those remain in their owning records.
+
+### Updated coverage status
+
+- `webview-ui/test/`: 54/54 files are now `TEST-INVENTORIED` (7 previously inventoried + 47 reviewed in this session).
+- `FETCHED / INVENTORIED`: 0 remaining.
+- `REVIEWED`: 261; binary header only: 143; not verified: 1 font.
+- All 459 webview paths remain SHA-reconciled at the active source snapshot.
+- No existing finding was closed. One test-quality finding, `WV-TEST-01`, was added.
+
+### Verification limits
+
+- `TEST-INVENTORIED` means assertions and setup were read and mapped; it does not mean `TEST-EXECUTED`.
+- No npm/vitest command, build, lint, typecheck, browser, VS Code extension host, accessibility or mobile-device experiment was run.
+- No source or test file was modified.
+
+### Next continuation point
+
+1. Continue the ClientMessage/ServerMessage producer-consumer trace through UI, adapter and server, focusing on field-level validation, authorization, persistence, side effects and handshake ordering. Reuse `WV-C08`, `WV-APP-01`, `WV-RESYNC-01` and `WV-TR-01`; do not duplicate them.
+2. Continue targeted lifecycle/disposal/reconnect analysis across webview, adapter and server.
+3. Retrieve the unverified font binary internals when available; preserve the 143 assets as header/signature-level evidence only.
+4. Test execution remains unauthorized and open; request explicit authorization before running tests or other dynamic checks.
