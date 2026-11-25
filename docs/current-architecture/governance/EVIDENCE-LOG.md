@@ -1153,3 +1153,67 @@ Updated github-ci/DEEP-AUDIT.md, github-ci/FILE-REFERENCE.md, github-ci/README.m
 ### Next continuation
 
 The static design review for BUILD-008/009 is complete. Continue only with explicitly authorized remediation or verification of actual repository/org settings, secret scopes, Environment protections, npm trusted-publisher configuration and artifact provenance. Preserve BUILD-008–BUILD-013 and all other finding IDs.
+
+## 2026-11-25 — GOV-DOCGOV-001: documentation governance reconciliation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Documentation branch:** `docs/hybrid-llm-engine-direction`  
+**Documentation HEAD at session start:** `02b3118edf38713cc55b581a916fd61dea8bfd1b` (commit title: `docs(audit): record npm prepack OIDC execution edge`).  
+**Source branch/commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`; 856 entries / 739 blobs / 117 trees; `truncated=false`.  
+**Scope:** documentation-only governance reconciliation. No application source was changed.
+
+### Branch reconciliation
+
+- Retrieved the actual documentation branch ref; it pointed to `02b3118edf38713cc55b581a916fd61dea8bfd1b` before this session's documentation commits.
+- Compared the complete recursive trees for that documentation snapshot and `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- All 739 source blob paths on `main` exist on the documentation branch with identical blob SHAs; 0 missing, 0 extra, 0 mismatched source blobs.
+- The documentation branch has 61 additional documentation blobs. The two branch histories are not asserted to be equivalent.
+
+### Governance discrepancies corrected
+
+- Webview README now reflects GOV-WEBVIEW-005–012: 261 reviewed rows, 54 assertion-reviewed test files, completed 34/34 + 46/46 protocol trace and field-level audit; former 118 reported-review rows and inventory-only tests are no longer presented as open. Runtime, cross-client and font/binary verification remain open.
+- Asset inventory now marks default layout and web manifest structural checks as complete while retaining semantic/runtime limitations; no full PNG decode or TTF internals are claimed.
+- E2E module record and README continuation no longer ask to repeat GOV-E2E-004 cross-module tracing; they point to authorized runtime/test verification and open E2E findings.
+- Legacy `scripts/README.md` and `scripts/FILE-REFERENCE.md` are explicitly navigation aliases to the canonical uppercase records, avoiding conflicting NOT AUDITED status.
+- Scripts module cross-reference corrected from BUILD-008–BUILD-014 to BUILD-008–BUILD-013.
+- GitHub CI module record now includes the latest npm `npm pack` → `prepack` execution path under `id-token:write` as additional evidence within existing BUILD-009; no new finding ID was created.
+- Adapter dependency document now distinguishes completed 8/8 static adapter review from the incomplete exhaustive dependency/build-enforcement map.
+- Infrastructure and CI/CD documents distinguish completed scoped `.github/` and scripts audits from the still incomplete integrated infrastructure audit.
+- System dependency map now defines ownership, scope, edge evidence requirements and next action; its audit status remains NOT AUDITED.
+- Governance README and register now link infrastructure and dependency-map ownership, record the actual documentation HEAD at session start, and distinguish source snapshot identity from runtime verification.
+
+### Files updated
+
+Module/technical navigation:
+- `governance/modules/e2e.md`
+- `governance/modules/scripts.md`
+- `governance/modules/github-ci.md`
+- `webview-ui/README.md`
+- `webview-ui/ASSET-INVENTORY.md`
+- `scripts/README.md` (legacy alias)
+- `scripts/FILE-REFERENCE.md` (legacy alias)
+- `adapters/DEPENDENCIES.md`
+- `infrastructure/README.md`
+- `infrastructure/CI-CD.md`
+- `SYSTEM-DEPENDENCY-MAP.md`
+
+Governance coordination:
+- `governance/README.md`
+- `governance/AUDIT-REGISTER.md`
+
+### Execution and modification limits
+
+- Documentation files only were modified.
+- No application source, tests, workflows, package manifests, dependencies or runtime configuration were modified.
+- No tests, build, lint, typecheck, generation, package, publish, CI dispatch, browser, VS Code host, OIDC request or runtime experiment was executed.
+- BUILD-001–BUILD-013, F-01–F-09, A-01–A-10, WV findings, E2E-001–E2E-009 and core observations were not closed or renumbered.
+- This log is append-only. Publication must be followed by re-fetching each changed file and recording the resulting committed blob SHA/branch HEAD verification in a subsequent evidence entry if a correction is needed.
+
+### Remaining work after this session
+
+1. Build the evidence-backed system dependency/lifecycle map.
+2. Complete integrated infrastructure review for build, package, dependencies and test configuration; do not repeat scoped scripts or `.github/` reviews.
+3. Perform authorized runtime/test verification for open findings.
+4. Reconcile architecture direction and ADRs against implementation contracts and decide the 12 unresolved hybrid-engine architecture questions.
+5. Verify actual organization/repository policy, Environment and secret scopes, npm trusted publisher and artifact provenance when access is available.
