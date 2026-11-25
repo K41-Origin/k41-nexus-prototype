@@ -49,3 +49,7 @@ Preserve F-01 through F-08 exactly as documented in `DEEP-AUDIT.md`; none are cl
 ## Next action
 
 Do not repeat the 74-file source review or 57-file test inventory while SHAs remain unchanged. Reopen only for a changed SHA, a concrete cross-module trace, or authorized verification of F-01–F-08. Keep detailed findings in `DEEP-AUDIT.md` and file-level inventory in `FILE-REFERENCE.md`.
+
+## Cross-module continuation — GOV-WEBVIEW-012
+
+The static webview lifecycle trace reused the server's existing 135/135 source audit and did not reopen unrelated server findings. It confirms the current standalone handshake sequence in `clientMessageHandler.ts` and activity replay in `agentActivityResend.ts`. Preserve server F-01/F-03/F-05 (runtime ownership, session unregister and awaited shutdown) as open lifecycle boundaries; no server finding was closed or duplicated. See webview DEEP-AUDIT §19 for the cross-layer trace and WV-RESYNC-01/02.
