@@ -80,7 +80,7 @@ The following is the authoritative continuation pointer; older continuation note
 1. GOV-WEBVIEW-011 completed the per-field validation, authorization/read-only, persistence and side-effect matrix for all 34 ClientMessage variants. Reuse `WV-C08` / `F-08`; do not repeat this work.
 2. GOV-WEBVIEW-012 completed the static cross-layer lifecycle/reconnect/state-reconciliation trace. Do not repeat the producer-consumer or lifecycle trace without changed source or a named evidence gap.
 3. Preserve `WV-PROTO-01/02/03`, `WV-APP-01`, `WV-RESYNC-01/02`, `WV-TR-01`, `WV-VITE-01`, `WV-C03/WV-C06`, `WV-C12`–`WV-C17` and `WV-TEST-01` as open static/test-quality findings or verification questions in the deep audit.
-4. Obtain the TTF font binary internals when retrievable. PNG signature/IHDR checks do not establish full decode, CRC integrity or runtime loading.
+4. Obtain the TTF binary and validate SFNT tables/glyph coverage. PNG chunk CRC integrity is now verified for 132 unique blobs/141 paths; full IDAT pixel decompression and browser loading remain OPEN.
 5. Perform browser, cross-client and reconnect runtime verification only when explicitly authorized; record environment and exact observations.
 6. Integrated infrastructure review and system dependency/lifecycle mapping are owned by their respective documents and the repository audit register.
 
