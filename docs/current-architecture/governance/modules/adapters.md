@@ -63,3 +63,15 @@ Before any adapter source is revisited:
 - Do not execute tests/build/lint/typecheck or VS Code runtime experiments unless explicitly authorized.
 
 **Evidence classification:** prior coverage/findings are DOC-RECORDED; latest 8/8 path/blob identities are TREE-VERIFIED against active `main`. Dynamic behavior remains OPEN.
+
+
+## Cross-module continuation — GOV-WEBVIEW-012
+
+The webview lifecycle/reconnect audit reuses the 8/8 adapter source review and current SHA reconciliation; no adapter source review was restarted. The trace adds evidence to the existing integration questions:
+
+- **A-03:** agent restoration and removal still span agentManager, AgentStateStore, provider callbacks and AgentRuntime; no single lifecycle owner is established by this static trace.
+- **A-05:** each resolved webview installs message/terminal listeners; explicit disposal ownership remains unclear. Fresh iframe readiness is reset, but listener lifetime/repeated resolution behavior was not runtime exercised.
+- **A-06:** restore grace-period timeout remains untracked by runtime disposal.
+- **WV-RESYNC-01 extension:** restored-agent `agentCreated` can precede the buffered `existingAgents` metadata and asynchronous layout snapshot; see webview DEEP-AUDIT §19.3–19.4.
+
+No new adapter finding ID was created. No VS Code host, activation/deactivation, repeated view resolution, test, build, lint or typecheck was executed.
