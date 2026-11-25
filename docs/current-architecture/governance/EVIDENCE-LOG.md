@@ -1093,3 +1093,63 @@ All seven changed audit documents were fetched again after publication and blob 
 ### Next continuation
 
 Resolve BUILD-008 and BUILD-009 trust boundaries first. Then verify organization-level branch rules, repository Actions default token permissions, secret scopes/environment protections, npm trusted publisher configuration and release artifact attestations when the required settings access is available. Preserve BUILD-001–BUILD-013 and all existing E2E/server/adapter/webview IDs.
+## 2026-11-25 — GOV-GHCI-002: preview and release trust-boundary design review
+
+Repository: K41-Origin/k41-nexus-prototype
+Source branch/commit: main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b
+Source tree: 2d02bb29bd5a3aa8f74fc6a2ed21027149817e50 — 856 entries, truncated=false.
+Documentation branch before publication: docs/hybrid-llm-engine-direction@aa00fe9fd9a5dbf29b15b3ede1248fab2338bc7d.
+Scope: targeted static continuation for BUILD-008/009 only; no repeat of the 10-file .github review.
+
+### Governance and reconciliation
+
+- Re-read governance README, audit register, audit method, evidence log, github-ci module record, deep audit and file reference.
+- Re-fetched complete source and docs-branch recursive trees; both are truncated=false.
+- Compared all 10 .github blob path/SHA pairs between source and docs branch: 10/10 identical; 0 added, 0 removed, 0 changed.
+- Source and documentation branch tips were kept separate. No source blob change was found for the audited workflow paths.
+
+### Additional source evidence
+
+Eight integration files were individually fetched at the source snapshot and reviewed for trust-boundary contracts; exact sizes, line counts and blob SHAs are in github-ci/FILE-REFERENCE.md:
+- package.json — 66efe28fd2927466c5f8283c6e26fe63da427079.
+- server/package.json — f3e7e63e1920d6804eec70c5104914c436269351.
+- webview-ui/package.json — 3729872b2736eaf6b66c608c1b40f4e24c25d2fb.
+- scripts/assemble-vercel-output.mjs — 70391faa6cb171577bb02aff6e4a6e13963399ae.
+- scripts/npm-package-contract.mjs — 329175a73e3bb2653dd7d2ada401492ecf3b5d4a.
+- scripts/publish-npm-package.mjs — 7cfcf7bb2d64aa62dd5ed70f7de9a212af4bff82.
+- scripts/verify-npm-package.mjs — 599b60cff9b10a22d06404d2b08e0c723baead15.
+- scripts/verify-vsix-package.mjs — ed4d2e5476cfc6c7d3a9ec5865ecc3ee1e4f4803.
+
+Workflow SHAs remain:
+- .github/workflows/ci.yml — 79cbf4d0835327f67fec623b3b41651f41ed72f4.
+- .github/workflows/publish-extension.yml — 713dc93fbd4a8f5d2c5f37cebdbf37587615205d.
+
+### Trust-boundary conclusions
+
+- BUILD-008: the fork-only precheck does not make same-repository PR code trusted. PR merge-ref content reaches a job with job-wide Vercel secrets, issue/PR write permissions, npm installation and PR-controlled report preparation. --prebuilt avoids a remote build but does not prevent local code from accessing job credentials. Required design: unprivileged PR build, exact run-scoped data-only artifact, trusted deployment workflow that never checks out or executes PR source, validated static output/config, Vercel credential only in deployment step, and separate comment permissions.
+- BUILD-009: manual dispatch can select a branch/tag, the main ancestry guard is release-only, and dry_run defaults false while VSIX publish steps are unconditional. A non-main manual ref can therefore reach Marketplace/Open VSX publication. The npm job also grants job-wide id-token:write while selected-ref package code executes; GitHub confirms this permission enables OIDC token requests. Whether npm accepts a manual-run identity depends on trusted-publisher settings that were not accessible. Required design: dry-run-only unprivileged dispatch, release-tag publication after shared ref/commit/version preflight, isolated publisher jobs, protected Environment approval where manual publishing remains, and no OIDC during untrusted build/test execution.
+- Checkout credential correction: actions/checkout@v7 stores the token-bearing Git config in a separate file under RUNNER_TEMP and references it from repo Git config. This corrects the earlier narrower claim that the token value itself is directly stored in .git/config; default credential persistence still leaves it available to same-job processes. External v7 source: action.yml SHA 5b0524f730db83f9513c18ab31a6c086c7239076; src/git-auth-helper.ts SHA dd7e6fbdb5387908190676a6ec9c4a828a044dea.
+- BUILD-008 and BUILD-009 remain OPEN. Design review completion is not remediation or closure. BUILD-013 remains the owner of the separate VSIX tag/package-version mismatch.
+- The .github/workflows/ci.yml tree size is 24,588 bytes; the previous FILE-REFERENCE value 24,566 was corrected. Blob SHA unchanged.
+
+### External semantics consulted
+
+- GitHub pull_request merge-ref and manual workflow-dispatch ref behavior.
+- GitHub OIDC id-token:write permission and token request interface.
+- npm trusted-publisher repository/workflow identity fields and optional environment.
+- Vercel --prebuilt upload semantics.
+- actions/checkout v7 credential-persistence implementation.
+
+### Publication and verification
+
+Updated github-ci/DEEP-AUDIT.md, github-ci/FILE-REFERENCE.md, github-ci/README.md, governance/modules/github-ci.md and governance/AUDIT-REGISTER.md; appended this session to the evidence log. Each changed file must be re-fetched after publication to verify committed contents and status markers.
+
+### Execution and modification limits
+
+- Static source inspection and audit-document publication only.
+- No tests, build, lint, typecheck, workflow dispatch, OIDC request, package publication, release, deployment or runtime experiment executed.
+- No application source, workflow, package manifest, dependency or configuration modified.
+
+### Next continuation
+
+The static design review for BUILD-008/009 is complete. Continue only with explicitly authorized remediation or verification of actual repository/org settings, secret scopes, Environment protections, npm trusted-publisher configuration and artifact provenance. Preserve BUILD-008–BUILD-013 and all other finding IDs.
