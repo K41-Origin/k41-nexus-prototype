@@ -31,6 +31,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [Adapters audit record](modules/adapters.md) | VS Code adapter static audit coverage, A-01–A-10, source baseline and remaining integration gaps |
 | [E2E audit record](modules/e2e.md) | E2E inventory, assertion-review status, E2E-001–E2E-009 and cross-module coverage gaps |
 | [Scripts audit record](modules/scripts.md) | Complete 14/14 scripts inventory, source review, BUILD-001–BUILD-007 and tooling gaps |
+| [GitHub CI/release audit record](modules/github-ci.md) | Complete 10/10 `.github/` inventory, workflow permissions/triggers, secret boundaries, artifact provenance and BUILD-008–BUILD-014 |
 
 ## Existing technical records retained
 
@@ -44,6 +45,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 - [Adapters deep audit](../adapters/DEEP-AUDIT.md) and [adapter file reference](../adapters/FILE-REFERENCE.md)
 - [E2E deep audit](../e2e/DEEP-AUDIT.md) and [E2E file reference](../e2e/FILE-REFERENCE.md)
 - [Scripts deep audit](../SCRIPTS-AUDIT.md), [scripts file reference](../SCRIPTS-FILE-REFERENCE.md) and [scripts overview](../SCRIPTS-README.md)
+- [GitHub CI/release deep audit](../github-ci/DEEP-AUDIT.md), [file reference](../github-ci/FILE-REFERENCE.md) and [overview](../github-ci/README.md)
 
 These documents are linked, not copied wholesale. The governance register points to the owning record for each detail.
 
