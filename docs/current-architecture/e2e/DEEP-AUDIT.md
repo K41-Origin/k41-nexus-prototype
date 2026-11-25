@@ -229,7 +229,7 @@ The complete contents of all 25 non-spec harness files were reviewed at `main@56
 - Findings **E2E-001–E2E-009** remain OPEN. E2E-001/E2E-002 process/port issues and E2E-003–E2E-006 assertion gaps are preserved unchanged; E2E-007/E2E-008 and E2E-009 are new and distinct.
 - No test/build/lint/typecheck/install/browser/VS Code/PTY/runtime experiment was executed.
 
-## 8. Cross-module integration and coverage boundaries
+## 8. GOV-E2E-004 — Targeted cross-module source-contract tracing
 
 The E2E layer is a consumer of, not a source of truth for, application contracts. Preserve these canonical findings and continue them in their owning records:
 
@@ -294,7 +294,7 @@ The README's pre-release manual smoke also calls out real Claude JSONL/MCP behav
 - **SHA-RECONCILED:** all 47 E2E path/blob-SHA pairs match between source and documentation branch snapshots.
 - **FETCHED:** all 47 blobs fetched individually.
 - **TEST-INVENTORIED:** assertion-level review complete for 21/21 spec files; 152 declarations and 152 area tags match the generated README inventory.
-- **STATIC-FINDING:** E2E-001, E2E-002, E2E-007, E2E-008 and E2E-009; assertion-quality STATIC-FINDINGs E2E-003–E2E-006. Cross-module server finding F-09 is recorded in the server owner document.
+- **STATIC-FINDING:** E2E-001, E2E-002, E2E-007, E2E-008 and E2E-009; assertion-quality STATIC-FINDINGs E2E-003–E2E-006. Cross-module server finding F-09 is recorded in the server owner document. GOV-E2E-004 is static source-contract tracing, not runtime verification.
 - **TEST-EXECUTED:** none.
 - **RUNTIME-REPRODUCED:** none.
 
