@@ -14,7 +14,7 @@ Source snapshot: `K41-Origin/k41-nexus-prototype`, branch `security/remediate-bu
 | `tsconfig.json` | `3f987e647c0a6e171f29268898fccc9dc8516a25` | Root TypeScript project |
 | `webview-ui/vite.config.ts` | `b47531773bf6fea57fe6d46a6291133371aa56ea` | Webview bundling and build-time asset plugin |
 | `webview-ui/vitest.config.ts` | `3ed45c68d601468600716a0fd69b8cdb12739f16` | Webview unit-test configuration |
-| `server/vitest.config.ts` | `b8d6265259e3abcec1d939288c1d0a9e8` | Server unit-test configuration |
+| `server/vitest.config.ts` | `b8d6265259e3abcec1d93945bbf42c43618b62d0` | Server unit-test configuration |
 | `e2e/playwright.config.ts` | `4e4683186ee24e5cdce49a35cf336e069f35b1a2` | E2E suite configuration |
 | `scripts/generate-messages.ts` | `19961b5a07cf1cd8c7d9ba1d55a0fddddbcadbec` | AsyncAPI → generated TypeScript |
 
