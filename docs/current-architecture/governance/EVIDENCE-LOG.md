@@ -513,3 +513,48 @@ Continue with the remaining 30 reported-review source rows, prioritizing the 14 
 ### Continuation pointer
 
 Resume with the 47 webview test files still marked `FETCHED / INVENTORIED` for assertion-level review, unless the user selects another scope. Do not repeat unchanged `REVIEWED` source files. Before any adapter source continuation, reconcile its 8 blob SHAs against the active source tree.
+
+## 2026-11-25 — GOV-ADAPTER-001: active-source baseline and SHA reconciliation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction` — `f9a0af11b1ba48885dcc553e58bd8470478752a1`  
+**Historical adapter source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
+**Scope:** complete repository tree baseline plus adapter path/blob SHA reconciliation; no source re-review.
+
+### Repository baseline
+
+- Repository default branch: `main`.
+- Source recursive tree: 856 entries, 739 blobs; `truncated: false`.
+- Documentation recursive tree: 918 entries, 790 blobs; `truncated: false`.
+- Shared source paths between `main` and the documentation branch: 739/739 have identical blob SHAs; 0 changed; 0 source-only paths; 51 documentation-branch-only blobs.
+- The 51 extra blobs are documentation-branch additions; no application source blob differs between the two refs.
+
+### Module SHA reconciliation against active source
+
+| Module | Historical baseline | Baseline blobs | Current blobs | Added | Removed | Changed SHA |
+|---|---|---:|---:|---:|---:|---:|
+| `core/` | `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1` | 28 | 28 | 0 | 0 | 0 |
+| `server/` | `f1af3e0c36573e4317143969cf43dde642877ba6` | 135 | 135 | 0 | 0 | 0 |
+| `adapters/` | `4dd14d612fd37d89ffbbc977959f572395c4eec8` | 8 | 8 | 0 | 0 | 0 |
+| `webview-ui/` | `4dd14d612fd37d89ffbbc977959f572395c4eec8` | 459 | 459 | 0 | 0 | 0 |
+
+- All four module subtrees were compared by exact path/blob-SHA pairs between their recorded historical source baseline and current `main`; all paths and blob identities are unchanged.
+- Independently compared all 459 webview ledger rows with current `main`: 459/459 paths and SHAs match; 0 missing, 0 extra, 0 mismatches. Status distribution remains 261 REVIEWED, 7 TEST-INVENTORIED, 47 FETCHED / INVENTORIED, 143 BINARY HEADER VERIFIED, 1 NOT VERIFIED.
+- Adapter current path/blob SHA pairs are recorded in `adapters/FILE-REFERENCE.md`; 8/8 equal the historical baseline. This closes the adapter SHA-reconciliation gate without repeating its static review.
+
+### Interpretation and limitations
+
+- **TREE-VERIFIED:** complete tree inventories and exact path/blob comparisons above.
+- **DOC-RECORDED:** prior core/server/adapter/webview source review coverage and findings remain documented; unchanged SHA preserves content identity, not runtime correctness.
+- No source files were re-fetched for semantic review in this session; no application source was modified.
+- No tests, build, lint, typecheck, protocol generation, or runtime experiment was executed.
+- Existing findings remain open; this session creates no new code finding and does not close any technical finding.
+
+### Documentation discrepancy noted
+
+The audit register's adapter continuation gate was stale: it requested SHA reconciliation even though this session now completes it. The register and adapter module record were updated to point to cross-module lifecycle verification instead. The evidence log had no dedicated adapter-session entry; this entry supplies the missing append-only reconciliation evidence.
+
+### Next continuation point
+
+Continue the 47 webview test files still marked `FETCHED / INVENTORIED` at assertion level, or select a specific cross-module protocol/lifecycle trace. Do not repeat unchanged reviewed source files. Adapter A-01–A-10 remain static findings pending authorized dynamic verification.
