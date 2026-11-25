@@ -703,7 +703,7 @@ Read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, module recor
 
 ### Fresh source tree and SHA reconciliation
 
-- Retrieved Git Trees API recursively for `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`: tree SHA equals commit SHA; 856 entries, 739 blobs, 117 trees, `truncated=false`.
+- Retrieved Git Trees API recursively for `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`: tree SHA `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`; 856 entries, 739 blobs, 117 trees, `truncated=false`.
 - Webview FILE-REFERENCE: parsed 459 ledger path/blob-SHA rows and compared against all 459 `webview-ui/` tree blobs: 459/459 match, 0 missing, 0 extra, 0 mismatched.
 - Adapter FILE-REFERENCE: parsed 8 current blob-SHA rows and compared against all 8 `adapters/` tree blobs: 8/8 match, 0 missing, 0 extra, 0 mismatched.
 - Server FILE-REFERENCE contains 135 path/responsibility rows but no per-file SHA column/manifest. The server governance record documents historical 135/135 SHA reconciliation at this same source commit. Current tree contains 135 server blobs; all selected server source files below were compared directly to current tree SHAs. No claim is made that all 135 server SHAs were independently compared to a standalone ledger in this session.
@@ -745,3 +745,19 @@ Static only. No tests, builds, lint, typecheck, protocol generation, browser/VS 
 ### Documentation changes
 
 Updated webview DEEP-AUDIT, TRANSPORT, STATE-MANAGEMENT, webview governance module, adapter/server governance cross-links, consolidated AUDIT-REGISTER and appended this evidence log. Re-fetch verification and resulting docs branch head/blob SHAs must be recorded after publication.
+
+
+### Post-publication documentation verification — GOV-WEBVIEW-012
+
+After the initial publication, all eight changed documents were fetched again from `docs/hybrid-llm-engine-direction`. Every fetched blob SHA matched the SHA returned by its corresponding update operation, and the expected GOV-WEBVIEW-012/WV-RESYNC-02 markers were present:
+
+- `webview-ui/DEEP-AUDIT.md` — `968ba59b7adcbdebdb8241aa933b17d546a2eb44` (corrected tree SHA wording below in this evidence entry's follow-up publication).
+- `webview-ui/TRANSPORT.md` — `108b52814f05b4503aa77d0c732642189017f0f0`.
+- `webview-ui/STATE-MANAGEMENT.md` — `6a14bfa2d754cc4ffc71d0ece9f6146e6c313a7b`.
+- `governance/modules/webview-ui.md` — `67389f0e740a239d5932134100a5f3a2d19f10ac`.
+- `governance/modules/adapters.md` — `75d000e9c137b291fc7a823474577f4c112e0cfe`.
+- `governance/modules/server.md` — `ecb330b538610e24d9cb823c6e08019a849e72e9`.
+- `governance/AUDIT-REGISTER.md` — `009a3c96dc5957f62b3520c720b19336b0b7e6d7`.
+- `governance/EVIDENCE-LOG.md` — `544b8b262d70b78c01820d4ccac641e6d840f920`.
+
+The branch head immediately after that publication was `2f95e172eeacadd4abe0eebeaef5666359f75848`. A follow-up correction records the canonical recursive tree object SHA as `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (the commit SHA remains `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`). The corrected DEEP-AUDIT and EVIDENCE-LOG files are re-fetched once more after this correction.
