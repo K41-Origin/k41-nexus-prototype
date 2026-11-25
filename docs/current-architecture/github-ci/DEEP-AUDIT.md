@@ -1,9 +1,9 @@
 # .github and CI/Release Deep Audit
 
-**Status:** STATIC AUDIT COMPLETE — 10/10 tracked blobs individually fetched, SHA-reconciled and reviewed. BUILD-008–BUILD-014 remain OPEN pending merge/runtime/settings verification; BUILD-008/009 remediation is implemented on `security/remediate-build-008-009`.  
+**Status:** STATIC AUDIT COMPLETE — 10/10 tracked blobs individually fetched, SHA-reconciled and reviewed. BUILD-008–BUILD-014 remain OPEN pending parser/runtime/settings verification; implementation corrections are recorded in the latest remediation snapshot.  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
-**Source branch/commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
-**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
+**Historical source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Historical source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
 **Docs branch before publication:** `docs/hybrid-llm-engine-direction@7b56bcd278311bfdb782acacdd80080f74d7e87a`.  
 **Inventory:** 10/10 .github blobs; source/docs path+SHA comparison 10/10 identical.  
 **File ledger:** [FILE-REFERENCE.md](FILE-REFERENCE.md).
@@ -298,3 +298,26 @@ No workflow, test, build, lint, typecheck, publish, dispatch, deployment or runt
 - **Verification status:** SOURCE-VERIFIED / STATIC-FINDING from the exact remediation-branch workflow blob. No YAML parser, actionlint, workflow run or runtime reproduction was available/performed; the finding is a control-flow conclusion from the checked-in YAML.
 - **Recommended direction:** either remove `continue-on-error: true` from these checks (while preserving intended always-run behavior) or pass all three `steps.<id>.outcome` values to the final gate and include them in the required-success loop and summary.
 - **Remaining uncertainty:** no workflow execution exists for this branch snapshot, so the actual failed-check scenario was not reproduced. The omission from the final gate is directly visible in source.
+
+
+## 11. BUILD-008–BUILD-014 remediation update — GOV-GHCI-003
+
+**Remediation branch:** `security/remediate-build-008-009`  
+**HEAD at this snapshot:** `4d29e1654b0d6a7bd3dacf3773e02265ab0069a1`  
+**Base:** `main@110c2c8c0907c710ef4a559c1dd647e6dee135c4`  
+**PR:** #2. Compare API reports the branch ahead of main with nine changed files (four workflows, package.json and four scripts); no merge has occurred.
+
+- **BUILD-008:** the Vercel PR preview jobs and secret-bearing execution path are removed. This is suspension of preview functionality, not a replacement deployment architecture. OPEN pending PR negative test, credential-history review and acceptance of preview suspension.
+- **BUILD-009:** manual dispatch is verification-only; build-and-verify is read-only/no OIDC/no publisher secrets; publisher jobs consume the run-scoped artifact; npm OIDC is isolated to `publish-npm`. OPEN pending manual negative tests, release positive rehearsal, Environment and npm trusted-publisher settings.
+- **BUILD-010:** remains OPEN. Repository metadata historically reports `main.protected=false`; rulesets endpoint was empty and branch-protection detail was denied. The connector has no branch-protection/ruleset write action. An authorized repository administrator must configure and verify required checks/rules.
+- **BUILD-011:** all action references in the four workflows now use full commit SHAs. The six previously mutable action tags were resolved through their upstream Git refs before pinning. OPEN pending actionlint/parser verification and ongoing pin-maintenance policy.
+- **BUILD-012:** `update-badges.yml` now declares workflow-level `permissions: contents: read`; Gist writes still use the dedicated GIST_SECRET. OPEN pending workflow validation and settings verification.
+- **BUILD-013:** the shared `build-and-verify` release job runs `validateReleaseIdentity` against manifest name/repository/version, release tag/ref and npm latest version before either VSIX or npm publisher job can start. OPEN pending a release-tag negative test and positive staging rehearsal.
+- **BUILD-014:** `validate_spec`, `messages_drift` and `e2e_inventory_drift` no longer use `continue-on-error`; all three outcomes are rendered in the CI summary and included in the explicit final required-success loop. OPEN pending YAML/actionlint and actual CI run.
+
+### Execution boundary
+
+- The changed files were re-fetched from the remediation branch and their blob SHAs reconciled.
+- GitHub Actions API returns zero workflow runs and zero check-runs for the repository. No CI, tests, build, lint, typecheck, package, E2E, release rehearsal, OIDC request, deployment or publish result exists.
+- No workflow parser/actionlint executable, local checkout, shell access to repository files or workflow-dispatch operation is available in this session. Do not interpret static implementation as test closure.
+- All seven BUILD findings remain OPEN pending their owning verification gates; BUILD-010 additionally needs repository administrator action.
