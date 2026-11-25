@@ -827,3 +827,55 @@ No existing finding ID was reused or duplicated.
 ### Next continuation point
 
 Complete assertion-level review of all 21 spec files and full review of the harness/helper/config files. Then trace only the named E2E contracts into the owning source modules. Inspect `scripts/run-e2e.mjs`, `scripts/generate-e2e-inventory.mjs`, report generation and CI workflows under the scripts and `.github/` governance scopes. Runtime verification remains unauthorized and OPEN.
+
+
+## 2026-11-25 — GOV-E2E-002: Assertion-level review of all E2E specs
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch / commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`; recursive tree `truncated=false`, 856 entries.  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction@b573e28d0c6027c68679bd826c0097fec47db37e`.  
+**Source reconciliation:** 21/21 spec blob SHAs match the E2E file ledger; no changed test blobs.  
+**Scope:** assertion-level review of all 21 `e2e/tests/**/*.spec.ts` files, including test setup, assertions, state-hook reads, waits/polls, persistence checks, negative assertions and UI gesture boundaries.  
+**Exclusions:** helper/fixture/config full review, application-source re-audit, scripts/CI, and all test/build/lint/typecheck/runtime execution.
+
+### Governance and continuation
+
+Re-read governance README, audit register, audit method, E2E module record, E2E deep audit, E2E file ledger and the latest evidence-log tail before continuing. The active source commit remains `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; the documentation branch is tracked separately. Existing E2E-001 and E2E-002 remain open and unchanged.
+
+### Assertion-level coverage
+
+- **21/21** spec files reviewed at assertion level.
+- **152/152** executable `test()` declarations carry `@area:` tags and match the generated inventory in `e2e/README.md`.
+- **8** platform skip guards are separate from the 152 test cases.
+- Reviewed assertion intent and boundaries across Areas, carpet, editor, launch drawer, lifecycle, matrix, pets, consent, teams, characters, conversations, Directory modal, standalone hooks, mobile, multi-server hooks, terminal and standalone UI.
+- All 21 test spec file rows were updated to `TEST-INVENTORIED` in `FILE-REFERENCE.md`.
+- This is test source/assertion review only. **No test was executed.**
+
+### New static test-quality findings
+
+- **E2E-003 — seeded-layout Areas gate assertion is not isolated.** Evidence: `e2e/tests/claude/hooks-off/areas.spec.ts:92-103`, SHA `4b6b96fdee7634361bdc0b754c13038fb07bcf1d`. The workspace Directory also satisfies the production OR gate, so button visibility does not prove the seeded-layout branch. Low, High confidence, STATIC-FINDING / TEST-INVENTORIED, OPEN.
+- **E2E-004 — carpet/furniture coexistence assertion does not prove co-location.** Evidence: `e2e/tests/claude/hooks-off/carpet.spec.ts:297-318`, SHA `668eff0627a55adaf1682c3650c088321ba7fa81`. The test asserts carpet at (3,3) and furniture count >= 1, but not furniture coordinates. Low, High confidence, STATIC-FINDING / TEST-INVENTORIED, OPEN.
+- **E2E-005 — mobile hooks-info modal test omits vertical viewport bounds.** Evidence: `e2e/tests/standalone/mobile.spec.ts:417-439`, SHA `bc2cb73f0f7e63850bc2edd61a82ec2c6034245b`. It checks horizontal x bounds only; vertical clipping can pass. Low, High confidence, STATIC-FINDING / TEST-INVENTORIED, OPEN.
+- **E2E-006 — pet persistence test checks count, not identity/type.** Evidence: `e2e/tests/claude/hooks-off/pets.spec.ts:147-197`, SHA `37cc965cf3e73bea101553e68d325419704ff17e`. Disk and reloaded arrays are checked for length two, not pet type/identity round-trip. Low, High confidence, STATIC-FINDING / TEST-INVENTORIED, OPEN.
+
+No existing findings were duplicated. E2E-001/E2E-002 remain the process teardown and port allocation findings.
+
+### Documentation updated
+
+1. `docs/current-architecture/e2e/DEEP-AUDIT.md` — assertion coverage matrix and E2E-003–E2E-006; blob SHA `c5ddb685cd073f36cfe4257401b546f7e37535f4`.
+2. `docs/current-architecture/e2e/FILE-REFERENCE.md` — all 21 spec rows marked TEST-INVENTORIED; blob SHA `6028da89681c021b150a9ada8414eba1f4c66036`.
+3. `docs/current-architecture/e2e/README.md` — status and findings pointer; blob SHA `56b3d7b6729f2ac82f7110728c209d293bb27a8c`.
+4. `docs/current-architecture/governance/modules/e2e.md` — module status and finding summary; blob SHA `16188e678baa5d366286092b8dee9d9761e858c3`.
+5. `docs/current-architecture/governance/AUDIT-REGISTER.md` — consolidated E2E status and next gap; blob SHA `fd716b4c1b864e19da95eb3527ba63569ab977fa`.
+
+### Verification boundary and next action
+
+- **TREE-VERIFIED / SHA-RECONCILED:** source tree and all E2E paths remain unchanged at the recorded source commit.
+- **TEST-INVENTORIED:** 21/21 spec files, 152/152 test cases.
+- **STATIC-FINDING:** E2E-003–E2E-006; all remain OPEN.
+- **TEST-EXECUTED:** none.
+- **RUNTIME-REPRODUCED:** none.
+- No application source, test code, package manifest, dependency or configuration was modified.
+
+Next: finish static source review of the remaining E2E fixtures/helpers/configuration, tracing scenario scheduling, process cleanup, temporary directories, artifacts and Playwright orchestration. Then move to `scripts/` and `.github/` under their own audit scopes. Runtime verification remains unauthorized.
