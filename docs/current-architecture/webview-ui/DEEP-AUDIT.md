@@ -836,7 +836,7 @@ Selected source blobs fetched from `main`: `core/asyncapi.yaml` ff1247118819fe68
 ## 19. GOV-WEBVIEW-012 — Cross-layer lifecycle, reconnect and state reconciliation
 
 **Status:** STATIC CROSS-LAYER TRACE COMPLETE; dynamic lifecycle remains OPEN.  
-**Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; recursive tree SHA is the same commit, `truncated=false`, 856 entries (739 blobs, 117 trees).  
+**Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; recursive tree SHA `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated=false`, 856 entries (739 blobs, 117 trees).  
 **Scope:** standalone control-plane WebSocket reconnect and snapshot replay; VS Code webview readiness/buffering/restore; per-agent terminal data-plane reconnect; React/OfficeState reconciliation and lifecycle ownership. Existing message route and field-level matrices are reused, not repeated.
 
 ### 19.1 Coverage and source reconciliation
