@@ -965,3 +965,60 @@ Updated server DEEP-AUDIT and server module record; E2E DEEP-AUDIT, E2E module r
 ### Next continuation
 
 Targeted cross-module source-contract tracing for lifecycle, hook execution, reconnect, persistence and test-hook boundaries is complete at static level. Next audit `scripts/` (E2E runner/inventory/report generation) and `.github/` workflows under their owning scopes. Runtime verification remains unauthorized.
+
+
+## 2026-11-25 — GOV-SCRIPTS-001: complete static audit of scripts/
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch / commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction@ed01e33e6be1914509518d6fe56a8fe5f5b2944d`.  
+**Scope:** all tracked blobs directly beneath `scripts/`; `package.json` inspected for script-entry integration.  
+**Governance reread:** governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, E2E module record, E2E DEEP-AUDIT and E2E FILE-REFERENCE.
+
+### Inventory and reconciliation
+
+- Complete recursive source tree contains 14 blobs directly under `scripts/`; all 14 were individually fetched and statically reviewed.
+- Complete docs-branch tree at `ed01e33e6be1914509518d6fe56a8fe5f5b2944d` contains the same 14 paths and blob SHAs: 0 added, 0 removed, 0 changed.
+- Complete per-file mode, size, line count, SHA and review state are in `docs/current-architecture/SCRIPTS-FILE-REFERENCE.md`.
+- No file under `scripts/` was omitted.
+- `scripts/npm-package-contract.test.mjs` contains 7 test declarations; assertions were inspected (`TEST-INVENTORIED`), not executed.
+
+### Findings
+
+- **BUILD-001:** JSONL viewer inserts untrusted tool names into HTML through event labels; Medium, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-002:** Asset Manager inserts a free-form group role into `innerHTML` without escaping; Medium, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-003:** imported group graph cycles are not validated before recursive traversal; Low, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-004:** discarded assets inside groups are included in grouped export; Medium, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-005:** `package.json` import-tileset command references absent `scripts/import-tileset-cli.ts`; Medium, High confidence, TREE-VERIFIED / SOURCE-VERIFIED, OPEN.
+- **BUILD-006:** Allure failure branch calls `process.exit()` before staged-results `finally` cleanup; Low, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-007:** npm package smoke helper returns after SIGKILL without awaiting child exit; Low, Medium confidence, STATIC-FINDING, OPEN.
+
+Related patterns in `verify-npm-package.mjs` are cross-referenced to E2E-001 (process termination) and E2E-002 (port-0 close-before-bind); no duplicate IDs were created. Existing E2E-001–E2E-009, server F-01–F-09, adapters A-01–A-10 and webview findings remain unchanged.
+
+### Documentation publication
+
+Created:
+- `docs/current-architecture/SCRIPTS-README.md` — blob SHA `70018b8ca336fe8c2958e5ea050a243bfcb6ecc5`.
+- `docs/current-architecture/SCRIPTS-FILE-REFERENCE.md` — blob SHA `e60def73771231c1ab17976363167b37ab136cd2`.
+- `docs/current-architecture/governance/modules/scripts.md` — blob SHA `a3947bf8c2414f9d4530a595f7a32beed6b54219`.
+
+Updated:
+- `docs/current-architecture/SCRIPTS-AUDIT.md` — blob SHA `93c92a7b34638244a098782f4e352396e6a97b58`.
+- `docs/current-architecture/governance/README.md` — blob SHA `a285909ce4ae049d46953697692a096bab37db36`.
+- `docs/current-architecture/governance/AUDIT-REGISTER.md` — blob SHA `3a1f1be6efdbd7cf4ec1d46fdcd495643433a16d`.
+- `docs/current-architecture/governance/modules/e2e.md` — blob SHA `feff055932c4faf0e46e9b7eab8fb5867ae49b7d`.
+- `docs/current-architecture/e2e/DEEP-AUDIT.md` — blob SHA `e5fbe24bf2da77446053a66605bc52989f751b82`.
+- `docs/current-architecture/e2e/README.md` — blob SHA `f5446029a48898a31c8fee2746c758932e9ac772`.
+
+All changed documentation files, including this evidence log, must be fetched again after publication to verify the committed contents and status markers.
+
+### Execution and modification limits
+
+- Static/read-only repository investigation and audit-document publication only.
+- No tests, build, lint, typecheck, generation, package, publish, browser, VS Code host or runtime experiment executed.
+- No application source, scripts, package manifest, dependencies or configuration modified.
+
+### Next continuation
+
+The `scripts/` static audit is complete (14/14; BUILD-001–BUILD-007 OPEN). Continue with `.github/` workflow, permissions, triggers, secrets, artifact provenance and CI/release audit. Runtime verification remains unauthorized.
