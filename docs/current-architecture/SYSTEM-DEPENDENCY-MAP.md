@@ -2,9 +2,9 @@
 
 **Status:** STATIC MAP IN PROGRESS — major compile-time, host composition, protocol, persistence and trust-boundary edges are SOURCE-VERIFIED; npm lockfile transitive closure is mapped (GOV-DEPMAP-002). Exhaustive source import/call graph and runtime lifecycle remain OPEN.
 
-**Source snapshot:** `K41-Origin/k41-nexus-prototype`, branch `security/remediate-build-008-009`, commit `86d3b1dbddae7605e5e2092886c12982f8e4bf58`.  
-**Base:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
-**Tree:** 856 entries, `truncated=false`; complete tree comparison against base found exactly two changed workflow blobs (`.github/workflows/ci.yml`, `.github/workflows/publish-extension.yml`). Application source and build manifests are unchanged from the prior main baseline.
+**Application/source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; tree `97940dabd84264b6281917b11928ebae6156752c`, 933 entries, `truncated=false`.  
+**Workflow remediation snapshot:** `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`; PR #2 diff against main contains only `.github/workflows/ci.yml` and `.github/workflows/publish-extension.yml`.  
+**Dependency graph:** package-lock closure mapped in GOV-DEPMAP-002; exhaustive source import/call graph and runtime lifecycle remain OPEN.
 
 This is the single owner for cross-module edges. Module deep audits continue to own detailed findings; this map references rather than duplicates them.
 
