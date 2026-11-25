@@ -1,8 +1,8 @@
 # End-to-End Tests — Current Architecture
 
-**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation (47/47); assertion-level review complete (21/21 specs, 152 tests); harness source review continues.  
+**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation (47/47); assertion-level review complete (21/21 specs, 152 tests); full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); cross-module verification remains open.  
 **Source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
-**Inventory:** 47/47 tracked blobs under `e2e/`; 21 spec files / 152 test declarations. No tests have been executed in this audit. Four assertion-quality gaps (E2E-003–E2E-006) are recorded in DEEP-AUDIT.md.
+**Inventory:** 47/47 tracked blobs under `e2e/`; 21 spec files / 152 test declarations. No tests have been executed in this audit. Eight static findings E2E-001–E2E-008 are recorded in DEEP-AUDIT.md, including run-ID path traversal and stale download-lock recovery gaps.
 
 ## Audit documents
 
