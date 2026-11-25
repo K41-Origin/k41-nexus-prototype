@@ -1518,3 +1518,45 @@ The current-architecture index previously displayed only the historical module b
 - No application source, package manifest, dependency, workflow, GitHub setting or release state was changed.
 - BUILD-008/009 remain OPEN pending actual PR/manual negative workflow tests, controlled release positive rehearsal, and GitHub/npm settings evidence. BUILD-014 remains OPEN pending source correction and workflow verification.
 - This entry must be re-fetched after commit to verify its final blob SHA. No merge or branch closure was performed.
+
+
+## 2026-11-26 — GOV-DOC-CONSOLIDATION-002: cross-record reconciliation and branch consolidation preparation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Documentation branch:** `docs/hybrid-llm-engine-direction` (pre-merge publication branch)  
+**Target canonical branch:** `main`  
+**Source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Additional static CI baseline:** `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`
+
+### Governance and state reviewed
+
+- Re-fetched governance README, Audit Register, Audit Method, Evidence Log and the infrastructure, dependency-map, architecture/ADR and GitHub CI module records.
+- Re-fetched infrastructure README, TESTING, CI/CD and Architecture/ADR reconciliation.
+- Verified branch refs before edits: `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`, `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`, `docs/hybrid-llm-engine-direction@6cea20c4aeccde46da558356455ebc80c7c0c79c`.
+- Historical module ledgers continue to report: core 28/28; server 135/135; webview 459/459 with 1 font NOT VERIFIED and 143 assets only header/signature verified; adapters 8/8 static; E2E 47/47 inventory with 21 specs / 152 assertions TEST-INVENTORIED; scripts 14/14; historical `.github/` 10/10. These are scoped coverage claims, not runtime validation.
+
+### Consolidation corrections
+
+- Synchronized BUILD-014 into infrastructure governance ownership and references. BUILD-001–BUILD-007 remain owned by scripts; BUILD-008–BUILD-014 remain owned by GitHub CI/release.
+- Corrected infrastructure TESTING and CI/CD descriptions: AsyncAPI validation, generated-message drift and E2E inventory drift use `continue-on-error: true` and are absent from the final failure gate. Their failure is not blocking in the audited workflow snapshot; BUILD-014 remains STATIC-FINDING / OPEN.
+- Removed the duplicate Architecture/ADR status row from the Audit Register; the single repository docs/ADRs row remains the consolidated entry and points to its owning module/reconciliation record.
+- Preserved Architecture/ADR status as PARTIAL, with three ADRs reconciled and 12 future-engine decisions OPEN.
+- Preserved infrastructure PARTIAL and system dependency map STATIC MAP IN PROGRESS; no status was promoted based on documentation cleanup.
+- No finding IDs were created, closed or reused in this consolidation pass.
+
+### Files published in this session
+
+- `governance/README.md`
+- `governance/AUDIT-REGISTER.md`
+- `governance/modules/infrastructure.md`
+- `governance/modules/github-ci.md`
+- `infrastructure/README.md`
+- `infrastructure/TESTING.md`
+- `infrastructure/CI-CD.md`
+
+### Verification boundary and branch plan
+
+- Every listed published file is to be re-fetched and checked for the expected BUILD-014 wording and updated SHA; publication verification is recorded only after that fetch.
+- No source code, package manifest, dependency, workflow, GitHub setting or release state was modified.
+- No tests, build, typecheck, lint, package, dependency/SBOM generation, workflow dispatch, release rehearsal, OIDC operation or runtime experiment was executed.
+- No branch was merged or deleted during this documentation pass. The remaining target is one canonical `main` branch; PR/merge operations and branch deletion capability must be verified separately. The available connector exposes PR merge and ref update but no branch-delete operation.
