@@ -83,3 +83,30 @@ Append-only session ledger. Corrections must be appended; do not erase historica
 ### Continuation pointer
 
 Next module work remains governed by the register. For the active deep audit, resume `webview-ui/` at reconnect/snapshot resynchronization in `useExtensionMessages.ts`, then continue only the recorded evidence gaps. Do not reopen completed `core/` source review unless a blob SHA changes or a concrete cross-module question requires it.
+
+
+## 2026-11-25 — GOV-CORE-002: current-tip core inventory closure check
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Branch:** `docs/hybrid-llm-engine-direction`  
+**Commit inspected:** `c522dbdac525b226ec84afa5b7c829289ea1949f`  
+**Scope:** complete tracked `core/` subtree; reconciliation against the prior source SHA manifest and core file-reference ledger.
+
+### Results
+
+- Retrieved the recursive Git tree at the inspected commit; `truncated: false`.
+- Counted exactly **28 tracked files**: 1 `core/asyncapi.yaml` and 27 `.ts` files under `core/src/`.
+- Individually fetched all 28 paths from this exact commit. Every fetch returned non-empty content.
+- Compared every returned blob SHA with the recorded 28-file manifest from GOV-CORE-001: **28/28 match**.
+- Reconciled the 27 TypeScript paths and the AsyncAPI YAML path against `docs/current-architecture/core/FILE-REFERENCE.md`; no tracked core path is absent from the file reference.
+- No new or changed core source file was found. No source file was modified.
+
+### Audit status
+
+**CORE SOURCE INVENTORY + STATIC REVIEW: COMPLETE for the verified 28-file snapshot.** No file was missed from the recorded core inventory.
+
+This closure check does not upgrade the remaining cross-layer, package/bundle, test-coverage, AsyncAPI generation, or runtime questions. No tests, build, typecheck, lint, package inspection, AsyncAPI validation/generation, or runtime execution were performed.
+
+### Continuation
+
+Core is not the active source-review target unless its blob SHA changes or a concrete cross-layer question requires a narrowly scoped revisit. Proceed to the already-recorded server audit evidence without repeating its source review; preserve findings F-01 through F-08 and resolve only documented gaps.

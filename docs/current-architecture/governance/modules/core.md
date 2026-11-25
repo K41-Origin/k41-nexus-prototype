@@ -1,8 +1,8 @@
 # Core Module Audit Record
 
 **Status:** AUDITED — source inventory, source review and core documentation reverified statically.  
-**Audit session:** `GOV-CORE-001` (2026-11-25)  
-**Source branch snapshot:** `docs/hybrid-llm-engine-direction` at `13354f1a74b75b9ab3d8982544414134b1940ae3`  
+**Audit sessions:** `GOV-CORE-001` and `GOV-CORE-002` (2026-11-25)  
+**Source branch snapshot:** `docs/hybrid-llm-engine-direction` at `c522dbdac525b226ec84afa5b7c829289ea1949f` (core source blob identities unchanged from the prior audited snapshot)  
 **Historical inventory root:** `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1`  
 **Inventory:** 28/28 tracked files; recursive tree `truncated: false`.  
 **Evidence log:** [GOV-CORE-001](../EVIDENCE-LOG.md#2026-11-25--gov-core-001-core-source-and-documentation-re-verification)
@@ -11,9 +11,9 @@
 
 Reviewed all files under `core/`:
 - `core/asyncapi.yaml`
-- 27 TypeScript files under `core/src/`, including generated `messages.ts).
+- 27 TypeScript files under `core/src/`, including generated `messages.ts`.
 
-Re-read and cross-checked the five core documents:
+Re-read and cross-checked all five core documents:
 - [README](../../core/README.md)
 - [Module overview](../../core/MODULE-OVERVIEW.md)
 - [File reference](../../core/FILE-REFERENCE.md)

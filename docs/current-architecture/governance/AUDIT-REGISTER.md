@@ -1,6 +1,6 @@
 # Repository Audit Register
 
-**Status snapshot:** 2026-11-25  
+**Status snapshot:** 2026-11-25 (core inventory closure rechecked at `c522dbdac525b226ec84afa5b7c829289ea1949f`)  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
 **Governance branch:** `docs/hybrid-llm-engine-direction`  
 **Source branch for current-state audit:** `main` unless a module record explicitly declares another baseline.
@@ -13,7 +13,7 @@ This register is the consolidated index. Detailed findings remain in their ownin
 |---|---|---|
 | `main` | `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` | Current application source reference at governance initialization |
 | `docs/hybrid-llm-engine-direction` | `13354f1a74b75b9ab3d8982544414134b1940ae3` | Audit documentation and governance record branch |
-| Core source snapshot | `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1` | Historical core audit inventory root; all 28 core blob SHAs were rechecked at the governance branch tip |
+| Core source snapshot | `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1` | Historical inventory root; all 28 core blob SHAs individually re-fetched and matched at governance branch tip `c522dbdac525b226ec84afa5b7c829289ea1949f` |
 
 The core source blob SHAs at the governance branch tip match the recorded core audit snapshot. This confirms source identity for `core/` at that branch tip; it does not imply that the two branch histories have been fully walked or merged.
 
@@ -21,7 +21,7 @@ The core source blob SHAs at the governance branch tip match the recorded core a
 
 | Module / scope | Status | Evidence owner | Next action |
 |---|---|---|---|
-| `core/` | **AUDITED — static source and documentation reverified** | [Core audit record](modules/core.md), [core file reference](../core/FILE-REFERENCE.md) | Cross-layer consumer/runtime verification remains open |
+| `core/` | **AUDITED — 28/28 files individually re-fetched; SHA and file-reference reconciliation complete** | [Core audit record](modules/core.md), [core file reference](../core/FILE-REFERENCE.md) | Cross-layer consumer/runtime verification remains open |
 | `server/` | **AUDITED — static source review recorded** | [Server deep audit](../server/DEEP-AUDIT.md) | Preserve F-01–F-08; runtime/test verification remains open |
 | `webview-ui/` | **IN PROGRESS** | [Webview deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Continue from SHA reconciliation and documented cross-module gaps; do not repeat reviewed files |
 | `adapters/` | **NOT AUDITED as a module** | Pending | Audit host lifecycle, ownership, activation/deactivation, protocol bridges and disposal |
