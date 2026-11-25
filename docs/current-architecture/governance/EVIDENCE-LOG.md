@@ -1321,3 +1321,75 @@ The source remediation branch was independently re-fetched: `security/remediate-
 Targeted static assertions by inspection confirmed: no Vercel secret names or preview jobs in CI; manual dispatch defaults to true and rejects false; both publisher jobs require `release.published`; only one `id-token: write` declaration exists and it belongs to `publish-npm`; build checkout has `persist-credentials: false`; publisher jobs contain no checkout; npm artifact integrity and release identity checks are present. These are static observations, not executed workflow behavior.
 
 This evidence-log entry itself must be fetched once after the commit to verify its final blob SHA and documentation branch HEAD. No workflow run or runtime verification was performed.
+
+
+## 2026-11-25 — GOV-INFRA-001 / GOV-DEPMAP-001 / GOV-ADR-001
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `security/remediate-build-008-009`  
+**Source commit:** `86d3b1dbddae7605e5e2092886c12982f8e4bf58`  
+**Source base:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Documentation branch HEAD before this append:** `e8fa7b82ec18080c7c0eaa9a809a448b9be7ecde`  
+**Scope:** integrated infrastructure static audit, evidence-backed system dependency map, architecture-direction/ADR implementation reconciliation.
+
+### Governance-first and state reconciliation
+
+- Read governance README, AUDIT-REGISTER, AUDIT-METHOD and EVIDENCE-LOG before source continuation.
+- Read infrastructure README/CI-CD and System Dependency Map; retrieved all infrastructure document paths, the Hybrid LLM Engine direction note and ADR-0001/0002/0003.
+- Retrieved current source branch ref and complete recursive tree: 856 entries, `truncated=false`.
+- Retrieved current `main` ref and compared complete tree path/blob pairs: exactly two source blobs differ from base, `.github/workflows/ci.yml` and `.github/workflows/publish-extension.yml`. No application source, package manifest, lockfile or build/test config changed in BUILD-008/009 remediation branch.
+- Reused existing module audits rather than repeating unchanged 28 core, 135 server, 459 webview, 8 adapter, 47 E2E, 14 scripts and 10 `.github/` file reviews.
+
+### Infrastructure integration
+
+- Updated `infrastructure/BUILD-SYSTEM.md`: npm workspace/build graph, AsyncAPI generation, TypeScript/lint, esbuild outputs, Vite asset pipeline, prepack/vscode prepublish, package allowlist and external runtime dependencies.
+- Updated `infrastructure/DEPENDENCIES.md`: root/server/webview direct dependency classes, optional native PTY, Fastify external CLI dependency, build-time pngjs and remaining transitive/bundle/SBOM questions.
+- Updated `infrastructure/TESTING.md`: Vitest server/webview, Node package contract, Playwright E2E, suite counts/configuration, CI matrix and explicit non-execution status.
+- Updated `infrastructure/README.md` and `infrastructure/CI-CD.md` to consolidate ownership and relate CI/release workflows to build/package/test steps.
+- Static observations: root lockfile v3 has 816 package records; root workspaces are server/webview-ui; root Node engine is >=20 and .nvmrc selects 22; CI has a separate Node 20 package smoke job and 3 OS × 3 E2E shards. No package installation, build, dependency audit or artifact inspection was performed.
+- Consolidated infrastructure status is PARTIAL, not fully audited: transitive dependency use, generated bundle/tarball/VSIX outputs, optional native install matrix and actual test outcomes remain OPEN.
+
+### System dependency map
+
+- Replaced the NOT AUDITED placeholder with a source-linked map for compile/build/package edges; VS Code and standalone host composition; Fastify/WebSocket/control-plane and terminal data-plane; AsyncAPI generation; client transport selection; provider/hook/consent flow; StateAdapter/FileStateAdapter persistence; CI/release integration and trust boundaries.
+- Each direct source edge records source path, line range and blob SHA. Existing lifecycle/persistence/terminal details are reused as DOC-RECORDED where they were not re-opened.
+- Status is STATIC MAP IN PROGRESS. Exhaustive transitive imports, full terminal/process ownership, multi-process/runtime lifecycle and external settings remain OPEN.
+
+### Architecture and ADR reconciliation
+
+- Created `ARCHITECTURE-ADR-RECONCILIATION.md` and module status record.
+- The current source tree contains no C/C++ source or CMake build files and no Android/Gradle/AndroidManifest project. Current provider registry is Claude-only; no generic Main Agent/worker scheduler or outbound model inference SDK was identified in the reviewed server contract/dependency evidence. Existing browser mobile E2E is not a native Android app.
+- ADR-0001: static implementation alignment found for immediate consent send, tri-state consent/revision semantics, process-wide queue, privileged ask gate and client tour state. Tests were inventoried but not run.
+- ADR-0002: static alignment found between CONTEXT.md Directory vocabulary and AsyncAPI/generated wire contract; legacy persisted `folderName` remains a read migration fallback.
+- ADR-0003: `repeat` wire/persisted/rendered path and legacy hue migration are source-verified; full `characterSpritesLoaded` path remains PARTIAL.
+- All 12 Hybrid LLM Engine design questions remain OPEN. The directional note is not a frozen implementation spec. No new finding IDs were created.
+
+### Key source evidence identities
+
+- `package.json`: `66efe28fd2927466c5f8283c6e26fe63da427079`
+- `package-lock.json`: `e183f6eced2e598496010a79c56a19f32e3dbe83`
+- `esbuild.js`: `450d0d3a1e2e194d47d5bb598c1669b9f3c33955`
+- `webview-ui/vite.config.ts`: `b47531773bf6fea57fe6d46a6291133371aa56ea`
+- `core/asyncapi.yaml`: `ff1247118819fe68852da11996c660df1726aa66`
+- `server/src/server.ts`: `e3616e30f635ce5074a62829cd518af455b24009`
+- `server/src/httpServer.ts`: `ad5104a14233aa29834e008833a0f21458fc887b`
+- `server/src/clientMessageHandler.ts`: `d7ae8235ee75de63b1716a4b67f27d69023f5d96`
+- `adapters/vscode/PixelAgentsViewProvider.ts`: `94d1ab2e1427377e67ff430a852d49863e5e4d87`
+- `webview-ui/src/transport/index.ts`: `066cb0b06dd1c9a00c74dda27a21fe0c49e1b14a`
+- `server/src/providers/hook/consentExecutor.ts`: `523dbde800d275c8f070a7d44ac48956e4034b63`
+- `server/src/agentPersistence.ts`: `0dcced81be9762d924ebed02aeea3c6c24ece0bf`
+
+### Documentation publication and execution boundary
+
+Documentation changes are published on the governance branch only; application source and the remediation branch were not modified. Files updated/created in this session:
+- `infrastructure/BUILD-SYSTEM.md`
+- `infrastructure/DEPENDENCIES.md`
+- `infrastructure/TESTING.md`
+- `infrastructure/README.md`
+- `infrastructure/CI-CD.md`
+- `SYSTEM-DEPENDENCY-MAP.md`
+- `ARCHITECTURE-ADR-RECONCILIATION.md`
+- governance module records for infrastructure, system dependency map and architecture/ADR
+- governance README, AUDIT-REGISTER and current-architecture README
+
+No test, build, typecheck, lint, npm install, generation, package, bundle analysis, dependency audit, benchmark, CI dispatch, network experiment, OIDC request, PTY experiment or runtime reproduction was executed. No application source, package manifest, dependency or workflow changed during these three audit workstreams.
