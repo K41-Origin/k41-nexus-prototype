@@ -10,7 +10,7 @@
 - `TREE-VERIFIED`: path, mode, size and blob SHA present in the complete Git tree.
 - `SHA-RECONCILED`: path/blob SHA agrees with the comparison snapshot.
 - `FETCHED`: file content was retrieved; this alone is not a review.
-- `FETCHED / TEST STRUCTURE INVENTORIED`: test declarations, area tags and major assertion/wait surfaces were structurally catalogued; assertion-level review remains open.
+- `TEST-INVENTORIED — assertions reviewed`: test declarations, area tags and major assertion/wait surfaces were structurally catalogued; assertion-level review remains open.
 - `SOURCE-VERIFIED`: complete static review with line evidence; do not assign until completed.
 - `TEST-INVENTORIED`: assertion-level review completed; does not mean test executed.
 - `TEST-EXECUTED`: only after an authorized run with command/environment/exit code recorded.
@@ -47,33 +47,33 @@ All rows below are `TREE-VERIFIED`, `SHA-RECONCILED` and `FETCHED` at the stated
 | `e2e/helpers/webview.ts` | `100644` | 26416 | `5acec507ac0b5b28a8afcdf0528d1611b22d6386` | FETCHED / REVIEW IN PROGRESS | VS Code panel, frame, drawer and settings UI helpers. |
 | `e2e/playwright.config.ts` | `100644` | 2291 | `4e4683186ee24e5cdce49a35cf336e069f35b1a2` | FETCHED / REVIEW IN PROGRESS | Playwright projects, retries, workers, reporters and output paths. |
 | `e2e/run-config.ts` | `100644` | 550 | `1921baad5195765b91a6661afd2f75415c49be96` | FETCHED / REVIEW IN PROGRESS | Optional run-ID artifact path namespacing. |
-| `e2e/tests/claude/hooks-off/areas-multiroot.spec.ts` | `100644` | 14271 | `2865f4de7e9d3cee9e21bd62d99bd008abc28160` | FETCHED / TEST STRUCTURE INVENTORIED | Multi-root area mapping and seat preference. |
-| `e2e/tests/claude/hooks-off/areas.spec.ts` | `100644` | 4637 | `4b6b96fdee7634361bdc0b754c13038fb07bcf1d` | FETCHED / TEST STRUCTURE INVENTORIED | Single-root area data and editor gate. |
-| `e2e/tests/claude/hooks-off/carpet.spec.ts` | `100644` | 13252 | `668eff0627a55adaf1682c3650c088321ba7fa81` | FETCHED / TEST STRUCTURE INVENTORIED | Carpet layer rendering, painting, erase, undo and persistence. |
-| `e2e/tests/claude/hooks-off/editor.spec.ts` | `100644` | 30023 | `ce90cbb0399f9b2c1f954e60bdf581506bfd1b03` | FETCHED / TEST STRUCTURE INVENTORIED | Layout editor erase, stroke undo, desk groups and color operations. |
-| `e2e/tests/claude/hooks-off/launch-drawer.spec.ts` | `100644` | 5073 | `d603c08951476a9dea6eba8cf0e69b1aeadcb14b` | FETCHED / TEST STRUCTURE INVENTORIED | VS Code multi-root and user Directory launch drawer. |
-| `e2e/tests/claude/hooks-off/lifecycle.spec.ts` | `100644` | 38456 | `ad45fb01b44d6d7e9e47026aae87f6bf914e74f9` | FETCHED / TEST STRUCTURE INVENTORIED | Hooks-off lifecycle, polling and heuristic timer behavior. |
-| `e2e/tests/claude/hooks-off/matrix.spec.ts` | `100644` | 15125 | `e85e7590259a9e663cac59f5645b559cc977421f` | FETCHED / TEST STRUCTURE INVENTORIED | Hooks-off internal/external × basic/inline/tmux spawn matrix. |
-| `e2e/tests/claude/hooks-off/pets.spec.ts` | `100644` | 11352 | `37cc965cf3e73bea101553e68d325419704ff17e` | FETCHED / TEST STRUCTURE INVENTORIED | Pet asset loading, placement, persistence and click bubble. |
-| `e2e/tests/claude/hooks-on/basic.spec.ts` | `100644` | 9175 | `741c72abca608de9bd621ef6c150ff19b81daf9c` | FETCHED / TEST STRUCTURE INVENTORIED | Hooks-on internal spawn, subagent and external adoption. |
-| `e2e/tests/claude/hooks-on/consent.spec.ts` | `100644` | 28042 | `f2ffe2aa112c2b177aa05e523f0b94dfb24bfed2` | FETCHED / TEST STRUCTURE INVENTORIED | Hook consent, install/uninstall, migration and failure cases. |
-| `e2e/tests/claude/hooks-on/lifecycle.spec.ts` | `100644` | 70687 | `1e89dc75cb4e9f30faeb8010ea6c2e339de9626c` | FETCHED / TEST STRUCTURE INVENTORIED | Hooks-on lifecycle, teams, sound, settings and editor regressions. |
-| `e2e/tests/claude/hooks-on/teams.spec.ts` | `100644` | 24689 | `42937ceb5701034b1e313ae8947df16d8a4df79d` | FETCHED / TEST STRUCTURE INVENTORIED | Inline/tmux/new-harness teams and tool routing. |
-| `e2e/tests/standalone/characters.spec.ts` | `100644` | 9847 | `df27b9c1dc16fbd9ab49642379f846f4bc90c879` | FETCHED / TEST STRUCTURE INVENTORIED | Character editing, wardrobe items and roster. |
-| `e2e/tests/standalone/conversations.spec.ts` | `100644` | 10850 | `eee811c71bc214c6c7aeed9e1ce8bbb53c4e5f67` | FETCHED / TEST STRUCTURE INVENTORIED | Conversation history, resume, paging/search and Directory changes. |
-| `e2e/tests/standalone/directory-modal.spec.ts` | `100644` | 4982 | `277893997d242ab44f372edcef2eaf9296c64cf9` | FETCHED / TEST STRUCTURE INVENTORIED | Directory modal keyboard and Area mapping. |
-| `e2e/tests/standalone/hooks.spec.ts` | `100644` | 13707 | `c1067099831d32e8c5c4e35c8d6ae529c1775431` | FETCHED / TEST STRUCTURE INVENTORIED | Hook-driven lifecycle, consent and read-only spectator behavior. |
-| `e2e/tests/standalone/launch-drawer.spec.ts` | `100644` | 20253 | `bdc56858997ab50e80cda4986d3955b0642a0bf5` | FETCHED / TEST STRUCTURE INVENTORIED | Directory launch, validation, suggestions, settings and viewport fit. |
-| `e2e/tests/standalone/mobile.spec.ts` | `100644` | 29768 | `bc2cb73f0f7e63850bc2edd61a82ec2c6034245b` | FETCHED / TEST STRUCTURE INVENTORIED | Mobile shell, touch gestures, keyboard, clipboard and roster. |
-| `e2e/tests/standalone/multi-server-hooks.spec.ts` | `100644` | 3417 | `adc90a44341487087609f58e2dbb502b65df5109` | FETCHED / TEST STRUCTURE INVENTORIED | Embedded VS Code and standalone hook-server isolation. |
-| `e2e/tests/standalone/terminal.spec.ts` | `100644` | 17396 | `7d586c1045da35ae0b38662ef2183a3930ddda3c` | FETCHED / TEST STRUCTURE INVENTORIED | PTY terminal input, resize, URL copy/open and --no-terminal. |
-| `e2e/tests/standalone/ui.spec.ts` | `100644` | 8747 | `0338c1494ce0199dbbbfe79f53caf4288feec0f3` | FETCHED / TEST STRUCTURE INVENTORIED | Close, debug view, assets, layout import/export and reconnect indicator. |
+| `e2e/tests/claude/hooks-off/areas-multiroot.spec.ts` | `100644` | 14271 | `2865f4de7e9d3cee9e21bd62d99bd008abc28160` | TEST-INVENTORIED — assertions reviewed | Multi-root area mapping and seat preference. |
+| `e2e/tests/claude/hooks-off/areas.spec.ts` | `100644` | 4637 | `4b6b96fdee7634361bdc0b754c13038fb07bcf1d` | TEST-INVENTORIED — assertions reviewed | Single-root area data and editor gate. |
+| `e2e/tests/claude/hooks-off/carpet.spec.ts` | `100644` | 13252 | `668eff0627a55adaf1682c3650c088321ba7fa81` | TEST-INVENTORIED — assertions reviewed | Carpet layer rendering, painting, erase, undo and persistence. |
+| `e2e/tests/claude/hooks-off/editor.spec.ts` | `100644` | 30023 | `ce90cbb0399f9b2c1f954e60bdf581506bfd1b03` | TEST-INVENTORIED — assertions reviewed | Layout editor erase, stroke undo, desk groups and color operations. |
+| `e2e/tests/claude/hooks-off/launch-drawer.spec.ts` | `100644` | 5073 | `d603c08951476a9dea6eba8cf0e69b1aeadcb14b` | TEST-INVENTORIED — assertions reviewed | VS Code multi-root and user Directory launch drawer. |
+| `e2e/tests/claude/hooks-off/lifecycle.spec.ts` | `100644` | 38456 | `ad45fb01b44d6d7e9e47026aae87f6bf914e74f9` | TEST-INVENTORIED — assertions reviewed | Hooks-off lifecycle, polling and heuristic timer behavior. |
+| `e2e/tests/claude/hooks-off/matrix.spec.ts` | `100644` | 15125 | `e85e7590259a9e663cac59f5645b559cc977421f` | TEST-INVENTORIED — assertions reviewed | Hooks-off internal/external × basic/inline/tmux spawn matrix. |
+| `e2e/tests/claude/hooks-off/pets.spec.ts` | `100644` | 11352 | `37cc965cf3e73bea101553e68d325419704ff17e` | TEST-INVENTORIED — assertions reviewed | Pet asset loading, placement, persistence and click bubble. |
+| `e2e/tests/claude/hooks-on/basic.spec.ts` | `100644` | 9175 | `741c72abca608de9bd621ef6c150ff19b81daf9c` | TEST-INVENTORIED — assertions reviewed | Hooks-on internal spawn, subagent and external adoption. |
+| `e2e/tests/claude/hooks-on/consent.spec.ts` | `100644` | 28042 | `f2ffe2aa112c2b177aa05e523f0b94dfb24bfed2` | TEST-INVENTORIED — assertions reviewed | Hook consent, install/uninstall, migration and failure cases. |
+| `e2e/tests/claude/hooks-on/lifecycle.spec.ts` | `100644` | 70687 | `1e89dc75cb4e9f30faeb8010ea6c2e339de9626c` | TEST-INVENTORIED — assertions reviewed | Hooks-on lifecycle, teams, sound, settings and editor regressions. |
+| `e2e/tests/claude/hooks-on/teams.spec.ts` | `100644` | 24689 | `42937ceb5701034b1e313ae8947df16d8a4df79d` | TEST-INVENTORIED — assertions reviewed | Inline/tmux/new-harness teams and tool routing. |
+| `e2e/tests/standalone/characters.spec.ts` | `100644` | 9847 | `df27b9c1dc16fbd9ab49642379f846f4bc90c879` | TEST-INVENTORIED — assertions reviewed | Character editing, wardrobe items and roster. |
+| `e2e/tests/standalone/conversations.spec.ts` | `100644` | 10850 | `eee811c71bc214c6c7aeed9e1ce8bbb53c4e5f67` | TEST-INVENTORIED — assertions reviewed | Conversation history, resume, paging/search and Directory changes. |
+| `e2e/tests/standalone/directory-modal.spec.ts` | `100644` | 4982 | `277893997d242ab44f372edcef2eaf9296c64cf9` | TEST-INVENTORIED — assertions reviewed | Directory modal keyboard and Area mapping. |
+| `e2e/tests/standalone/hooks.spec.ts` | `100644` | 13707 | `c1067099831d32e8c5c4e35c8d6ae529c1775431` | TEST-INVENTORIED — assertions reviewed | Hook-driven lifecycle, consent and read-only spectator behavior. |
+| `e2e/tests/standalone/launch-drawer.spec.ts` | `100644` | 20253 | `bdc56858997ab50e80cda4986d3955b0642a0bf5` | TEST-INVENTORIED — assertions reviewed | Directory launch, validation, suggestions, settings and viewport fit. |
+| `e2e/tests/standalone/mobile.spec.ts` | `100644` | 29768 | `bc2cb73f0f7e63850bc2edd61a82ec2c6034245b` | TEST-INVENTORIED — assertions reviewed | Mobile shell, touch gestures, keyboard, clipboard and roster. |
+| `e2e/tests/standalone/multi-server-hooks.spec.ts` | `100644` | 3417 | `adc90a44341487087609f58e2dbb502b65df5109` | TEST-INVENTORIED — assertions reviewed | Embedded VS Code and standalone hook-server isolation. |
+| `e2e/tests/standalone/terminal.spec.ts` | `100644` | 17396 | `7d586c1045da35ae0b38662ef2183a3930ddda3c` | TEST-INVENTORIED — assertions reviewed | PTY terminal input, resize, URL copy/open and --no-terminal. |
+| `e2e/tests/standalone/ui.spec.ts` | `100644` | 8747 | `0338c1494ce0199dbbbfe79f53caf4288feec0f3` | TEST-INVENTORIED — assertions reviewed | Close, debug view, assets, layout import/export and reconnect indicator. |
 | `e2e/tsconfig.json` | `100644` | 494 | `5fc3efce347e5591b3021362d0b3365b65cc5114` | FETCHED / REVIEW IN PROGRESS | Strict E2E TypeScript compiler configuration. |
 
 ## Coverage totals
 
 - 47 blobs across 7 directories.
-- 21 spec files; 152 test declarations; 152 area tags.
+- 21 spec files; 152 test declarations; 152 area tags; assertion-level review complete (GOV-E2E-002).
 - 8 platform skip guards, recorded separately from test declarations.
 - No binary blob was present in the E2E subtree at this snapshot.
 - No test was executed during GOV-E2E-001.
