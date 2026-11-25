@@ -73,16 +73,15 @@ GOV-WEBVIEW-005 adds three static component observations for future technical pr
 
 Preserve existing `WV-` findings and their states in [DEEP-AUDIT.md](../../webview-ui/DEEP-AUDIT.md). The reconnect trace in GOV-WEBVIEW-001 adds `WV-RESYNC-01`, a static finding about applying a server seat snapshot while the client still has its pre-reconnect layout. It remains open and is not runtime reproduced.
 
-The historical SHA reconciliation for all 62 reported-review rows is complete. GOV-WEBVIEW-005 then directly re-fetched and reviewed the 32 component rows with missing per-file coverage evidence. All 54 files under `webview-ui/src/components/` are now REVIEWED (22 previously reviewed plus 32 reviewed in GOV-WEBVIEW-005). The remaining reported-review source scope is 7 other source rows; all 9 character UI rows are now REVIEWED. Hooks are complete at 24/24 REVIEWED.
+The historical SHA reconciliation for all 62 reported-review rows is complete. GOV-WEBVIEW-005 directly reviewed the 32 component rows with missing per-file coverage evidence; all 54 files under `webview-ui/src/components/` are now REVIEWED. GOV-WEBVIEW-006 completed all 24 hooks, and GOV-WEBVIEW-007 completed all 33 character source files. GOV-WEBVIEW-008 directly reviewed the final seven reported-review source rows elsewhere in `webview-ui/src/`. There are now **no reported-review source rows remaining**.
 
 The next work is:
 
-1. Perform targeted direct source verification for the remaining 7 reported-review source rows elsewhere in webview-ui. Record exact line ranges and cross-references; promote only files whose complete content is verified.
-2. Review the remaining 47 test files beyond inventory where needed; map assertions to implementation and keep execution separate.
-3. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server.
-4. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
-5. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-APP-01`, `WV-TR-01`, `WV-RESYNC-01`, `WV-VITE-01`, `WV-C03/WV-C06`, the component-level priorities `WV-C12`–`WV-C14`, hook priorities `WV-C15`–`WV-C16`, and the completed character UI review GOV-WEBVIEW-007.
-6. Keep runtime, browser, VS Code host, build, lint, typecheck and test verification open until explicitly authorized and actually performed.
+1. Review the remaining 47 `FETCHED / INVENTORIED` test files at assertion level; map assertions to implementation and keep execution separate.
+2. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server.
+3. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
+4. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-APP-01`, `WV-TR-01`, `WV-RESYNC-01`, `WV-VITE-01`, `WV-C03/WV-C06`, component priorities `WV-C12`–`WV-C14`, hook priorities `WV-C15`–`WV-C16`, and `WV-C17` (reduced-motion coverage).
+5. Keep runtime, browser, VS Code host, build, lint, typecheck and test verification open until explicitly authorized and actually performed.
 
 ## Explicit limitations
 
