@@ -151,3 +151,21 @@ The per-file modes, byte sizes, line counts and SHAs are in [SCRIPTS-FILE-REFERE
 - **RUNTIME-REPRODUCED:** none.
 
 No tests, builds, lint, typecheck, generation, package, publish, browser, VS Code host or runtime experiments were executed. No source, script, package manifest, dependency or configuration was modified.
+
+
+## 7. BUILD-001–BUILD-007 remediation implementation snapshot
+
+**Branch:** `security/remediate-build-008-009`  
+**HEAD:** `4d29e1654b0d6a7bd3dacf3773e02265ab0069a1`  
+**Base:** current `main` at `110c2c8c0907c710ef4a559c1dd647e6dee135c4`  
+**Changed files:** `scripts/jsonl-viewer.html`, `scripts/asset-manager.html`, `scripts/build-allure-report.mjs`, `scripts/verify-npm-package.mjs`, `package.json`.
+
+- **BUILD-001:** event labels now pass untrusted tool/subagent names through `esc()` before HTML rendering. SOURCE-VERIFIED; browser exploit test not executed.
+- **BUILD-002:** group role now passes through `escHtml()` at the `innerHTML` sink. SOURCE-VERIFIED; browser exploit test not executed.
+- **BUILD-003:** imported group graphs are validated before assignment; duplicate IDs and cycles throw an input error. Proposed group graphs are checked before commit; recursive resolution also carries an ancestor set. SOURCE-VERIFIED; cyclic fixture and editor interaction not executed.
+- **BUILD-004:** grouped export leaf resolution filters `asset.discard`, matching ungrouped behavior. SOURCE-VERIFIED; export fixture not executed.
+- **BUILD-005:** the broken `import-tileset` npm script was removed because the referenced file is absent and no CLI contract/implementation exists. This removes a dead command; it does not implement import functionality. Manifest parse and package smoke remain unexecuted.
+- **BUILD-006:** Allure failure sets `process.exitCode` and allows `finally` to remove staged results. SOURCE-VERIFIED; forced failure/cleanup not executed.
+- **BUILD-007:** child stop now awaits close after SIGTERM and SIGKILL and throws if the process never closes. SOURCE-VERIFIED; process-stop race not reproduced.
+
+**Verification boundary:** all changed files re-fetched from the remediation branch; no tests, lint, format, typecheck, build, package, browser or runtime command executed. All seven findings remain OPEN pending executable regression verification.
