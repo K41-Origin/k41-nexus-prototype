@@ -444,3 +444,38 @@ Continue with the remaining 30 reported-review source rows, prioritizing the 14 
 - 7 reported-review source rows remain elsewhere in `webview-ui/src/`.
 - 7 `FETCHED / REVIEWED REPORTED` rows remain as a separate exact-coverage evidence gap.
 - 47 inventoried-only tests, protocol producer-consumer tracing, host lifecycle/reconnect and binary/font evidence remain open.
+
+
+## 2026-11-25 — GOV-WEBVIEW-008: remaining webview source coverage
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main`  
+**Source commit:** `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Recursive tree SHA:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction` at `8aabad19e60226ef44ecfc94c5aba7c427616132`  
+**Scope:** the seven `FETCHED / REVIEWED REPORTED` source rows remaining in `webview-ui/src/`.
+
+### Governance and source reconciliation
+
+- Re-read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, webview module record, DEEP-AUDIT and FILE-REFERENCE before inspecting source.
+- Complete recursive tree: `truncated: false`; 459 webview blobs.
+- FILE-REFERENCE reconciliation: 459/459 paths and blob SHAs match; 0 missing, 0 extra, 0 mismatches.
+- The seven ledger rows were fetched in full and statically reviewed: `changelogData.ts` (341 lines), `constants.ts` (880), `index.css` (697), `loadingPreview.tsx` (14), `notificationSound.ts` (128), `runtime.ts` (28), and `testHooks.ts` (352). All current SHAs match the ledger.
+- Clarification: the earlier continuation text referred to seven remaining source rows and seven fetched/reported-review rows as if separate. Ledger reconciliation shows these are the same seven rows; no second seven-file group existed.
+
+### Finding
+
+- Added `WV-C17`: `index.css` does not suppress the infinite `.pixel-pulse` and `.usage-heart-beat` animations under `prefers-reduced-motion: reduce`. Source and consumers are cross-referenced in the owning deep-audit record. Static only; no browser accessibility test executed.
+
+### Execution and modification limits
+
+- Static source/document investigation only.
+- No tests, build, lint, typecheck, browser/VS Code runtime, accessibility audit or audio experiment executed.
+- No application source, test, configuration, dependency or asset file changed.
+- Seven source rows promoted to `REVIEWED`; the 47 inventoried-only tests, protocol/lifecycle traces and binary/font validation remain open.
+
+### Next continuation
+
+- Review the 47 `FETCHED / INVENTORIED` test files at assertion level without executing them.
+- Continue ClientMessage/ServerMessage producer-consumer tracing and host lifecycle/reconnect analysis.
+- Retain the 143 binary-header-only assets and one unverified font as open validation limits.
