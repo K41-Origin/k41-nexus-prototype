@@ -1255,3 +1255,49 @@ The documentation branch ref was re-fetched after all reconciliation updates and
 | `SYSTEM-DEPENDENCY-MAP.md` | `0382c1e79f237d26ddffe06e1ea2b0d2752ca16a` |
 
 All 16 paths returned the expected updated content and blob SHA. The evidence-log blob listed above is the version fetched before this final verification append; this current entry must itself be fetched once after commit to verify its final blob SHA. No application source changed.
+
+
+## 2026-11-25 — GOV-GHCI-003: BUILD-008/009 remediation branch and verification plan
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source base:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Remediation branch:** `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`  
+**Documentation branch before this entry:** `docs/hybrid-llm-engine-direction@54b7d4b44c50bbd6e73dbc5d501a66e944e7203d`  
+**Scope:** targeted remediation for existing findings BUILD-008 and BUILD-009; no new finding IDs.
+
+### Governance and reconciliation
+
+- Read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, GitHub CI module record, GitHub CI DEEP-AUDIT and FILE-REFERENCE before source continuation.
+- Verified source `main` remains at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; docs branch is maintained separately.
+- Retrieved complete recursive tree for the remediation branch: 856 entries, `truncated=false`.
+- Existing 10-file `.github/` audit was not repeated. Only the two workflow files changed in this remediation branch.
+
+### Changes implemented on the remediation branch
+
+- `.github/workflows/ci.yml`: removed `deploy-preview-precheck` and `deploy-preview`. This removes Vercel secret injection, privileged PR deployment permissions, checkout/npm/report-generation execution in the Vercel job, and PR comment writes. Hosted PR report preview is intentionally suspended rather than replaced by an unverified privileged `workflow_run` consumer.
+- `.github/workflows/publish-extension.yml`: manual dispatch defaults to dry-run and rejects `dry_run=false`; publisher jobs are release-event-only. A read-only build/verify job checks release ancestry and preserves npm release identity/version validation, builds VSIX/npm artifacts, and uploads a run-scoped artifact. VSIX and npm publishers consume that artifact without checkout or repository package scripts. Marketplace/Open VSX tokens are step-scoped. `id-token:write` is confined to the npm publisher job, which pins its setup-node/download-artifact actions, installs npm with lifecycle scripts disabled, checks SHA-512 integrity and idempotent registry state, and publishes with provenance.
+- No application source, package manifest, dependency, package script or runtime configuration was changed.
+- BUILD-013 remains a separate open finding; its release identity preflight was retained, but no finding was closed.
+
+### Branch evidence
+
+- `.github/workflows/ci.yml`: blob `8dc8cdf30e2cb1857708a8bd601807c08df34368`, 16,167 bytes, 450 lines.
+- `.github/workflows/publish-extension.yml`: blob `0b408f04d6b7c47d1405b9259d257fd21bdcb15d`, 6,627 bytes, 237 lines.
+- Both files were fetched from the remediation branch after the final update. The complete branch tree shows no other path changed from the base for this remediation.
+
+### Verification planning and remaining gates
+
+1. Static pre-merge: run a YAML/workflow parser and actionlint; verify expressions, job graph, artifact paths, outputs, shell quoting, npm CLI compatibility and permission scopes.
+2. BUILD-008 PR negative test: confirm no Vercel secret or Vercel deploy job appears in a same-repository PR run; no write-capable token is present; no Vercel request or preview comment occurs.
+3. BUILD-009 manual negative tests: dispatch from non-main with default dry_run=true and confirm build-only; dispatch with dry_run=false and confirm rejection; confirm publisher jobs do not start and build job has no OIDC permission.
+4. BUILD-009 release positive rehearsal: use a controlled release/staging path; confirm ancestry preflight, exact run-scoped artifact, VSIX verification, npm integrity/idempotency, registry publication and provenance. Production publication requires explicit approval.
+5. Settings: configure and inspect `npm-publish` Environment required reviewers and allowed refs; verify npm trusted publisher repository/workflow/environment tuple; verify Marketplace/Open VSX token scopes, Actions defaults and organization rulesets. A YAML Environment reference does not create protection rules.
+6. Credential hygiene: inspect historical run/access logs for the former Vercel exposure window and rotate credentials if access history/scopes cannot exclude exposure; remove now-unused Vercel secrets only after preview suspension is accepted.
+7. Post-merge: record merged workflow SHAs, run IDs/attempts, expanded permissions, artifact IDs/digests, publication outcomes and provenance URL. BUILD-008/009 closure requires the corresponding negative/positive tests and settings evidence.
+
+### Execution boundaries
+
+- Static workflow inspection and audit-document publication only.
+- No workflow dispatch, CI run, YAML parser, actionlint, test, build, lint, typecheck, OIDC request, deployment, release or package publication executed.
+- No application source or runtime files changed.
+- BUILD-008 and BUILD-009 remain OPEN: remediation exists on an unmerged branch and verification is pending.
