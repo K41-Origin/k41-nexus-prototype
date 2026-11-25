@@ -1,7 +1,7 @@
 # Webview UI Module Audit Record
 
 **Status:** IN PROGRESS — complete tracked-file inventory and SHA reconciliation; historical static-review coverage and cross-layer verification remain open.  
-**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-008` (2026-11-25)  
+**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-009` (2026-11-25)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
 **Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
 **Latest source verification:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`, per GOV-WEBVIEW-002/008 evidence)  
@@ -54,12 +54,12 @@ The 459 ledger rows currently classify as:
 | `REVIEWED` | 261 | Prior 254 plus 7 remaining webview source files fully re-fetched and statically reviewed in GOV-WEBVIEW-008 |
 | `FETCHED / REVIEWED REPORTED` | 0 | All seven remaining rows directly reviewed in GOV-WEBVIEW-008; no rows remain in this status |
 | `REVIEWED REPORTED` | 0 | All 9 character UI rows directly reviewed in GOV-WEBVIEW-007 |
-| `TEST-INVENTORIED` | 7 | Complete test source/assertions inspected in GOV-WEBVIEW-002/003; not executed |
-| `FETCHED / INVENTORIED` | 47 | Test files fetched/inventoried; complete assertion review remains; not executed |
+| `TEST-INVENTORIED` | 54 | All 54 test files have assertion-level inventory/review evidence (7 prior + 47 in GOV-WEBVIEW-009); not executed |
+| `FETCHED / INVENTORIED` | 0 | No remaining test files in this status after GOV-WEBVIEW-009 |
 | `BINARY HEADER VERIFIED` | 143 | Header/signature/metadata checks only, as specified per file |
 | `NOT VERIFIED` | 1 | `public/fonts/FSPixelSansUnicode-Regular.ttf` internals remain unavailable |
 
-These categories sum to 459. GOV-WEBVIEW-005 directly reviewed the 32 component rows previously left as reported-review; together with the 22 component rows already REVIEWED, `src/components/` is 54/54 REVIEWED. GOV-WEBVIEW-006 directly reviewed the 14 remaining reported-review hook rows; together with the 10 previously REVIEWED hook rows, `src/hooks/` is 24/24 REVIEWED. All seven previously fetched/reported source rows elsewhere in webview source were directly reviewed in GOV-WEBVIEW-008; they were the same seven rows described in the earlier continuation note, not a second independent group. The 9 character UI rows are also directly reviewed. The remaining 47 test files are inventoried but still need assertion-level review. No tests were executed. Do not repeat completed work wholesale. The single unverified font must remain open until its binary content is actually available.
+These categories sum to 459. GOV-WEBVIEW-005 directly reviewed the 32 component rows previously left as reported-review; together with the 22 component rows already REVIEWED, `src/components/` is 54/54 REVIEWED. GOV-WEBVIEW-006 directly reviewed the 14 remaining reported-review hook rows; together with the 10 previously REVIEWED hook rows, `src/hooks/` is 24/24 REVIEWED. All seven previously fetched/reported source rows elsewhere in webview source were directly reviewed in GOV-WEBVIEW-008; they were the same seven rows described in the earlier continuation note, not a second independent group. The 9 character UI rows are also directly reviewed. All 54 test files now have assertion-level inventory/review evidence; the 47 formerly inventoried-only files were completed in GOV-WEBVIEW-009. No tests were executed. Do not repeat completed work wholesale. The single unverified font must remain open until its binary content is actually available.
 
 ## Documentation verification
 
@@ -77,11 +77,11 @@ The historical SHA reconciliation for all 62 reported-review rows is complete. G
 
 The next work is (authoritative continuation pointer; older continuation notes in DEEP-AUDIT are historical and superseded by GOV-WEBVIEW-008):
 
-1. Review the remaining 47 `FETCHED / INVENTORIED` test files at assertion level; map assertions to implementation and keep execution separate.
-2. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server.
+1. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server. Reuse `WV-C08`, `WV-APP-01`, `WV-RESYNC-01` and `WV-TR-01`; add only materially new edges/findings.
+2. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-VITE-01`, `WV-C03/WV-C06`, component priorities `WV-C12`–`WV-C14`, hook priorities `WV-C15`–`WV-C16`, `WV-C17` and `WV-TEST-01`.
 3. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
-4. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-APP-01`, `WV-TR-01`, `WV-RESYNC-01`, `WV-VITE-01`, `WV-C03/WV-C06`, component priorities `WV-C12`–`WV-C14`, hook priorities `WV-C15`–`WV-C16`, and `WV-C17` (reduced-motion coverage).
-5. Keep runtime, browser, VS Code host, build, lint, typecheck and test verification open until explicitly authorized and actually performed.
+4. Continue E2E, scripts, CI/release and system dependency-map work under their owning governance scopes.
+5. Keep runtime, browser, VS Code host, build, lint, typecheck and test execution open until explicitly authorized and actually performed.
 
 ## Explicit limitations
 
