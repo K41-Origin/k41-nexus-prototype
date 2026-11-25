@@ -26,7 +26,7 @@ Counts exclude directory entries. Recursive tree was not truncated.
 
 ### Office
 
-44 files under src/office were previously fetched/reviewed: canvas, overlays, cursor/touch, editor, OfficeState, characters, pets, game loop, renderer, selection, layout serializer/catalog/tile map/workstations, floor/wall/carpet tiles, sprite data/cache, types and utilities.
+44 files under src/office were previously fetched/reviewed: canvas, overlays, cursor/touch, editor, OfficeState, characters, pets, game loop, renderer, selection, layout serializer/catalog/tile map/workstations, floor/wall/carpet tiles, sprite data/cache, types and utilities. Large files were chunked.
 - WV-O01 (Medium): reassignSeat can unassign old seat before validating target; possible inconsistent assignment on failure.
 - WV-O02 (Low–Medium): pet-follow comment excludes subagents but implementation does not filter them.
 - WV-O03 (Low–Medium): paintTile validates linear index, not row/column separately; reachability pending.
@@ -59,7 +59,7 @@ Previously examined component groups include agent cards, launch/settings/direct
 - WV-C05: SettingsModal combines local settings, transport, import/export and usage bridge.
 - WV-C07: useExtensionMessages is a high-coupling orchestration hook.
 - WV-C08: incoming server-message runtime validation is inconsistent.
-- WV-APP-01 (Medium–High, static finding): App creates isEditDirty with dependencies [editor.isEditMode, editor.isDirty] and passes it to useExtensionMessages. The long-lived message subscription reads the callback in layoutLoaded handling but depends only on getOfficeState; exhaustive-deps is explicitly suppressed. The first callback closure is retained (normally false/false), so later dirty edits may not block external/reconnect layoutLoaded snapshots. Static path verified; runtime reproduction/test not run.
+- WV-APP-01 (Medium–High, static finding): confirmed stale closure. App.tsx creates isEditDirty with dependencies [editor.isEditMode, editor.isDirty] and passes it to useExtensionMessages. The long-lived message subscription reads it in layoutLoaded handling but depends only on getOfficeState; exhaustive-deps is explicitly suppressed. The first callback closure is retained (normally false/false), so later dirty edits may not block external/reconnect layoutLoaded snapshots. Static path verified; runtime reproduction/test not run.
 
 ### Mobile, music, conversations, usage and transport
 
