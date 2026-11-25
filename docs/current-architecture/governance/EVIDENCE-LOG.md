@@ -1022,3 +1022,13 @@ All changed documentation files, including this evidence log, must be fetched ag
 ### Next continuation
 
 The `scripts/` static audit is complete (14/14; BUILD-001–BUILD-007 OPEN). Continue with `.github/` workflow, permissions, triggers, secrets, artifact provenance and CI/release audit. Runtime verification remains unauthorized.
+
+
+### GOV-SCRIPTS-001 publication SHA correction
+
+The create-file API returned commit SHAs for newly created files, not content blob SHAs. After re-fetching the committed files, the verified **blob SHAs** are:
+- `docs/current-architecture/SCRIPTS-README.md`: `2970c2ecb6d9863a555241788cba1cbdb7875480`.
+- `docs/current-architecture/SCRIPTS-FILE-REFERENCE.md`: `7b48c76330f912543ffd36a0c200a5e8d7bdebf8`.
+- `docs/current-architecture/governance/modules/scripts.md`: `e2676b8dbd9fdb1f11cccae48452651cc7efd3c8`.
+
+The earlier three values in the GOV-SCRIPTS-001 publication list were create-file commit SHAs, not blob SHAs. This correction preserves the append-only history; the remaining listed values were verified blob SHAs. The evidence log is re-fetched after this correction.
