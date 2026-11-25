@@ -141,7 +141,7 @@ The standalone server's `handleWebviewReady` sends `existingAgents` at lines 747
 
 ### Next continuation point
 
-Continue from the 118 reported-review rows and protocol producer/consumer gaps without rereading unchanged, fully reviewed files. The reconnect seat scenario above is now a specific open question; do not duplicate WV-APP-01, which separately records the stale `isEditDirty` closure affecting `layoutLoaded`.
+Continuation pointer superseded by GOV-WEBVIEW-003 below. Preserve the historical 118-row count as the state at GOV-WEBVIEW-001; the current ledger is authoritative for remaining coverage.
 
 
 ## 9. Incremental static review — GOV-WEBVIEW-002 (2026-11-25)
@@ -187,3 +187,57 @@ No source/document contradiction requiring a new finding was established in this
 - 5/54 test files have complete assertion review recorded; 49 remain inventoried only.
 - 143 binary rows retain header/metadata-only evidence; the TTF remains `NOT VERIFIED`.
 - No tests, build, lint, typecheck, protocol generation, browser/VS Code runtime or reconnect experiment was executed. No application source or asset was modified.
+
+
+## 10. Incremental static review — GOV-WEBVIEW-003 (2026-11-25)
+
+### Repository and scope
+
+- Source branch: `main`, commit `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- Recursive tree: `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`.
+- `webview-ui/`: 459 blobs; selected source/test blob SHAs match the existing ledger. No source changes were found in the inspected paths.
+- Documentation branch parent before this session: `d15dbb41666b2ac7420e4ebe88456c250c10298f`.
+- Scope: browser-mock bootstrap and asset decoding, Vite asset middleware/cache invalidation, and the two directly related asset-path integration tests.
+
+### Files fully re-fetched and reviewed
+
+| Path | Blob SHA | Lines | Result |
+|---|---|---:|---|
+| `webview-ui/src/browserMock.ts` | `335caac9b428de7801b0c5c680eaab2dd7a1f290` | 1–248 | Full static review; ledger advanced to REVIEWED |
+| `webview-ui/src/main.tsx` | `223bbf51073edc73b9646be0e9618b11ea1ac250` | 1–27 | Full static review; ledger advanced to REVIEWED |
+| `webview-ui/vite.config.ts` | `b47531773bf6fea57fe6d46a6291133371aa56ea` | 1–126 | Full static review; ledger advanced to REVIEWED |
+| `webview-ui/test/dev-assets.test.ts` | `44c181de7e7f63904143d6e7ccdf3b0fc33bb0b7` | 1–99 | Full assertions inspected; TEST-INVENTORIED |
+| `webview-ui/test/build-subpath.test.ts` | `6531f84f343232b656cd9265d701a478babd4277` | 1–137 | Full assertions inspected; TEST-INVENTORIED |
+
+Cross-reference reads (not counted as new webview ledger rows):
+- `core/src/assets/loader.ts` — `0cbd192c01398fa1f62fcdafd67f85a0882a1266`.
+- `core/src/assets/build.ts` — `08d04b03d8937558c437dc3de7a9dab06568aad3`.
+
+### Source-verified flow and observations
+
+1. `main.tsx:11–16` imports and awaits `initBrowserMock()` only when `isBrowserRuntime && import.meta.env.DEV`; the React root is mounted afterward. `App.tsx` dispatches the mock messages from its effect, while `useExtensionMessages` registers the transport subscription. The second dynamic import resolves the already-loaded module asynchronously, allowing the effect flush to register the listener before dispatch.
+2. `browserMock.ts:132–201` fetches the asset index and furniture catalog, prefers decoded floor/wall/furniture JSON in DEV, and falls back to browser PNG decoding if that complete trio is unavailable. Carpet data is fetched separately and degrades to an empty array when its optional endpoint is unavailable.
+3. `browserMock.ts:204–248` dispatches the initial mock state in a fixed order, with `furnitureAssetsLoaded` before `layoutLoaded`. This order is consistent with the message handler's dependency on the dynamic furniture catalog before layout application.
+4. `vite.config.ts:53–100` exposes the metadata and decoded JSON middleware and memoizes decoded values in a plugin-local cache. Cache invalidation currently subscribes to watcher `change` only. This is additional source evidence for existing `WV-VITE-01`; add/unlink invalidation remains unverified. No duplicate finding ID created.
+5. The source comment in `browserMock.ts` describes fallback behavior for plain browser builds, but the actual entrypoint gate in `main.tsx:11–16` only imports the module in Vite DEV. Therefore the PNG fallback is statically reachable through this entrypoint only in DEV when one or more required decoded endpoints are unavailable; it is not established as a production static-browser path.
+6. `dev-assets.test.ts` checks root and `/sub/` endpoint availability, index/catalog contents, and representative floor/wall/furniture/default-layout URLs. It does not request `decoded/carpets.json`, nor does it exercise the browserMock fallback/dispatch behavior or watcher invalidation.
+7. `build-subpath.test.ts` checks production JS/CSS, metadata sidecars and manifest icon URLs under `/sub/`; it does not boot the browser application or assert browserMock dispatch. The production path does not invoke browserMock through the inspected `main.tsx` gate.
+
+### Findings and test limits
+
+- No new defect finding was established in this pass.
+- Existing `WV-VITE-01` remains OPEN: the plugin's change-only watcher is statically verified; the runtime effect of add/unlink events is not tested.
+- The two asset-path tests are now TEST-INVENTORIED, not TEST-EXECUTED. Their assertions leave the carpets endpoint, browser PNG fallback, mock message order, and watcher add/unlink behavior without direct coverage in these files.
+- No tests, build, lint, typecheck, protocol generation, browser runtime or file-watcher experiment was executed.
+- No application source, assets, configuration or dependencies were modified.
+
+### Updated coverage
+
+- Source files: 199 REVIEWED; 62 reported-review source rows remain.
+- Tests: 7/54 complete assertion inspections recorded; 47 remain inventory-only.
+- Binary evidence and TTF status are unchanged.
+- Inventory remains 459/459; this session does not close the webview audit.
+
+### Next continuation point
+
+Continue from the remaining 62 reported-review source rows by reconciling their historical line-level evidence, then review the 47 remaining test files as needed. Keep protocol producer/consumer validation and the open WV findings in scope; do not reread unchanged files already fully reviewed for the same question.
