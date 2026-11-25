@@ -277,3 +277,24 @@ No workflow, test, build, lint, typecheck, publish, dispatch, deployment or runt
 7. **Post-merge verification:** retrieve merged workflow blobs, record exact run IDs/attempts, job permissions, artifact IDs/digests, registry outcomes and npm provenance URL. Close BUILD-008 only after the no-secret PR negative test; close BUILD-009 only after manual negative tests and release-path positive verification plus settings evidence.
 
 **Current disposition:** remediation implemented on branch, not merged; BUILD-008 and BUILD-009 remain OPEN pending static parser validation, settings verification and authorized workflow evidence.
+
+
+## BUILD-014 — Protocol and inventory drift checks are not enforced by the CI final gate
+
+- **Severity:** Medium
+- **Confidence:** High
+- **State:** OPEN
+- **Verification:** STATIC-FINDING
+- **Affected file:** `.github/workflows/ci.yml`
+- **Source snapshot:** `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`
+- **Workflow blob SHA:** `8dc8cdf30e2cb1857708a8bd601807c08df34368`
+- **Evidence:**
+  - Lines 54-60 label AsyncAPI validation as part of the “Protocol spec checks (blocking)” section, but the step has `continue-on-error: true`.
+  - Lines 62-71 run generated-message drift detection and also set `continue-on-error: true`.
+  - Lines 73-82 run E2E inventory drift detection and also set `continue-on-error: true`.
+  - The final gate at lines 209-233 exports/checks only checkout, Node setup, dependency installation, typecheck, lint, webview tests, format, build, npm package and server tests. It does not export or check `validate_spec`, `messages_drift` or `e2e_inventory_drift`.
+- **Technical explanation:** GitHub Actions continues the job after a step marked `continue-on-error: true`; its failure must be explicitly incorporated into a later gate to make the overall job fail. The final gate does not consume these three step outcomes. Consequently, these checks can fail while the CI job's explicit blocking gate still succeeds, notwithstanding the “blocking” section comment.
+- **Impact:** invalid AsyncAPI specification, generated protocol drift, or stale E2E inventory can be reported as a successful CI run. This weakens the advertised CI contract and can allow generated/source-of-truth inconsistencies to merge.
+- **Verification status:** SOURCE-VERIFIED / STATIC-FINDING from the exact remediation-branch workflow blob. No YAML parser, actionlint, workflow run or runtime reproduction was available/performed; the finding is a control-flow conclusion from the checked-in YAML.
+- **Recommended direction:** either remove `continue-on-error: true` from these checks (while preserving intended always-run behavior) or pass all three `steps.<id>.outcome` values to the final gate and include them in the required-success loop and summary.
+- **Remaining uncertainty:** no workflow execution exists for this branch snapshot, so the actual failed-check scenario was not reproduced. The omission from the final gate is directly visible in source.
