@@ -1,6 +1,6 @@
 # GitHub Workflows and CI/Release Audit Record
 
-**Status:** STATIC AUDIT COMPLETE — 10/10 tracked `.github/` blobs fetched, SHA-reconciled and reviewed; BUILD-008–BUILD-013 OPEN.  
+**Status:** STATIC AUDIT + TRUST-BOUNDARY DESIGN REVIEW COMPLETE — 10/10 `.github/` blobs and 8 targeted integration files SOURCE-VERIFIED; BUILD-008–BUILD-013 remain OPEN pending implementation/settings evidence.  
 **Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated=false`.  
 **Documentation snapshot before publication:** `docs/hybrid-llm-engine-direction@7b56bcd278311bfdb782acacdd80080f74d7e87a`.  
 **Detailed owner:** [GitHub CI/release deep audit](../../github-ci/DEEP-AUDIT.md).  
@@ -24,4 +24,13 @@ Preserve BUILD-008–BUILD-013 in [DEEP-AUDIT.md](../../github-ci/DEEP-AUDIT.md)
 - Existing BUILD-001–BUILD-007 remain in the scripts audit; no IDs reused.
 
 ## Next action
-Resolve the privileged preview and manual publish trust boundaries first. Verify actual organization rulesets, repository Actions default token permissions, secret scopes/environment protections, trusted npm publisher settings and release artifact attestations when access is available. Runtime execution remains unauthorized.
+Implement the GOV-GHCI-002 design only after explicit authorization. Before closure, verify organization rulesets, repository Actions defaults, Vercel/registry secret scopes, protected Environment rules, npm trusted-publisher configuration and artifact provenance; then run authorized workflow verification. Runtime execution remains unauthorized.
+
+
+## Trust-boundary design review — GOV-GHCI-002
+
+- BUILD-008 design review is complete: same-repository PR code is untrusted. Required boundary: unprivileged PR build, exact run-scoped data-only artifact, trusted deploy workflow that never checks out or executes PR code, validated static output/config, Vercel secret only in the deploy step, and separate comment permissions.
+- BUILD-009 design review is complete: manual dispatch can select a branch/tag and the false-by-default dry-run allows non-main VSIX publication. Required boundary: manual dry-run without privilege; real publication only from a validated release tag (or protected main-only manual route); shared tag/ref/commit/version preflight; isolated publisher jobs; verified artifact; OIDC only in the trusted npm publisher job.
+- Checkout credential correction: actions/checkout@v7 stores the token-bearing Git config in a separate RUNNER_TEMP file referenced from repository Git config. The token value itself is not directly stored in .git/config; default persistence still makes the credential available to same-job processes.
+- Design assessment complete is not remediation: BUILD-008/009 remain OPEN because no workflow/source changes or runtime verification were authorized. See [DEEP-AUDIT.md §9](../../github-ci/DEEP-AUDIT.md) and [FILE-REFERENCE.md](../../github-ci/FILE-REFERENCE.md).
+
