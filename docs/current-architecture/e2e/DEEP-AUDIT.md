@@ -1,6 +1,6 @@
 # E2E Deep Audit
 
-**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); four test-quality coverage gaps E2E-003–E2E-006 recorded; harness source review and cross-module review continue.  
+**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); four test-quality coverage gaps E2E-003–E2E-006 recorded; full static review of 25/25 fixture/helper/setup/config files completed (GOV-E2E-003); cross-module review remains open.  
 **Source branch / commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
 **Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
 **Documentation branch before this publication:** `docs/hybrid-llm-engine-direction@cbf2d7ed7f711bc44fb619e43d86c560e1cf7d7e`.  
@@ -172,7 +172,52 @@ All 21 spec files were revisited at assertion level. The review examined each te
 - **Impact:** occasional standalone E2E startup failures under concurrent local services or parallel test invocations.
 - **Remaining uncertainty:** no collision was induced; practical frequency is unknown.
 
-## 7. Cross-module integration and coverage boundaries
+## 7. Full static harness source review — GOV-E2E-003
+
+The complete contents of all 25 non-spec harness files were reviewed at `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; each current blob SHA matches the FILE-REFERENCE ledger. Scope was all six fixture/shim files, all 15 helpers, `global-setup.ts`, `playwright.config.ts`, `run-config.ts` and `tsconfig.json`. No source file was modified and no command was executed. Exact per-file SHA and line-count evidence is recorded in FILE-REFERENCE.
+
+### Harness behavior and boundaries verified
+
+- **Scenario queue and mock process:** `ClaudeMockScenarioBuilder` serializes typed action/session definitions to a per-HOME JSON queue; the CJS runner claims one queued scenario, creates Claude project/transcript/sidecar files, schedules JSONL writes/hooks/file actions and optionally exits or holds open. Hook execution uses the installed hook command and sends JSON on child stdin. POSIX and Windows wrappers invoke the same runner; narration is explicitly cosmetic.
+- **VS Code lane:** isolated HOME/workspace/user-data/bin trees are created; config/layout/Claude settings are seeded before activation; multi-root workspaces are generated; the mock CLI and sibling scripts are copied; platform-specific environment/profile settings are applied; Electron launches with the extension dev path and the fixture attaches failure diagnostics. Fixture teardown finishes narration, attempts external-process termination, closes VS Code and removes the temporary root.
+- **Standalone lane:** the fixture owns only directories it creates, seeds consent/config/layout when appropriate, starts local `dist/cli.js`, waits for health and the printed browser capability URL, records WebSocket messages, and exposes stop/restart/cleanup. The browser URL is sourced from CLI stdout rather than reconstructed from the privileged server registry.
+- **Hook and test helpers:** hook server readiness is polled via server.json + health endpoint; event POSTs include the bearer token. Editor/office helpers explicitly distinguish real canvas gestures from test-hook calls that bypass pixel geometry or gestures. Transcript/team helpers construct JSONL and sidecar fixtures. Narration and terminal tail are isolated from assertions by design.
+- **Orchestration/configuration:** Playwright uses a single worker by default, fullyParallel test distribution and one retry; Electron recording is configured separately from browser-page video. Run-ID namespacing is shared by report/output paths. TypeScript configuration is strict.
+
+### New static findings
+
+#### E2E-007 — run ID `..` escapes the artifact namespace and broadens cleanup target
+
+- **Severity:** Medium
+- **Confidence:** High
+- **State:** OPEN
+- **Verification:** STATIC-FINDING
+- **Evidence:** `e2e/run-config.ts:3-19`, blob `1921baad5195765b91a6661afd2f75415c49be96`; cleanup sink `e2e/global-setup.ts:7,136-137`, blob `bb0b9611947b1ebaccea2cdd186811d2ab898176`.
+- **Trigger / precondition:** the environment variable `PIXEL_AGENTS_E2E_RUN_ID` is set to exactly `..` (or another value that sanitizes to a parent segment).
+- **Technical explanation:** the sanitizer permits dots and does not reject the special path segment `..`. `namespaceE2EPath(baseDir)` passes that segment directly to `path.join(baseDir, runId)`, which resolves to the parent of `baseDir`. `globalSetup()` then recursively removes `ALLURE_RESULTS_DIR`; with this run ID, the cleanup target resolves from `allure-results/e2e/..` to the broader `allure-results` directory. The same namespace function also broadens Playwright output/report paths.
+- **Impact:** a malformed or misconfigured run-ID environment variable can cause E2E startup to recursively delete report data outside the intended per-run `e2e/<runId>` directory.
+- **Remaining uncertainty:** no deletion or runtime experiment was performed; this is a static path-resolution consequence. The environment's actual source and likelihood are unknown.
+
+#### E2E-008 — VS Code download lock has no stale-owner recovery
+
+- **Severity:** Low
+- **Confidence:** High
+- **State:** OPEN
+- **Verification:** STATIC-FINDING
+- **Evidence:** `e2e/global-setup.ts:24-72`, blob `bb0b9611947b1ebaccea2cdd186811d2ab898176`.
+- **Trigger / precondition:** a process creates `download.lock` and terminates abnormally before the `finally` block removes it.
+- **Technical explanation:** lock acquisition writes `owner.json` with PID/time, but contention handling only polls for directory disappearance. It never reads the owner record, checks whether the PID remains alive, or expires stale ownership; a later run therefore waits until the fixed ten-minute deadline and fails.
+- **Impact:** a crashed/interrupted VS Code download can leave a persistent cache lock that blocks subsequent E2E setup on a reused workspace/cache.
+- **Remaining uncertainty:** impact depends on cache persistence and abnormal process termination; no stale lock was created or tested.
+
+### Review result and retained findings
+
+- Full static source review: **25/25** fixture/helper/setup/config files.
+- Assertion review: retained **21/21** spec files / **152/152** test declarations as GOV-E2E-002 evidence; not repeated here.
+- Findings **E2E-001–E2E-008** remain OPEN. E2E-001/E2E-002 process/port issues and E2E-003–E2E-006 assertion gaps are preserved unchanged; E2E-007/E2E-008 are new and distinct.
+- No test/build/lint/typecheck/install/browser/VS Code/PTY/runtime experiment was executed.
+
+## 8. Cross-module integration and coverage boundaries
 
 The E2E layer is a consumer of, not a source of truth for, application contracts. Preserve these canonical findings and continue them in their owning records:
 
@@ -196,19 +241,19 @@ The E2E layer is a consumer of, not a source of truth for, application contracts
 
 The README's pre-release manual smoke also calls out real Claude JSONL/MCP behavior, Firefox/Safari standalone behavior, cross-window sync, first-run behavior and platform sanity. These are manual checks, not automated E2E evidence.
 
-## 8. Verification boundaries
+## 9. Verification boundaries
 
 - **TREE-VERIFIED:** complete source recursive tree and all 47 E2E paths/modes/sizes/blob SHAs.
 - **SHA-RECONCILED:** all 47 E2E path/blob-SHA pairs match between source and documentation branch snapshots.
 - **FETCHED:** all 47 blobs fetched individually.
 - **TEST-INVENTORIED:** assertion-level review complete for 21/21 spec files; 152 declarations and 152 area tags match the generated README inventory.
-- **STATIC-FINDING:** E2E-001 and E2E-002.
+- **STATIC-FINDING:** E2E-001, E2E-002, E2E-007 and E2E-008; assertion-quality STATIC-FINDINGs E2E-003–E2E-006.
 - **TEST-EXECUTED:** none.
 - **RUNTIME-REPRODUCED:** none.
 
 No install, test, build, lint, typecheck, browser, VS Code host, PTY, hook fault injection or runtime experiment was performed. No application source, test, dependency, package manifest or configuration was modified. Documentation changes are confined to the audit branch.
 
-## 9. Continuation plan
+## 10. Continuation plan
 
 1. Preserve TEST-INVENTORIED status for all 21 spec files; address E2E-003–E2E-006 in a future test-quality improvement pass if implementation changes are authorized.
 2. Finish full source review of every fixture/helper/configuration file and trace the scenario queue, child-process lifetime, temporary-directory ownership, artifact paths and failure cleanup end to end.
