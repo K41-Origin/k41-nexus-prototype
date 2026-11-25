@@ -1,7 +1,7 @@
 # Webview UI Module Audit Record
 
-**Status:** IN PROGRESS — complete tracked-file inventory and SHA reconciliation; 34/34 ClientMessage and 46/46 ServerMessage variants statically traced; field-level and runtime/cross-client verification remain open.  
-**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-010` (2026-11-25)  
+**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation; 34/34 ClientMessage and 46/46 ServerMessage variants statically traced; field-level validation/authorization/persistence/side-effect static audit completed in GOV-WEBVIEW-011; runtime/cross-client verification remains open.  
+**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-011` (2026-11-25)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
 **Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
 **Latest source verification:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`, per GOV-WEBVIEW-002/008 evidence)  
@@ -77,8 +77,8 @@ The historical SHA reconciliation for all 62 reported-review rows is complete. G
 
 The next work is (authoritative continuation pointer; older continuation notes in DEEP-AUDIT are historical and superseded by GOV-WEBVIEW-008):
 
-1. Complete the remaining per-field validation, authorization/read-only, persistence and side-effect matrix. Reuse `WV-C08` and server `F-08`; do not create duplicate schema findings. The 34 ClientMessage and 46 ServerMessage producer/consumer routes are statically mapped in PROTOCOL-MATRIX.md.
-2. Confirm the intended multi-client consistency contract for `WV-PROTO-01` and `WV-PROTO-02`; runtime reproduction requires explicit authorization.
+1. Per-field validation, authorization/read-only, persistence and side-effect matrix is complete for all 34 ClientMessage variants in GOV-WEBVIEW-011 / PROTOCOL-MATRIX.md §14–16. Reuse `WV-C08` / `F-08`; do not repeat or duplicate this work.
+2. Continue lifecycle/reconnect and cross-client consistency analysis for `WV-PROTO-01`, `WV-PROTO-02`, `WV-PROTO-03`, `WV-APP-01`, `WV-RESYNC-01` and `WV-TR-01`; runtime reproduction requires explicit authorization.
 3. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-VITE-01`, `WV-C03/WV-C06`, `WV-APP-01`, `WV-RESYNC-01`, `WV-TR-01`, component priorities `WV-C12`–`WV-C14`, hook priorities `WV-C15`–`WV-C16`, `WV-C17` and `WV-TEST-01`.
 4. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
 5. Continue E2E, scripts, CI/release and system dependency-map work under their owning governance scopes.
