@@ -921,3 +921,47 @@ Updated E2E DEEP-AUDIT, FILE-REFERENCE, architecture README, governance module r
 ### Next continuation
 
 The full E2E harness static review is complete. Continue targeted cross-module source-contract tracing for lifecycle, hooks, reconnect, persistence and test-hook boundaries, reusing canonical server F-01/F-03/F-05/F-08, adapter A-03/A-05/A-06 and webview findings rather than duplicating them. Then audit `scripts/` and `.github/` under their own governance scopes. Runtime verification remains unauthorized.
+
+
+## 2026-11-25 — GOV-E2E-004: targeted cross-module source-contract tracing
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch / commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction@749094e910eccb112a7267435af9ff6bb71b6dd2`.  
+**Governance reread:** governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG; E2E/server/adapters/webview module records and deep audits; server PERSISTENCE.md.  
+**Scope:** lifecycle, hook execution, reconnect, persistence and E2E test-hook boundaries. Only files needed for these named contracts were re-fetched; prior 47/47 E2E inventory, 21/21 assertion review and 25/25 harness review were not restarted.
+
+### Source contract trace
+
+- **Lifecycle:** VS Code launch/restore/close paths were traced through `PixelAgentsViewProvider`, `agentManager`, `AgentRuntime`, `AgentStateStore` and `HookEventHandler`. Standalone launch/reattach was traced through `standaloneAgentLauncher`, PTY exit callbacks and CLI shutdown. Existing server F-01/F-03/F-05 and adapter A-03/A-05/A-06 remain canonical.
+- **Hook execution:** mock runner settings-command matching and stdin invocation → installed `claude-hook.js` registry fan-out → authenticated `POST /api/hooks/:providerId` → runtime callback → provider normalization → SessionRouter → HookEventHandler → AgentStateStore/WebSocket was traced. Direct E2E `sendHookEvent()` tests bypass the installed hook script; scenario `emitHook` covers that separate process boundary. Preserve F-04: HookEventHandler receives but ignores providerId.
+- **Reconnect:** standalone `WebSocketTransport` queues disconnected ClientMessages; state subscribers run on CONNECTED before the old queue flush, while `onReconnect` sends `webviewReady`. Server snapshot order is existingAgents → layoutLoaded → activity replay → terminal-session announcements. Preserve WV-RESYNC-01/02, WV-APP-01 and WV-TR-01. VS Code's postMessage surface is a fresh-iframe hydration, not a socket reconnect; the known initial seat metadata ordering extends WV-RESYNC-01.
+- **Persistence:** AgentStateStore projects state through `toPersistedAgent` into namespace-specific FileStateAdapter files. Identity/look/team and selected background-spawn state persist; foreground active-tool/permission/turn state does not. Restore paths start JSONL watching at EOF; the existing initialReadOffset test explicitly rejects replaying old transcript history. Therefore in-process WebSocket reconnect can replay current activity, while process restart intentionally restores an agent at rest. Recorded as an explicit behavior boundary/design question, not a new defect. Existing PERSISTENCE.md already records cross-process read-modify-write lost-update risk; no duplicate finding created.
+- **Test-hook boundary:** VS Code and standalone fixtures set the E2E flag with Playwright addInitScript before app initialization. App installs test hooks only when isE2E is true. Read hooks expose full pet/furniture state; E2E-004/E2E-006 assertions use only counts despite richer observability. selectAgent/petClick/editor action drivers bypass canvas pointer geometry; getTileCenter supports real gesture paths. These are test seams, not server authorization controls.
+
+### New findings
+
+- **Server F-09 — SessionEnd grace timer survives HookEventHandler disposal.** Evidence: `server/src/hookEventHandler.ts:385-398,793-796`, SHA `bd430b99f4abf7afea851645fe31924bf6213f43`; `server/src/agentRuntime.ts:595-623`, SHA `875efec343faada4763a2f4d75c336f9b625d54a`. A clear/resume SessionEnd creates an untracked timeout. Handler disposal only disposes SessionRouter; AgentRuntime.stop documents that it stops timers while preserving agents. If a host remains alive after stop, the old callback can still run against the preserved store. Low, High confidence, STATIC-FINDING, OPEN. Normal full-dispose and current CLI process-exit paths narrow the practical trigger. Existing `hookEventHandler.test.ts` dispose case does not schedule a grace timer before disposal.
+- **E2E-009 — mock scenario queue claim is not atomic across concurrent processes.** Evidence: `e2e/fixtures/mock-claude-runner.cjs:39-63`, SHA `6072b23f637ec2cd3518965f0fabc97f230e9051`; `e2e/helpers/mock-claude.ts:278-284`, SHA `90754501c25ee2b7af4720b00646b557eade48e9`. Multiple child processes sharing one HOME can read the same queue head before rewriting the remaining array; no lock/CAS exists. Low, Medium confidence, STATIC-FINDING, OPEN. No concurrent-claim reproduction was performed.
+
+### Existing findings preserved
+
+- Server F-01/F-03/F-04/F-05/F-08 remain open/partially covered as previously recorded; F-09 is new.
+- Adapter A-03/A-05/A-06 remain open.
+- Webview WV-RESYNC-01/02, WV-APP-01, WV-TR-01, WV-PROTO-01/02/03 and WV-C08 remain open.
+- E2E-001–E2E-008 remain open and unchanged; E2E-009 is new. No existing finding ID was reused.
+
+### Documentation publication
+
+Updated server DEEP-AUDIT and server module record; E2E DEEP-AUDIT, E2E module record and E2E README; consolidated AUDIT-REGISTER; appended this EVIDENCE-LOG entry. After publication, each changed document must be fetched again and its blob SHA plus key status/finding markers verified.
+
+### Execution and modification limits
+
+- Static source tracing and audit-document publication only.
+- No tests, build, lint, typecheck, install, browser, VS Code, PTY, hook fault injection, reconnect/network interruption, multi-process stress or runtime experiment executed.
+- No application source, tests, package/dependency/configuration files modified.
+
+### Next continuation
+
+Targeted cross-module source-contract tracing for lifecycle, hook execution, reconnect, persistence and test-hook boundaries is complete at static level. Next audit `scripts/` (E2E runner/inventory/report generation) and `.github/` workflows under their owning scopes. Runtime verification remains unauthorized.
