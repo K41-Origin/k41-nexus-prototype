@@ -111,7 +111,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/README.md | d2e77611fd3d959fee0487c41bd27b318be32b04 | 2555 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/src/App.tsx | 3eb91a2050da5f789223bc0a045a80fc841d60cb | 42910 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/browserMock.ts | 335caac9b428de7801b0c5c680eaab2dd7a1f290 | 8750 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-003; browser-mock asset fallback and dispatch flow traced |
-| webview-ui/src/changelogData.ts | a7a9c67afa47a0fdab0c63de91a25e9ead3389be | 12006 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile — SHA RECONCILED GOV-WEBVIEW-004; historical per-file line coverage not evidenced; direct verification remains |
+| webview-ui/src/changelogData.ts | a7a9c67afa47a0fdab0c63de91a25e9ead3389be | 12006 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-008; lines 1–341; cross-module/runtime verification remains open |
 | webview-ui/src/characters/art/artColors.ts | 793a52107a0e9704cf5e4c657b52e56d3851bf04 | 967 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/art/beard/full_beard.png | ea50d209e15eb2176eb804604e72c25acefe7458 | 1247 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
 | webview-ui/src/characters/art/beard/goatee.png | 4f1546fa94a981dfd7c8991c0663c5cb9701b0da | 653 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
@@ -281,7 +281,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/components/VersionIndicator.tsx | ba5a0c3009bfb6f3028a4a5e786d5410eac5c4be | 4292 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-005; lines 1–126; cross-module/runtime verification remains open |
 | webview-ui/src/components/VisualColorPicker.tsx | f24cb4e20c3631ae740fa7c559d716b800213690 | 8840 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-005; lines 1–254; cross-module/runtime verification remains open |
 | webview-ui/src/components/ZoomControls.tsx | 7d3e17ed65d2e533b7e452b680c6f549eea947e5 | 5055 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-005; lines 1–156; cross-module/runtime verification remains open |
-| webview-ui/src/constants.ts | 9580f95a5239485b5cb83a6ebe6c3b79010a19cc | 50697 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile — SHA RECONCILED GOV-WEBVIEW-004; historical per-file line coverage not evidenced; direct verification remains |
+| webview-ui/src/constants.ts | 9580f95a5239485b5cb83a6ebe6c3b79010a19cc | 50697 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-008; lines 1–880; cross-module/runtime verification remains open |
 | webview-ui/src/conversations/ConversationList.tsx | 5f89f074a4e0bf4f60c926709b6cfd024fe7d94b | 16250 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/conversations/ConversationSearch.tsx | da5eb5efdd143572270909be52e680ae62f56b2c | 7084 | REVIEWED — conversationSearchResults correlation and searchConversations request path verified |
 | webview-ui/src/conversations/ConversationSidebar.tsx | 08cff2d2fa11c8cb452ea3cdce438ba687606065 | 3391 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
@@ -313,8 +313,8 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/hooks/useRosterLaunch.ts | 4988aca1cecc1b3f2f94de7fb2530449af4e567a | 5531 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-006; lifecycle/cross-module follow-up remains |
 | webview-ui/src/hooks/useSlidePanel.ts | 2cf4ab0013cae1d82615759e51844e9f02bb7b98 | 2986 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-006; lifecycle/cross-module follow-up remains |
 | webview-ui/src/hooks/useTerminalDrawer.ts | 2913c2331ad4bee5f127a249502a394bfb414980 | 10246 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
-| webview-ui/src/index.css | daa1fcad26dbb03a9fa4ef0e1cf16389b7577b33 | 19712 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile — SHA RECONCILED GOV-WEBVIEW-004; historical per-file line coverage not evidenced; direct verification remains |
-| webview-ui/src/loadingPreview.tsx | 9cd3169706acf23a2b3ea4a7d92fdc8b41fc855b | 364 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile — SHA RECONCILED GOV-WEBVIEW-004; historical per-file line coverage not evidenced; direct verification remains |
+| webview-ui/src/index.css | daa1fcad26dbb03a9fa4ef0e1cf16389b7577b33 | 19712 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-008; lines 1–697; cross-module/runtime verification remains open |
+| webview-ui/src/loadingPreview.tsx | 9cd3169706acf23a2b3ea4a7d92fdc8b41fc855b | 364 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-008; lines 1–14; cross-module/runtime verification remains open |
 | webview-ui/src/main.tsx | 223bbf51073edc73b9646be0e9618b11ea1ac250 | 810 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-003; dev-only browser-mock bootstrap verified |
 | webview-ui/src/mobile/edgeSwipe.ts | 37b4fbc95728f573cef28b8ae9c5792f32352652 | 7439 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/mobile/keyboardViewport.ts | bd8d9e880ffefbef922d335b2b72abde520c01db | 2884 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
@@ -336,7 +336,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/music/tuneNames.ts | 54e382e0747a5bcf5d407db54faca2a40da0e0ee | 5764 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/music/useOfficeRadio.ts | 81ce5a22c2220b0f4d429074844280628e94eb88 | 301 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/music/VolumeControl.tsx | ce5ee838cb311e662cab34693cfc75821b65de05 | 3705 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
-| webview-ui/src/notificationSound.ts | f30c00d2463e79724e7d57ad56420d92b2625211 | 3536 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile — SHA RECONCILED GOV-WEBVIEW-004; historical per-file line coverage not evidenced; direct verification remains |
+| webview-ui/src/notificationSound.ts | f30c00d2463e79724e7d57ad56420d92b2625211 | 3536 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-008; lines 1–128; cross-module/runtime verification remains open |
 | webview-ui/src/office/colorize.ts | 70496be0b26feb1805a140c5e3776588e810a66d | 7756 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/office/components/index.ts | af03421b7c9d3a3f1415f0a5571629f8e802c306 | 98 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/office/components/OfficeCanvas.tsx | 108b79553473434202deb68d06979d3d632a5815 | 30809 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
@@ -381,7 +381,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/office/toolUtils.ts | 9ca01de477ee96577daaacfcd75a5afb1db5ac51 | 1613 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/office/types.ts | 00f3f3dc8735bb2ffae0b78c37b4b89aa17f4bc2 | 12070 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/office/wallTiles.ts | 694f2f965be03ec1623523ece2af1dda67288c5f | 6111 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
-| webview-ui/src/runtime.ts | 39316cd1563dc344232832f90fb23c82dff4c0c4 | 1037 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile — SHA RECONCILED GOV-WEBVIEW-004; historical per-file line coverage not evidenced; direct verification remains |
+| webview-ui/src/runtime.ts | 39316cd1563dc344232832f90fb23c82dff4c0c4 | 1037 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-008; lines 1–28; cross-module/runtime verification remains open |
 | webview-ui/src/terminal/clipboard.ts | ef13774c9c7fda3d54b828df981e937f3f63ad66 | 2358 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/terminal/clipboardInput.ts | edc8c394ff78d57bc12e8d62ee87f431def5ae1f | 2720 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/terminal/clipboardKeys.ts | 821de1064338dce111baebeec1d9181d8aa1a47b | 3313 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
@@ -396,7 +396,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/terminal/terminalLinks.ts | aa5a2f0ddb166fe448d49bec5bb9be4accea0d9f | 6409 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/terminal/touchGesture.ts | 245b94b166fe78d2eb8098ac58a01bd9b2a36e47 | 20336 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/terminal/touchInput.ts | 9d35d41762973ef5fbf369803a1d1c2df00617b4 | 10570 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
-| webview-ui/src/testHooks.ts | e2f7fe210be54bd6448c7735b0baaf29dfe9ca32 | 12733 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile — SHA RECONCILED GOV-WEBVIEW-004; historical per-file line coverage not evidenced; direct verification remains |
+| webview-ui/src/testHooks.ts | e2f7fe210be54bd6448c7735b0baaf29dfe9ca32 | 12733 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-008; lines 1–352; cross-module/runtime verification remains open |
 | webview-ui/src/touch/touchPrimitives.ts | d2d917653ed39a92d8b49e85e0e18a69c69158ae | 1268 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/touch/trackpad.ts | 7098d01522eb4f56c22f3d6d80414ab824ace778 | 4916 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/transport/index.ts | 066cb0b06dd1c9a00c74dda27a21fe0c49e1b14a | 2488 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
