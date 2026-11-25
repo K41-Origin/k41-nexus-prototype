@@ -39,7 +39,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [System dependency map module record](modules/system-dependency-map.md) | Coverage/status pointer for the cross-module map |
 | [Architecture/ADR module record](modules/architecture-adr.md) | Reconciliation of current implementation, three ADRs and future hybrid-engine direction |
 | [Architecture/ADR reconciliation](../../ARCHITECTURE-ADR-RECONCILIATION.md) | Technical comparison; 12 future-engine design decisions remain OPEN |
-| [Infrastructure audit documents](../infrastructure/README.md) | Build, dependency, testing and integrated CI/CD infrastructure status; currently NOT AUDITED as a consolidated scope |
+| [Infrastructure audit documents](../infrastructure/README.md) | Integrated build/package/test/CI static audit; PARTIAL, with transitive/bundle/runtime verification OPEN |
 
 ## Existing technical records retained
 
