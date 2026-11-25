@@ -92,6 +92,20 @@ The top-level read-only gate is fail-closed and several features validate carefu
 
 **Direction:** define runtime schemas per message, validate nested fields before side effects, and return explicit rejection messages.
 
+### F-09 — SessionEnd grace timer survives HookEventHandler disposal
+**Priority: Low | Files:** `hookEventHandler.ts`, `agentRuntime.ts`
+
+For `SessionEnd(reason=clear|resume)`, `HookEventHandler.handleSessionEnd()` schedules a `setTimeout` callback but does not retain its handle. `HookEventHandler.dispose()` only disposes `SessionRouter`; it cannot cancel this grace timer. `AgentRuntime.stop()` calls the handler's `dispose()` while its documented contract is to stop timers/watchers and leave agents plus persisted state intact.
+
+**Trigger / precondition:** a clear/resume SessionEnd has set `agent.pendingClear`, then the runtime is stopped in a host that remains alive past `SESSION_END_GRACE_MS` without receiving the matching SessionStart.
+
+**Impact:** the delayed callback can invoke the old lifecycle callback after runtime stop and mutate the preserved store (including external-agent dismissal/removal/persistence). The normal VS Code full-dispose path removes agents, and the current CLI PTY-host shutdown exits immediately after stop, so those paths reduce the practical window; the timer ownership contract is nevertheless incomplete.
+
+**Evidence:** `hookEventHandler.ts:385-398,793-796`, blob `bd430b99f4abf7afea851645fe31924bf6213f43`; `agentRuntime.ts:595-623`, blob `875efec343faada4763a2f4d75c336f9b625d54a`. Existing `hookEventHandler.test.ts:368-374` dispose test does not first schedule a clear/resume grace timer; delay behavior is tested separately at lines 479-502.
+
+**Direction:** retain/cancel pending SessionEnd timer handles on matching SessionStart, agent removal and handler disposal; add a regression asserting disposal prevents a late callback.  
+**Verification:** STATIC-FINDING / OPEN; no timer fault-injection or runtime reproduction.
+
 ## 3. Other coupling observations
 
 - `clientMessageHandler.ts` is the main command switch. It hardcodes Claude for launch/capability reporting; conversation selection chooses the first provider with title + launch support. This matches today's single-provider product but is not a generic provider router.
