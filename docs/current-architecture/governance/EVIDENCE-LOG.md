@@ -636,8 +636,8 @@ Continue UI → adapter → server ClientMessage/ServerMessage tracing, field va
 
 ### Documentation published
 
-1. webview-ui/PROTOCOL-MATRIX.md — complete ClientMessage producer/ingress map, ServerMessage producer/recipient map, validation/authorization/fan-out summary, correction for focusAgent, and WV-PROTO-01/02. Blob SHA: 2753367c3d44c2599522bb248b0ca919a1f4dfcf.
-2. webview-ui/DEEP-AUDIT.md — section 17 with source baseline, selected source blob SHAs, full trace result, findings, verification limits and continuation. Blob SHA: da7bd6876a75277bd789b47e0dcd351c712e115b.
+1. webview-ui/PROTOCOL-MATRIX.md — complete ClientMessage producer/ingress map, ServerMessage producer/recipient map, validation/authorization/fan-out summary, correction for focusAgent, and WV-PROTO-01/02. Blob SHA after final wording correction: 9a9d23521fecca560553929ab3ac37ba35baa51c.
+2. webview-ui/DEEP-AUDIT.md — section 17 with source baseline, selected source blob SHAs, full trace result, findings, verification limits and continuation. Blob SHA after final wording correction: 0c9d5b7764f4f39bbafb44d7f9027ea020f0fba8.
 3. governance/modules/webview-ui.md — session range through GOV-WEBVIEW-010, consolidated trace status, new finding references and revised continuation. Blob SHA: 11d2c5a87121d975a4232051dcfb830cc33e885a.
 4. governance/AUDIT-REGISTER.md — consolidated webview status and continuation updated; stale docs-branch pre-publication pointer corrected to 189e28970ec5d05abd536a57a4adab53399c27fd. Blob SHA: 2d3947ecc0b00167b1039749a86b8b6959c687bc.
 5. This EVIDENCE-LOG.md entry is append-only.
