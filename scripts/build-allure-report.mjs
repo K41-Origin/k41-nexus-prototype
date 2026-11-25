@@ -193,8 +193,10 @@ try {
     },
   );
 
+  if (result.error) throw result.error;
   if (result.status !== 0) {
-    process.exit(result.status ?? 1);
+    console.error(`Allure report generation failed with status ${result.status ?? 'unknown'}`);
+    process.exitCode = result.status ?? 1;
   }
 } finally {
   rmSync(stagedResultsDir, { recursive: true, force: true });

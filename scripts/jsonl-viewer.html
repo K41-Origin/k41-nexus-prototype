@@ -1359,7 +1359,7 @@ function evBadgeCls(t) {
 }
 
 function evLabel(e) {
-  switch(e.type) { case 'tool-start': return `+${e.toolName}`; case 'tool-done': return `-${e.toolName}`; case 'turn-end': return 'TURN END'; case 'waiting': return 'WAITING'; case 'new-turn': return 'NEW TURN'; case 'permission-start': return 'PERM TIMER'; case 'permission-restart': return 'PERM RESTART'; case 'text-idle-start': return 'IDLE TIMER'; case 'active': return 'ACTIVE'; case 'clear-activity': return 'CLEAR ALL'; case 'clear-stale-tools': return 'CLEAR STALE'; case 'subagent-tool-start': return `+sub:${e.toolName}`; case 'subagent-tool-done': return '-sub'; case 'subagent-clear': return 'sub clear'; default: return e.type; }
+  switch(e.type) { case 'tool-start': return `+${esc(e.toolName)}`; case 'tool-done': return `-${esc(e.toolName)}`; case 'turn-end': return 'TURN END'; case 'waiting': return 'WAITING'; case 'new-turn': return 'NEW TURN'; case 'permission-start': return 'PERM TIMER'; case 'permission-restart': return 'PERM RESTART'; case 'text-idle-start': return 'IDLE TIMER'; case 'active': return 'ACTIVE'; case 'clear-activity': return 'CLEAR ALL'; case 'clear-stale-tools': return 'CLEAR STALE'; case 'subagent-tool-start': return `+sub:${esc(e.toolName)}`; case 'subagent-tool-done': return '-sub'; case 'subagent-clear': return 'sub clear'; default: return e.type; }
 }
 
 function evIcon(t) {
