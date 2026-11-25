@@ -114,7 +114,7 @@ The UI consumption is distributed rather than centralized exclusively in useExte
 | resumeConversation | standalone clientMessageHandler | Relaunch past session |
 | requestDiagnostics | VS Code PixelAgentsViewProvider; standalone clientMessageHandler | Point-to-point diagnostics response |
 
-The standalone server handler has 29 explicit switch cases. The five ClientMessage variants absent from that switch are focusAgent, exportLayout, importLayout, exportFile and openSessionsFolder; these are host-specific VS Code actions and are handled in PixelAgentsViewProvider. This is a transport/host boundary, not automatically a protocol defect.
+The standalone server handler has 29 explicit switch cases. Five variants have no explicit standalone switch case: focusAgent, exportLayout, importLayout, exportFile and openSessionsFolder. Four are VS Code-only host actions with browser/local alternatives; focusAgent is emitted in both runtimes, but standalone intentionally no-ops the server side while App handles local drawer/tab focus. This is a transport/host boundary, not automatically a protocol defect.
 
 ## 4. Transport ingress and runtime validation
 
@@ -215,7 +215,7 @@ All 34 variants in core/asyncapi.yaml are accounted for below. The webview uses 
 | resumeConversation | conversations/useConversations.ts:79–83; hooks/useLaunchActions.ts:22–27 | Not implemented by PixelAgentsViewProvider; UI is gated by standalone terminal availability | clientMessageHandler.ts:234; resumeRequest validates/resolves before launch |
 | requestDiagnostics | components/DebugView.tsx:75–81 | PixelAgentsViewProvider.ts:983 | clientMessageHandler.ts:273; point-to-point response |
 
-**Ingress completeness:** 29 variants are handled by the standalone clientMessageHandler switch. The five absent variants are focusAgent, exportLayout, importLayout, exportFile and openSessionsFolder; their VS Code-only host behavior and standalone local/native alternatives are accounted for above. No other ClientMessage variant was found without a producer and ingress/intent mapping in this static pass.
+**Ingress completeness:** 29 variants are handled by the standalone clientMessageHandler switch. Five have no explicit standalone case: focusAgent, exportLayout, importLayout, exportFile and openSessionsFolder. Four are VS Code-only host actions; focusAgent is still emitted in standalone but intentionally no-ops server-side while App handles local focus. No other ClientMessage variant was found without a producer and ingress/intent mapping in this static pass.
 
 ## 10. Complete ServerMessage producer and delivery map
 
