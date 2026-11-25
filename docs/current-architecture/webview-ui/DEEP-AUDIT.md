@@ -831,3 +831,63 @@ Selected source blobs fetched from `main`: `core/asyncapi.yaml` ff1247118819fe68
 **Not performed:** fresh recursive tree retrieval (connector exposes no tree-fetch action in this session); tests/build/lint/typecheck; runtime/browser/VS Code; malformed payload, permission-failure or concurrent-client experiments. No source code changed.
 
 **Next:** cross-layer lifecycle/reconnect and state reconciliation, preserving WV-PROTO-01/02/03 and WV-C08/F-08; do not repeat the completed 34-message matrix.
+
+
+## 19. GOV-WEBVIEW-012 — Cross-layer lifecycle, reconnect and state reconciliation
+
+**Status:** STATIC CROSS-LAYER TRACE COMPLETE; dynamic lifecycle remains OPEN.  
+**Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; recursive tree SHA is the same commit, `truncated=false`, 856 entries (739 blobs, 117 trees).  
+**Scope:** standalone control-plane WebSocket reconnect and snapshot replay; VS Code webview readiness/buffering/restore; per-agent terminal data-plane reconnect; React/OfficeState reconciliation and lifecycle ownership. Existing message route and field-level matrices are reused, not repeated.
+
+### 19.1 Coverage and source reconciliation
+
+- Re-fetched the complete recursive Git tree. Webview ledger: 459/459 paths and blob SHAs match (0 missing, 0 extra, 0 mismatched). Adapter ledger: 8/8 paths and blob SHAs match. Server FILE-REFERENCE enumerates 135 paths but does not carry a per-file SHA manifest; server governance records its 135/135 historical reconciliation. All server files selected for this cross-layer trace match the current tree SHAs.
+- No source file changed relative to the documented source commit. Unchanged reviewed files were revisited only for the named cross-layer lifecycle question.
+- Selected source blobs: `webview-ui/src/hooks/useExtensionMessages.ts` 649025df90edef84d24c40556cee2ea007e15ccf; `webview-ui/src/transport/webSocketTransport.ts` 33008b95327f9e2a18e23aaf0f2060416c95aba9; `webview-ui/src/transport/onReconnect.ts` 030ae419587d5f3b69b78d74cf295811087e2bcd; `webview-ui/src/transport/postMessageTransport.ts` f9b622f6bc28eb18b3bb7131e10c596ad7e68acd; `webview-ui/src/transport/reconnectBackoff.ts` 44dc5aac6b52a73f35700509036a248396e3cc20; `webview-ui/src/App.tsx` 3eb91a2050da5f789223bc0a045a80fc841d60cb; `webview-ui/src/office/engine/existingAgents.ts` f23ff3f79f5fc6baf37f2915f8ff6abde107ce35; `webview-ui/src/office/engine/officeState.ts` 1afd778f4c72f1901ef91266e29a89f117e180c7; `webview-ui/src/terminal/terminalClient.ts` 55336df6e5d593008c0f1c7d34c8d0d0c5ae3d10; `webview-ui/src/hooks/useTerminalDrawer.ts` 2913c2331ad4bee5f127a249502a394bfb414980; `server/src/clientMessageHandler.ts` d7ae8235ee75de63b1716a4b67f27d69023f5d96; `server/src/httpServer.ts` ad5104a14233aa29834e008833a0f21458fc887b; `server/src/agentStateStore.ts` e73e5e47550cdfb1560ecdd0514b75be3688c5c1; `server/src/agentMessages.ts` df521f7a6d9ddbad8d7ee0c567df4054c500b9ea; `server/src/agentActivityResend.ts` f0c6fe190f9d259c6c172cfd7a4198ecc64dfb77; `adapters/vscode/PixelAgentsViewProvider.ts` 94d1ab2e1427377e67ff430a852d49863e5e4d87; `adapters/vscode/agentManager.ts` 30020b3e34d2d83fa4536e0d27f55c9e4fe3295c.
+
+### 19.2 Standalone control-plane lifecycle
+
+1. `WebSocketTransport` connects once at module creation. Close moves it to RECONNECTING and schedules the shared exponential backoff. The token is captured in the URL at construction and reused for reconnect.
+2. `useExtensionMessages` registers the message handler, queues/sends the initial `webviewReady`, then subscribes through `onReconnect`. Every later CONNECTED transition sets `resyncPending` and sends another `webviewReady`.
+3. The server sends connection access/capabilities, initial assets/settings, area mappings/directories, restores external agents, then sends `cardOrderLoaded`, `existingAgents`, `layoutLoaded`, activity replay, and live terminal-session announcements. This ordering is designed so restored characters exist before activity and terminal tabs are announced.
+4. On a reconnect snapshot, the webview removes agents absent from the snapshot, detaches subagents, clears tool/status state, and then reconciles each incoming agent's look/seat. Activity is replayed from the server's current AgentState, not from missed historical broadcasts.
+5. The terminal data plane is separate: one `TerminalConnection` per agent reconnects independently; the server PTY outlives the socket and sends a replay frame. Client terminal input is not queued while disconnected; last-known geometry is retained and re-sent on open.
+
+### 19.3 VS Code webview lifecycle and initial hydration
+
+- Each fresh `resolveWebviewView` resets `isWebviewReady=false` and clears the prior iframe's pending broadcast queue. The new iframe's `webviewReady` flushes buffered events, sends settings/area mappings, restores agents, starts scanners and asynchronously loads assets/layout. This is a new iframe lifecycle, not a WebSocket reconnect; `PostMessageTransport` reports CONNECTED continuously and has no reconnect event.
+- A concrete ordering edge exists during restored-agent hydration: `restoreAgents` calls `store.set`; `AgentStateStore.set` emits `agentAdded`; the provider immediately sends `agentCreated` because `isWebviewReady` is already true. The webview's `agentCreated` handler immediately calls `OfficeState.addAgent`, even while `layoutReadyRef` is false. The provider then sends `existingAgents` using `adapter.loadSeats()`; because layout is not ready, `reconcileExistingAgents` buffers that metadata. When `layoutLoaded` flushes the pending item, `restoreAgent` calls `addAgent` again, but `OfficeState.addAgent` returns immediately when the ID already exists. Therefore the buffered snapshot metadata is not applied to that already-created character.
+- **This extends existing WV-RESYNC-01; it is not a new finding ID.** If the separate persisted seat/look record differs from the AgentState fields in the earlier `agentCreated` event (for example, a seat saved through `saveAgentSeats`), the initial VS Code hydration can retain the event's earlier seat/look rather than the snapshot's authoritative metadata. The trigger is conditional; static source ordering is established, but a divergent persisted-record fixture/runtime reproduction is still needed.
+- Existing adapter findings A-03 (split lifecycle ownership), A-05 (listener disposal/repeated view resolution) and A-06 (untracked restore grace timer) remain open and relevant. This session does not close or duplicate them.
+
+### 19.4 Findings
+
+#### WV-RESYNC-01 — Snapshot seat metadata may not be applied across layout/restore ordering (existing finding, extended)
+
+- Preserve existing ID, severity and historical evidence. Existing reconnect trigger remains: on reconnect, `existingAgents` is reconciled against the currently loaded layout before the new `layoutLoaded` arrives; `syncAgent` cannot retain a requested seat absent from the old seat map, and the later layout rebuild does not retry that requested ID.
+- Additional VS Code first-hydration trigger and evidence are described in §19.3: `PixelAgentsViewProvider.ts:675–806, 982`; `agentManager.ts:362–370, 495–531`; `agentStateStore.ts:115–120`; `agentMessages.ts:8–22`; `useExtensionMessages.ts:455–499`; `existingAgents.ts:55–100`; `officeState.ts:453–468`.
+- **State:** OPEN; SOURCE-VERIFIED / STATIC-FINDING; not runtime reproduced. Remaining uncertainty: whether the separate adapter seat/look record diverges from AgentState in a reachable production path, and the visible frequency/impact.
+
+#### WV-RESYNC-02 — Disconnected control-plane commands are replayed after reconnect
+
+- **Severity:** Medium. **Confidence:** High. **State:** OPEN.
+- **Affected files:** `webview-ui/src/transport/webSocketTransport.ts`; related `webview-ui/src/hooks/useExtensionMessages.ts`, `webview-ui/src/transport/onReconnect.ts`, and server ClientMessage handlers.
+- **Evidence:** `webSocketTransport.ts:24, 60–70, 93–99` stores every ClientMessage in an unbounded `pendingMessages` array whenever the socket is not OPEN, then flushes the entire array on the next open. The queue is cleared only after flush or explicit transport disposal; no expiry, command classification, coalescing, acknowledgement, or cancellation is present. `onReconnect` sends `webviewReady` on the CONNECTED state transition; in `onopen`, state callbacks run before the pending queue flush.
+- **Trigger / preconditions:** a UI action sends a ClientMessage while the control socket is connecting/reconnecting; the socket later reconnects before the transport is disposed.
+- **Technical impact:** commands with non-idempotent or context-sensitive effects (notably `launchAgent`, `resumeConversation`, `closeAgent`, and provider/consent operations) can execute after a delay, after the user's context may have changed, or after the user has retried. Settings and persistence writes can also replay stale values. On reconnect the fresh snapshot is requested before the old queued commands are flushed, so the subsequent queued effects may immediately change state after the snapshot.
+- **Verification:** SOURCE-VERIFIED / STATIC-FINDING; no network fault injection or duplicate-action runtime experiment.
+- **Remaining uncertainty:** the exact set of controls reachable during a disconnect and user-visible behavior depends on UI state and timing; no runtime experiment was authorized.
+
+### 19.5 Existing findings and ownership links preserved
+
+- `WV-APP-01`: stale `isEditDirty` callback captured by the long-lived message subscription; still OPEN.
+- `WV-TR-01`: subscriber exception aborts remaining WebSocket message dispatch; still OPEN.
+- `WV-PROTO-01/02/03`: area-mapping fan-out, requester-only asset reload and false-success-on-write-failure; still OPEN.
+- `WV-C08/F-08`: message runtime-validation gap; unchanged.
+- Adapter `A-03/A-05/A-06` and server `F-01/F-03/F-05`: lifecycle ownership, subscription disposal, restore timer and shutdown boundaries; unchanged and not re-audited outside the named cross-layer trace.
+
+### 19.6 Verification boundary and next action
+
+- Static only. No tests, builds, lint, typecheck, browser/VS Code runtime, WebSocket drop/reconnect, PTY attach, fault injection or multi-client experiment was executed. No application source, test, asset, dependency or config was modified.
+- The complete recursive tree was freshly retrieved in this session: 856 entries, 739 blobs, 117 trees, `truncated=false`. This supersedes the GOV-WEBVIEW-011 note that a fresh tree retrieval was unavailable at that earlier time; that historical note is not erased.
+- Next: resolve the intended offline command policy and snapshot ordering through design evidence, then obtain explicit authorization for targeted runtime reproduction. Preserve WV-RESYNC-01/02, WV-APP-01, WV-TR-01, WV-PROTO-01/02/03 and A-03/A-05/A-06/F-01/F-03/F-05. Do not repeat the 34-message field matrix.
