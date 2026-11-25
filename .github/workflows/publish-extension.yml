@@ -62,6 +62,37 @@ jobs:
       - name: Check types and lint
         run: npm run check-types && npm run lint
 
+      - name: Verify npm Release Identity
+        if: github.event_name == 'release'
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_REF: ${{ github.ref }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { execFileSync } from 'node:child_process';
+          import fs from 'node:fs';
+          import { validateReleaseIdentity } from './scripts/npm-package-contract.mjs';
+
+          const manifest = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const latestVersion = execFileSync('npm', ['view', manifest.name, 'dist-tags.latest', '--json'], { encoding: 'utf8' }).trim();
+          let exactVersionExists = false;
+          try {
+            execFileSync('npm', ['view', `${manifest.name}@${manifest.version}`, 'dist.integrity', '--json'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+            exactVersionExists = true;
+          } catch (error) {
+            const output = `${error.stdout ?? ''}\n${error.stderr ?? ''}`;
+            if (!output.includes('E404')) throw error;
+          }
+
+          validateReleaseIdentity({
+            manifest,
+            releaseTag: process.env.RELEASE_TAG,
+            ref: process.env.RELEASE_REF,
+            latestVersion,
+            exactVersionExists,
+          });
+          NODE
+
       - name: Run Unit Tests
         run: npm test
 
@@ -168,11 +199,13 @@ jobs:
       - name: Install pinned npm CLI without lifecycle scripts
         run: npm install --global --ignore-scripts npm@11.5.1
 
-      - name: Verify npm artifact integrity
+      - name: Verify npm artifact integrity and publication decision
+        id: npm_artifact
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import crypto from 'node:crypto';
+          import { execFileSync } from 'node:child_process';
           import fs from 'node:fs';
           import path from 'node:path';
 
@@ -184,8 +217,21 @@ jobs:
           const integrity = `sha512-${crypto.createHash('sha512').update(fs.readFileSync(tarball)).digest('base64')}`;
           if (metadata.integrity !== integrity) throw new Error('npm tarball integrity does not match build metadata');
           if (metadata.filename !== tarballs[0]) throw new Error('npm tarball filename does not match build metadata');
-          console.log(`Verified ${metadata.id} (${integrity})`);
+          if (typeof metadata.id !== 'string' || !metadata.id.includes('@')) throw new Error('npm artifact metadata has an invalid package identity');
+
+          let publishedIntegrity = null;
+          try {
+            publishedIntegrity = execFileSync('npm', ['view', metadata.id, 'dist.integrity', '--json'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim().replace(/^"|"$/g, '');
+          } catch (error) {
+            const output = `${error.stdout ?? ''}\n${error.stderr ?? ''}`;
+            if (!output.includes('E404')) throw error;
+          }
+          if (publishedIntegrity && publishedIntegrity !== integrity) throw new Error('Published npm version exists with different integrity');
+          const decision = publishedIntegrity === integrity ? 'skip' : 'publish';
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `decision=${decision}\n`);
+          console.log(`Verified ${metadata.id} (${integrity}); decision=${decision}`);
           NODE
 
       - name: Publish npm artifact with provenance
+        if: steps.npm_artifact.outputs.decision == 'publish'
         run: npm publish "$RUNNER_TEMP"/release-artifacts/*.tgz --provenance --access public
