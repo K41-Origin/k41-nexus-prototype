@@ -119,9 +119,27 @@ Persistence has both shared machine-level data and host-scoped agent/seat state.
 
 The diagram is a structural summary, not a complete call graph or runtime proof.
 
+
+
+## Transitive npm lockfile graph — GOV-DEPMAP-002 (2026-11-26)
+
+**Source:** `package-lock.json` blob `e183f6eced2e598496010a79c56a19f32e3dbe83` (lockfileVersion 3; 816 package records, 812 `node_modules/` entries). Manifest identities: root `package.json` `66efe28fd2927466c5f8283c6e26fe63da427079`; `server/package.json` `f3e7e63e1920d6804eec70c5104914c436269351`; `webview-ui/package.json` `3729872b2736eaf6b66c608c1b40f4e24c25d2fb`.
+
+The lock graph was traversed from each package/workspace root, resolving nested `node_modules` locations and following runtime, optional, workspace-root dev and peer-dependency edges. Optional peer dependencies are not treated as missing required edges.
+
+| Root | Direct manifest dependencies (all groups) | Reachable locked package paths | Resolved edges (runtime / dev / optional / peer) | Unresolved required edges |
+|---|---:|---:|---:|---:|
+| Root | 28 | 664 | 1,055 / 23 / 76 / 44 (1,198 total) | 0 |
+| Server workspace | 10 | 200 | 174 / 4 / 55 / 36 (269 total) | 0 |
+| Webview workspace | 25 | 293 | 295 / 21 / 78 / 66 (460 total) | 0 |
+
+The union contains 810 reachable installed package paths. Two additional `node_modules/` entries (`pixel-agents` and `webview-ui`) are workspace-link records, not unresolved external packages. The lockfile records 643 distinct package names; nested duplicate instances are retained where npm resolution requires them.
+
+**Interpretation:** this closes the static transitive dependency *lockfile-resolution* inventory for the current committed lockfile. It does not prove that `npm ci` succeeds, that every package is imported/reachable in shipped bundles, that optional native binaries install on every OS/ABI, or that licenses/vulnerabilities are acceptable. Source import-to-package usage, esbuild/Vite metafile comparison, tarball/VSIX closure, SBOM and installed-runtime verification remain OPEN.
+
 ## 9. Known gaps and continuation
 
-1. Build an exhaustive static import graph (including script/config imports) and compare it to bundler output/metafiles.
+1. Build the exhaustive source import/call graph (including script/config imports) and compare it to bundler output/metafiles; the npm lockfile transitive resolution graph is now mapped in infrastructure/DEPENDENCIES.md.
 2. Trace all server route registrations and all terminal process ownership edges where not already covered by module deep audits.
 3. Verify actual generated protocol parity and built npm/VSIX contents only when execution is authorized.
 4. Clarify multi-window/multi-process persistence ownership and runtime teardown; preserve F-01–F-09, A-01–A-10 and WV lifecycle findings.
