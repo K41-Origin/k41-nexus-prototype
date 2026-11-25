@@ -109,10 +109,10 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/public/office.png | 8c770a3c15f4b67264d160b195fe24853234120e | 49958 | BINARY HEADER VERIFIED — PNG signature/IHDR; dimensions in ASSET-INVENTORY.md |
 | webview-ui/public/Screenshot.jpg | a23439795da5ce4f0bffe11b8fff855700fb6b90 | 111189 | BINARY HEADER VERIFIED — JPEG 1308×521 |
 | webview-ui/README.md | d2e77611fd3d959fee0487c41bd27b318be32b04 | 2555 | REVIEWED — root/package/build/config file content read; no dynamic execution |
-| webview-ui/src/App.tsx | 3eb91a2050da5f789223bc0a045a80fc841d60cb | 42910 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
+| webview-ui/src/App.tsx | 3eb91a2050da5f789223bc0a045a80fc841d60cb | 42910 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/browserMock.ts | 335caac9b428de7801b0c5c680eaab2dd7a1f290 | 8750 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/changelogData.ts | a7a9c67afa47a0fdab0c63de91a25e9ead3389be | 12006 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
-| webview-ui/src/characters/art/artColors.ts | 793a52107a0e9704cf5e4c657b52e56d3851bf04 | 967 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/art/artColors.ts | 793a52107a0e9704cf5e4c657b52e56d3851bf04 | 967 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/art/beard/full_beard.png | ea50d209e15eb2176eb804604e72c25acefe7458 | 1247 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
 | webview-ui/src/characters/art/beard/goatee.png | 4f1546fa94a981dfd7c8991c0663c5cb9701b0da | 653 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
 | webview-ui/src/characters/art/beard/long_beard.png | d06f4942ce61ab385e2d4ecbf8d0c75af0e69421 | 1517 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
@@ -195,69 +195,69 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/characters/art/watch/watch_both.png | 9d2b270f75fae0a4e69ac6fca8acdc739c2261ee | 416 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
 | webview-ui/src/characters/art/watch/watch_right.png | aee2e0eef4862a8a54cc3fd6884e10af8c2eddc0 | 314 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
 | webview-ui/src/characters/art/watch/watch.png | f4742d7f188ef0ed6ed77e35dec722779be5a59d | 339 | BINARY HEADER VERIFIED — PNG signature and 128×96 IHDR; full CRC/pixel validation not performed |
-| webview-ui/src/characters/cast.ts | b923a8bd52a572f0e9de11ecd6474642a3561346 | 13564 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/castMessages.ts | 35bdf9a46246ffa2ef60cdb2fe377b3761ff5312 | 2031 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/castStore.ts | 5f3186567cd783f727b487543b4e9a1157e0749c | 3181 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/color.ts | 1746fa07996a6e75df46381f77f01f6f7c19e9a7 | 4371 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/history.ts | 43b3e623c84517f71c70efe40775ece579be1ceb | 2695 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/items.ts | 61bcc273528234f93c8f3f596fa271dd3e830458 | 4790 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/loadWardrobe.ts | 213317f090a1f02bce586e7becbd21f7fbf8a48e | 1766 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/officeSprites.ts | 4b175d47d4ef2393b59c89d7ad71b1ac21a81c48 | 5598 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/profiles.ts | f7db8a40143d302e9f6c5c7f8c828b6b89716e43 | 9099 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/recent.ts | 5697a89ae83884bfb5796f9558a450520d8b08dd | 723 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/renderer.ts | 41219fc5bad2f2bd70b7c49ead8f6f571e18c8d5 | 16950 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/repeatClothes.ts | c3d6825b008b1e1a4e25a1b6980be7727c4538ff | 2131 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/sheet.ts | 17296fd4d477ce97d5a6cbbd8445231539ab65a5 | 1675 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/slots.ts | 51f4fb5a83f7391d5190db6c79916139221e0ecc | 14264 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/cast.ts | b923a8bd52a572f0e9de11ecd6474642a3561346 | 13564 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/castMessages.ts | 35bdf9a46246ffa2ef60cdb2fe377b3761ff5312 | 2031 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/castStore.ts | 5f3186567cd783f727b487543b4e9a1157e0749c | 3181 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/color.ts | 1746fa07996a6e75df46381f77f01f6f7c19e9a7 | 4371 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/history.ts | 43b3e623c84517f71c70efe40775ece579be1ceb | 2695 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/items.ts | 61bcc273528234f93c8f3f596fa271dd3e830458 | 4790 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/loadWardrobe.ts | 213317f090a1f02bce586e7becbd21f7fbf8a48e | 1766 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/officeSprites.ts | 4b175d47d4ef2393b59c89d7ad71b1ac21a81c48 | 5598 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/profiles.ts | f7db8a40143d302e9f6c5c7f8c828b6b89716e43 | 9099 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/recent.ts | 5697a89ae83884bfb5796f9558a450520d8b08dd | 723 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/renderer.ts | 41219fc5bad2f2bd70b7c49ead8f6f571e18c8d5 | 16950 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/repeatClothes.ts | c3d6825b008b1e1a4e25a1b6980be7727c4538ff | 2131 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/sheet.ts | 17296fd4d477ce97d5a6cbbd8445231539ab65a5 | 1675 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/slots.ts | 51f4fb5a83f7391d5190db6c79916139221e0ecc | 14264 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/ui/ArmedButton.tsx | b773162e20ae6aa3620bfb4ae0da08e8fb00981c | 1195 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/castActions.ts | b18caf1f4759c28a9b0be83d9584aaa3190dd839 | 4181 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/ui/castActions.ts | b18caf1f4759c28a9b0be83d9584aaa3190dd839 | 4181 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/ui/characters.css | b299ebb659f58b4b253214c18761c8d1d18c081e | 19917 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/characters.phone.css | 269248f4433198dee264e72ddc5896cd4611ff59 | 8159 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/CharactersView.tsx | 5229b74d09d3a92f33ab8da530dfc995a7c0a5a5 | 15896 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/ui/CharactersView.tsx | 5229b74d09d3a92f33ab8da530dfc995a7c0a5a5 | 15896 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/ui/ColorPanel.tsx | c944c2c7aa40d00021f4689763e15472bb8fd6e6 | 13348 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/files.ts | e9842275fee39cc3709453329b74a5f22d809281 | 4472 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/ui/files.ts | e9842275fee39cc3709453329b74a5f22d809281 | 4472 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/ui/ItemTools.tsx | 68cc48ad0097c7b4ee3096fa02f7447c0d465cb8 | 5447 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/pixelCanvas.ts | c570bffd712422fc8130c9ae0c33aeb43ea82c80 | 5867 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/PixelEditor.tsx | e422e2c2958d5c23c222b83c0bd5c03f53754a49 | 16518 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/ui/pixelCanvas.ts | c570bffd712422fc8130c9ae0c33aeb43ea82c80 | 5867 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/ui/PixelEditor.tsx | e422e2c2958d5c23c222b83c0bd5c03f53754a49 | 16518 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/ui/Roster.tsx | f92a91c7fce45bd5f9af08a7ddcfd040c051db76 | 9293 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
 | webview-ui/src/characters/ui/SaveButton.tsx | d96773f83779aecc12d3ba64ea43f6fbcdf84ea8 | 675 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/SpriteCanvas.tsx | e4c199fa8873f867aace1ef2efd85e9e53f5c555 | 1091 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/ui/Stage.tsx | 951954909bacc2ed6f9e722be90ba7dd45a52918 | 10571 | REVIEWED REPORTED — verify exact line coverage before closure |
+| webview-ui/src/characters/ui/SpriteCanvas.tsx | e4c199fa8873f867aace1ef2efd85e9e53f5c555 | 1091 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/characters/ui/Stage.tsx | 951954909bacc2ed6f9e722be90ba7dd45a52918 | 10571 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/characters/ui/studio.ts | 815583783ab3c2150230bce1c20934177832f36b | 2641 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/ViewButton.tsx | 9c22f04ee2deb6489666128247122b5588201b7b | 996 | REVIEWED REPORTED — verify exact line coverage before closure |
 | webview-ui/src/characters/ui/Wardrobe.tsx | 5fb4e456225f297b23400e26363ae84fe09714a0 | 8912 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/characters/wardrobe.ts | 6d2d2bdd35888b71b515971ff93f78156f45810c | 8926 | REVIEWED REPORTED — verify exact line coverage before closure |
-| webview-ui/src/components/AgentCard.tsx | fe7be6e720b6cd8a7f7a3b1e75e209c651fd6723 | 4312 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/AgentCardBar.tsx | 82449d892429b10bd26f1fa7dd9485a281cb9022 | 2573 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/AgentCardList.tsx | e55b618eb2a37382a6c6daf60bb9f67367bf31f3 | 4833 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/characters/wardrobe.ts | 6d2d2bdd35888b71b515971ff93f78156f45810c | 8926 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/AgentCard.tsx | fe7be6e720b6cd8a7f7a3b1e75e209c651fd6723 | 4312 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/AgentCardBar.tsx | 82449d892429b10bd26f1fa7dd9485a281cb9022 | 2573 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/AgentCardList.tsx | e55b618eb2a37382a6c6daf60bb9f67367bf31f3 | 4833 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/BottomToolbar.tsx | 95472e7199aa8236ff2603c1460df1c65b4f8307 | 10051 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
-| webview-ui/src/components/cardBar.ts | 76ac0818de593966b7c73ef60e0c11fde42470a4 | 3043 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/ChangelogModal.tsx | e550bd6d1a15ab95d1777b171c18a8b0aa376a70 | 4744 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/CharacterMugShot.tsx | ed982e8c4d46377685a5c4cdd0a2db0d6836712b | 2401 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/cardBar.ts | 76ac0818de593966b7c73ef60e0c11fde42470a4 | 3043 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/ChangelogModal.tsx | e550bd6d1a15ab95d1777b171c18a8b0aa376a70 | 4744 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/CharacterMugShot.tsx | ed982e8c4d46377685a5c4cdd0a2db0d6836712b | 2401 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/CharacterPicker.tsx | 96d325100bb3e300829696fbefe4d97f65fd117c | 12288 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
-| webview-ui/src/components/ConnectionIndicator.tsx | 805b2b1dde3c69d81f06672a5656e3d86c31307e | 1391 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/DebugView.tsx | ccc1f465d3777b65bfb79c870d5cb6eb3ef95c5e | 6636 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/DirectoryCharactersField.tsx | 8dbc69a8f3fa51090a922af32848cc9d6a65d442 | 6310 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/DirectoryCharacterStrip.tsx | ea7b710df81527fb9ea8306e4208fded8bf0c3e7 | 5768 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/DirectoryModal.tsx | 29318c52dd6bdc50441fb9282bf6a1f3921f9635 | 9181 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/ConnectionIndicator.tsx | 805b2b1dde3c69d81f06672a5656e3d86c31307e | 1391 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/DebugView.tsx | ccc1f465d3777b65bfb79c870d5cb6eb3ef95c5e | 6636 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/DirectoryCharactersField.tsx | 8dbc69a8f3fa51090a922af32848cc9d6a65d442 | 6310 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/DirectoryCharacterStrip.tsx | ea7b710df81527fb9ea8306e4208fded8bf0c3e7 | 5768 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/DirectoryModal.tsx | 29318c52dd6bdc50441fb9282bf6a1f3921f9635 | 9181 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/directoryStrip.ts | fe4746c500da2a7ae091324e2f8232dd429655c9 | 1701 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/EditActionBar.tsx | 167f33ecabb947684fd37f4c083ecf75c27e701d | 2187 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/EditActionBar.tsx | 167f33ecabb947684fd37f4c083ecf75c27e701d | 2187 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/IntroBubble.tsx | 3ecdac98e9e15be0eca5fe1f1ec848828ddee53a | 18970 | REVIEWED — prior body inspection retained; EOF/tail boundary verified in this continuation |
 | webview-ui/src/components/introBubbleGeometry.ts | e8750b34e3459ee3d1ecc0493a473424b2898012 | 4883 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/LaunchDrawer.tsx | a4367269738709c51c0f82bdd82ea801dcfb0091 | 11148 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/LoadingScene.tsx | 764d5b9eb0a3dea6c32979b7e95e6cc439f6ff9b | 7622 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/LaunchDrawer.tsx | a4367269738709c51c0f82bdd82ea801dcfb0091 | 11148 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/LoadingScene.tsx | 764d5b9eb0a3dea6c32979b7e95e6cc439f6ff9b | 7622 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/loadingSceneArt.ts | 2d33cd9f1fad94103f20e22622c3dd58a88bba16 | 3451 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/loadingSceneLayout.ts | a122bbff64ef37b31bbc3daf046a977b01ba0f9f | 7905 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/MigrationNotice.tsx | 0aa1bd3190d5a50d7a20965d9b3250399a90e319 | 1237 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/MobileAgentBar.tsx | 6fc6be39ffb350cfd8090e0252c89f9cb7c7a9e2 | 8624 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/MobileKeyBar.tsx | d3a0d3f03d998577feacc056b6edf458ba456ddc | 8466 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/MobileTerminalPage.tsx | 42f686b412cafc90b4164cf38431cc2a0f2fd26e | 2163 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/SettingsModal.tsx | ca9248f01ba8631a81b0489fcb152203f3b553d3 | 11109 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/MobileTerminalPage.tsx | 42f686b412cafc90b4164cf38431cc2a0f2fd26e | 2163 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/SettingsModal.tsx | ca9248f01ba8631a81b0489fcb152203f3b553d3 | 11109 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/statusDot.ts | 23c78e9f495dbcdfc9031f37f95776f8d337d9dc | 556 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/TerminalDrawer.tsx | a2cf945de98cf1ba9838d7fb7c7011ac5d68fd84 | 3843 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/TerminalDrawer.tsx | a2cf945de98cf1ba9838d7fb7c7011ac5d68fd84 | 3843 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/TerminalHideRibbon.tsx | 54f35f46fb05adb34c75c6fddeca595f3dceffa9 | 1945 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/TerminalPane.tsx | ae1cc4daca64ec437f283731e23629e6ecb66375 | 11493 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
-| webview-ui/src/components/TerminalPaneStack.tsx | 5862c638b345dfa430e91c084d7eb6110d543fcb | 3139 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
+| webview-ui/src/components/TerminalPane.tsx | ae1cc4daca64ec437f283731e23629e6ecb66375 | 11493 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/components/TerminalPaneStack.tsx | 5862c638b345dfa430e91c084d7eb6110d543fcb | 3139 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/components/Tooltip.tsx | 5e2305434b2eb22075dea27fccec0324a942bde6 | 1502 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/ui/Button.tsx | 0b04f4fef6ce11ef28cf18b19e05a491fe6432a1 | 1700 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
 | webview-ui/src/components/ui/Checkbox.tsx | 8688f09731c4456cd7984a29131ebe3df7639722 | 1699 | FETCHED / REVIEWED REPORTED — prior component inspection; exact range/cross-reference reconciliation pending |
@@ -289,18 +289,18 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/conversations/timeAgo.ts | 8d02f7097b245b1e95face8d90756dee8281019a | 667 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/conversations/useConversations.ts | e360d9eb264502582c7a07f205fb0fc82910c8a3 | 2971 | REVIEWED — requestConversations, conversationsLoaded and refresh lifecycle verified |
 | webview-ui/src/conversations/useConversationSidebar.ts | 1ce57afac2fb74b45f31238789c9f3313b355c6a | 1337 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
-| webview-ui/src/hooks/drawerWidth.ts | 4fa3b94f7e900af62e2eaafa26c4e6cb2257537f | 989 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/introTourState.ts | f64a1f9c2c598f812360413f958783fe1d90c2c5 | 5148 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/launchLatch.ts | d2eb0688e7eb637bba834c4ef4c6e3e1d4148649 | 672 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/launchMenus.ts | fad1fcd3196423896663ae3d0b8f3649ae56e8ec | 2417 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/slideTransitions.ts | 858df85c58b06c17d74c296ea31d9a5512e4d838 | 1417 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/useBoxSize.ts | abdfb290c54dfeda4cb98c5adc332eb95c2d55c2 | 841 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/useDevicePixelRatio.ts | 2aa6ee211e8f6a3082ae1d237dfd486ebc27ce04 | 912 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/useDirectoryEditor.ts | abf44c4dfc59fd57cdcc0193b31385a5e7bcebad | 7041 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
+| webview-ui/src/hooks/drawerWidth.ts | 4fa3b94f7e900af62e2eaafa26c4e6cb2257537f | 989 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/hooks/introTourState.ts | f64a1f9c2c598f812360413f958783fe1d90c2c5 | 5148 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/hooks/launchLatch.ts | d2eb0688e7eb637bba834c4ef4c6e3e1d4148649 | 672 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/hooks/launchMenus.ts | fad1fcd3196423896663ae3d0b8f3649ae56e8ec | 2417 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/hooks/slideTransitions.ts | 858df85c58b06c17d74c296ea31d9a5512e4d838 | 1417 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/hooks/useBoxSize.ts | abdfb290c54dfeda4cb98c5adc332eb95c2d55c2 | 841 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/hooks/useDevicePixelRatio.ts | 2aa6ee211e8f6a3082ae1d237dfd486ebc27ce04 | 912 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
+| webview-ui/src/hooks/useDirectoryEditor.ts | abf44c4dfc59fd57cdcc0193b31385a5e7bcebad | 7041 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/hooks/useDismiss.ts | 0910f0925e6afa283fed7ca25895ff19eea22e80 | 742 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
 | webview-ui/src/hooks/useEditorActions.ts | 386b839a124ffad437c8a3cd9c3460e2826c0d00 | 28332 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
 | webview-ui/src/hooks/useEditorKeyboard.ts | 44ccc408d1a264b45e99cb2c1056650910d3c8c7 | 3990 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/useExtensionMessages.ts | 649025df90edef84d24c40556cee2ea007e15ccf | 44355 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
+| webview-ui/src/hooks/useExtensionMessages.ts | 649025df90edef84d24c40556cee2ea007e15ccf | 44355 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/hooks/useFurnitureColorActions.ts | 8fbaa9bc141aaf2daeabc809da7132e6b1e36519 | 3796 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
 | webview-ui/src/hooks/useHoverPin.ts | ed9f946d644ba8133beaec95e307b95136127304 | 1466 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
 | webview-ui/src/hooks/useIntroTour.ts | 4fc18a2eef5bb2b73bcf6a4bf5facfc17d25a28d | 4367 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
@@ -312,7 +312,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/hooks/usePresence.ts | 141a990f9c8ac9047b621b11e86ced25af7c3dfc | 1256 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
 | webview-ui/src/hooks/useRosterLaunch.ts | 4988aca1cecc1b3f2f94de7fb2530449af4e567a | 5531 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
 | webview-ui/src/hooks/useSlidePanel.ts | 2cf4ab0013cae1d82615759e51844e9f02bb7b98 | 2986 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
-| webview-ui/src/hooks/useTerminalDrawer.ts | 2913c2331ad4bee5f127a249502a394bfb414980 | 10246 | REVIEWED REPORTED — lifecycle/cross-module validation remains |
+| webview-ui/src/hooks/useTerminalDrawer.ts | 2913c2331ad4bee5f127a249502a394bfb414980 | 10246 | REVIEWED — full content re-fetched and statically reviewed in GOV-WEBVIEW-002; cross-module follow-up remains |
 | webview-ui/src/index.css | daa1fcad26dbb03a9fa4ef0e1cf16389b7577b33 | 19712 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/loadingPreview.tsx | 9cd3169706acf23a2b3ea4a7d92fdc8b41fc855b | 364 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
 | webview-ui/src/main.tsx | 223bbf51073edc73b9646be0e9618b11ea1ac250 | 810 | FETCHED / REVIEWED REPORTED — exact coverage/cross-references to reconcile |
@@ -414,8 +414,8 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/test/build-subpath.test.ts | 6531f84f343232b656cd9265d701a478babd4277 | 4933 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/cardBar.test.ts | 39e3b000b1aef67abd7f0f342330af44437c0944 | 2615 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/castHistory.test.ts | 3de1c964733ca76f8472906d15572f1d4313ef85 | 2181 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/castSync.test.ts | 2a0c507d8173811995c8b6578079d29b20acdc04 | 9866 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/characterRenderer.test.ts | 618af4fec0b4968feae3bddee3f4e16d64d42da4 | 11253 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/castSync.test.ts | 2a0c507d8173811995c8b6578079d29b20acdc04 | 9866 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
+| webview-ui/test/characterRenderer.test.ts | 618af4fec0b4968feae3bddee3f4e16d64d42da4 | 11253 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
 | webview-ui/test/characterSheet.test.ts | 8e3c4de80cedafb49046afd15a6c578b1a51a04b | 7181 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/characterTemplatesVersion.test.ts | b34861e202e317340a3e6402f03602f4a6c8b8e0 | 1126 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/clipboardKeys.test.ts | 6fd711c2e492c7fa7695104c90ce18952e47373a | 4269 | FETCHED / INVENTORIED — assertions catalogued; not executed |
@@ -427,7 +427,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/test/edgeSwipe.test.ts | 01da285159b5c81c02a374dd02a5acc3658afa7e | 5852 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/editorActions.test.ts | b27ca7b3529a019a542fc0bc701d0672da662fff | 4289 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/editorState.test.ts | e2122f1b8c0da2e0390aef840a518602e0235ab0 | 2319 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/existingAgents.test.ts | 11914967532cda8fa8bc62e84613e5f56bfdb80a | 7099 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/existingAgents.test.ts | 11914967532cda8fa8bc62e84613e5f56bfdb80a | 7099 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
 | webview-ui/test/flowCopy.test.ts | 4d8c35241b72d6516dd3c101288b577631a6b017 | 6567 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/greeter.test.ts | 116ae19c1446e888eb763214d13249f48dec357f | 8863 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/greeterCharacter.test.ts | b164d53b18a95d88198afbcca6db780084312b2a | 1429 | FETCHED / INVENTORIED — assertions catalogued; not executed |
@@ -443,7 +443,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/test/officeBlink.test.ts | ad40215944dbb2e5bec43e638130cfc28d5f040c | 2469 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/officeBlinkSprites.test.ts | 6b8b14673e493221060913b8d04f2cb992debfc5 | 2750 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/officeCanvasCursor.test.ts | 5bde5502619ceede4d3e6603a47885eada49151a | 6972 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/onReconnect.test.ts | 344ffa982c77b11cba8529942ce55cc18febff83 | 1828 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/onReconnect.test.ts | 344ffa982c77b11cba8529942ce55cc18febff83 | 1828 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
 | webview-ui/test/petEntity.test.ts | 0897047475e5b1cf3d1595b669d66962b983a34c | 13187 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/pieceItems.test.ts | 31a96bd13dee646e00dd70346f4679b58f8f53e1 | 1224 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/pixelFont.test.ts | 18531e885497d230b876dd6cf4bdc72ac1c5b158 | 2446 | FETCHED / INVENTORIED — assertions catalogued; not executed |
@@ -456,7 +456,7 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/test/selectionButtons.test.ts | b58db130650c087b139bc4e833f594bfc78edae6 | 2640 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/selectionMath.test.ts | 110632affff46ab5a788e99770f191b83a9b7b86 | 7087 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/slideTransitions.test.ts | 43beb2021446681e7d2954107aef3da3a3cf319d | 1911 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/subagentResync.test.ts | 186ac30aa58919e0affda0b8a25ba849bb3825a6 | 3875 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/subagentResync.test.ts | 186ac30aa58919e0affda0b8a25ba849bb3825a6 | 3875 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
 | webview-ui/test/teammateSeating.test.ts | 4f84bd6b7ebea60bdad715d0ee9842198fca90c0 | 3900 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/terminalLinks.test.ts | 9454e202fc3d1a8c781824faac6769c7993b2a20 | 8848 | FETCHED / INVENTORIED — assertions catalogued; not executed |
 | webview-ui/test/touchGesture.test.ts | fce4e63d43ace5db03782479e4a7980f3f0ca94f | 16570 | FETCHED / INVENTORIED — assertions catalogued; not executed |

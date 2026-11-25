@@ -142,3 +142,48 @@ The standalone server's `handleWebviewReady` sends `existingAgents` at lines 747
 ### Next continuation point
 
 Continue from the 118 reported-review rows and protocol producer/consumer gaps without rereading unchanged, fully reviewed files. The reconnect seat scenario above is now a specific open question; do not duplicate WV-APP-01, which separately records the stale `isEditDirty` closure affecting `layoutLoaded`.
+
+
+## 9. Incremental static review — GOV-WEBVIEW-002 (2026-11-25)
+
+### Source review and ledger advancement
+
+- Repository source branch: `main`, commit `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- Recursive tree: `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`.
+- Webview subtree: 459 blobs; exact path/blob-SHA comparison with the documentation branch and the canonical baseline found 0 additions, 0 removals and 0 changed SHAs.
+- Re-fetched and read the complete content of 55 source files in this session. Of these, 53 rows were advanced from reported-review status to `REVIEWED`; two already-`REVIEWED` terminal data-plane files were revisited for the lifecycle question below. Exact path/SHA/size records remain in `FILE-REFERENCE.md`.
+- Large-file retrieval was segmented and covered the complete files: `App.tsx` 1–1031; `useExtensionMessages.ts` 1–997; `CharactersView.tsx` 1–448; `PixelEditor.tsx` 1–471; `Stage.tsx` 1–297; `TerminalPane.tsx` 1–270; `useTerminalDrawer.ts` 1–241.
+- Five test files were re-fetched and their complete assertions inspected: `existingAgents.test.ts`, `subagentResync.test.ts`, `onReconnect.test.ts`, `castSync.test.ts`, and `characterRenderer.test.ts`. They remain `TEST-INVENTORIED`; no test was executed.
+
+### Documentation comparison
+
+The reviewed implementation supports the existing architecture documents' main boundaries:
+- character cast is an external store with saved/draft state and server synchronization;
+- character sheets are composed from wardrobe art and profile edits, then converted to office sprites;
+- UI canvas rendering and DPR snapping are separate from office scene rendering;
+- terminal control-plane session state is separate from per-agent raw terminal WebSockets;
+- desktop keeps hidden xterm panes mounted while mobile mounts only the selected pane;
+- reconnect snapshots are reconciled by `useExtensionMessages`, not by transport alone.
+
+No source/document contradiction requiring a new finding was established in this pass. Existing `WV-APP-01`, `WV-TR-01`, `WV-WARD-01`, cache findings and `WV-RESYNC-01` remain open as previously recorded.
+
+### Lifecycle evidence expansion — WV-C03 / WV-C06
+
+- `webview-ui/src/hooks/useTerminalDrawer.ts:150–168` installs window-level `mousemove` and `mouseup` listeners and sets `document.body.style.userSelect = 'none'` during drawer resize.
+- The listeners and body style are restored only in the local `onUp` callback. The hook has no effect cleanup for an unmount or lost mouseup before that callback.
+- This is a static lifecycle gap under the precondition that the app/hook is torn down or the mouseup is not delivered during an active resize. It is recorded as additional evidence for the existing global-drag cleanup concerns `WV-C03/WV-C06`, not as a duplicate finding ID. Runtime manifestation and exact impact remain unverified.
+
+### Reconnect test coverage cross-check
+
+- `existingAgents.test.ts:64–216` covers layout-ready vs buffered restoration, deduplication, server look/seat synchronization when the requested seat exists, mixed rosters and headless flags.
+- `subagentResync.test.ts:16–110` covers stale subagent removal, preserving live subagent position, stale agent filtering, and `syncAgent` when both old and requested seat IDs exist.
+- `onReconnect.test.ts:1–64` covers first-connect suppression, subsequent reconnect callbacks and unsubscribe.
+- The inspected assertions do not cover the `WV-RESYNC-01` precondition where the requested seat is absent from the pre-reconnect seat map but appears in the incoming layout. This remains a test-coverage gap, not a test failure.
+
+### Updated coverage and limits
+
+- 53 previously reported source-review rows now have complete content retrieval and static review recorded.
+- 65 reported-review source rows remain for exact content/line coverage reconciliation.
+- 5/54 test files have complete assertion review recorded; 49 remain inventoried only.
+- 143 binary rows retain header/metadata-only evidence; the TTF remains `NOT VERIFIED`.
+- No tests, build, lint, typecheck, protocol generation, browser/VS Code runtime or reconnect experiment was executed. No application source or asset was modified.

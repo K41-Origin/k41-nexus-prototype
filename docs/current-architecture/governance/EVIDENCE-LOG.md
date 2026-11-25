@@ -196,3 +196,50 @@ Static trace: reconnect sets `resyncPending` and sends `webviewReady`. Standalon
 ### Continuation
 
 Continue with the exact line-coverage gaps in the 118 reported-review rows, the 54 test files inventoried but not fully reconciled, the unverified TTF font, and the ClientMessage/ServerMessage producer-consumer/validation matrix. Preserve existing WV findings and do not repeat unchanged files already reviewed for the same question.
+
+
+## 2026-11-25 — GOV-WEBVIEW-002: incremental webview static source review
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main`  
+**Source commit:** `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Documentation branch parent:** `3c6145079339591767998e548fa79f93a2ee3336`  
+**Scope:** SHA-first verification of the full `webview-ui/` subtree; complete static review of 53 previously reported source files; targeted revisit of two terminal data-plane files; assertion review of five tests; comparison with all ten webview architecture documents.
+
+### Repository and inventory
+
+- `main` and the audit documentation branch both contain 459 webview blobs.
+- Exact path/blob-SHA comparison against the canonical baseline and between branches: 0 added, 0 removed, 0 changed.
+- The complete 459-row file ledger remains the inventory owner. No file is missing from the inventory.
+- All ten webview architecture documents were fetched and compared with the implementation areas reviewed.
+
+### Files reviewed
+
+- Complete content was re-fetched and statically reviewed for 55 source files. 53 were advanced from reported-review to `REVIEWED`; two terminal data-plane files were already `REVIEWED` and were revisited for cleanup/lifecycle correlation.
+- The exact 53 path/SHA/size rows are updated in `webview-ui/FILE-REFERENCE.md`; the two revisited rows retain their prior status.
+- Large-file ranges were complete: `App.tsx` 1–1031; `useExtensionMessages.ts` 1–997; `CharactersView.tsx` 1–448; `PixelEditor.tsx` 1–471; `Stage.tsx` 1–297; `TerminalPane.tsx` 1–270; `useTerminalDrawer.ts` 1–241.
+
+### Test files inspected
+
+| Path | Blob SHA | Evidence |
+|---|---|---|
+| `webview-ui/test/existingAgents.test.ts` | `11914967532cda8fa8bc62e84613e5f56bfdb80a` | Full assertions inspected; not executed |
+| `webview-ui/test/subagentResync.test.ts` | `186ac30aa58919e0affda0b8a25ba849bb3825a6` | Full assertions inspected; not executed |
+| `webview-ui/test/onReconnect.test.ts` | `344ffa982c77b11cba8529942ce55cc18febff83` | Full assertions inspected; not executed |
+| `webview-ui/test/castSync.test.ts` | `2a0c507d8173811995c8b6578079d29b20acdc04` | Full assertions inspected; not executed |
+| `webview-ui/test/characterRenderer.test.ts` | `618af4fec0b4968feae3bddee3f4e16d64d42da4` | Full assertions inspected; not executed |
+
+### Static observations
+
+1. The main architecture documents align with the source reviewed: cast store/draft flow, wardrobe/sheet composition, Canvas/DPR sizing, terminal control/data-plane separation, and desktop/mobile terminal pane mounting.
+2. No new source/document contradiction requiring a new finding ID was established.
+3. Additional exact evidence for existing `WV-C03/WV-C06`: `useTerminalDrawer.ts:150–168` registers window-level resize-drag listeners and sets body `userSelect`; cleanup is only in the mouseup callback, with no hook-unmount cleanup. Static lifecycle gap only; no runtime reproduction.
+4. The five reconnect/cast/renderer test files were inspected, not executed. In particular, the seat tests cover a requested seat already present in the current map; they do not cover the stale-layout seat condition recorded by `WV-RESYNC-01`.
+
+### Updated coverage
+
+- Source review: 196 `REVIEWED`; 65 reported-review rows remain.
+- Tests: 5/54 complete assertion inspections recorded; 49 remain inventory-only.
+- Binary evidence: 143 header/metadata-only rows; TTF remains unverified.
+- No tests, build, lint, typecheck, protocol generation, runtime experiment, application source change or asset change occurred.
