@@ -466,3 +466,60 @@ Static source and documentation review only. No tests, build, lint, typecheck, b
 ### Next continuation point
 
 Continue the remaining **16 reported-review source rows**: 9 files under `webview-ui/src/characters/ui/` and 7 other source files. Then proceed with the 47 inventoried-only tests, protocol producer-consumer tracing, host lifecycle/reconnect, and outstanding binary/font evidence. The `components/` (54/54) and `hooks/` (24/24) source scopes are complete at this source baseline.
+
+
+## 14. Character subsystem direct review — GOV-WEBVIEW-007 (2026-11-25)
+
+**Source baseline:** `main` at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Recursive tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Scope:** complete `webview-ui/src/characters/` subtree.
+
+### Inventory and SHA reconciliation
+
+- Complete tree contains **115 files** under `src/characters/`.
+- FILE-REFERENCE contains exactly 115 character rows: 0 missing paths, 0 extra paths and 0 blob SHA mismatches.
+- Breakdown: **33 source files** (TypeScript/TSX/CSS), **81 PNG art assets**, and **1 wardrobe JSON manifest**.
+- Historical status before this session: 23 source files REVIEWED, 1 source file with prior body review and EOF boundary evidence, 9 source files REVIEWED REPORTED, 81 PNGs BINARY HEADER VERIFIED, and wardrobe.json REVIEWED.
+- The 9 REVIEWED REPORTED rows were individually fetched in full and statically reviewed. They are now REVIEWED. All 33 source files have review evidence in the ledger; the previously reviewed source files were not re-reviewed for the same question.
+- All 81 PNGs retain their historical PNG signature and 128×96 IHDR evidence. Full CRC validation, pixel decode and visual inspection were not performed in this session.
+- `art/wardrobe.json` retains its historical parsed/manifest-consistency evidence. It was not redundantly reparsed.
+- The subtree is fully accounted for; no character file was omitted from path/SHA reconciliation.
+
+### Newly reviewed source files
+
+| File | Blob SHA | Lines |
+|---|---|---:|
+| `webview-ui/src/characters/ui/ArmedButton.tsx` | `b773162e20ae6aa3620bfb4ae0da08e8fb00981c` | 40 |
+| `webview-ui/src/characters/ui/characters.css` | `b299ebb659f58b4b253214c18761c8d1d18c081e` | 928 |
+| `webview-ui/src/characters/ui/characters.phone.css` | `269248f4433198dee264e72ddc5896cd4611ff59` | 373 |
+| `webview-ui/src/characters/ui/ColorPanel.tsx` | `c944c2c7aa40d00021f4689763e15472bb8fd6e6` | 376 |
+| `webview-ui/src/characters/ui/ItemTools.tsx` | `68cc48ad0097c7b4ee3096fa02f7447c0d465cb8` | 151 |
+| `webview-ui/src/characters/ui/SaveButton.tsx` | `d96773f83779aecc12d3ba64ea43f6fbcdf84ea8` | 24 |
+| `webview-ui/src/characters/ui/studio.ts` | `815583783ab3c2150230bce1c20934177832f36b` | 79 |
+| `webview-ui/src/characters/ui/ViewButton.tsx` | `9c22f04ee2deb6489666128247122b5588201b7b` | 34 |
+| `webview-ui/src/characters/ui/Wardrobe.tsx` | `5fb4e456225f297b23400e26363ae84fe09714a0` | 275 |
+
+### Cross-reference and lifecycle observations
+
+- `CharactersView.tsx:48–70` owns status/toast timeout and pointerdown dismissal; `:92–108` brackets undo steps with root pointerdown and window pointerup/pointercancel and removes all three listeners on cleanup.
+- `CharactersView.tsx:218–250` installs a global keyboard handler with `isTextEntry` guard; editable inputs, textareas and contenteditable elements are excluded, while range inputs remain eligible for view shortcuts. This is a useful contrast with the editor keyboard handler recorded in `WV-C15`.
+- `Stage.tsx:87–124` runs the preview animation through requestAnimationFrame and cancels the last scheduled frame on cleanup.
+- `Roster.tsx:163–191` removes the ResizeObserver and the document pointerdown listener when the phone dock / More sheet effects end.
+- `PixelEditor.tsx:260–354` maps pointer coordinates to sprite cells, captures the active pointer, paints Bresenham-interpolated cells and clears stroke state on pointerup/pointercancel.
+- `ItemTools.tsx:43–69` catches PNG decode failures and revokes the temporary object URL in `finally`; `loadWardrobe.ts:48–57` retains the previously recorded aggregate wardrobe-load rejection risk (`WV-C11` / `WV-WARD-01`), not a new finding.
+- `castStore.ts:28–55` decodes custom item PNGs and caches decode results; `decodeItemPng` catches decode failures and returns null. The cast save operation is synchronous at the UI boundary (`cast.ts:356–378`), records the in-flight save and sends the saved snapshot; the close-confirmation save/discard sequence in `CharactersView.tsx` therefore does not await an asynchronous return from `castStore.save()`.
+- The two character CSS files were reviewed as complete style sheets, including desktop/phone layouts, dock, wardrobe, picker, pixel editor, roster, focus-visible treatment and reduced-motion rules.
+
+### Findings
+
+No new stable-ID defect finding was added from this pass. The review confirms UI lifecycle cleanup paths and identifies no new issue strong enough to promote beyond an observation. Existing character-related findings `WV-C09`, `WV-C10`, `WV-C11` and `WV-WARD-01` remain unchanged and OPEN as recorded in the existing deep-audit sections.
+
+### Verification limits
+
+- Static source and ledger review only.
+- No tests, build, lint, typecheck, browser/VS Code runtime, accessibility audit, pointer simulation, image decode, PNG CRC check or visual regression was executed.
+- No application source, test, configuration, dependency or asset file was modified.
+
+### Next continuation point
+
+The 9 character UI reported-review rows are closed at the source-review evidence level. **7 reported-review source rows remain elsewhere in `webview-ui/src/`**, in addition to 7 `FETCHED / REVIEWED REPORTED` rows requiring their own coverage reconciliation, 47 inventoried-only tests, 143 binary-header-only assets and 1 unverified font. Continue with the 7 other source rows; do not re-review the 115 character subtree files without changed SHAs or a new cross-module question.
