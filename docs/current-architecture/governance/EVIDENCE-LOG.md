@@ -879,3 +879,45 @@ No existing findings were duplicated. E2E-001/E2E-002 remain the process teardow
 - No application source, test code, package manifest, dependency or configuration was modified.
 
 Next: finish static source review of the remaining E2E fixtures/helpers/configuration, tracing scenario scheduling, process cleanup, temporary directories, artifacts and Playwright orchestration. Then move to `scripts/` and `.github/` under their own audit scopes. Runtime verification remains unauthorized.
+
+
+## 2026-11-25 — GOV-E2E-003: full static source review of fixtures, helpers, mock processes and E2E configuration
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch / commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree baseline:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated=false`; historical complete-tree snapshot).  
+**Documentation branch:** `docs/hybrid-llm-engine-direction`; pre-publication tip recorded by GOV-E2E-002 as `8a1cb6399d51e5ecb15806c5d4b0750d0535cc01`.  
+**Scope:** all six fixture/shim files, all 15 helper files, `global-setup.ts`, `playwright.config.ts`, `run-config.ts` and `tsconfig.json`. Test specs were not re-reviewed.  
+**Exclusions:** `scripts/`, `.github/`, app-source re-audit, tests/build/lint/typecheck/install/runtime execution.
+
+### Governance and continuity
+
+Re-read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, E2E module record, E2E DEEP-AUDIT and FILE-REFERENCE. Preserved GOV-E2E-001 inventory and GOV-E2E-002 assertion review (47/47 blobs; 21/21 specs; 152/152 tests). The source branch remains at the recorded main commit; the docs branch is a separate documentation stream. All 25 non-spec harness files were individually re-fetched and their current blob SHAs match the existing FILE-REFERENCE ledger. Full-file line counts and SHA identities are recorded in FILE-REFERENCE under GOV-E2E-003.
+
+### Review coverage
+
+- **Fixtures/shims:** 6/6 — POSIX/Windows mock CLI wrappers, mock scenario runner, VS Code fixture, standalone fixture, narration tail.
+- **Helpers:** 15/15 — Allure labels, editor, external monitor, hook client, internal agent, intro, VS Code launch, layout seed, lifecycle/team, mock process/scenario manager, office, standalone host, transcript/team utilities, narration, webview.
+- **Setup/config:** 4/4 — global setup, Playwright configuration, run-ID namespace helper, strict TypeScript config.
+- **Total:** 25/25 full-file static source review. All 21 test specs retain their prior TEST-INVENTORIED status; no test was executed.
+
+### Findings
+
+- **E2E-007 — run ID `..` escapes the artifact namespace and broadens cleanup target.** Evidence: `e2e/run-config.ts:3-19`, SHA `1921baad5195765b91a6661afd2f75415c49be96`; cleanup sink `e2e/global-setup.ts:7,136-137`, SHA `bb0b9611947b1ebaccea2cdd186811d2ab898176`. Sanitization allows dots and does not reject the special `..` segment; `path.join(baseDir, '..')` resolves to the parent, and global setup recursively removes the resulting Allure path. Medium, High confidence, STATIC-FINDING, OPEN. No deletion/runtime experiment performed.
+- **E2E-008 — VS Code download lock has no stale-owner recovery.** Evidence: `e2e/global-setup.ts:24-72`, SHA `bb0b9611947b1ebaccea2cdd186811d2ab898176`. The lock writes PID/time but contention handling never checks owner liveness or expires stale locks; abnormal termination before `finally` can leave later setup waiting until its ten-minute timeout. Low, High confidence, STATIC-FINDING, OPEN. No lock fault injection performed.
+
+Existing E2E-001–E2E-006 remain OPEN and unchanged. No existing ID was reused; the new findings are distinct from process teardown, port allocation and assertion-quality gaps.
+
+### Documentation publication and verification
+
+Updated E2E DEEP-AUDIT, FILE-REFERENCE, architecture README, governance module record, consolidated AUDIT-REGISTER and appended this evidence entry. After publication, all six documents were fetched again and their blob SHAs/content markers checked. The audit branch is the only write target.
+
+### Execution and modification limits
+
+- Static/read-only repository investigation plus audit-document publication only.
+- No test, build, lint, typecheck, install, browser, VS Code host, PTY, process fault injection or runtime experiment executed.
+- No application source, test, package manifest, dependency or configuration file modified.
+
+### Next continuation
+
+The full E2E harness static review is complete. Continue targeted cross-module source-contract tracing for lifecycle, hooks, reconnect, persistence and test-hook boundaries, reusing canonical server F-01/F-03/F-05/F-08, adapter A-03/A-05/A-06 and webview findings rather than duplicating them. Then audit `scripts/` and `.github/` under their own governance scopes. Runtime verification remains unauthorized.
