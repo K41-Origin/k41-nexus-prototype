@@ -13,6 +13,7 @@ The source baseline for this integration pass is `security/remediate-build-008-0
 - Separate Node 20 package smoke job runs package contract and installed npm package verification.
 - Playwright E2E runs on Ubuntu, macOS and Windows, three shards per OS (nine jobs), one worker per shard.
 - `required-checks` aggregates the main CI, Node 20 package smoke and E2E matrix. Workflow configuration exists; actual branch protection/organization enforcement is not verified (BUILD-010).
+- **BUILD-014:** `validate_spec`, `messages_drift` and `e2e_inventory_drift` use `continue-on-error: true` and are omitted from the final main-job failure gate. Their failures can therefore be masked while the job succeeds. This is a static finding, OPEN; no workflow run has reproduced it.
 - The PR Vercel preview jobs were removed in the remediation branch; the preview feature is suspended to remove the privileged PR execution path (BUILD-008 remains OPEN pending PR negative test and merge).
 
 ## Release workflow integration
