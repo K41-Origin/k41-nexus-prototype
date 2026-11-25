@@ -1217,3 +1217,15 @@ Governance coordination:
 3. Perform authorized runtime/test verification for open findings.
 4. Reconcile architecture direction and ADRs against implementation contracts and decide the 12 unresolved hybrid-engine architecture questions.
 5. Verify actual organization/repository policy, Environment and secret scopes, npm trusted publisher and artifact provenance when access is available.
+
+
+### GOV-DOCGOV-001 — publication completion and verification scope
+
+The following additional records were aligned after the initial append above:
+- `governance/modules/webview-ui.md`: latest continuation now points to authorized runtime/font evidence and explicitly marks GOV-WEBVIEW-011/012 static work complete.
+- `e2e/README.md`: continuation no longer implies the completed GOV-E2E-004 trace remains outstanding.
+- `governance/README.md`: HEAD label clarified as the documentation branch tip at session start, not the post-publication tip.
+
+**Changed document set for post-publication verification:** governance README, AUDIT-REGISTER, EVIDENCE-LOG, module records for E2E/scripts/github-ci/webview-ui, webview README and ASSET-INVENTORY, E2E README, legacy scripts README/FILE-REFERENCE aliases, adapters DEPENDENCIES, infrastructure README/CI-CD, and SYSTEM-DEPENDENCY-MAP.
+
+The current branch tip and each changed file's resulting blob SHA must be fetched after this append. This entry records the intended verification scope; it does not claim the post-publication verification until that fetch has occurred.
