@@ -1,6 +1,6 @@
 # Repository Audit Register
 
-**Status snapshot:** 2026-11-25 (core inventory closure rechecked at `c522dbdac525b226ec84afa5b7c829289ea1949f`)  
+**Status snapshot:** 2026-11-25 (core and server inventory reconciled at `d571b69d03b6993ab14d66f0d11d5a3d79a52a5b`)  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
 **Governance branch:** `docs/hybrid-llm-engine-direction`  
 **Source branch for current-state audit:** `main` unless a module record explicitly declares another baseline.
@@ -22,7 +22,7 @@ The core source blob SHAs at the governance branch tip match the recorded core a
 | Module / scope | Status | Evidence owner | Next action |
 |---|---|---|---|
 | `core/` | **AUDITED — 28/28 files individually re-fetched; SHA and file-reference reconciliation complete** | [Core audit record](modules/core.md), [core file reference](../core/FILE-REFERENCE.md) | Cross-layer consumer/runtime verification remains open |
-| `server/` | **AUDITED — static source review recorded** | [Server deep audit](../server/DEEP-AUDIT.md) | Preserve F-01–F-08; runtime/test verification remains open |
+| `server/` | **AUDITED — 135/135 tracked files reconciled; source SHAs unchanged; 9/9 architecture docs fetched** | [Server governance record](modules/server.md), [deep audit](../server/DEEP-AUDIT.md), [file reference](../server/FILE-REFERENCE.md) | Preserve F-01–F-08; runtime/test verification remains open |
 | `webview-ui/` | **IN PROGRESS** | [Webview deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Continue from SHA reconciliation and documented cross-module gaps; do not repeat reviewed files |
 | `adapters/` | **NOT AUDITED as a module** | Pending | Audit host lifecycle, ownership, activation/deactivation, protocol bridges and disposal |
 | `e2e/` | **INVENTORY / SAMPLING PENDING** | Preliminary audit and tree inventory | Review fixtures, test assertions, host workflows and coverage gaps |

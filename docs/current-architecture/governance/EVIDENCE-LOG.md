@@ -110,3 +110,38 @@ This closure check does not upgrade the remaining cross-layer, package/bundle, t
 ### Continuation
 
 Core is not the active source-review target unless its blob SHA changes or a concrete cross-layer question requires a narrowly scoped revisit. Proceed to the already-recorded server audit evidence without repeating its source review; preserve findings F-01 through F-08 and resolve only documented gaps.
+
+
+## 2026-11-25 — GOV-SERVER-001: server inventory and documentation reconciliation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Branch:** `docs/hybrid-llm-engine-direction`  
+**Verification commit:** `d571b69d03b6993ab14d66f0d11d5a3d79a52a5b`  
+**Scope:** complete tracked `server/` subtree and all server architecture documents; reconciliation only, no repeat of unchanged source review.
+
+### Tree and source identity
+
+- Recursive tree: `truncated: false`.
+- Current inventory: **135 blobs** = 74 `server/src/` + 57 `server/__tests__/` + 4 root support/config.
+- Compared path/blob-SHA pairs against historical snapshots `f1af3e0c36573e4317143969cf43dde642877ba6`, `89851b12b968fcf30288f1edf4315e6377d51325`, and `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- All three historical snapshots and current verification commit contain the same 135 paths and identical blob SHAs: **135/135 unchanged**. No server file was added, removed, or content-changed.
+- Prior audit evidence remains applicable: 74/74 runtime source files fetched/reviewed; 57/57 test/support files fetched and inventoried; 4/4 root support/config files fetched/reviewed.
+- `FILE-REFERENCE.md` reconciles all 135 tracked paths across its runtime, test/support and root support/config sections.
+
+### Documentation
+
+Fetched and confirmed non-empty all nine server docs: README, MODULE-OVERVIEW, FILE-REFERENCE, DEEP-AUDIT, RUNTIME-LIFECYCLE, PROVIDERS, PERSISTENCE, HTTP-WEBSOCKET and DEPENDENCIES.
+
+README's older inventory arithmetic/baseline wording was inconsistent with DEEP-AUDIT and FILE-REFERENCE. Since the compared trees prove identical server blob identities, README metadata is normalized to the canonical audit baseline and 74/57/4 partition; the prior snapshot remains recorded as equivalent.
+
+### Status and limits
+
+- Server static source inventory/review: complete for the verified snapshot; no tracked file missed.
+- Test/support files: fetched and inventoried, not all assertions exhaustively reviewed and **not executed**.
+- Findings F-01–F-08 preserved as open / partially covered per DEEP-AUDIT; none closed by this reconciliation.
+- No tests, build, typecheck, lint, live network test, OS PTY matrix or runtime experiment executed.
+- No application source changed. Governance records and server README inventory metadata only.
+
+### Continuation
+
+Use `governance/modules/server.md` as governance summary, `server/DEEP-AUDIT.md` as detailed finding owner, and `server/FILE-REFERENCE.md` as per-file inventory. Do not duplicate the 135-file manifest or F-01–F-08 analysis in register/evidence log. Reopen unchanged source only for a concrete cross-module question, changed SHA, or authorized verification.

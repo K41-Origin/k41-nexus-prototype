@@ -3,8 +3,8 @@
 **Status:** DEEP STATIC SOURCE AUDIT DOCUMENTED — runtime verification pending
 
 **Coverage:** 74/74 runtime source files reviewed; 57/57 test/support files fetched and suite cases inventoried; 4/4 root support/config files reviewed. See [Deep Audit Findings](DEEP-AUDIT.md).  
-**Audited baseline:** `89851b12b968fcf30288f1edf4315e6377d51325`  
-**Inventory:** 135 tracked files (132 TypeScript, 2 JSON, 1 HTTP); includes 76 source/config/support files and 59 test/support files.
+**Audited baseline:** `f1af3e0c36573e4317143969cf43dde642877ba6` (the prior `89851b12b968fcf30288f1edf4315e6377d51325` snapshot has identical server blob SHAs)  
+**Inventory:** 135 tracked files: 74 runtime source files, 57 test/support files, and 4 root support/config files (132 TypeScript, 2 JSON, 1 HTTP).
 
 The server is the Node.js host/runtime for Pixel Agents. It ingests provider hook events and transcript records, maintains observed agent/session state, persists shared and adapter-scoped state, serves HTTP/WebSocket interfaces, and optionally owns standalone PTY terminals. It is **not** a general-purpose LLM inference engine or model gateway.
 
