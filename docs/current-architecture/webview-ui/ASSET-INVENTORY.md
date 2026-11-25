@@ -1,7 +1,7 @@
 # Webview UI — Public Asset Metadata Inventory
 
 **Baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
-**Scope:** 60 PNG files under webview-ui/public; all fetched as base64 and checked for PNG signature and IHDR width/height.
+**Scope:** 60 PNG files under `webview-ui/public`; 141 PNG paths across public assets and character art were fetched as base64 and all 132 unique PNG blobs passed chunk CRC/structure checks. Full pixel decompression remains OPEN.
 
 ## PNG inventory
 
