@@ -802,3 +802,32 @@ The blob SHA for every row is recorded in [FILE-REFERENCE.md](FILE-REFERENCE.md)
 - No tests, build, lint, typecheck, protocol generation, browser/VS Code host, multi-client WebSocket, PTY or reconnect experiment was executed.
 - No application source, tests, assets, dependencies or configuration were modified.
 - Next: confirm the intended multi-client state contract for WV-PROTO-01/02; complete per-field validation and authorization review without duplicating WV-C08/F-08; then proceed to targeted lifecycle/reconnect work when authorized.
+
+
+## 18. GOV-WEBVIEW-011 — Field-level validation, authorization, persistence and side effects
+
+**Scope:** all 34 ClientMessage variants, using the existing 34/34 producer-consumer trace from GOV-WEBVIEW-010. The detailed field-by-field matrix is in [PROTOCOL-MATRIX.md](PROTOCOL-MATRIX.md) §14–16.  
+**Source ref:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`. Static source retrieval only; no runtime or test execution.
+
+### Coverage completed
+
+- Compared AsyncAPI field requirements/types against the actual standalone WebSocket ingress, `handleClientMessage`, shared persistence helpers, and VS Code webview dispatcher.
+- Classified each message for: field shape, runtime validation, read-only/privilege boundary, durable/runtime side effects, success/failure acknowledgement, and broadcast vs requester-only delivery.
+- Confirmed that AsyncAPI is a declarative contract only: standalone parses JSON then casts to a record; VS Code dispatches the raw message object. Neither host applies a complete ClientMessage runtime schema validator.
+- Confirmed the standalone connection-level gate refuses all non-`webviewReady` messages for unprivileged clients. This is fail-closed authorization but does not validate fields or provide per-command capabilities.
+- Confirmed stronger shared validation for profiles/wardrobe, Directories, card order, conversation queries/session UUID and consent choices; partial or absent validation for seats, layout, area mappings, most settings, hook enabled boolean and external asset paths.
+- Confirmed durable write boundaries and missing/optimistic acknowledgements. External asset directory handlers ignore `writeConfig` failure; profile + wardrobe files are atomic individually, not transactionally together.
+
+### Findings
+
+- Existing `WV-C08` / server `F-08` remains the canonical runtime-validation finding; this session adds the exact message-level cases listed above. No duplicate schema finding was created.
+- `WV-PROTO-03` added: external asset directory add/remove can report the in-memory candidate as updated even when `writeConfig` returns false. Low severity, high confidence, OPEN, static only.
+- Existing `WV-PROTO-01` (area mapping fan-out) and `WV-PROTO-02` (requester-only external asset reload) remain separate and OPEN.
+
+### Evidence and limitations
+
+Selected source blobs fetched from `main`: `core/asyncapi.yaml` ff1247118819fe68852da11996c660df1726aa66; `server/src/clientMessageHandler.ts` d7ae8235ee75de63b1716a4b67f27d69023f5d96; `server/src/httpServer.ts` ad5104a14233aa29834e008833a0f21458fc887b; `server/src/configPersistence.ts` 056e71dec89dd174df80d65da349cfafff57a5b7; `server/src/directories.ts` a27617b843733ff8eb5a6a0263324587bb57a32b; `server/src/characterProfilesPersistence.ts` 6444df2a8a032f0023426a226244d25cd7178a85; `server/src/cardOrder.ts` 3c4d7bd9397546dfe01081593045a9edaa57a0fa; `server/src/conversations.ts` bb698e3ce55862309d53320841550556d0d90b7f; `server/src/terminal/standaloneAgentLauncher.ts` f17562fcf673e5b8db4a7bd94d9ff953c4edf0b4; `adapters/vscode/PixelAgentsViewProvider.ts` 94d1ab2e1427377e67ff430a852d49863e5e4d87.
+
+**Not performed:** fresh recursive tree retrieval (connector exposes no tree-fetch action in this session); tests/build/lint/typecheck; runtime/browser/VS Code; malformed payload, permission-failure or concurrent-client experiments. No source code changed.
+
+**Next:** cross-layer lifecycle/reconnect and state reconciliation, preserving WV-PROTO-01/02/03 and WV-C08/F-08; do not repeat the completed 34-message matrix.
