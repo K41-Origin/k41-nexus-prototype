@@ -32,6 +32,16 @@ Do not claim that a repository, module, file, test suite, or runtime was inspect
 
 A file's path is not its identity. Its blob SHA at the audit commit is. A branch movement does not automatically mean every file changed.
 
+### Required reconciliation gate before every continuation
+
+- Record the active source branch + commit and the documentation branch + commit separately. Never treat a docs-branch commit as an application-source baseline.
+- Retrieve the complete recursive source tree (`truncated: false`) for the active source commit and compare `(path, blob SHA)` pairs against the owning module ledger. If the tree is truncated, inventory reconciliation is OPEN.
+- Preserve historical module baselines as provenance. Add a new verification snapshot when a newer source commit is checked; do not overwrite the historical baseline or imply that a branch-tip movement changed source content.
+- Classify each ledger row before reading source. Re-fetch/review only changed blobs, explicit `INVENTORIED`/`PARTIAL`/`NOT VERIFIED` gaps, or unchanged files required for a named cross-module trace. Do not repeat an unchanged `REVIEWED` file for the same question.
+- Keep source review and test review separate. `TEST-INVENTORIED` means assertions were inspected; `FETCHED / INVENTORIED` means the test file was fetched/catalogued but assertion-level review is still open; neither means executed.
+- Before creating a finding, search the owning deep-audit record for an existing ID/behavior. Extend an existing finding when the behavior is the same; create a new ID only for a materially distinct behavior. Never recycle closed/rejected IDs.
+- Update the owning module ledger/record first, then register summary, then append the evidence-log session. The register must point to the actual next gap, not stale historical continuation text.
+
 ## 3. Evidence levels
 
 Use explicit labels:
