@@ -714,7 +714,7 @@ The blob SHA for every row is recorded in [FILE-REFERENCE.md](FILE-REFERENCE.md)
 
 - **ClientMessage:** 34/34 variants mapped from UI producer to transport and host ingress or documented local/browser behavior.
 - **ServerMessage:** 46/46 variants mapped to producer family, delivery scope (store broadcast, direct reply, handshake snapshot, watcher or VS Code-only event) and UI consumer.
-- Five ClientMessage variants absent from the standalone switch are accounted for as host-specific VS Code actions: exportLayout, importLayout, exportFile, openSessionsFolder, plus focusAgent's VS Code terminal-focus behavior. The UI also sends focusAgent in standalone; the server intentionally no-ops it while App handles local drawer/tab focus.
+- Five ClientMessage variants have no explicit standalone switch case: focusAgent, exportLayout, importLayout, exportFile and openSessionsFolder. Four are VS Code-only host actions with browser/local alternatives; focusAgent is emitted in both runtimes, but standalone intentionally no-ops the server side while App handles local drawer/tab focus.
 - Conversation requests remain standalone-only because the UI is gated on terminal availability; the VS Code adapter does not implement requestConversations, searchConversations or resumeConversation.
 - Raw terminal output/replay/input remains a separate WebSocket data plane and is not counted among the 80 control-plane variants.
 - Full producer, ingress, consumer and recipient map is in PROTOCOL-MATRIX.md sections 9–11.
