@@ -1,7 +1,8 @@
 # Repository Audit Register
 
 **Status snapshot:** 2026-11-25 — governance reconciliation session GOV-DOCGOV-001. Documentation branch HEAD at session start: `02b3118edf38713cc55b581a916fd61dea8bfd1b`; source branch `main`: `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`. Complete recursive tree comparison: 739/739 source paths and blob SHAs are identical between `main` and the documentation branch snapshot; 61 additional documentation blobs exist on the documentation branch. Module baselines remain individually scoped below.  
-**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Repository:** `K41-Origin/k41-nexus-prototype`
+**Latest cross-layer static snapshot:** source `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`; docs branch is updated independently. Complete source tree: 856 entries, `truncated=false`. See GOV-INFRA-001, GOV-DEPMAP-001 and GOV-ADR-001 in the evidence log.  
 **Governance branch:** `docs/hybrid-llm-engine-direction`  
 **Source branch for current-state audit:** `main` unless a module record explicitly declares another baseline.
 
