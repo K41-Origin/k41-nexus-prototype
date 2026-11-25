@@ -1,6 +1,6 @@
 # E2E Module Audit Record
 
-**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); E2E-003–E2E-006 are OPEN test-quality findings; full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); targeted lifecycle/hook/reconnect/persistence/test-hook cross-module static trace complete (GOV-E2E-004); scripts/CI review remains open.  
+**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); E2E-003–E2E-006 are OPEN test-quality findings; full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); targeted lifecycle/hook/reconnect/persistence/test-hook cross-module static trace complete (GOV-E2E-004); scripts static audit is complete (14/14; BUILD-001–BUILD-007 recorded); `.github/` CI/release workflow review remains open.  
 **Source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
 **Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated=false`).  
 **Latest documentation snapshot before publication:** `docs/hybrid-llm-engine-direction@cbf2d7ed7f711bc44fb619e43d86c560e1cf7d7e`.  
@@ -47,4 +47,4 @@ Do not duplicate these detailed records in the register. Cross-link canonical fi
 
 ## Next action
 
-Continue targeted cross-module source-contract tracing for E2E lifecycle, hook and state assertions, reusing canonical server/adapters/webview findings. Then inspect E2E runner/inventory/report scripts and CI workflows under `scripts/` and `.github/`. Keep execution/runtime verification OPEN until explicitly authorized.
+Continue targeted cross-module source-contract tracing for E2E lifecycle, hook and state assertions, reusing canonical server/adapters/webview findings. The E2E runner/inventory/report scripts are now statically audited under [scripts module record](scripts.md); continue with `.github/` CI/release workflows. Keep execution/runtime verification OPEN until explicitly authorized.
