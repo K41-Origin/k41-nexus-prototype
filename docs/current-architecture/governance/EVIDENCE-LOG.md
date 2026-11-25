@@ -761,3 +761,69 @@ After the initial publication, all eight changed documents were fetched again fr
 - `governance/EVIDENCE-LOG.md` — `544b8b262d70b78c01820d4ccac641e6d840f920`.
 
 The branch head immediately after that publication was `2f95e172eeacadd4abe0eebeaef5666359f75848`. A follow-up correction records the canonical recursive tree object SHA as `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (the commit SHA remains `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`). The corrected DEEP-AUDIT and EVIDENCE-LOG files are re-fetched once more after this correction.
+
+
+## 2026-11-25 — GOV-E2E-001: E2E inventory, SHA reconciliation and initial static audit
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch / commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`; 856 entries, 739 blobs, 117 trees, `truncated=false`.  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction@cbf2d7ed7f711bc44fb619e43d86c560e1cf7d7e`.  
+**Documentation branch before evidence-log append:** `4b56416e7d4aa2640fcec4745b130c7eadaa047a`; tree `54baced42554453f8dbc0eb7fd47665a8182b77c`.  
+**Scope:** complete `e2e/` tree inventory, path/blob-SHA reconciliation, individual blob retrieval, E2E README/test inventory, harness architecture and initial static process/port review.  
+**Exclusions:** scripts implementation, CI workflows, test/build/lint/typecheck execution and runtime experiments.
+
+### Governance and historical coverage
+
+Read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, module records for core/server/webview-ui/adapters, and the existing E2E README and FILE-REFERENCE template before source inspection. E2E had no prior governance module record or deep-audit document; its prior state in the register was INVENTORY / SAMPLING PENDING. Existing core/server/adapter/webview findings were reused by ID, not duplicated.
+
+### Repository and inventory evidence
+
+- Retrieved the complete recursive Git tree for `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; `truncated=false`.
+- `e2e/` contains **47 blobs** and **7 tree directories**.
+- All 47 blobs were fetched individually. The subtree includes one suite README, six fixture/shim files, global setup, 15 helpers, Playwright/run/TypeScript configuration, and 21 spec files.
+- Retrieved the complete recursive tree at the documentation branch's tree object `1883eeea8af8fc8217d7d279be6ab34ab4d91bb6`; `truncated=false`.
+- Compared every E2E `(path, blob SHA)` pair: source branch 47, documentation branch 47, **0 added / 0 removed / 0 changed**.
+- The exact path, mode, byte size and SHA manifest is maintained in `docs/current-architecture/e2e/FILE-REFERENCE.md`; it is not duplicated in this log.
+
+### Test inventory evidence
+
+- Fetched all 21 spec files.
+- Structural source count: **152 test declarations** and **152 @area tags**; this agrees with the generated test inventory in `e2e/README.md`.
+- Counted **8 platform skip guards**, separately from test declarations.
+- This is structural/test inventory evidence, not a full assertion-level review of every spec and not test execution.
+
+### Initial static findings
+
+- **E2E-001 — standalone process termination fallback does not reliably escalate after SIGTERM.** Evidence: `e2e/helpers/standalone.ts:188-201`, SHA `ab94998af9c08316a126ef1c2b0ca8f8c269cb17`. Node's `ChildProcess.killed` indicates signal delivery, not process exit; after SIGTERM the fallback condition can therefore be false while `exitCode` remains null. Related teardown helper `killTrackedExternalProcesses` sends SIGTERM and clears its registry without awaiting process exit (`e2e/helpers/mock-claude.ts:325-340`, SHA `90754501c25ee2b7af4720b00646b557eade48e9`). Medium severity, High confidence, STATIC-FINDING, OPEN; no runtime reproduction.
+- **E2E-002 — standalone port-0 allocation has a close-before-bind race.** Evidence: `e2e/helpers/standalone.ts:84-101`, SHA `ab94998af9c08316a126ef1c2b0ca8f8c269cb17`. The temporary listener closes before the CLI binds the returned port; no reservation spans the handoff and no retry is visible. Low severity, High confidence, STATIC-FINDING, OPEN; no collision was induced.
+
+### Cross-module consolidation
+
+Preserved canonical findings and linked E2E coverage gaps to their owners:
+- server F-01/F-03/F-05 for lifecycle ownership, unregister and shutdown;
+- adapters A-03/A-05/A-06 for restore/removal, listener disposal and grace timer;
+- webview WV-RESYNC-01/02, WV-APP-01, WV-TR-01 and WV-PROTO-01/02/03 for reconnect/snapshot, queued commands and shared-state fan-out;
+- server F-08 / webview WV-C08 for runtime validation.
+No existing finding ID was reused or duplicated.
+
+### Documentation published
+
+1. `docs/current-architecture/e2e/DEEP-AUDIT.md` — initial technical audit, E2E-001/E2E-002 and cross-module map; verified blob SHA `b22f92b95da231ba9c1cdab9646ce46679aba070`.
+2. `docs/current-architecture/e2e/FILE-REFERENCE.md` — 47-row path/mode/size/SHA ledger; verified blob SHA `45e0cb2a32bc7b2024ae5b6a84f0443b05e2e4a3`.
+3. `docs/current-architecture/e2e/README.md` — audit navigation and status; verified blob SHA `27578f34c9dab8d7e1d5de830805fc8fa94995a9`.
+4. `docs/current-architecture/governance/modules/e2e.md` — E2E module ownership/status; verified blob SHA `33308c1343741a7170dc0ef9720b6bcf4ac6ad12`.
+5. `docs/current-architecture/governance/README.md` — E2E record and documents integrated into governance index; verified blob SHA `014c0570dc167aa57d4a4c3d285dce1fc301a1da`.
+6. `docs/current-architecture/governance/AUDIT-REGISTER.md` — E2E status and next action consolidated; verified blob SHA `3debabc05d7171d422a9ddf50be676b570d8b2ca`.
+
+### Verification limits
+
+- TREE-VERIFIED / SHA-RECONCILED / FETCHED for all 47 E2E blobs.
+- Structural test inventory for 21 specs / 152 declarations; assertion-level review remains IN PROGRESS.
+- E2E-001 and E2E-002 are static findings only.
+- No tests, builds, lint, typecheck, install, browser/VS Code host, PTY, hook fault injection or runtime experiments were executed.
+- No application source, tests, package manifest, dependencies or configuration were modified.
+
+### Next continuation point
+
+Complete assertion-level review of all 21 spec files and full review of the harness/helper/config files. Then trace only the named E2E contracts into the owning source modules. Inspect `scripts/run-e2e.mjs`, `scripts/generate-e2e-inventory.mjs`, report generation and CI workflows under the scripts and `.github/` governance scopes. Runtime verification remains unauthorized and OPEN.
