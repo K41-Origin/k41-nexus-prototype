@@ -1,6 +1,6 @@
 # System Dependency Map Audit Record
 
-**Status:** STATIC MAP IN PROGRESS — major host composition, protocol, persistence, provider, transport and infrastructure edges are SOURCE-VERIFIED at `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`. Exhaustive transitive imports and runtime lifecycle edges remain OPEN.
+**Status:** STATIC MAP IN PROGRESS — major host composition, protocol, persistence, provider, transport and infrastructure edges are SOURCE-VERIFIED; npm lockfile transitive closure is now mapped (GOV-DEPMAP-002); exhaustive source import/call and runtime lifecycle edges remain OPEN. Source baseline: `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`. Exhaustive source import/call graph and runtime lifecycle edges remain OPEN.
 
 ## Owner
 
