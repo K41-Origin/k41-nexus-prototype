@@ -69,7 +69,7 @@ Both WebSocketTransport and PostMessageTransport cast untrusted runtime data to 
 
 ### Queue semantics
 
-WebSocketTransport queues outgoing control-plane messages while disconnected. The separate TerminalConnection.write() path does not buffer terminal input while its raw socket is unavailable. These are intentionally distinct channels and must not be conflated.
+WebSocketTransport queues **every** outgoing ClientMessage while disconnected and flushes the entire pending array on the next open. There is no command classification, expiry, coalescing, acknowledgement, cancellation or queue bound; see **WV-RESYNC-02** in DEEP-AUDIT. On reconnect, the `onReconnect` state callback sends `webviewReady` before `onopen` flushes the pending array, so the new snapshot is requested before queued commands replay. The separate `TerminalConnection.write()` path does not buffer terminal input while its raw socket is unavailable; it retains only the last geometry and re-sends resize on reconnect. These are intentionally distinct channels and must not be conflated.
 
 ## 7. Ownership and disposal questions
 
@@ -81,4 +81,4 @@ WebSocketTransport queues outgoing control-plane messages while disconnected. Th
 
 ## 8. Verification boundary
 
-Static source review only. No browser, VS Code host, WebSocket server, reconnect fault injection, malformed-frame test or runtime lifecycle experiment was performed. Tests have not been executed.
+Static source review only. GOV-WEBVIEW-012 adds a static cross-layer lifecycle trace and WV-RESYNC-02; no browser, VS Code host, WebSocket server, reconnect fault injection, malformed-frame test or runtime lifecycle experiment was performed. Tests have not been executed.
