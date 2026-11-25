@@ -1,0 +1,25 @@
+# End-to-End Tests — Current Architecture
+
+**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation (47/47); assertion-level review complete (21/21 specs, 152 tests); full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); targeted cross-module lifecycle/hook/reconnect/persistence/test-hook static trace complete (GOV-E2E-004); scripts static audit is complete (14/14; BUILD-001–BUILD-007 recorded); `.github/` CI/release static audit is complete (10/10; BUILD-008–BUILD-013 recorded).  
+**Source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
+**Inventory:** 47/47 tracked blobs under `e2e/`; 21 spec files / 152 test declarations. No tests have been executed in this audit. Nine static findings E2E-001–E2E-009 are recorded in DEEP-AUDIT.md, including run-ID path traversal, stale download-lock recovery, and mock scenario queue concurrency.
+
+## Audit documents
+
+- [E2E DEEP-AUDIT](DEEP-AUDIT.md) — harness architecture, findings, cross-module links, limitations and continuation.
+- [E2E FILE-REFERENCE](FILE-REFERENCE.md) — complete path/mode/size/blob-SHA ledger and per-file review state.
+- [Repository E2E governance record](../governance/modules/e2e.md) — consolidated module status and document ownership.
+
+## Scope
+
+The E2E module includes Playwright configuration, global setup, VS Code and standalone fixtures, mock Claude process shims, scenario builders, hook helpers, office/editor/webview helpers, narration, and all VS Code/standalone test specs.
+
+The source suite README at `e2e/README.md` remains the product-facing source of truth for automated test coverage, declared gaps and manual pre-release smoke checks. This architecture document records audit status and links to the technical audit; it does not duplicate the suite's test inventory.
+
+## Current continuation
+
+GOV-E2E-004 completed the targeted lifecycle/hook/reconnect/persistence/test-hook cross-module static trace. Do not repeat that trace without changed source or a named evidence gap. Preserve E2E-001–E2E-009. The next E2E work is remediation planning and, only when explicitly authorized, test/runtime verification.
+
+## Verification boundary
+
+A file being present in the tree or fetched is not equivalent to a completed source review. A test being inventoried is not equivalent to being executed. Runtime, browser, VS Code host, PTY and CI evidence remain OPEN until actually obtained and recorded.
