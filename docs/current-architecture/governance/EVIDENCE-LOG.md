@@ -1597,3 +1597,39 @@ The current-architecture index previously displayed only the historical module b
 - The documentation branch and security branch refs still exist. The available GitHub connector has no branch/ref deletion action; it cannot delete either ref. No destructive workaround or force-update was attempted.
 - The security workflow source was not modified in this session. A source patch to resolve BUILD-014 requires explicit authorization; after correction, static review and workflow verification must precede PR #2 merge.
 - Therefore the requested end state (only `main`) is NOT YET ACHIEVED. Current branch refs remain three: `main`, `docs/hybrid-llm-engine-direction`, and `security/remediate-build-008-009`.
+
+
+## 2026-11-26 — GOV-GAP-CLOSURE-001: binary integrity and transitive lock graph
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Canonical branch:** `main`  
+**Source commit at start:** `b1104a808cf70382c2bd14a94d372d907a500cda`  
+**Tree:** `97940dabd84264b6281917b11928ebae6156752c`, 933 entries, `truncated=false`.
+
+### Webview tree reconciliation
+
+- Re-fetched the current recursive tree and `webview-ui/FILE-REFERENCE.md`: 459/459 paths and blob SHAs match, zero missing, extra or changed rows.
+- Binary ledger contains 141 PNG paths (132 unique blobs), one ICO, one JPEG and one TTF. The TTF remains unavailable through the GitHub connector's binary fetch path (empty base64 for the 1,077,160-byte blob).
+- All 132 unique PNG blobs were fetched and checked for exact byte size, signature, chunk bounds, IHDR/IDAT/IEND and every chunk CRC-32. All chunk CRC checks passed. One PNG (`public/assets/pets/gitcat/pet.png`) contains two trailing zero bytes after IEND; recorded as a non-canonical tail, not a reproduced defect.
+- ICO directory bounds and all three embedded PNG chunk CRCs passed. JPEG SOI/SOF0/SOS/EOI markers and 1308×521 dimensions were verified.
+- Pixel decompression/rendering was not performed because this execution environment has no PNG/JPEG decoder or local checkout. TTF SFNT table, checksums, cmap/glyph coverage and parser checks remain OPEN.
+
+### Transitive npm dependency graph
+
+- Parsed the committed npm lockfile and three manifests at the recorded blob SHAs. Lockfile v3 has 816 records / 812 node_modules entries.
+- Resolved graph closures: root 664 package paths / 1,198 edges; server 200 / 269; webview 293 / 460; 810 reachable package paths in the union. Required dependency/peer edges unresolved: 0. Two workspace-link entries are expected local links.
+- Published detailed counts and scope limitations in `infrastructure/DEPENDENCIES.md` and linked them from `SYSTEM-DEPENDENCY-MAP.md` and governance module records.
+- This is lockfile graph evidence, not source import reachability or bundle/runtime proof. Exhaustive source import/call graph and bundler output comparison remain OPEN.
+
+### BUILD-014 source correction
+
+- On `security/remediate-build-008-009`, removed `continue-on-error: true` from AsyncAPI validation, generated-message drift and E2E inventory drift checks.
+- Added all three step outcomes to the final failure gate environment, required-success loop and CI summary. Updated PR #2 body to describe the correction and its remaining verification gates.
+- Workflow blob after correction: `bebbd9b2252dc1245eb05065507be83a72a904f9`; source commit `1e77a3631d9cc3e7187af2f6d02e791ce5208111`; branch synchronized with current `main` through merge commit `1b71acd07b48d56527d0ad72e4d5e23713b390a7`.
+- Static source correction is implemented, but BUILD-014 remains OPEN pending YAML/actionlint validation and an actual CI run. GitHub Actions API currently returns zero runs and zero check-runs; no test/build/runtime result is claimed.
+
+### Remaining hard blockers
+
+- No local checkout, shell, package installation, YAML parser/actionlint, image decoder, font parser, browser/VS Code host or runtime execution capability is available in this session. Git clone previously failed DNS resolution; GitHub connector exposes read/write repository operations but no workflow dispatch action. No Actions runs/check-runs exist to inspect.
+- No application-source fixes or runtime findings were closed. BUILD-001–BUILD-013, runtime lifecycle/cross-process behavior, full binary pixel/font validation and source import graph remain OPEN pending executable verification and remediation.
+- Documentation changes are published on `main`; each updated file must be re-fetched after this session's commits before the documentation publication verification is complete.
