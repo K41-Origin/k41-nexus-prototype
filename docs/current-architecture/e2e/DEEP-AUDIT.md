@@ -1,6 +1,6 @@
 # E2E Deep Audit
 
-**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); four test-quality coverage gaps E2E-003–E2E-006 recorded; full static review of 25/25 fixture/helper/setup/config files completed (GOV-E2E-003); cross-module review remains open.  
+**Status:** IN PROGRESS — inventory/SHA reconciliation complete (47/47); assertion-level review complete (21/21 spec files, 152/152 tests); four test-quality coverage gaps E2E-003–E2E-006 recorded; full static review of 25/25 fixture/helper/setup/config files completed (GOV-E2E-003); targeted cross-module lifecycle/hook/reconnect/persistence/test-hook trace complete (GOV-E2E-004); scripts/CI review remains open.  
 **Source branch / commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
 **Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
 **Documentation branch before this publication:** `docs/hybrid-llm-engine-direction@cbf2d7ed7f711bc44fb619e43d86c560e1cf7d7e`.  
