@@ -1424,3 +1424,8 @@ No runtime or toolchain verification was performed; this publication check verif
 ### GOV-INFRA-001 — evidence correction and final re-fetch
 
 During final SHA spot-check, the `server/vitest.config.ts` blob SHA transcribed in the Build System table was corrected to the directly fetched value `b8d6265259e3abcec1d93945bbf42c43618b62d0`. The corrected `infrastructure/BUILD-SYSTEM.md` was re-fetched after publication; its final blob SHA is `dc971936695c9fd59503a46f68b8cad98f19453c`. This replaces the earlier Build System blob SHA `fe9e281102a6f3ba4ba7a51e0d4811d83e46fe46` in the post-publication table above. No source finding or implementation conclusion changed.
+
+
+### GOV-INFRA-001 — current-architecture index baseline clarification
+
+The current-architecture index previously displayed only the historical module baseline. It now labels that baseline as historical and records the latest cross-layer static source snapshot `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`, based on `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`. The updated index was re-fetched and verified as blob `511a7e330079e7ffc5da9f9cfec2a8071f17c917`.
