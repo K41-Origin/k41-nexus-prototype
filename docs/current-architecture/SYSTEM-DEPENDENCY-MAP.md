@@ -1,6 +1,6 @@
 # System Dependency Map
 
-**Status:** STATIC MAP IN PROGRESS — major compile-time, host composition, protocol, persistence and trust-boundary edges are SOURCE-VERIFIED. Exhaustive transitive import graph and runtime lifecycle remain OPEN.
+**Status:** STATIC MAP IN PROGRESS — major compile-time, host composition, protocol, persistence and trust-boundary edges are SOURCE-VERIFIED; npm lockfile transitive closure is mapped (GOV-DEPMAP-002). Exhaustive source import/call graph and runtime lifecycle remain OPEN.
 
 **Source snapshot:** `K41-Origin/k41-nexus-prototype`, branch `security/remediate-build-008-009`, commit `86d3b1dbddae7605e5e2092886c12982f8e4bf58`.  
 **Base:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
