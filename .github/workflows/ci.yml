@@ -217,6 +217,9 @@ jobs:
           CHECKOUT: ${{ steps.checkout.outcome }}
           SETUP_NODE: ${{ steps.setup_node.outcome }}
           INSTALL_DEPENDENCIES: ${{ steps.install_dependencies.outcome }}
+          VALIDATE_SPEC: ${{ steps.validate_spec.outcome }}
+          MESSAGES_DRIFT: ${{ steps.messages_drift.outcome }}
+          E2E_INVENTORY_DRIFT: ${{ steps.e2e_inventory_drift.outcome }}
           TYPE_CHECK: ${{ steps.type_check.outcome }}
           LINT: ${{ steps.lint.outcome }}
           WEBVIEW_TEST: ${{ steps.webview_test.outcome }}
