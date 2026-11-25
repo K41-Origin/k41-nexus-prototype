@@ -1,6 +1,6 @@
 # GitHub Workflows and CI/Release Audit
 
-**Status:** STATIC AUDIT COMPLETE — 10/10 tracked `.github/` blobs fetched and reviewed; 7 workflow/governance findings BUILD-008–BUILD-014 are OPEN.  
+**Status:** STATIC AUDIT COMPLETE — 10/10 tracked `.github/` blobs fetched and reviewed; 6 workflow/governance findings BUILD-008–BUILD-013 are OPEN.  
 **Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
 **Tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, complete (`truncated=false`).  
 **Detailed audit:** [DEEP-AUDIT.md](DEEP-AUDIT.md).  
