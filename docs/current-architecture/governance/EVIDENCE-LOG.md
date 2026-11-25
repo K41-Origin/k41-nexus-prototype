@@ -652,3 +652,37 @@ Continue UI → adapter → server ClientMessage/ServerMessage tracing, field va
 ### Next continuation point
 
 Complete the field-level validation/authorization and side-effect matrix using WV-C08 and F-08 as canonical findings. Confirm intended multi-client semantics for WV-PROTO-01/02 before proposing implementation changes. Then continue targeted lifecycle/disposal/reconnect analysis. Runtime verification remains unauthorized and OPEN.
+
+
+## 2026-11-25 — GOV-WEBVIEW-011: field-level validation, authorization, persistence and side-effect audit
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch/ref:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Documentation branch:** `docs/hybrid-llm-engine-direction`  
+**Scope:** all 34 ClientMessage variants; cross-layer static trace through AsyncAPI contract, standalone WebSocket ingress/handler, VS Code webview dispatcher, shared persistence helpers, and response/fan-out behavior. Existing 34/34 + 46/46 producer-consumer map reused, not repeated.
+
+### Governance and historical coverage
+
+Read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, module records for webview-ui/server/adapters, and webview DEEP-AUDIT, FILE-REFERENCE, PROTOCOL-MATRIX, TRANSPORT and STATE-MANAGEMENT before source inspection. Historical status: all 459 webview paths reconciled; 261 source rows REVIEWED; 54 tests TEST-INVENTORIED; 34 ClientMessage and 46 ServerMessage routes traced in GOV-WEBVIEW-010; canonical validation gap WV-C08 / F-08; multi-client findings WV-PROTO-01/02.
+
+### Repository/source verification
+
+- Source ref fetched: `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; fetch_commit confirms the referenced commit exists.
+- A fresh recursive tree could not be fetched with the available GitHub connector actions in this session. The 856-entry / 739-blob / truncated=false source tree and prior full SHA reconciliation are therefore DOC-RECORDED from GOV-WEBVIEW-008, not newly TREE-VERIFIED here.
+- Selected source blobs fetched from main: `core/asyncapi.yaml` ff1247118819fe68852da11996c660df1726aa66; `server/src/clientMessageHandler.ts` d7ae8235ee75de63b1716a4b67f27d69023f5d96; `server/src/httpServer.ts` ad5104a14233aa29834e008833a0f21458fc887b; `server/src/configPersistence.ts` 056e71dec89dd174df80d65da349cfafff57a5b7; `server/src/directories.ts` a27617b843733ff8eb5a6a0263324587bb57a32b; `server/src/characterProfilesPersistence.ts` 6444df2a8a032f0023426a226244d25cd7178a85; `server/src/cardOrder.ts` 3c4d7bd9397546dfe01081593045a9edaa57a0fa; `server/src/conversations.ts` bb698e3ce55862309d53320841550556d0d90b7f; `server/src/terminal/standaloneAgentLauncher.ts` f17562fcf673e5b8db4a7bd94d9ff953c4edf0b4; `adapters/vscode/PixelAgentsViewProvider.ts` 94d1ab2e1427377e67ff430a852d49863e5e4d87.
+
+### Results
+
+- 34/34 ClientMessage variants classified for contract fields, runtime validation, authorization/read-only gate, persistence/side effects and acknowledgements/fan-out. Detailed matrix: PROTOCOL-MATRIX.md §14–16.
+- Standalone's connection-level privileged gate is fail-closed; it does not substitute for field-level validation. VS Code dispatches webview objects without a complete runtime schema validator.
+- Stronger validation exists for profiles/wardrobe, Directories, card order, conversation query/session UUID and consent choice. Weak/absent checks remain for seats, layout/import nested shape, area mappings, general settings toggles, setHooksEnabled.enabled and external asset paths.
+- Durable writes are split across shared config, layout, character/wardrobe files, adapter state and conversation looks; a number of write paths have no negative acknowledgement. Character + wardrobe writes are atomic individually, not a cross-file transaction.
+- Existing WV-C08 / F-08 extended, not duplicated. New WV-PROTO-03 records external asset directory changes reporting the in-memory candidate even when writeConfig returns false (Low, High confidence, OPEN, static only). WV-PROTO-01/02 remain open.
+
+### Verification limits
+
+Static only. No tests, build, lint, typecheck, protocol generation, runtime/browser/VS Code, malformed payload, write-failure fault injection or concurrent-client experiment. No application source modified. The exact runtime symptom of WV-PROTO-03 and malformed nested payload effects remain OPEN.
+
+### Documentation changes
+
+Appended detailed field-level matrix and findings to webview PROTOCOL-MATRIX / DEEP-AUDIT; updated webview governance module, consolidated register and this append-only evidence log. Publication must be verified by re-fetching every changed document and recording the resulting branch head/blob SHAs.
