@@ -1393,3 +1393,29 @@ Documentation changes are published on the governance branch only; application s
 - governance README, AUDIT-REGISTER and current-architecture README
 
 No test, build, typecheck, lint, npm install, generation, package, bundle analysis, dependency audit, benchmark, CI dispatch, network experiment, OIDC request, PTY experiment or runtime reproduction was executed. No application source, package manifest, dependency or workflow changed during these three audit workstreams.
+
+
+### GOV-INFRA-001 / GOV-DEPMAP-001 / GOV-ADR-001 — post-publication verification
+
+Documentation branch HEAD after publication: `23e6987fc97226bea3819af12952fc2af0602966`. The following records were re-fetched from that branch and their blob identities verified:
+
+| Path | Verified blob SHA |
+|---|---|
+| `infrastructure/BUILD-SYSTEM.md` | `fe9e281102a6f3ba4ba7a51e0d4811d83e46fe46` |
+| `infrastructure/DEPENDENCIES.md` | `e58935bdd61804ba543c8b2ba7da36d25e132570` |
+| `infrastructure/TESTING.md` | `14f7035502ac277c449662f5542833824057ac61` |
+| `infrastructure/README.md` | `d4595a16f03aa61064348dba4a8c853a9f09ce32` |
+| `infrastructure/CI-CD.md` | `08d3b9eab01b573df0c939e8858a23a1a2b921ab` |
+| `SYSTEM-DEPENDENCY-MAP.md` | `167af5aedeeeaa39c4c7ede59054a7fed15c6ab0` |
+| `ARCHITECTURE-ADR-RECONCILIATION.md` | `2ffd3c3fbe90681ef04bf7f9d7440b4f06050fcf` |
+| `governance/modules/infrastructure.md` | `5f3442105570434237ccf44a87fd14cbad5a632a` |
+| `governance/modules/system-dependency-map.md` | `9e3f45b2e4663dc13c0c08c539fb0198d7551872` |
+| `governance/modules/architecture-adr.md` | `911f1bc32904e6dcaaea26b8eb3de48cd7fc06d1` |
+| `governance/README.md` | `44b36635fc2ea22d1bebbde0c8628a5e95e6b101` |
+| `governance/AUDIT-REGISTER.md` | `a71940e27443bdd738f96ee507a97a119e52dd90` |
+| `current-architecture/README.md` | `a688ace86c2611ab5ff42f5244b371a9c1229755` |
+| `governance/EVIDENCE-LOG.md` before this verification append | `d8094ed85da4358658d43e98db8a17bc0b47f18f` |
+
+All 14 updated/created files returned non-empty content and the expected source-snapshot/status references where applicable. The evidence-log blob above is the pre-verification version; this append must be fetched once after commit to establish its final blob SHA and final documentation branch HEAD.
+
+No runtime or toolchain verification was performed; this publication check verifies documentation commits and content identities only.
