@@ -25,7 +25,7 @@ The core, server and webview source blob identities have been reconciled at the 
 |---|---|---|---|
 | `core/` | **AUDITED — 28/28 files individually re-fetched; SHA and file-reference reconciliation complete** | [Core audit record](modules/core.md), [core file reference](../core/FILE-REFERENCE.md) | Cross-layer consumer/runtime verification remains open |
 | `server/` | **AUDITED — 135/135 tracked files reconciled; source SHAs unchanged; 9/9 architecture docs fetched** | [Server governance record](modules/server.md), [deep audit](../server/DEEP-AUDIT.md), [file reference](../server/FILE-REFERENCE.md) | Preserve F-01–F-08; runtime/test verification remains open |
-| `webview-ui/` | **IN PROGRESS — 459/459 paths/SHA reconciled; 199 source files reviewed; 62 reported-review rows, remaining tests and binary evidence open** | [Webview governance record](modules/webview-ui.md), [deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Historical reconciliation of all 62 reported-review rows completed (SHAs match; exact line coverage still unverified); perform targeted source verification, then continue 47 test assertions, protocol tracing and binary/font evidence |
+| `webview-ui/` | **IN PROGRESS — 459/459 paths/SHA reconciled; 231 ledger rows REVIEWED; 30 reported-review source rows, 47 inventoried-only tests and binary evidence remain open; components 54/54 REVIEWED** | [Webview governance record](modules/webview-ui.md), [deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Continue direct source verification of the remaining 30 reported-review rows (14 hooks, 9 character UI files, 7 other source files), then 47 test assertion reviews, protocol tracing and binary/font evidence |
 | `adapters/` | **NOT AUDITED as a module** | Pending | Audit host lifecycle, ownership, activation/deactivation, protocol bridges and disposal |
 | `e2e/` | **INVENTORY / SAMPLING PENDING** | Preliminary audit and tree inventory | Review fixtures, test assertions, host workflows and coverage gaps |
 | `scripts/` | **INVENTORY / IMPLEMENTATION REVIEW PENDING** | Preliminary audit and tree inventory | Review generation, build, packaging, validation and release side effects |
@@ -37,7 +37,7 @@ The core, server and webview source blob identities have been reconciled at the 
 
 ## Current open workstreams
 
-1. Continue `webview-ui/` from the recorded line-coverage, reconnect/seat reconciliation, protocol, test-inventory and binary gaps.
+1. Continue `webview-ui/` from the 30 remaining reported-review source rows, reconnect/seat reconciliation, protocol, test-inventory and binary gaps. The 54 component files are fully source-reviewed; do not repeat them without changed SHAs or a new cross-module question.
 2. Audit `adapters/` as the next major module, correlating it with completed core/server/webview records.
 3. Review test suites and scripts as evidence of intended behavior, not as proof of correctness until executed.
 4. Build the system dependency/lifecycle map from source references and runtime observations.
