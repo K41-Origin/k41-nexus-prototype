@@ -1032,3 +1032,64 @@ The create-file API returned commit SHAs for newly created files, not content bl
 - `docs/current-architecture/governance/modules/scripts.md`: `e2676b8dbd9fdb1f11cccae48452651cc7efd3c8`.
 
 The earlier three values in the GOV-SCRIPTS-001 publication list were create-file commit SHAs, not blob SHAs. This correction preserves the append-only history; the remaining listed values were verified blob SHAs. The evidence log is re-fetched after this correction.
+
+
+## 2026-11-25 — GOV-GHCI-001: complete .github and CI/release static audit
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch/commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction@7b56bcd278311bfdb782acacdd80080f74d7e87a`.  
+**Governance reread:** governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, scripts module record/deep audit/file reference and E2E module record.  
+**Scope:** all tracked `.github/` blobs, all four workflows, templates/Dependabot/funding, and targeted release integration paths in package.json and npm/VSIX packaging scripts.
+
+### Inventory and reconciliation
+
+- Complete source tree has 10 blobs beneath `.github/`; all 10 individually fetched and source-reviewed.
+- Complete docs-branch tree at the pre-publication snapshot contains the same 10 .github paths/blob SHAs: 0 added, 0 removed, 0 changed.
+- Four workflows reviewed in full: `ci.yml` (683 lines), `pr-title.yml` (33), `publish-extension.yml` (154), `update-badges.yml` (129).
+- The three issue-template files, Dependabot config, PR template and funding file were also reviewed.
+- Full file metadata and SHA evidence are in `docs/current-architecture/github-ci/FILE-REFERENCE.md`.
+
+### Findings
+
+- **BUILD-008 — same-repository PR-controlled code executes in Vercel-secret-bearing preview job.** `.github/workflows/ci.yml:500-518,550-585,608-626`; Vercel secrets are job-wide, fork check is the only trust filter, and PR-controlled npm lifecycle/report scripts run in that job. Checkout credential persistence plus job write permissions increase the exposed token surface. High, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-009 — workflow_dispatch can publish a VSIX from a ref not verified as main.** `.github/workflows/publish-extension.yml:3-11,29-35,65-81`; default dry_run is false, main ancestry check applies only to release event, marketplace publishing steps are unconditional. High, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-010 — Required Checks is not shown as enforced by repository-level branch policy.** CI documents the aggregate gate at `ci.yml:426-437`; branch metadata reports `protected:false`, repository rulesets endpoint returns an empty list. Medium, High confidence for repository metadata; organization policy remains unverified. OPEN.
+- **BUILD-011 — third-party Actions references use mutable version tags, not full commit SHA pins.** Examples across all workflows are recorded in `github-ci/DEEP-AUDIT.md`. Medium, High confidence, STATIC-FINDING, OPEN.
+- **BUILD-012 — update-badges workflow omits explicit GITHUB_TOKEN permissions.** `update-badges.yml:8-12,40-46,96-128`; effective rights inherit repository defaults. Low, High confidence that declaration is absent; actual effective rights unknown. OPEN.
+- **BUILD-013 — VSIX release path does not compare release tag to package manifest version.** `publish-extension.yml:29-35,51-87` checks main ancestry only, whereas `scripts/npm-package-contract.mjs:130-136` enforces `v<manifest.version>` for npm. Medium, High confidence, STATIC-FINDING, OPEN.
+
+### Workflow, artifact and repository metadata observations
+
+- CI triggers on PRs to main and pushes to main; PR-title uses `pull_request_target` without checkout and only read permission; extension publishing triggers on published release and manual dispatch; badge update is scheduled and manually dispatchable; Dependabot runs weekly.
+- npm publication verifies release identity and SHA-512 tarball integrity in the same job that generated the package. The publish command uses the local verified tarball rather than downloading a separate artifact.
+- VSIX is smoke-verified and the same local output path is passed to Marketplace/Open VSX/release upload. No explicit VSIX checksum/attestation generation is present in the workflow.
+- Allure artifacts are uploaded/downloaded within the same workflow run. No separate artifact attestation or explicit digest comparison is defined in the workflow YAML.
+- The deploy precheck receives CI/E2E results but does not use them in its ready decision; its skip-summary branches for CI/E2E failure are unreachable in the current script. Whether report preview should be gated on failed tests remains an OPEN design-intent question, not a new finding.
+- GitHub Actions workflow-runs API returned 0 runs and releases API returned an empty list. Branch metadata reports main `protected:false`; repository rulesets list is empty. Branch-protection detail endpoint returned 403 to the connected integration. Organization rulesets, repo Actions defaults, secret values/scopes and npm trusted-publisher settings were not available.
+
+### Documentation publication and verification
+
+Created:
+- `docs/current-architecture/github-ci/README.md` — blob SHA `baaf0f2146a821a9afb6bc0c96394611a77798fa`.
+- `docs/current-architecture/github-ci/FILE-REFERENCE.md` — blob SHA `781e9ab2d4cc4137b39760589fa0164fe208c356`.
+- `docs/current-architecture/github-ci/DEEP-AUDIT.md` — blob SHA `b540b8db646ec9f63250533afefc4d7235f71f9c`.
+- `docs/current-architecture/governance/modules/github-ci.md` — blob SHA `2d50c2ee1aede2ae71fe737601438abeaea2e47a`.
+
+Updated:
+- `docs/current-architecture/governance/README.md` — blob SHA `a9c34d3f6170ee37da1362006db7c91056b5f72e`.
+- `docs/current-architecture/governance/AUDIT-REGISTER.md` — blob SHA `62a9e38fc0062330e3d2ac17a0e1f8c7ccb2de8c`.
+- `docs/current-architecture/governance/modules/scripts.md` — blob SHA `0073a20a71ffa9f9c7cef3cbda881a924e1cc595`.
+
+All seven changed audit documents were fetched again after publication and blob SHAs/status markers verified. This evidence log is appended below and must be re-fetched once more after the update.
+
+### Execution and modification limits
+
+- Static/read-only repository investigation and audit-document publication only.
+- No workflow dispatch, CI execution, test, build, lint, typecheck, deployment, release, package publication or runtime experiment executed.
+- No application source, workflow, package manifest, dependency or configuration modified.
+
+### Next continuation
+
+Resolve BUILD-008 and BUILD-009 trust boundaries first. Then verify organization-level branch rules, repository Actions default token permissions, secret scopes/environment protections, npm trusted publisher configuration and release artifact attestations when the required settings access is available. Preserve BUILD-001–BUILD-013 and all existing E2E/server/adapter/webview IDs.
