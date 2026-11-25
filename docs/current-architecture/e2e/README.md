@@ -1,6 +1,6 @@
 # End-to-End Tests — Current Architecture
 
-**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation (47/47); assertion-level review complete (21/21 specs, 152 tests); full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); targeted cross-module lifecycle/hook/reconnect/persistence/test-hook static trace complete (GOV-E2E-004); scripts/CI verification remains open.  
+**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation (47/47); assertion-level review complete (21/21 specs, 152 tests); full static review complete for 25/25 fixture/helper/setup/config files (GOV-E2E-003); targeted cross-module lifecycle/hook/reconnect/persistence/test-hook static trace complete (GOV-E2E-004); scripts static audit is complete (14/14; BUILD-001–BUILD-007 recorded); `.github/` CI/release verification remains open.  
 **Source baseline:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.  
 **Inventory:** 47/47 tracked blobs under `e2e/`; 21 spec files / 152 test declarations. No tests have been executed in this audit. Nine static findings E2E-001–E2E-009 are recorded in DEEP-AUDIT.md, including run-ID path traversal, stale download-lock recovery, and mock scenario queue concurrency.
 
