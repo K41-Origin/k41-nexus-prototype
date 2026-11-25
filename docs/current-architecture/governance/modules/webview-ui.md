@@ -51,15 +51,15 @@ The 459 ledger rows currently classify as:
 
 | Ledger status | Files | Meaning |
 |---|---:|---|
-| `REVIEWED` | 254 | Prior 245 plus 9 character UI files fully re-fetched and statically reviewed in GOV-WEBVIEW-007 |
-| `FETCHED / REVIEWED REPORTED` | 7 | GOV-WEBVIEW-004: SHA matched; historical per-file line coverage not evidenced; direct verification remains |
+| `REVIEWED` | 261 | Prior 254 plus 7 remaining webview source files fully re-fetched and statically reviewed in GOV-WEBVIEW-008 |
+| `FETCHED / REVIEWED REPORTED` | 0 | All seven remaining rows directly reviewed in GOV-WEBVIEW-008; no rows remain in this status |
 | `REVIEWED REPORTED` | 0 | All 9 character UI rows directly reviewed in GOV-WEBVIEW-007 |
 | `TEST-INVENTORIED` | 7 | Complete test source/assertions inspected in GOV-WEBVIEW-002/003; not executed |
 | `FETCHED / INVENTORIED` | 47 | Test files fetched/inventoried; complete assertion review remains; not executed |
 | `BINARY HEADER VERIFIED` | 143 | Header/signature/metadata checks only, as specified per file |
 | `NOT VERIFIED` | 1 | `public/fonts/FSPixelSansUnicode-Regular.ttf` internals remain unavailable |
 
-These categories sum to 459. GOV-WEBVIEW-005 directly reviewed the 32 component rows previously left as reported-review; together with the 22 component rows already REVIEWED, `src/components/` is 54/54 REVIEWED. GOV-WEBVIEW-006 directly reviewed the 14 remaining reported-review hook rows; together with the 10 previously REVIEWED hook rows, `src/hooks/` is 24/24 REVIEWED. **7 reported-review rows remain** elsewhere in webview source, alongside 47 inventoried-only tests. The 9 character UI rows are now directly reviewed; the 7 FETCHED / REVIEWED REPORTED rows remain a separate evidence gap. These are evidence gaps, not a claim that every remaining file is unread. No tests were executed. Do not repeat completed work wholesale. The single unverified font must remain open until its binary content is actually available.
+These categories sum to 459. GOV-WEBVIEW-005 directly reviewed the 32 component rows previously left as reported-review; together with the 22 component rows already REVIEWED, `src/components/` is 54/54 REVIEWED. GOV-WEBVIEW-006 directly reviewed the 14 remaining reported-review hook rows; together with the 10 previously REVIEWED hook rows, `src/hooks/` is 24/24 REVIEWED. All seven previously fetched/reported source rows elsewhere in webview source were directly reviewed in GOV-WEBVIEW-008; they were the same seven rows described in the earlier continuation note, not a second independent group. The 9 character UI rows are also directly reviewed. The remaining 47 test files are inventoried but still need assertion-level review. No tests were executed. Do not repeat completed work wholesale. The single unverified font must remain open until its binary content is actually available.
 
 ## Documentation verification
 
