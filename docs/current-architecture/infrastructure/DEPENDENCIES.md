@@ -2,7 +2,8 @@
 
 **Status:** PARTIAL — direct declarations and npm lockfile transitive closure statically mapped (GOV-DEPMAP-002); exhaustive source import/use mapping and bundle verification remain OPEN.
 
-**Source snapshot:** `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`.
+**Lockfile source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; package-lock blob `e183f6eced2e598496010a79c56a19f32e3dbe83`.
+**Security workflow snapshot:** `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`.
 
 ## Lock and workspace identity
 
