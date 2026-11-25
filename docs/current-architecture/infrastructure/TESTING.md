@@ -28,7 +28,7 @@
 
 The CI main job installs with `npm ci`; validates AsyncAPI; regenerates and checks `core/src/messages.ts` drift; checks E2E inventory drift; runs typecheck, lint, webview tests, format check and advisory Knip; builds extension and webview; verifies package contract/artifact; runs server tests after build; and runs npm audit. A separate Node 20 job performs package contract and installed artifact smoke. E2E runs across the 3×3 matrix. `required-checks` aggregates the main CI, Node 20 package smoke and E2E matrix outcomes.
 
-The CI workflow marks individual checks `continue-on-error: true` and then uses a final explicit fail gate to make the named blocking checks fail the job. Dependency audit and Knip are reported as advisory in the main job. The E2E job likewise has an explicit final failure gate.
+The CI workflow uses `continue-on-error: true` on AsyncAPI validation (`validate_spec`), generated-message drift (`messages_drift`) and E2E inventory drift (`e2e_inventory_drift`). These three outcomes are omitted from the final `required-checks` gate, so their failures do not fail the CI job (BUILD-014; STATIC-FINDING, OPEN). Dependency audit and Knip are also advisory by design. The E2E job has a separate explicit failure gate. The CI job's final gate does block the other enumerated required steps; do not generalize that guarantee to the three omitted checks.
 
 ## Test-quality evidence to preserve
 
