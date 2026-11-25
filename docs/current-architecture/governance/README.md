@@ -34,7 +34,11 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [E2E audit record](modules/e2e.md) | E2E inventory, assertion-review status, E2E-001–E2E-009 and cross-module coverage gaps |
 | [Scripts audit record](modules/scripts.md) | Complete 14/14 scripts inventory, source review, BUILD-001–BUILD-007 and tooling gaps |
 | [GitHub CI/release audit record](modules/github-ci.md) | Complete 10/10 `.github/` inventory, workflow permissions/triggers, secret boundaries, artifact provenance and BUILD-008–BUILD-013 |
-| [System dependency map](../SYSTEM-DEPENDENCY-MAP.md) | Single owner for evidence-backed cross-module import, runtime ownership, lifecycle, protocol and trust-boundary edges; currently NOT AUDITED |
+| [System dependency map](../SYSTEM-DEPENDENCY-MAP.md) | Single owner for evidence-backed cross-module import, runtime ownership, lifecycle, protocol and trust-boundary edges; static map IN PROGRESS |
+| [Infrastructure module record](modules/infrastructure.md) | Integrated build/package/dependency/test/CI audit; PARTIAL |
+| [System dependency map module record](modules/system-dependency-map.md) | Coverage/status pointer for the cross-module map |
+| [Architecture/ADR module record](modules/architecture-adr.md) | Reconciliation of current implementation, three ADRs and future hybrid-engine direction |
+| [Architecture/ADR reconciliation](../../ARCHITECTURE-ADR-RECONCILIATION.md) | Technical comparison; 12 future-engine design decisions remain OPEN |
 | [Infrastructure audit documents](../infrastructure/README.md) | Build, dependency, testing and integrated CI/CD infrastructure status; currently NOT AUDITED as a consolidated scope |
 
 ## Existing technical records retained
