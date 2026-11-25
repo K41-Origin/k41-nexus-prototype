@@ -1583,3 +1583,17 @@ The current-architecture index previously displayed only the historical module b
 - Re-fetched and verified the updated GitHub CI deep audit, E2E deep audit, E2E module record and scripts module record on `main` after publication.
 - Remaining coverage boundaries are unchanged: webview font TTF internals remain NOT VERIFIED; 143 public binary assets remain header/signature/metadata verified only; runtime/build/test verification remains unexecuted.
 - No source, workflow, package manifest, dependency, GitHub setting or release state was changed in this documentation-only reconciliation.
+
+
+## 2026-11-26 — GOV-BRANCH-CONSOLIDATION-001: canonical main selected
+
+- Canonical branch selected by the repository owner: `main`.
+- Current verified refs before this evidence append:
+  - `main@2718891011458fcbc7b8de11d4db7f134113fc32`
+  - `docs/hybrid-llm-engine-direction@ff15c7a28a515cc85af8e5e2c1f79a0ff362ddb4`
+  - `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`
+- Documentation PR #1 was squash-merged; all 65 audit documentation files are now present on `main`.
+- Security PR #2 was opened to consolidate the two workflow changes. It is intentionally NOT merged because BUILD-014 is an identified, uncorrected CI failure-gate defect. BUILD-008/009 also remain OPEN pending their actual workflow verification gates.
+- The documentation branch and security branch refs still exist. The available GitHub connector has no branch/ref deletion action; it cannot delete either ref. No destructive workaround or force-update was attempted.
+- The security workflow source was not modified in this session. A source patch to resolve BUILD-014 requires explicit authorization; after correction, static review and workflow verification must precede PR #2 merge.
+- Therefore the requested end state (only `main`) is NOT YET ACHIEVED. Current branch refs remain three: `main`, `docs/hybrid-llm-engine-direction`, and `security/remediate-build-008-009`.
