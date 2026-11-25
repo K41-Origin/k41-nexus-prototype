@@ -1,7 +1,8 @@
 # Webview UI — File Audit Ledger
 
 **Baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
-**Last SHA reconciliation:** 2026-11-25 at source `main` commit `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`); recursive tree `truncated: false`.  
+**Historical SHA reconciliation:** 2026-11-25 at source `main` commit `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`).
+**Latest SHA reconciliation:** 2026-11-26 at `main@b1104a808cf70382c2bd14a94d372d907a500cda` (tree `97940dabd84264b6281917b11928ebae6156752c`, `truncated=false`); 459/459 paths and blob SHAs match.  
 **Inventory:** 459 tracked blobs (302 src, 92 public, 54 tests, 11 root/package/config).  
 **Reconciliation result:** 459/459 ledger paths and blob SHAs match the current tree; 0 missing, 0 extra, 0 mismatched, and 0 source changes against the baseline.
 
