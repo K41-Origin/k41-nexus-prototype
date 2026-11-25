@@ -29,7 +29,8 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [Server audit record](modules/server.md) | Verified server inventory/source reconciliation, findings and runtime/test limitations |
 | [Webview UI audit record](modules/webview-ui.md) | Webview inventory reconciliation, historical coverage, findings and remaining audit gaps |
 | [Adapters audit record](modules/adapters.md) | VS Code adapter static audit coverage, A-01–A-10, source baseline and remaining integration gaps |
-| [E2E audit record](modules/e2e.md) | E2E inventory, assertion-review status, E2E-001/E2E-002 and cross-module coverage gaps |
+| [E2E audit record](modules/e2e.md) | E2E inventory, assertion-review status, E2E-001–E2E-009 and cross-module coverage gaps |
+| [Scripts audit record](modules/scripts.md) | Complete 14/14 scripts inventory, source review, BUILD-001–BUILD-007 and tooling gaps |
 
 ## Existing technical records retained
 
@@ -42,6 +43,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 - [Server deep audit](../server/DEEP-AUDIT.md) and [server file reference](../server/FILE-REFERENCE.md)
 - [Adapters deep audit](../adapters/DEEP-AUDIT.md) and [adapter file reference](../adapters/FILE-REFERENCE.md)
 - [E2E deep audit](../e2e/DEEP-AUDIT.md) and [E2E file reference](../e2e/FILE-REFERENCE.md)
+- [Scripts deep audit](../SCRIPTS-AUDIT.md), [scripts file reference](../SCRIPTS-FILE-REFERENCE.md) and [scripts overview](../SCRIPTS-README.md)
 
 These documents are linked, not copied wholesale. The governance register points to the owning record for each detail.
 
