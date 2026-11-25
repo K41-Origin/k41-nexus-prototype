@@ -370,3 +370,40 @@ These are audit observations and future technical priorities only. No fixes were
 ### Continuation
 
 Continue with the remaining 30 reported-review source rows, prioritizing the 14 hooks and their lifecycle/cross-module behavior. Then continue the 47 test assertion reviews, protocol producer-consumer tracing, host lifecycle/reconnect analysis and outstanding binary/font evidence. Do not repeat the 54 component files unless their source SHA changes or a new cross-module question requires it.
+
+
+## 2026-11-25 — GOV-WEBVIEW-006: webview hooks direct source verification
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main`  
+**Source commit:** `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Recursive tree SHA:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Documentation branch before this session's publication:** `docs/hybrid-llm-engine-direction` at `c24f2b79b037909092167a5d361b20c7e30f7547`  
+**Scope:** all tracked files under `webview-ui/src/hooks/`.
+
+### Governance and historical reconciliation
+
+- Re-read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, webview module record, DEEP-AUDIT and FILE-REFERENCE.
+- Complete source tree confirms **24 hook files**, not 14 total. The earlier module record's 14 was the remaining reported-review gap, not the total hook count.
+- Reconciled all 24 paths and blob SHAs against FILE-REFERENCE: 0 missing, 0 extra, 0 SHA mismatches.
+- Ten hook files were already REVIEWED under GOV-WEBVIEW-002 and were not redundantly inspected.
+- Individually re-fetched and statically reviewed all 14 remaining reported-review files. All 24 hooks are now REVIEWED at this source commit.
+- Updated per-file ledger line coverage for the 14 newly reviewed files.
+
+### Findings
+
+- Added `WV-C15`: `useEditorKeyboard` global keydown handler does not exclude text inputs; App activates it during editor mode while EditorToolbar has Area name and rename text fields. Static only.
+- Added `WV-C16`: redo shortcut branch compares lowercase `e.key === 'z'` while requiring Shift; standard Shift+Z key value is uppercase. Ctrl/Cmd+Y remains separate fallback. Static only.
+- Existing findings and IDs preserved; no prior finding was closed or reused.
+
+### Execution and modification limits
+
+- Static source/documentation investigation only.
+- No tests, builds, lint, typecheck, browser/VS Code runtime, keyboard simulation, or other runtime experiment executed.
+- No application source, test, configuration, dependency or asset file changed.
+- Findings are not runtime reproduced and no fixes were implemented.
+
+### Next continuation
+
+- 16 reported-review source rows remain: 9 `characters/ui/` files and 7 other source files.
+- After those, continue the 47 inventoried-only tests, protocol producer-consumer tracing, host lifecycle/reconnect and binary/font evidence.
