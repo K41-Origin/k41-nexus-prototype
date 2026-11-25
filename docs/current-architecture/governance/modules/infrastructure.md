@@ -1,6 +1,6 @@
 # Infrastructure Audit Record
 
-**Status:** PARTIAL — integrated static infrastructure review published at source snapshot `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`. Build graph and test/CI configuration are statically mapped; direct dependencies classified; runtime/package/bundle verification remains OPEN.
+**Status:** PARTIAL — integrated static infrastructure review published at source snapshot `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`. Build graph and test/CI configuration are statically mapped; direct and lockfile-transitive dependency resolution statically mapped (GOV-DEPMAP-002); source import reachability, runtime/package/bundle verification remain OPEN.
 
 ## Ownership
 
