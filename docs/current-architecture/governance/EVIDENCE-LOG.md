@@ -243,3 +243,45 @@ Continue with the exact line-coverage gaps in the 118 reported-review rows, the 
 - Tests: 5/54 complete assertion inspections recorded; 49 remain inventory-only.
 - Binary evidence: 143 header/metadata-only rows; TTF remains unverified.
 - No tests, build, lint, typecheck, protocol generation, runtime experiment, application source change or asset change occurred.
+
+
+## 2026-11-25 — GOV-WEBVIEW-003: browser mock and development asset pipeline review
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main`  
+**Source commit:** `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Documentation branch parent:** `d15dbb41666b2ac7420e4ebe88456c250c10298f`  
+**Scope:** browserMock bootstrap/asset decoding, Vite asset middleware/cache invalidation, and two related integration test files.  
+**Method:** SHA-first source fetch, full-file static inspection, source/test cross-reference. No execution.
+
+### Files fully reviewed
+
+| Path | Blob SHA | Lines | Status |
+|---|---|---:|---|
+| `webview-ui/src/browserMock.ts` | `335caac9b428de7801b0c5c680eaab2dd7a1f290` | 1–248 | REVIEWED |
+| `webview-ui/src/main.tsx` | `223bbf51073edc73b9646be0e9618b11ea1ac250` | 1–27 | REVIEWED |
+| `webview-ui/vite.config.ts` | `b47531773bf6fea57fe6d46a6291133371aa56ea` | 1–126 | REVIEWED |
+| `webview-ui/test/dev-assets.test.ts` | `44c181de7e7f63904143d6e7ccdf3b0fc33bb0b7` | 1–99 | TEST-INVENTORIED |
+| `webview-ui/test/build-subpath.test.ts` | `6531f84f343232b656cd9265d701a478babd4277` | 1–137 | TEST-INVENTORIED |
+
+Cross-reference source:
+- `core/src/assets/loader.ts` — `0cbd192c01398fa1f62fcdafd67f85a0882a1266`.
+- `core/src/assets/build.ts` — `08d04b03d8937558c437dc3de7a9dab06568aad3`.
+
+### Results
+
+1. The entrypoint awaits browserMock initialization only for browser runtime + Vite DEV; production standalone and VS Code do not import it through this entrypoint.
+2. The dev mock prefers decoded floor/wall/furniture endpoints and falls back to browser PNG decoding if the full trio is unavailable. Carpet endpoint failure is intentionally degraded to an empty array.
+3. The mock dispatch order sends furniture assets before layout.
+4. The Vite asset plugin clears its decoded cache and sends full reload on watcher `change`; no add/unlink listener was found in the inspected implementation. This adds source evidence to existing `WV-VITE-01`; no new ID was created.
+5. `dev-assets.test.ts` checks root/subpath metadata and representative asset URLs but omits the decoded carpets endpoint and does not exercise browserMock fallback/dispatch or watcher invalidation. `build-subpath.test.ts` checks built bundles, metadata sidecars and manifest icons, not browserMock execution.
+6. The browserMock file comment suggests a plain-browser production fallback, but the inspected main entrypoint gates import to DEV. Actual production reachability of that fallback is not established by this code path.
+
+### Coverage delta and limits
+
+- 3 source rows advanced to REVIEWED: browserMock.ts, main.tsx, vite.config.ts.
+- 2 test rows advanced to TEST-INVENTORIED: dev-assets.test.ts, build-subpath.test.ts.
+- New status distribution: 199 REVIEWED source rows; 62 reported-review source rows; 7 TEST-INVENTORIED tests; 47 FETCHED / INVENTORIED tests; 143 binary header-only rows; 1 unverified TTF.
+- No tests/build/lint/typecheck/protocol generation/runtime or watcher experiment executed.
+- No application source, asset, dependency or configuration file modified.
