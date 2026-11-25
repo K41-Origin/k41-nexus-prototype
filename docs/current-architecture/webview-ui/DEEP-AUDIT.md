@@ -2,9 +2,10 @@
 
 **Status:** IN PROGRESS — not approved as complete.  
 **Repository:** K41-Origin/k41-nexus-prototype  
-**Baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
-**Documentation branch:** docs/hybrid-llm-engine-direction  
-**Inventory:** 459 tracked blobs; recursive tree validated with truncated=false.
+**Historical baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
+**Latest source verification:** `main@b1104a808cf70382c2bd14a94d372d907a500cda` (tree `97940dabd84264b6281917b11928ebae6156752c`, `truncated=false`).  
+**Canonical documentation branch:** `main`.  
+**Inventory:** 459 tracked blobs; 459/459 current path/blob SHAs match.
 
 ## 1. Audit control and no-duplication rule
 
