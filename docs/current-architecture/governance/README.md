@@ -28,6 +28,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [Core audit record](modules/core.md) | Verified core source/docs audit, baseline, findings and open cross-layer questions |
 | [Server audit record](modules/server.md) | Verified server inventory/source reconciliation, findings and runtime/test limitations |
 | [Webview UI audit record](modules/webview-ui.md) | Webview inventory reconciliation, historical coverage, findings and remaining audit gaps |
+| [Adapters audit record](modules/adapters.md) | VS Code adapter static audit coverage, A-01–A-10, source baseline and remaining integration gaps |
 
 ## Existing technical records retained
 
@@ -38,6 +39,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 - [Core dependencies](../core/DEPENDENCIES.md)
 - [Webview deep audit](../webview-ui/DEEP-AUDIT.md), [webview file ledger](../webview-ui/FILE-REFERENCE.md), and its protocol/asset/state/rendering/transport documents
 - [Server deep audit](../server/DEEP-AUDIT.md) and [server file reference](../server/FILE-REFERENCE.md)
+- [Adapters deep audit](../adapters/DEEP-AUDIT.md) and [adapter file reference](../adapters/FILE-REFERENCE.md)
 
 These documents are linked, not copied wholesale. The governance register points to the owning record for each detail.
 
