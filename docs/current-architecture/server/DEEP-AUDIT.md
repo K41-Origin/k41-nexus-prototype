@@ -165,7 +165,7 @@ Test files and cases were inventoried; this does not mean every assertion was in
 | `standaloneAgentLauncher.test.ts` | Launch/resume command construction, id allocation rollback, PTY failure, exit cleanup and transcript watcher behavior | Provider launch behavior is mocked; actual CLI startup/session creation remains external integration |
 | `paletteAssigner.test.ts`, `characterRemap.test.ts`, `seatedFrame.test.ts` | Character selection/remap/legacy asset behavior | Does not cover the complete asset pipeline or browser packaging |
 
-### 6.2 Direct correlation with F-01–F-08
+### 6.2 Direct correlation with F-01–F-09
 
 | Finding | Existing test evidence | Audit conclusion / missing regression |
 |---|---|---|
@@ -177,6 +177,7 @@ Test files and cases were inventoried; this does not mean every assertion was in
 | F-06 Existing token mode | Server/CLI tests cover token creation/rotation and discovery | **Not closed.** No existing-token permissive-mode test asserting mode is tightened or a documented unsupported-platform outcome. |
 | F-07 Descriptor closure | JSON watcher tests cover watcher disposal and failed writes | **Not closed.** No fault-injected synchronous JSONL read failure asserting descriptor closure after a successful open. |
 | F-08 Message schema validation | Client handler tests cover read-only gate and selected malformed values; config/directory/profile tests cover feature-specific validation | **Partially covered only.** Existing tests do not provide exhaustive schema validation for every message. Add malformed nested payload matrices for layout, area mappings, seats and settings, asserting no persistence or side effects. |
+| F-09 SessionEnd grace timer disposal | `hookEventHandler.test.ts` covers the grace delay and separately calls `dispose()` idempotently | **Not closed.** The dispose case does not schedule a pending clear/resume timer before disposal or assert that the lifecycle callback cannot fire afterwards. Add a pending-timer → dispose → advance-time regression. |
 
 ### 6.3 Test harness quality and blind spots
 
@@ -196,15 +197,15 @@ Test files and cases were inventoried; this does not mean every assertion was in
 - Build/typecheck/protocol generation: **NOT RUN** in this audit session.
 - Platform/integration testing: **NOT RUN**.
 - No claim is made that the suite passes.
-- The test audit does not close F-01–F-08. It identifies existing coverage and the specific missing regressions needed to verify those findings.
+- The test audit does not close F-01–F-09. It identifies existing coverage and the specific missing regressions needed to verify those findings.
 
 ## 7. Exit criteria for the next repository audit stage
 
-The server static audit is complete at the file-inventory/source-review level. Before implementation, the verification sequence in §5 remains required. The repository-wide audit can now proceed to `adapters/` while preserving F-01–F-08 as open findings. The next module audit must trace adapter ownership, activation/deactivation lifecycle, provider/session dependencies, message/data boundaries and teardown behavior, then correlate its tests and callers with the server findings.
+The server static audit is complete at the file-inventory/source-review level. Before implementation, the verification sequence in §5 remains required. The repository-wide audit can now proceed to `adapters/` while preserving F-01–F-09 as open findings. The next module audit must trace adapter ownership, activation/deactivation lifecycle, provider/session dependencies, message/data boundaries and teardown behavior, then correlate its tests and callers with the server findings.
 
 ## 5. Verification sequence before refactoring
 
-1. Add regression tests for F-01–F-08.
+1. Add regression tests for F-01–F-09.
 2. Run the server test command and record exact results.
 3. Run root typecheck/build and protocol-generation checks.
 4. Exercise embedded/standalone startup, multiple roots/processes, hook fan-out, consent revision and shutdown/restart.
