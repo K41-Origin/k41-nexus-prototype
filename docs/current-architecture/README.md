@@ -1,7 +1,8 @@
 # Current Architecture Audit
 
 **Status:** Evidence-backed architecture audit in progress  
-**Baseline:** `main` — `4dd14d612fd37d89ffbbc977959f572395c4eec8`
+**Historical module baseline:** `main` — `4dd14d612fd37d89ffbbc977959f572395c4eec8`
+**Latest cross-layer static source snapshot:** `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58` (based on `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`); system dependency, infrastructure and ADR reconciliation are documented against this snapshot.
 
 ## Governance
 
