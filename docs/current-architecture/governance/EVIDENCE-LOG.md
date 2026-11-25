@@ -686,3 +686,62 @@ Static only. No tests, build, lint, typecheck, protocol generation, runtime/brow
 ### Documentation changes
 
 Appended detailed field-level matrix and findings to webview PROTOCOL-MATRIX / DEEP-AUDIT; updated webview governance module, consolidated register and this append-only evidence log. Publication must be verified by re-fetching every changed document and recording the resulting branch head/blob SHAs.
+
+
+## 2026-11-25 — GOV-WEBVIEW-012: cross-layer lifecycle, reconnect and state reconciliation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main`  
+**Source commit:** `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Documentation branch:** `docs/hybrid-llm-engine-direction`  
+**Documentation branch tip before this session's publication:** `08ee7fc7edddc358ba883cb4d25d6282becd10a8`  
+**Scope:** standalone control-plane reconnect and snapshot replay; VS Code webview readiness/buffering/restore; per-agent terminal data-plane reconnect; UI/OfficeState reconciliation and cross-layer lifecycle ownership.
+
+### Governance and historical work reused
+
+Read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, module records webview-ui/server/adapters, webview DEEP-AUDIT, FILE-REFERENCE, PROTOCOL-MATRIX, TRANSPORT and STATE-MANAGEMENT. Existing coverage reused: 34/34 ClientMessage + 46/46 ServerMessage route map; 34/34 field-level validation/authorization/persistence/side-effect matrix; server 135/135 audit; adapter 8/8 source audit. Existing findings preserved: WV-APP-01, WV-RESYNC-01, WV-TR-01, WV-PROTO-01/02/03, A-03/A-05/A-06 and F-01/F-03/F-05.
+
+### Fresh source tree and SHA reconciliation
+
+- Retrieved Git Trees API recursively for `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`: tree SHA equals commit SHA; 856 entries, 739 blobs, 117 trees, `truncated=false`.
+- Webview FILE-REFERENCE: parsed 459 ledger path/blob-SHA rows and compared against all 459 `webview-ui/` tree blobs: 459/459 match, 0 missing, 0 extra, 0 mismatched.
+- Adapter FILE-REFERENCE: parsed 8 current blob-SHA rows and compared against all 8 `adapters/` tree blobs: 8/8 match, 0 missing, 0 extra, 0 mismatched.
+- Server FILE-REFERENCE contains 135 path/responsibility rows but no per-file SHA column/manifest. The server governance record documents historical 135/135 SHA reconciliation at this same source commit. Current tree contains 135 server blobs; all selected server source files below were compared directly to current tree SHAs. No claim is made that all 135 server SHAs were independently compared to a standalone ledger in this session.
+- Documentation branch head fetched before publication: `08ee7fc7edddc358ba883cb4d25d6282becd10a8`.
+
+### Selected source evidence
+
+All selected SHAs below match the fresh recursive tree at the source commit:
+
+- `webview-ui/src/hooks/useExtensionMessages.ts` — `649025df90edef84d24c40556cee2ea007e15ccf` (reconnect resync cleanup lines 305–325; existingAgents reconciliation 469–509; ready/reconnect subscription 910–923).
+- `webview-ui/src/transport/webSocketTransport.ts` — `33008b95327f9e2a18e23aaf0f2060416c95aba9` (queue lines 24, 60–70, 93–99; message dispatch lines 72–78).
+- `webview-ui/src/transport/onReconnect.ts` — `030ae419587d5f3b69b78d74cf295811087e2bcd`.
+- `webview-ui/src/transport/postMessageTransport.ts` — `f9b622f6bc28eb18b3bb7131e10c596ad7e68acd`.
+- `webview-ui/src/transport/reconnectBackoff.ts` — `44dc5aac6b52a73f35700509036a248396e3cc20`.
+- `webview-ui/src/App.tsx` — `3eb91a2050da5f789223bc0a045a80fc841d60cb` (dirty callback lines 89–92; useExtensionMessages wiring lines 94+).
+- `webview-ui/src/office/engine/existingAgents.ts` — `f23ff3f79f5fc6baf37f2915f8ff6abde107ce35` (restore/reconcile lines 55–100).
+- `webview-ui/src/office/engine/officeState.ts` — `1afd778f4c72f1901ef91266e29a89f117e180c7` (addAgent idempotency guard lines 453–468; rebuild/sync path was inspected in targeted ranges).
+- `webview-ui/src/terminal/terminalClient.ts` — `55336df6e5d593008c0f1c7d34c8d0d0c5ae3d10`.
+- `webview-ui/src/hooks/useTerminalDrawer.ts` — `2913c2331ad4bee5f127a249502a394bfb414980`.
+- `server/src/clientMessageHandler.ts` — `d7ae8235ee75de63b1716a4b67f27d69023f5d96` (handshake snapshot ordering lines 700–770).
+- `server/src/httpServer.ts` — `ad5104a14233aa29834e008833a0f21458fc887b` (connection and store subscription lifecycle lines 180–280).
+- `server/src/agentStateStore.ts` — `e73e5e47550cdfb1560ecdd0514b75be3688c5c1` (agentAdded/agentRemoved emission lines 115–128).
+- `server/src/agentMessages.ts` — `df521f7a6d9ddbad8d7ee0c567df4054c500b9ea` (agentCreated payload includes palette/repeat/seatId lines 8–22).
+- `server/src/agentActivityResend.ts` — `f0c6fe190f9d259c6c172cfd7a4198ecc64dfb77` (activity replay lines 14–95).
+- `adapters/vscode/PixelAgentsViewProvider.ts` — `94d1ab2e1427377e67ff430a852d49863e5e4d87` (webviewReady restore lines 675–806; async layout and existing snapshot send lines 975–982).
+- `adapters/vscode/agentManager.ts` — `30020b3e34d2d83fa4536e0d27f55c9e4fe3295c` (store.set on restore lines 362–370; snapshot metadata from adapter.loadSeats lines 495–531).
+
+### Lifecycle map and findings
+
+- Standalone control plane: WebSocket reconnect → onReconnect → webviewReady → server sends settings/assets/mappings/directories → existingAgents → layoutLoaded → activity replay → terminalSessionOpened. Client snapshot resync removes stale agents and resets transient tool/status/subagent state. Terminal sockets are separate, reconnect per agent, replay scrollback, and reassert geometry; terminal input is not buffered while disconnected.
+- VS Code: PostMessageTransport has no reconnect state. Each fresh iframe resets readiness and its pending buffer; webviewReady flushes buffered events, restores agents, then async asset/layout work completes. Store restore emits agentAdded before sendExistingAgents; webview immediately materializes agentCreated before layout is ready; existingAgents metadata is buffered, and later restoreAgent's addAgent is a no-op for an existing ID. This extends WV-RESYNC-01 with a conditional initial-hydration path where separate persisted seat/look metadata may not override earlier agentCreated values.
+- **WV-RESYNC-02** added: every ClientMessage sent while WebSocket is not OPEN is queued and replayed on next open without command classification, expiry, coalescing, acknowledgement or cancellation. Delayed launch/resume/close and stale settings writes are possible. Severity Medium, confidence High, OPEN, static only.
+- Existing **WV-APP-01**, **WV-RESYNC-01**, **WV-TR-01**, **WV-PROTO-01/02/03**, adapter **A-03/A-05/A-06**, server **F-01/F-03/F-05** remain open. No duplicate finding created for the VS Code hydration extension.
+
+### Verification limits
+
+Static only. No tests, builds, lint, typecheck, protocol generation, browser/VS Code runtime, WebSocket drop/reconnect, PTY attach, multi-client test or fault injection was executed. No application source/test/assets/config were modified. Runtime reachability and visible impact of both WV-RESYNC-01 trigger paths and WV-RESYNC-02 remain OPEN.
+
+### Documentation changes
+
+Updated webview DEEP-AUDIT, TRANSPORT, STATE-MANAGEMENT, webview governance module, adapter/server governance cross-links, consolidated AUDIT-REGISTER and appended this evidence log. Re-fetch verification and resulting docs branch head/blob SHAs must be recorded after publication.
