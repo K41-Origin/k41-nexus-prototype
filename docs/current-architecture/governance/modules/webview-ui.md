@@ -1,10 +1,10 @@
 # Webview UI Module Audit Record
 
 **Status:** IN PROGRESS — complete tracked-file inventory and SHA reconciliation; historical static-review coverage and cross-layer verification remain open.  
-**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-007` (2026-11-25)  
+**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-008` (2026-11-25)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
-**Verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
-**Verification tree:** `6c65c2127b2fdf3742f76b317d43e9faccb61506` (`truncated: false`)  
+**Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
+**Latest source verification:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`, per GOV-WEBVIEW-002/008 evidence)  
 **Inventory:** 459/459 tracked blobs reconciled; no path or blob-SHA differences from the baseline.  
 **Evidence:** [GOV-WEBVIEW-001](../EVIDENCE-LOG.md#2026-11-25--gov-webview-001-webview-ui-inventory-and-governance-reconciliation).
 
@@ -30,7 +30,7 @@ Detailed findings and file-level status remain in their owning documents. Do not
 
 ## Inventory and SHA reconciliation
 
-At verification commit `8fc045de9ddae905cc131498d918ddbd64cc8bca`:
+At historical verification commit `8fc045de9ddae905cc131498d918ddbd64cc8bca` (the later source verification at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` is recorded in GOV-WEBVIEW-002/008):
 
 - Recursive repository tree: `truncated: false`.
 - `webview-ui/` contains **459 tracked blobs**:
@@ -63,7 +63,7 @@ These categories sum to 459. GOV-WEBVIEW-005 directly reviewed the 32 component 
 
 ## Documentation verification
 
-All ten existing webview architecture documents were fetched and confirmed non-empty at the verification commit: README, FILE-REFERENCE, DEEP-AUDIT, ASSET-INVENTORY, PROTOCOL-MATRIX, MODULE-OVERVIEW, STATE-MANAGEMENT, RENDERING-ENGINE, DEPENDENCIES and TRANSPORT.
+All ten existing webview architecture documents were fetched and confirmed non-empty at the historical verification commit: README, FILE-REFERENCE, DEEP-AUDIT, ASSET-INVENTORY, PROTOCOL-MATRIX, MODULE-OVERVIEW, STATE-MANAGEMENT, RENDERING-ENGINE, DEPENDENCIES and TRANSPORT.
 
 The existing documentation remains the technical source for module details. This governance record consolidates status and ownership; it does not replace those documents.
 
@@ -75,7 +75,7 @@ Preserve existing `WV-` findings and their states in [DEEP-AUDIT.md](../../webvi
 
 The historical SHA reconciliation for all 62 reported-review rows is complete. GOV-WEBVIEW-005 directly reviewed the 32 component rows with missing per-file coverage evidence; all 54 files under `webview-ui/src/components/` are now REVIEWED. GOV-WEBVIEW-006 completed all 24 hooks, and GOV-WEBVIEW-007 completed all 33 character source files. GOV-WEBVIEW-008 directly reviewed the final seven reported-review source rows elsewhere in `webview-ui/src/`. There are now **no reported-review source rows remaining**.
 
-The next work is:
+The next work is (authoritative continuation pointer; older continuation notes in DEEP-AUDIT are historical and superseded by GOV-WEBVIEW-008):
 
 1. Review the remaining 47 `FETCHED / INVENTORIED` test files at assertion level; map assertions to implementation and keep execution separate.
 2. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server.
