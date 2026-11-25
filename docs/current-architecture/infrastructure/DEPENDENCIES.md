@@ -1,6 +1,6 @@
 # Dependency Inventory
 
-**Status:** PARTIAL — direct root/workspace declarations, lockfile structure and major runtime/build consumers classified. Exhaustive transitive import/use mapping and bundle verification remain OPEN.
+**Status:** PARTIAL — direct declarations and npm lockfile transitive closure statically mapped (GOV-DEPMAP-002); exhaustive source import/use mapping and bundle verification remain OPEN.
 
 **Source snapshot:** `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`.
 
