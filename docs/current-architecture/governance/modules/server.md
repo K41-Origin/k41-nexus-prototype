@@ -13,7 +13,7 @@ This is the governance summary, not a duplicate technical audit.
 | Concern | Owning document |
 |---|---|
 | Consolidated status | [Audit register](../AUDIT-REGISTER.md) |
-| Findings F-01–F-08 and test/assertion analysis | [DEEP-AUDIT.md](../../server/DEEP-AUDIT.md) |
+| Findings F-01–F-09 and test/assertion analysis | [DEEP-AUDIT.md](../../server/DEEP-AUDIT.md) |
 | Per-file inventory and responsibilities | [FILE-REFERENCE.md](../../server/FILE-REFERENCE.md) |
 | Runtime lifecycle | [RUNTIME-LIFECYCLE.md](../../server/RUNTIME-LIFECYCLE.md) |
 | HTTP/WebSocket trust boundaries | [HTTP-WEBSOCKET.md](../../server/HTTP-WEBSOCKET.md) |
@@ -44,7 +44,7 @@ The README had inconsistent baseline/count wording relative to DEEP-AUDIT and FI
 
 ## Findings and limits
 
-Preserve F-01 through F-08 exactly as documented in `DEEP-AUDIT.md`; none are closed by this reconciliation. F-01–F-07 remain open; F-08 remains partially covered. Tests were inventoried, not executed. No build, typecheck, lint, live Claude session, live network security test, OS PTY matrix, or runtime reproduction was performed. No application source was changed.
+Preserve F-01 through F-09 exactly as documented in `DEEP-AUDIT.md`; none are closed by this reconciliation. F-01–F-07 and F-09 remain open; F-08 remains partially covered. Tests were inventoried, not executed. No build, typecheck, lint, live Claude session, live network security test, OS PTY matrix, or runtime reproduction was performed. No application source was changed.
 
 ## Next action
 
@@ -53,3 +53,8 @@ Do not repeat the 74-file source review or 57-file test inventory while SHAs rem
 ## Cross-module continuation — GOV-WEBVIEW-012
 
 The static webview lifecycle trace reused the server's existing 135/135 source audit and did not reopen unrelated server findings. It confirms the current standalone handshake sequence in `clientMessageHandler.ts` and activity replay in `agentActivityResend.ts`. Preserve server F-01/F-03/F-05 (runtime ownership, session unregister and awaited shutdown) as open lifecycle boundaries; no server finding was closed or duplicated. See webview DEEP-AUDIT §19 for the cross-layer trace and WV-RESYNC-01/02.
+
+
+## Targeted lifecycle continuation — GOV-E2E-004
+
+The targeted E2E cross-module trace adds **F-09** to the server-owned findings: the `SessionEnd(clear|resume)` grace timeout is not retained/cancelled by `HookEventHandler.dispose()`, while `AgentRuntime.stop()` documents a stop-and-preserve-state contract. See [server DEEP-AUDIT](../../server/DEEP-AUDIT.md#f-09--sessionend-grace-timer-survives-hookeventhandler-disposal) and [E2E cross-module trace](../../e2e/DEEP-AUDIT.md#81-lifecycle-and-hook-execution). This is static evidence only; the normal full-dispose and CLI process-exit paths narrow the practical trigger. No source/test was modified or executed.
