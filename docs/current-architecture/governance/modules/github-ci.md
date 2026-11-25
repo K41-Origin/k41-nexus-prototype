@@ -1,6 +1,6 @@
 # GitHub Workflows and CI/Release Audit Record
 
-**Status:** STATIC AUDIT COMPLETE — 10/10 historical `.github/` blobs reviewed; BUILD-008/009 remediation implemented on `security/remediate-build-008-009` (not merged; OPEN pending verification); BUILD-010–BUILD-014 OPEN.  
+**Status:** STATIC AUDIT COMPLETE — 10/10 historical `.github/` blobs reviewed; BUILD-008–BUILD-014 source corrections are present on `security/remediate-build-008-009@4d29e1654b0d6a7bd3dacf3773e02265ab0069a1`; all remain OPEN pending verification/settings gates.  
 **Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated=false`.  
 **Documentation snapshot before publication:** `docs/hybrid-llm-engine-direction@7b56bcd278311bfdb782acacdd80080f74d7e87a`.  
 **Detailed owner:** [GitHub CI/release deep audit](../../github-ci/DEEP-AUDIT.md).  
@@ -18,14 +18,14 @@ Preserve BUILD-008–BUILD-014 in [DEEP-AUDIT.md](../../github-ci/DEEP-AUDIT.md)
 - BUILD-008: historical finding was PR-controlled execution in a Vercel-secret-bearing preview job. Remediation branch removes the preview precheck/deploy jobs and all Vercel references from `ci.yml`; preview feature is suspended. OPEN pending PR negative-test evidence and merge.
 - BUILD-009: remediation branch makes manual dispatch build/verify-only, release-gates publisher jobs, separates unprivileged artifact build from VSIX/npm publisher jobs, confines `id-token:write` to the isolated npm publisher, disables checkout credential persistence in the build job, and verifies artifact integrity/idempotency. OPEN pending negative/positive workflow tests and Environment/npm trusted-publisher settings.
 - BUILD-010: required-check aggregate is not shown as enforced by repository branch policy; OPEN pending org-level policy verification.
-- BUILD-011: GitHub Actions dependencies use mutable tags rather than full commit SHA pins; OPEN.
-- BUILD-012: badge workflow omits explicit GITHUB_TOKEN permissions; OPEN.
-- BUILD-013: VSIX release path does not enforce tag/package-version identity; OPEN.
-- BUILD-014: AsyncAPI validation, generated-message drift and E2E inventory drift steps use `continue-on-error: true` but are omitted from the CI final gate; OPEN (STATIC-FINDING on remediation branch).
+- BUILD-011: all action references are now pinned to resolved full commit SHAs on the remediation branch; OPEN pending parser/actionlint and maintenance verification.
+- BUILD-012: badge workflow now declares `contents: read`; OPEN pending workflow/settings verification.
+- BUILD-013: shared release preflight now validates tag/ref/package version before both VSIX and npm publishing; OPEN pending negative/positive release tests.
+- BUILD-014: three protocol/inventory checks are now blocking and included in the final gate; OPEN pending YAML/actionlint and an actual CI run.
 - Existing BUILD-001–BUILD-007 remain in the scripts audit; no IDs reused.
 
 ## Next action
-Merge remediation branch `security/remediate-build-008-009` into `main` only after reconciliation; complete BUILD-014 remediation and the verification gates in [DEEP-AUDIT.md §10](../../github-ci/DEEP-AUDIT.md). BUILD-008 preview deployment is intentionally suspended. Before closure, verify PR/manual negative tests, release positive rehearsal, organization rulesets, Actions defaults, Vercel/registry secret scopes, `npm-publish` Environment protection, npm trusted publisher and artifact provenance. No workflow was dispatched in the remediation session.
+Complete BUILD-010 repository branch-protection/ruleset configuration with an authorized admin; run the workflow/test/release verification gates for BUILD-008–BUILD-014; merge only after evidence is recorded in [DEEP-AUDIT.md §10](../../github-ci/DEEP-AUDIT.md). BUILD-008 preview deployment is intentionally suspended. Before closure, verify PR/manual negative tests, release positive rehearsal, organization rulesets, Actions defaults, Vercel/registry secret scopes, `npm-publish` Environment protection, npm trusted publisher and artifact provenance. No workflow was dispatched in the remediation session.
 
 
 ## Trust-boundary design review — GOV-GHCI-002
