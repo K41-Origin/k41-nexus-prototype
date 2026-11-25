@@ -1,10 +1,11 @@
 # Adapters Module Audit Record
 
-**Status:** STATIC AUDIT COMPLETE for the documented baseline; cross-module and dynamic verification remain OPEN.  
+**Status:** STATIC AUDIT COMPLETE — 8/8 source files SHA-reconciled against the active source branch; cross-module and dynamic verification remain OPEN.  
 **Audit scope:** `adapters/vscode/` — 8/8 tracked files fetched and statically reviewed.  
 **Historical source baseline:** `main` — `4dd14d612fd37d89ffbbc977959f572395c4eec8`.  
+**Latest SHA verification:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (8/8 paths and blob SHAs unchanged).  
 **Detailed owner:** [Adapters DEEP-AUDIT](../../adapters/DEEP-AUDIT.md).  
-**File identity/coverage owner:** [Adapters FILE-REFERENCE](../../adapters/FILE-REFERENCE.md).
+**File identity/coverage owner:** [Adapters FILE-REFERENCE](../../adapters/FILE-REFERENCE.md), including the 2026-11-25 SHA manifest.
 
 ## Coverage already completed
 
@@ -35,6 +36,15 @@
 - Webview: message transport, readiness buffering, reconnect and UI snapshot handling.
 - Core: host/terminal/provider contracts; adapter remains a VS Code host integration, not a generic provider-adapter registry.
 
+## SHA reconciliation result — 2026-11-25
+
+- Source branch: `main` at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`.
+- Recursive tree: 856 entries / 739 blobs; `truncated: false`.
+- Historical adapter baseline: `4dd14d612fd37d89ffbbc977959f572395c4eec8`.
+- Comparison: 8/8 adapter paths unchanged; 0 added, 0 removed, 0 blob-SHA mismatches.
+- Exact current blob SHAs and byte sizes are recorded in [FILE-REFERENCE](../../adapters/FILE-REFERENCE.md).
+- **Conclusion:** the previous SHA-reconciliation gate is closed. No adapter source needs re-review because of source changes.
+
 ## Mandatory continuation gate
 
 Before any adapter source is revisited:
@@ -47,9 +57,9 @@ Before any adapter source is revisited:
 
 ## Next work
 
-- Reconcile the adapter file SHAs at the active source commit before further investigation; the baseline above is historical provenance, not proof of current identity.
+- SHA reconciliation against active `main` is complete at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; do not repeat the 8-file static review while identities remain unchanged.
 - Continue cross-layer lifecycle ownership and teardown tracing with server F-01/F-03/F-05 and webview reconnect/transport records.
 - Activation/deactivation, repeated view resolution, terminal launch compensation, restore timer cancellation, multi-root behavior and uninstall completion remain unverified.
 - Do not execute tests/build/lint/typecheck or VS Code runtime experiments unless explicitly authorized.
 
-**Evidence classification:** coverage/findings above are DOC-RECORDED from the adapter audit documents. Current-source SHA reconciliation is OPEN until the 8-file ledger is compared with the active source tree.
+**Evidence classification:** prior coverage/findings are DOC-RECORDED; latest 8/8 path/blob identities are TREE-VERIFIED against active `main`. Dynamic behavior remains OPEN.
