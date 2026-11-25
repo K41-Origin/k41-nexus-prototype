@@ -16,6 +16,7 @@ This register is the consolidated index. Detailed findings remain in their ownin
 | Core source snapshot | `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1` | Historical core inventory root; all 28 core blob SHAs reconciled |
 | Server source snapshot | `f1af3e0c36573e4317143969cf43dde642877ba6` | Canonical server audit baseline; all 135 server blob SHAs reconciled |
 | Webview UI source snapshot | `4dd14d612fd37d89ffbbc977959f572395c4eec8` | Canonical webview audit baseline; all 459 webview blob SHAs reconciled at the governance branch tip |
+| Adapter source verification | `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` | 8/8 adapter path/blob SHAs match historical baseline `4dd14d612fd37d89ffbbc977959f572395c4eec8` |
 
 The core, server and webview source blob identities have been reconciled at the stated snapshots. This does not imply runtime correctness, test success, or that divergent branch histories have been merged.
 
@@ -26,7 +27,7 @@ The core, server and webview source blob identities have been reconciled at the 
 | `core/` | **AUDITED — 28/28 files individually re-fetched; SHA and file-reference reconciliation complete** | [Core audit record](modules/core.md), [core file reference](../core/FILE-REFERENCE.md) | Cross-layer consumer/runtime verification remains open |
 | `server/` | **AUDITED — 135/135 tracked files reconciled; source SHAs unchanged; 9/9 architecture docs fetched** | [Server governance record](modules/server.md), [deep audit](../server/DEEP-AUDIT.md), [file reference](../server/FILE-REFERENCE.md) | Preserve F-01–F-08; runtime/test verification remains open |
 | `webview-ui/` | **IN PROGRESS — 459/459 paths/SHA reconciled; 261 REVIEWED; 0 reported-review source rows; 7 TEST-INVENTORIED; 47 FETCHED / INVENTORIED; 143 BINARY HEADER VERIFIED; 1 NOT VERIFIED** | [Webview governance record](modules/webview-ui.md), [deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Assertion-level review of the 47 inventoried-only tests; then protocol tracing, lifecycle/reconnect and binary/font evidence |
-| `adapters/` | **STATIC AUDIT COMPLETE — 8/8 files reviewed; findings A-01–A-10 documented; dynamic verification open** | [Adapters governance record](modules/adapters.md), [deep audit](../adapters/DEEP-AUDIT.md), [file reference](../adapters/FILE-REFERENCE.md) | Reconcile 8 file SHAs against active source tree before any revisit; then targeted VS Code lifecycle/activation/disposal verification when authorized |
+| `adapters/` | **STATIC AUDIT COMPLETE — 8/8 files reviewed and SHA-reconciled against main@56f354f; findings A-01–A-10 documented; dynamic verification open** | [Adapters governance record](modules/adapters.md), [deep audit](../adapters/DEEP-AUDIT.md), [file reference](../adapters/FILE-REFERENCE.md) | Continue targeted cross-module lifecycle/activation/disposal verification when authorized; do not repeat unchanged adapter source review |
 | `e2e/` | **INVENTORY / SAMPLING PENDING** | Preliminary audit and tree inventory | Review fixtures, test assertions, host workflows and coverage gaps |
 | `scripts/` | **INVENTORY / IMPLEMENTATION REVIEW PENDING** | Preliminary audit and tree inventory | Review generation, build, packaging, validation and release side effects |
 | `.github/` and CI/release | **REVIEW PENDING** | Preliminary audit | Inspect workflow permissions, triggers, secrets, artifact provenance and release process |
@@ -39,7 +40,7 @@ The core, server and webview source blob identities have been reconciled at the 
 
 1. `webview-ui/`: review the 47 `FETCHED / INVENTORIED` test files at assertion level (7 other test files are already `TEST-INVENTORIED`); do not reread the 261 `REVIEWED` source rows unless their blob SHA changes or a concrete cross-layer question requires it.
 2. `webview-ui/`: continue ClientMessage/ServerMessage producer-consumer tracing across UI → adapter → server, including runtime validation, authorization, side effects, persistence and ordering. Reuse existing `WV-APP-01`, `WV-C08`, `WV-RESYNC-01`, `WV-TR-01` evidence; add only missing edges.
-3. `webview-ui/` + `adapters/` + `server/`: continue lifecycle/disposal/reconnect analysis. Adapter static audit is already complete (8/8 files; A-01–A-10); do not restart it. Reconcile adapter SHAs first and inspect only changed files or unresolved lifecycle edges.
+3. `webview-ui/` + `adapters/` + `server/`: continue lifecycle/disposal/reconnect analysis. Adapter static audit and SHA reconciliation are complete (8/8 files; A-01–A-10); do not restart it. Inspect only unresolved cross-module lifecycle edges or files changed in a future source snapshot.
 4. `webview-ui/`: retrieve/verify the font binary internals when available. Existing 143 PNG/assets are header/signature-level only; do not label them fully decoded or runtime-validated.
 5. `e2e/`, `scripts/`, `.github/` and CI/release remain unaudited or partially inventoried; begin only after the relevant governance/module records are read.
 6. Build the system dependency/lifecycle map from evidence-backed imports, producers/consumers and ownership edges.
