@@ -692,3 +692,113 @@ The blob SHA for every row is recorded in [FILE-REFERENCE.md](FILE-REFERENCE.md)
 2. Continue targeted lifecycle/disposal/reconnect analysis across webview, adapter and server.
 3. Retrieve the unverified font binary internals when available; preserve the 143 assets as header/signature-level evidence only.
 4. Test execution remains unauthorized and open; request explicit authorization before running tests or other dynamic checks.
+
+
+## 17. Control-plane producer-consumer trace — GOV-WEBVIEW-010 (2026-11-25)
+
+**Source branch:** main at 56f354f2808ae5aba10b0e1d5892bd9fa7ca095b  
+**Source tree:** 2d02bb29bd5a3aa8f74fc6a2ed21027149817e50; 856 entries, 739 blobs, truncated=false  
+**Documentation branch before publication:** docs/hybrid-llm-engine-direction at 189e28970ec5d05abd536a57a4adab53399c27fd  
+**Scope:** complete static producer → transport → host ingress trace for all 34 ClientMessage variants, and producer → delivery/fan-out → UI consumer trace for all 46 ServerMessage variants.  
+**Governance read before source inspection:** governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, webview/server/adapter module records, webview DEEP-AUDIT and FILE-REFERENCE, PROTOCOL-MATRIX, TRANSPORT and STATE-MANAGEMENT.
+
+### Repository and coverage reconciliation
+
+- Reconfirmed source branch main at 56f354f2808ae5aba10b0e1d5892bd9fa7ca095b and recursive tree 2d02bb29bd5a3aa8f74fc6a2ed21027149817e50 (truncated=false).
+- Reconfirmed docs branch before publication at 189e28970ec5d05abd536a57a4adab53399c27fd.
+- The webview FILE-REFERENCE rows for the re-fetched UI producer/consumer files match their current blob SHAs; all inspected files were already classified REVIEWED. No source ledger status needed promotion.
+- Server and adapter modules remain at the previously reconciled source baseline: 135/135 server paths and 8/8 adapter paths. Relevant source files were selectively re-fetched for this cross-layer question; this did not restart either module audit.
+- AsyncAPI remains the source of truth: 34 ClientMessage variants and 46 ServerMessage variants. The generated core/src/messages.ts remains generated and was not edited.
+
+### Producer-consumer coverage result
+
+- **ClientMessage:** 34/34 variants mapped from UI producer to transport and host ingress or documented local/browser behavior.
+- **ServerMessage:** 46/46 variants mapped to producer family, delivery scope (store broadcast, direct reply, handshake snapshot, watcher or VS Code-only event) and UI consumer.
+- Five ClientMessage variants absent from the standalone switch are accounted for as host-specific VS Code actions: exportLayout, importLayout, exportFile, openSessionsFolder, plus focusAgent's VS Code terminal-focus behavior. The UI also sends focusAgent in standalone; the server intentionally no-ops it while App handles local drawer/tab focus.
+- Conversation requests remain standalone-only because the UI is gated on terminal availability; the VS Code adapter does not implement requestConversations, searchConversations or resumeConversation.
+- Raw terminal output/replay/input remains a separate WebSocket data plane and is not counted among the 80 control-plane variants.
+- Full producer, ingress, consumer and recipient map is in PROTOCOL-MATRIX.md sections 9–11.
+
+### Key cross-layer facts
+
+1. The standalone WebSocket boundary parses JSON and casts to Record<string, unknown>; it does not validate the ClientMessage union at ingress. The server's privileged gate is fail-closed except for webviewReady. The VS Code adapter trusts its own webview boundary but still dispatches runtime message objects without a comprehensive schema validator. This is the existing WV-C08 / F-08 concern, not a new validation finding.
+2. ServerMessage delivery is not uniform: store broadcasts reach all connected standalone sockets and the VS Code webview listener; handshake snapshots, diagnostics, conversation results, directory acknowledgements and some hook/asset responses are point-to-point.
+3. areaMappingsLoaded is sent during handshake; saveAreaMappings persists config but does not publish a new snapshot to other active clients. OfficeState uses that mapping when placing a new agent, while agentCreated is delivered to all connected clients. This creates a conditional multi-client state divergence risk.
+4. External asset directory mutations update shared config/cache but the reload messages are sent using the requesting socket's send callback. Other already-connected standalone clients do not receive the refreshed list/sprites until a later handshake/reconnect.
+5. Some other host-global mutations are also point-to-point or persist-only (for example hooksStatus after setHooksEnabled and settings affected by setWatchAllSessions). Their intended multi-client consistency contract remains an OPEN question; they are recorded in the matrix rather than promoted to another finding in this session.
+6. saveDirectory and removeDirectory share one handler across hosts. Successful mutations broadcast directoriesLoaded; save additionally acknowledges the sender with directorySaved; rejection and suggestions are point-to-point.
+7. saveCharacterProfiles uses shared parsing/persistence and broadcasts successful profile snapshots; refused saves reply only to the sender. saveCardOrder parses and filters against existing agent IDs, then broadcasts the accepted order.
+8. Usage snapshots are sent only to privileged clients; httpServer also filters usageBridgeStatus and usageLimits broadcasts for read-only sockets.
+
+### Source identity of the selectively re-fetched trace files
+
+| File | Current blob SHA |
+|---|---|
+| core/asyncapi.yaml | ff1247118819fe68852da11996c660df1726aa66 |
+| webview-ui/src/App.tsx | 3eb91a2050da5f789223bc0a045a80fc841d60cb |
+| webview-ui/src/hooks/useExtensionMessages.ts | 649025df90edef84d24c40556cee2ea007e15ccf |
+| webview-ui/src/hooks/useDirectoryEditor.ts | abf44c4dfc59fd57cdcc0193b31385a5e7bcebad |
+| webview-ui/src/hooks/useLaunchActions.ts | 88d01bb2f03bade7f4f8030e25a34e90687bfbca |
+| webview-ui/src/hooks/useEditorActions.ts | 386b839a124ffad437c8a3cd9c3460e2826c0d00 |
+| webview-ui/src/components/SettingsModal.tsx | ca9248f01ba8631a81b0489fcb152203f3b553d3 |
+| webview-ui/src/characters/castStore.ts | 5f3186567cd783f727b487543b4e9a1157e0749c |
+| webview-ui/src/characters/ui/files.ts | e9842275fee39cc3709453329b74a5f22d809281 |
+| webview-ui/src/hooks/useIntroTour.ts | 4fc18a2eef5bb2b73bcf6a4bf5facfc17d25a28d |
+| webview-ui/src/usage/useUsageBridge.ts | 270909fcba42e615b95d6229b66d61b1224f9072 |
+| webview-ui/src/conversations/useConversations.ts | e360d9eb264502582c7a07f205fb0fc82910c8a3 |
+| webview-ui/src/conversations/ConversationSearch.tsx | da5eb5efdd143572270909be52e680ae62f56b2c |
+| webview-ui/src/components/DebugView.tsx | ccc1f465d3777b65bfb79c870d5cb6eb3ef95c5e |
+| webview-ui/src/office/engine/officeState.ts | 1afd778f4c72f1901ef91266e29a89f117e180c7 |
+| adapters/vscode/PixelAgentsViewProvider.ts | 94d1ab2e1427377e67ff430a852d49863e5e4d87 |
+| adapters/vscode/agentManager.ts | 30020b3e34d2d83fa4536e0d27f55c9e4fe3295c |
+| server/src/clientMessageHandler.ts | d7ae8235ee75de63b1716a4b67f27d69023f5d96 |
+| server/src/httpServer.ts | ad5104a14233aa29834e008833a0f21458fc887b |
+| server/src/fileWatcher.ts | 4f409487b7593ee8f3ec5ce29cf7627f4a39a11f |
+| server/src/hookEventHandler.ts | bd430b99f4abf7afea851645fe31924bf6213f43 |
+| server/src/transcriptParser.ts | a706cb5549ae67fee2cbe3ec3420fda3bed0013a |
+| server/src/timerManager.ts | c01dcfc964830289b9ee8e2329da444c06fbf1b7 |
+| server/src/agentActivityResend.ts | f0c6fe190f9d259c6c172cfd7a4198ecc64dfb77 |
+| server/src/contextUsage.ts | b77d0515bb5b806a8c2652ef4fab744bfec37757 |
+| server/src/agentMessages.ts | df521f7a6d9ddbad8d7ee0c567df4054c500b9ea |
+| server/src/directories.ts | a27617b843733ff8eb5a6a0263324587bb57a32b |
+| server/src/characterProfilesPersistence.ts | 6444df2a8a032f0023426a226244d25cd7178a85 |
+| server/src/cardOrder.ts | 3c4d7bd9397546dfe01081593045a9edaa57a0fa |
+| server/src/layoutPersistence.ts | 02a65d6237eec3ff6e867d1ab0548c88173a2e2b |
+| server/src/usageLimits.ts | b28ebe7b43d8df3179cfb44c4abcd3b980539f8a |
+| server/src/cli.ts | 2ab60f30b17b856d17c68435337663aab000b7e7 |
+| server/src/terminal/standaloneAgentLauncher.ts | f17562fcf673e5b8db4a7bd94d9ff953c4edf0b4 |
+| server/src/terminal/terminalRoutes.ts | 434ac1db106d593577409b42e872331ac54e4323 |
+
+### WV-PROTO-01 — Area mapping mutation is not propagated to other connected clients
+
+- **Severity:** Medium. **Confidence:** High.
+- **Affected files:** webview-ui/src/App.tsx; webview-ui/src/hooks/useDirectoryEditor.ts; webview-ui/src/hooks/useExtensionMessages.ts; webview-ui/src/office/engine/officeState.ts; server/src/clientMessageHandler.ts; adapters/vscode/PixelAgentsViewProvider.ts; server/src/httpServer.ts.
+- **Evidence:** App.tsx:282–303 and useDirectoryEditor.ts:64–78 update the sender's OfficeState and send saveAreaMappings. Standalone clientMessageHandler.ts:436–444 writes config.standalone.areaMappings but emits no store broadcast or areaMappingsLoaded reply. VS Code PixelAgentsViewProvider.ts:635–639 writes config.vscode.areaMappings without sending a new snapshot. useExtensionMessages.ts:779–783 only updates local state on areaMappingsLoaded, and the standalone snapshot is sent at clientMessageHandler.ts:696–701 during webviewReady. OfficeState.findFreeSeat reads the local mapping at officeState.ts:368–395. The same server process fans agentAdded to every socket at httpServer.ts:263–280.
+- **Technical explanation:** a second connected standalone client retains the previous mapping snapshot. A subsequent shared agentCreated causes each UI instance to select a seat using its own local areaMappings.
+- **Impact:** under multiple connected clients, one shared agent may appear in different seats in each office rendering.
+- **Verification:** SOURCE-VERIFIED / STATIC-FINDING / OPEN; not runtime reproduced.
+- **Remaining uncertainty:** expected cross-client seat/layout consistency has not been validated in a live multi-client session; VS Code's normal single-webview mode reduces that host's exposure.
+
+### WV-PROTO-02 — External asset directory reload is delivered only to the requesting client
+
+- **Severity:** Low. **Confidence:** High.
+- **Affected files:** webview-ui/src/components/SettingsModal.tsx; webview-ui/src/hooks/useExtensionMessages.ts; server/src/clientMessageHandler.ts; server/src/cli.ts; adapters/vscode/PixelAgentsViewProvider.ts.
+- **Evidence:** clientMessageHandler.ts:405–425 sends externalAssetDirectoriesUpdated via the requesting socket's send callback and calls onReloadAssets(send). cli.ts:382–415 mutates the shared assetCache but sends refreshed character, pet and furniture assets through that same callback. useExtensionMessages.ts:872–875 updates only the receiving UI. The VS Code adapter posts the updated list/assets directly to its one webview at PixelAgentsViewProvider.ts:1008–1041.
+- **Technical explanation:** other connected standalone clients receive neither the new externalAssetDirectories list nor the refreshed sprites. A later handshake receives the mutated shared cache, but an already-connected client can retain stale UI asset state until reconnect/reload.
+- **Impact:** concurrently open standalone clients can display different character/pet/furniture catalogs after one client changes external asset directories.
+- **Verification:** SOURCE-VERIFIED / STATIC-FINDING / OPEN; not runtime reproduced.
+- **Remaining uncertainty:** intended immediate asset synchronization semantics for multiple clients are not documented.
+
+### Related existing findings — preserved, not duplicated
+
+- WV-C08 and server F-08 remain the canonical runtime-schema validation gap; this trace supplies per-variant examples but does not create a duplicate schema finding.
+- WV-RESYNC-01 and WV-APP-01 remain the canonical reconnect/layout snapshot concerns.
+- WV-TR-01 remains the canonical WebSocket subscriber-exception dispatch concern.
+- Adapter A-01–A-10 and server F-01–F-08 remain unchanged.
+
+### Verification limits and next continuation
+
+- Static source and protocol documentation only; all 80 control-plane variant paths are inventoried, not runtime exercised.
+- No tests, build, lint, typecheck, protocol generation, browser/VS Code host, multi-client WebSocket, PTY or reconnect experiment was executed.
+- No application source, tests, assets, dependencies or configuration were modified.
+- Next: confirm the intended multi-client state contract for WV-PROTO-01/02; complete per-field validation and authorization review without duplicating WV-C08/F-08; then proceed to targeted lifecycle/reconnect work when authorized.
