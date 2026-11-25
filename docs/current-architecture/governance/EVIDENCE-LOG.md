@@ -1429,3 +1429,40 @@ During final SHA spot-check, the `server/vitest.config.ts` blob SHA transcribed 
 ### GOV-INFRA-001 — current-architecture index baseline clarification
 
 The current-architecture index previously displayed only the historical module baseline. It now labels that baseline as historical and records the latest cross-layer static source snapshot `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`, based on `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`. The updated index was re-fetched and verified as blob `511a7e330079e7ffc5da9f9cfec2a8071f17c917`.
+
+
+## 2026-11-26 — GOV-CROSS-LAYER-001: final branch-state and governance-pointer reconciliation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Documentation branch:** `docs/hybrid-llm-engine-direction`  
+**Source branch:** `security/remediate-build-008-009`  
+**Source commit:** `86d3b1dbddae7605e5e2092886c12982f8e4bf58`  
+**Source base:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Scope:** read-only branch/tree reconciliation and correction of one stale governance continuation pointer.
+
+### Governance and history
+
+- Retrieved the applicable governance README, audit register, audit method and evidence log from `docs/current-architecture/governance/`, plus the infrastructure, system-dependency-map and architecture/ADR module records and their technical documents.
+- The repository does not contain the alternate root-level paths `governance/README.md`, `governance/AUDIT-REGISTER.md`, `governance/AUDIT-METHOD.md` or `governance/EVIDENCE-LOG.md`; the active governance source of truth is under `docs/current-architecture/governance/`.
+- Historical GOV-INFRA-001, GOV-DEPMAP-001 and GOV-ADR-001 records are present in the evidence log. No historical finding IDs were reused or closed.
+
+### Current repository state
+
+- Verified refs: `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`; documentation branch before this correction `b552ac64198a1494fc4450750ebd530d2771bf49`.
+- Retrieved complete recursive trees for main and the remediation branch: both contain 856 entries, `truncated=false`.
+- Compared all blob path/SHA pairs: 739/739 source blobs are present on both; exactly two blobs differ, `.github/workflows/ci.yml` and `.github/workflows/publish-extension.yml`. No source additions or removals.
+- Commit comparison reports remediation branch ahead of main by 6 commits, behind by 0; the two workflow files are the only changed files in the source tree.
+- No open pull request was returned for head branch `security/remediate-build-008-009` by the repository-scoped PR search.
+
+### Governance correction
+
+- The consolidated register already reported the system dependency map as STATIC MAP IN PROGRESS, but continuation item 6 still said the map itself was NOT AUDITED. That stale sentence contradicted the published map and module record.
+- Updated item 6 to reflect the actual evidence: major compile/build, host composition, protocol, persistence, provider, transport and trust-boundary edges are SOURCE-VERIFIED; exhaustive transitive imports/call graph, complete terminal/process ownership and runtime lifecycle remain OPEN.
+- Updated register blob: `fba035474812a7ed2b946aa16e1472a46aed99f9` (commit `26eae50d351a2245a76c9f50cd31df848f66efc0`).
+
+### Verification boundary
+
+- This was a static Git/governance reconciliation only. No source files, workflows, manifests, dependencies or settings were changed.
+- No tests, build, typecheck, lint, package, dependency/SBOM generation, CI dispatch, release rehearsal, OIDC operation or runtime experiment was executed.
+- BUILD-008/009 remain OPEN pending negative/positive workflow verification and merge. Infrastructure remains PARTIAL; system dependency map remains STATIC MAP IN PROGRESS; Architecture/ADR remains PARTIAL with 12 future-engine decisions OPEN.
+- Branch merge/closure was not performed.
