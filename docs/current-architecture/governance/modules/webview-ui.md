@@ -1,7 +1,7 @@
 # Webview UI Module Audit Record
 
-**Status:** IN PROGRESS — complete tracked-file inventory and SHA reconciliation; historical static-review coverage and cross-layer verification remain open.  
-**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-009` (2026-11-25)  
+**Status:** IN PROGRESS — complete tracked-file inventory and SHA reconciliation; 34/34 ClientMessage and 46/46 ServerMessage variants statically traced; field-level and runtime/cross-client verification remain open.  
+**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-010` (2026-11-25)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
 **Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
 **Latest source verification:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`, per GOV-WEBVIEW-002/008 evidence)  
@@ -71,17 +71,18 @@ The existing documentation remains the technical source for module details. This
 
 GOV-WEBVIEW-005 adds three static component observations for future technical prioritization: `WV-C12` (touch cancellation shares the touch-end completion path), `WV-C13` (modal dialog semantics and focus lifecycle need verification), and `WV-C14` (loading-art rejection has no local recovery path). GOV-WEBVIEW-006 adds `WV-C15` (editor keyboard shortcuts also receive events from text inputs) and `WV-C16` (Shift+Z redo key comparison is lowercase-only). GOV-WEBVIEW-007 completes the 9 character UI line-coverage gaps; no new finding ID was warranted. These are OPEN static findings, not runtime-reproduced defects or fixes. It also adds component-level lifecycle evidence to the existing `WV-C03/WV-C06` concern. These are OPEN static findings, not runtime-reproduced defects or fixes.
 
-Preserve existing `WV-` findings and their states in [DEEP-AUDIT.md](../../webview-ui/DEEP-AUDIT.md). The reconnect trace in GOV-WEBVIEW-001 adds `WV-RESYNC-01`, a static finding about applying a server seat snapshot while the client still has its pre-reconnect layout. It remains open and is not runtime reproduced.
+Preserve existing `WV-` findings and their states in [DEEP-AUDIT.md](../../webview-ui/DEEP-AUDIT.md). The reconnect trace in GOV-WEBVIEW-001 adds `WV-RESYNC-01`, a static finding about applying a server seat snapshot while the client still has its pre-reconnect layout. GOV-WEBVIEW-010 adds `WV-PROTO-01` (area mappings are not fanned out to other connected clients) and `WV-PROTO-02` (external asset reload is requester-only). All remain open static findings; none is runtime reproduced.
 
 The historical SHA reconciliation for all 62 reported-review rows is complete. GOV-WEBVIEW-005 directly reviewed the 32 component rows with missing per-file coverage evidence; all 54 files under `webview-ui/src/components/` are now REVIEWED. GOV-WEBVIEW-006 completed all 24 hooks, and GOV-WEBVIEW-007 completed all 33 character source files. GOV-WEBVIEW-008 directly reviewed the final seven reported-review source rows elsewhere in `webview-ui/src/`. There are now **no reported-review source rows remaining**.
 
 The next work is (authoritative continuation pointer; older continuation notes in DEEP-AUDIT are historical and superseded by GOV-WEBVIEW-008):
 
-1. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server. Reuse `WV-C08`, `WV-APP-01`, `WV-RESYNC-01` and `WV-TR-01`; add only materially new edges/findings.
-2. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-VITE-01`, `WV-C03/WV-C06`, component priorities `WV-C12`–`WV-C14`, hook priorities `WV-C15`–`WV-C16`, `WV-C17` and `WV-TEST-01`.
-3. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
-4. Continue E2E, scripts, CI/release and system dependency-map work under their owning governance scopes.
-5. Keep runtime, browser, VS Code host, build, lint, typecheck and test execution open until explicitly authorized and actually performed.
+1. Complete the remaining per-field validation, authorization/read-only, persistence and side-effect matrix. Reuse `WV-C08` and server `F-08`; do not create duplicate schema findings. The 34 ClientMessage and 46 ServerMessage producer/consumer routes are statically mapped in PROTOCOL-MATRIX.md.
+2. Confirm the intended multi-client consistency contract for `WV-PROTO-01` and `WV-PROTO-02`; runtime reproduction requires explicit authorization.
+3. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-VITE-01`, `WV-C03/WV-C06`, `WV-APP-01`, `WV-RESYNC-01`, `WV-TR-01`, component priorities `WV-C12`–`WV-C14`, hook priorities `WV-C15`–`WV-C16`, `WV-C17` and `WV-TEST-01`.
+4. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
+5. Continue E2E, scripts, CI/release and system dependency-map work under their owning governance scopes.
+6. Keep runtime, browser, VS Code host, build, lint, typecheck and test execution open until explicitly authorized and actually performed.
 
 ## Explicit limitations
 
@@ -90,3 +91,12 @@ The next work is (authoritative continuation pointer; older continuation notes i
 - No application source, assets, package manifest or configuration changed.
 - Binary header verification does not establish full image/font integrity.
 - The audit is not complete merely because all paths and SHAs reconcile.
+
+
+## Latest continuation — GOV-WEBVIEW-010
+
+- Static producer → consumer tracing is complete for all 34 ClientMessage and 46 ServerMessage variants. The detailed UI producer, host ingress, server producer, recipient/fan-out, validation and persistence map is owned by PROTOCOL-MATRIX.md.
+- New static findings: WV-PROTO-01 (shared Directory-to-Area mappings are persisted without notifying already-connected peers) and WV-PROTO-02 (external asset directory reload is delivered only to the requesting client). Both are OPEN and conditional on multiple connected standalone clients; neither has been runtime reproduced.
+- The five standalone-unhandled ClientMessage variants are explicitly reconciled with VS Code host actions/local browser behavior. focusAgent is sent by App in both runtimes; standalone intentionally no-ops the server-side action.
+- Existing WV-C08 / server F-08 remain the canonical validation gap. Runtime schema enforcement, complete field-by-field authorization, and some shared-setting fan-out questions remain open.
+- No source, test, build, package, asset or configuration files were modified; no tests/build/lint/typecheck/runtime experiments were executed.
