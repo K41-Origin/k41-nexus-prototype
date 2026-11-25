@@ -1572,3 +1572,14 @@ The current-architecture index previously displayed only the historical module b
 - The security remediation branch remains separate because its CI workflow snapshot contains BUILD-014: three `continue-on-error` protocol/inventory checks are omitted from the final failure gate. Merging that branch before resolving this known CI gating defect would publish a known false-green path. No source fix was applied because this pass was authorized for verification/documentation consolidation, not an application/workflow patch.
 - The connector exposes branch creation/ref update but no branch-delete operation. Therefore branch deletion cannot be claimed or performed through the available interface. The remaining security branch requires BUILD-014 correction/verification and then merge; only after that can it be removed through a branch-delete-capable GitHub interface.
 - No tests, build, typecheck, lint, package, workflow dispatch, release rehearsal, OIDC operation or runtime experiment was executed in this documentation publication step.
+
+
+## 2026-11-26 — GOV-DOC-CONSOLIDATION-003: final BUILD cross-reference reconciliation
+
+- Re-fetched module records and owning deep-audit/file-reference documents for core, server, webview-ui, adapters, E2E, scripts and GitHub CI/release.
+- Found stale cross-scope BUILD ranges in the E2E deep audit and E2E module record (they stopped at BUILD-013) and stale BUILD-008–BUILD-013 wording in the GitHub CI deep-audit header. Updated all to include BUILD-014.
+- Updated the scripts module cross-scope reference so its BUILD range includes the complete CI/release namespace while preserving ownership of BUILD-001–BUILD-007 in scripts.
+- Reconciled the Audit Register next action: BUILD-014 must be resolved before merging the BUILD-008/009 remediation PR; verification gates remain OPEN.
+- Re-fetched and verified the updated GitHub CI deep audit, E2E deep audit, E2E module record and scripts module record on `main` after publication.
+- Remaining coverage boundaries are unchanged: webview font TTF internals remain NOT VERIFIED; 143 public binary assets remain header/signature/metadata verified only; runtime/build/test verification remains unexecuted.
+- No source, workflow, package manifest, dependency, GitHub setting or release state was changed in this documentation-only reconciliation.
