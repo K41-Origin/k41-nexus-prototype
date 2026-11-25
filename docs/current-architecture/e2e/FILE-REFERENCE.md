@@ -23,30 +23,30 @@ All rows below are `TREE-VERIFIED`, `SHA-RECONCILED` and `FETCHED` at the stated
 | Path | Mode | Bytes | Blob SHA | Status | Responsibility |
 |---|---:|---:|---|---|---|
 | `e2e/README.md` | `100644` | 38245 | `f2655835d6f5ff038e23a5a023f72de351b8a829` | DOC-RECORDED | Suite scope, coverage gaps, manual smoke and generated 152-test inventory. |
-| `e2e/fixtures/mock-claude` | `100755` | 1046 | `9d6721fadd18d0610cfcf9aa06111d86d62c0daf` | FETCHED / REVIEW IN PROGRESS | Executable POSIX mock CLI wrapper. |
-| `e2e/fixtures/mock-claude-runner.cjs` | `100644` | 17517 | `6072b23f637ec2cd3518965f0fabc97f230e9051` | FETCHED / REVIEW IN PROGRESS | Scenario execution, JSONL and hook process simulation. |
-| `e2e/fixtures/mock-claude.cmd` | `100644` | 1101 | `94806fde99023ccfb79db8c24236fb7260532613` | FETCHED / REVIEW IN PROGRESS | Windows mock CLI wrapper. |
-| `e2e/fixtures/pixel-agents.ts` | `100644` | 8324 | `f4239fecbba1d6e9b09d3e3c224249592251db20` | FETCHED / REVIEW IN PROGRESS | VS Code/Electron fixture lifecycle and artifacts. |
-| `e2e/fixtures/standalone.ts` | `100644` | 3386 | `0007a8c1947d0ac702093ef3040308895b861d5b` | FETCHED / REVIEW IN PROGRESS | Standalone browser fixture lifecycle and artifacts. |
-| `e2e/fixtures/tail-follow.cjs` | `100644` | 3483 | `61a48c46957d121b6db4fb15f058dc16a208d985` | FETCHED / REVIEW IN PROGRESS | Cross-platform cosmetic narration tail. |
-| `e2e/global-setup.ts` | `100644` | 5399 | `bb0b9611947b1ebaccea2cdd186811d2ab898176` | FETCHED / REVIEW IN PROGRESS | VS Code download/cache setup and Windows product patch. |
-| `e2e/helpers/allure-labels.ts` | `100644` | 1537 | `eea3551753d78d5805df92b4bdfbebf874a02310` | FETCHED / REVIEW IN PROGRESS | Maps area tags to Allure epics. |
-| `e2e/helpers/editor.ts` | `100644` | 16320 | `7ef4f0671ad5a9c87e34a612b6dd549033390c5e` | FETCHED / REVIEW IN PROGRESS | Editor/carpet/area test actions and state readers. |
-| `e2e/helpers/external-monitor.ts` | `100644` | 837 | `696f0fa9cd3787611697d8163293da0dd8839876` | FETCHED / REVIEW IN PROGRESS | External mock narration log path. |
-| `e2e/helpers/hooks.ts` | `100644` | 7535 | `81b5bd497a5f16a72deb79aa97410b166cf96345` | FETCHED / REVIEW IN PROGRESS | Hook-server probe, event POST and payload builders. |
-| `e2e/helpers/internal-agent.ts` | `100644` | 7568 | `2a9a043c6b02f38b71cccf8bed6a2f10aa3bee78` | FETCHED / REVIEW IN PROGRESS | Internal agent launch and transcript discovery helpers. |
-| `e2e/helpers/intro.ts` | `100644` | 1839 | `f973a12a6b05805cd0a8ce971d729a72967aae9e` | FETCHED / REVIEW IN PROGRESS | First-run intro and consent flow helpers. |
-| `e2e/helpers/launch.ts` | `100644` | 22295 | `a67cddb2979897921184c232bc8d81c725d1995c` | FETCHED / REVIEW IN PROGRESS | VS Code host, isolated environment, mock CLI and cleanup. |
-| `e2e/helpers/layout-seed.ts` | `100644` | 4207 | `7669eb198d61f08489dae53eb715402f6fd8cf4f` | FETCHED / REVIEW IN PROGRESS | Seed builders for layout and config. |
-| `e2e/helpers/lifecycle.ts` | `100644` | 1679 | `d58a34ca1c83d93841c60611962eb3b115e92a5b` | FETCHED / REVIEW IN PROGRESS | Teammate session and team fixture builders. |
-| `e2e/helpers/mock-claude.ts` | `100644` | 12977 | `90754501c25ee2b7af4720b00646b557eade48e9` | FETCHED / REVIEW IN PROGRESS | Timed mock scenarios, process spawn and cleanup registry. |
-| `e2e/helpers/office.ts` | `100644` | 12777 | `1be26eea40612f011662129710b549d6a27f84c9` | FETCHED / REVIEW IN PROGRESS | Overlay, character, teammate and agent state assertions. |
-| `e2e/helpers/standalone.ts` | `100644` | 15838 | `ab94998af9c08316a126ef1c2b0ca8f8c269cb17` | FETCHED / STATIC REVIEW IN PROGRESS | Standalone CLI spawn, URL capability handoff, port allocation, message recorder and process cleanup. |
-| `e2e/helpers/team.ts` | `100644` | 6515 | `c5b2fc62b0cb0a37a8231245b615ac6a513d046d` | FETCHED / REVIEW IN PROGRESS | JSONL, team metadata and transcript builders. |
-| `e2e/helpers/test-narration.ts` | `100644` | 7579 | `2299d56b0681c6b90180e62a417f07528299e627` | FETCHED / REVIEW IN PROGRESS | Cosmetic narration lifecycle and monitor terminal. |
-| `e2e/helpers/webview.ts` | `100644` | 26416 | `5acec507ac0b5b28a8afcdf0528d1611b22d6386` | FETCHED / REVIEW IN PROGRESS | VS Code panel, frame, drawer and settings UI helpers. |
-| `e2e/playwright.config.ts` | `100644` | 2291 | `4e4683186ee24e5cdce49a35cf336e069f35b1a2` | FETCHED / REVIEW IN PROGRESS | Playwright projects, retries, workers, reporters and output paths. |
-| `e2e/run-config.ts` | `100644` | 550 | `1921baad5195765b91a6661afd2f75415c49be96` | FETCHED / REVIEW IN PROGRESS | Optional run-ID artifact path namespacing. |
+| `e2e/fixtures/mock-claude` | `100755` | 1046 | `9d6721fadd18d0610cfcf9aa06111d86d62c0daf` | SOURCE-VERIFIED — GOV-E2E-003 | Executable POSIX mock CLI wrapper. |
+| `e2e/fixtures/mock-claude-runner.cjs` | `100644` | 17517 | `6072b23f637ec2cd3518965f0fabc97f230e9051` | SOURCE-VERIFIED — GOV-E2E-003 | Scenario execution, JSONL and hook process simulation. |
+| `e2e/fixtures/mock-claude.cmd` | `100644` | 1101 | `94806fde99023ccfb79db8c24236fb7260532613` | SOURCE-VERIFIED — GOV-E2E-003 | Windows mock CLI wrapper. |
+| `e2e/fixtures/pixel-agents.ts` | `100644` | 8324 | `f4239fecbba1d6e9b09d3e3c224249592251db20` | SOURCE-VERIFIED — GOV-E2E-003 | VS Code/Electron fixture lifecycle and artifacts. |
+| `e2e/fixtures/standalone.ts` | `100644` | 3386 | `0007a8c1947d0ac702093ef3040308895b861d5b` | SOURCE-VERIFIED — GOV-E2E-003 | Standalone browser fixture lifecycle and artifacts. |
+| `e2e/fixtures/tail-follow.cjs` | `100644` | 3483 | `61a48c46957d121b6db4fb15f058dc16a208d985` | SOURCE-VERIFIED — GOV-E2E-003 | Cross-platform cosmetic narration tail. |
+| `e2e/global-setup.ts` | `100644` | 5399 | `bb0b9611947b1ebaccea2cdd186811d2ab898176` | SOURCE-VERIFIED — GOV-E2E-003 | VS Code download/cache setup and Windows product patch. |
+| `e2e/helpers/allure-labels.ts` | `100644` | 1537 | `eea3551753d78d5805df92b4bdfbebf874a02310` | SOURCE-VERIFIED — GOV-E2E-003 | Maps area tags to Allure epics. |
+| `e2e/helpers/editor.ts` | `100644` | 16320 | `7ef4f0671ad5a9c87e34a612b6dd549033390c5e` | SOURCE-VERIFIED — GOV-E2E-003 | Editor/carpet/area test actions and state readers. |
+| `e2e/helpers/external-monitor.ts` | `100644` | 837 | `696f0fa9cd3787611697d8163293da0dd8839876` | SOURCE-VERIFIED — GOV-E2E-003 | External mock narration log path. |
+| `e2e/helpers/hooks.ts` | `100644` | 7535 | `81b5bd497a5f16a72deb79aa97410b166cf96345` | SOURCE-VERIFIED — GOV-E2E-003 | Hook-server probe, event POST and payload builders. |
+| `e2e/helpers/internal-agent.ts` | `100644` | 7568 | `2a9a043c6b02f38b71cccf8bed6a2f10aa3bee78` | SOURCE-VERIFIED — GOV-E2E-003 | Internal agent launch and transcript discovery helpers. |
+| `e2e/helpers/intro.ts` | `100644` | 1839 | `f973a12a6b05805cd0a8ce971d729a72967aae9e` | SOURCE-VERIFIED — GOV-E2E-003 | First-run intro and consent flow helpers. |
+| `e2e/helpers/launch.ts` | `100644` | 22295 | `a67cddb2979897921184c232bc8d81c725d1995c` | SOURCE-VERIFIED — GOV-E2E-003 | VS Code host, isolated environment, mock CLI and cleanup. |
+| `e2e/helpers/layout-seed.ts` | `100644` | 4207 | `7669eb198d61f08489dae53eb715402f6fd8cf4f` | SOURCE-VERIFIED — GOV-E2E-003 | Seed builders for layout and config. |
+| `e2e/helpers/lifecycle.ts` | `100644` | 1679 | `d58a34ca1c83d93841c60611962eb3b115e92a5b` | SOURCE-VERIFIED — GOV-E2E-003 | Teammate session and team fixture builders. |
+| `e2e/helpers/mock-claude.ts` | `100644` | 12977 | `90754501c25ee2b7af4720b00646b557eade48e9` | SOURCE-VERIFIED — GOV-E2E-003 | Timed mock scenarios, process spawn and cleanup registry. |
+| `e2e/helpers/office.ts` | `100644` | 12777 | `1be26eea40612f011662129710b549d6a27f84c9` | SOURCE-VERIFIED — GOV-E2E-003 | Overlay, character, teammate and agent state assertions. |
+| `e2e/helpers/standalone.ts` | `100644` | 15838 | `ab94998af9c08316a126ef1c2b0ca8f8c269cb17` | SOURCE-VERIFIED — GOV-E2E-003 | Standalone CLI spawn, URL capability handoff, port allocation, message recorder and process cleanup. |
+| `e2e/helpers/team.ts` | `100644` | 6515 | `c5b2fc62b0cb0a37a8231245b615ac6a513d046d` | SOURCE-VERIFIED — GOV-E2E-003 | JSONL, team metadata and transcript builders. |
+| `e2e/helpers/test-narration.ts` | `100644` | 7579 | `2299d56b0681c6b90180e62a417f07528299e627` | SOURCE-VERIFIED — GOV-E2E-003 | Cosmetic narration lifecycle and monitor terminal. |
+| `e2e/helpers/webview.ts` | `100644` | 26416 | `5acec507ac0b5b28a8afcdf0528d1611b22d6386` | SOURCE-VERIFIED — GOV-E2E-003 | VS Code panel, frame, drawer and settings UI helpers. |
+| `e2e/playwright.config.ts` | `100644` | 2291 | `4e4683186ee24e5cdce49a35cf336e069f35b1a2` | SOURCE-VERIFIED — GOV-E2E-003 | Playwright projects, retries, workers, reporters and output paths. |
+| `e2e/run-config.ts` | `100644` | 550 | `1921baad5195765b91a6661afd2f75415c49be96` | SOURCE-VERIFIED — GOV-E2E-003 | Optional run-ID artifact path namespacing. |
 | `e2e/tests/claude/hooks-off/areas-multiroot.spec.ts` | `100644` | 14271 | `2865f4de7e9d3cee9e21bd62d99bd008abc28160` | TEST-INVENTORIED — assertions reviewed | Multi-root area mapping and seat preference. |
 | `e2e/tests/claude/hooks-off/areas.spec.ts` | `100644` | 4637 | `4b6b96fdee7634361bdc0b754c13038fb07bcf1d` | TEST-INVENTORIED — assertions reviewed | Single-root area data and editor gate. |
 | `e2e/tests/claude/hooks-off/carpet.spec.ts` | `100644` | 13252 | `668eff0627a55adaf1682c3650c088321ba7fa81` | TEST-INVENTORIED — assertions reviewed | Carpet layer rendering, painting, erase, undo and persistence. |
@@ -68,7 +68,45 @@ All rows below are `TREE-VERIFIED`, `SHA-RECONCILED` and `FETCHED` at the stated
 | `e2e/tests/standalone/multi-server-hooks.spec.ts` | `100644` | 3417 | `adc90a44341487087609f58e2dbb502b65df5109` | TEST-INVENTORIED — assertions reviewed | Embedded VS Code and standalone hook-server isolation. |
 | `e2e/tests/standalone/terminal.spec.ts` | `100644` | 17396 | `7d586c1045da35ae0b38662ef2183a3930ddda3c` | TEST-INVENTORIED — assertions reviewed | PTY terminal input, resize, URL copy/open and --no-terminal. |
 | `e2e/tests/standalone/ui.spec.ts` | `100644` | 8747 | `0338c1494ce0199dbbbfe79f53caf4288feec0f3` | TEST-INVENTORIED — assertions reviewed | Close, debug view, assets, layout import/export and reconnect indicator. |
-| `e2e/tsconfig.json` | `100644` | 494 | `5fc3efce347e5591b3021362d0b3365b65cc5114` | FETCHED / REVIEW IN PROGRESS | Strict E2E TypeScript compiler configuration. |
+| `e2e/tsconfig.json` | `100644` | 494 | `5fc3efce347e5591b3021362d0b3365b65cc5114` | SOURCE-VERIFIED — GOV-E2E-003 | Strict E2E TypeScript compiler configuration. |
+
+## Full harness source review — GOV-E2E-003
+
+All 25 non-spec harness files were re-fetched from main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b, matched to their ledger blob SHAs, and reviewed across the complete file (line 1 through EOF). This includes 6 fixture/shim files, 15 helpers, global setup and 3 configuration files. Their rows above are now SOURCE-VERIFIED; the 21 spec rows remain TEST-INVENTORIED and were not re-reviewed in this session.
+
+| Group | Files | Review coverage |
+|---|---:|---|
+| fixtures/ | 6/6 | POSIX/Windows mock wrappers, runner, VS Code/standalone fixtures, narration tail |
+| helpers/ | 15/15 | editor/office/webview, hooks, agent/team lifecycle, scenario/process management, narration, seed builders |
+| Setup/config | 4/4 | global setup, Playwright config, run-ID path namespacing, TypeScript config |
+| **Total** | **25/25** | **Full-file static review; no execution** |
+
+- `e2e/fixtures/mock-claude` — lines 1–23; blob `9d6721fadd18d0610cfcf9aa06111d86d62c0daf`.
+- `e2e/fixtures/mock-claude-runner.cjs` — lines 1–533; blob `6072b23f637ec2cd3518965f0fabc97f230e9051`.
+- `e2e/fixtures/mock-claude.cmd` — lines 1–29; blob `94806fde99023ccfb79db8c24236fb7260532613`.
+- `e2e/fixtures/pixel-agents.ts` — lines 1–236; blob `f4239fecbba1d6e9b09d3e3c224249592251db20`.
+- `e2e/fixtures/standalone.ts` — lines 1–112; blob `0007a8c1947d0ac702093ef3040308895b861d5b`.
+- `e2e/fixtures/tail-follow.cjs` — lines 1–92; blob `61a48c46957d121b6db4fb15f058dc16a208d985`.
+- `e2e/global-setup.ts` — lines 1–165; blob `bb0b9611947b1ebaccea2cdd186811d2ab898176`.
+- `e2e/helpers/allure-labels.ts` — lines 1–41; blob `eea3551753d78d5805df92b4bdfbebf874a02310`.
+- `e2e/helpers/editor.ts` — lines 1–417; blob `7ef4f0671ad5a9c87e34a612b6dd549033390c5e`.
+- `e2e/helpers/external-monitor.ts` — lines 1–18; blob `696f0fa9cd3787611697d8163293da0dd8839876`.
+- `e2e/helpers/hooks.ts` — lines 1–291; blob `81b5bd497a5f16a72deb79aa97410b166cf96345`.
+- `e2e/helpers/internal-agent.ts` — lines 1–210; blob `2a9a043c6b02f38b71cccf8bed6a2f10aa3bee78`.
+- `e2e/helpers/intro.ts` — lines 1–42; blob `f973a12a6b05805cd0a8ce971d729a72967aae9e`.
+- `e2e/helpers/launch.ts` — lines 1–482; blob `a67cddb2979897921184c232bc8d81c725d1995c`.
+- `e2e/helpers/layout-seed.ts` — lines 1–128; blob `7669eb198d61f08489dae53eb715402f6fd8cf4f`.
+- `e2e/helpers/lifecycle.ts` — lines 1–53; blob `d58a34ca1c83d93841c60611962eb3b115e92a5b`.
+- `e2e/helpers/mock-claude.ts` — lines 1–434; blob `90754501c25ee2b7af4720b00646b557eade48e9`.
+- `e2e/helpers/office.ts` — lines 1–327; blob `1be26eea40612f011662129710b549d6a27f84c9`.
+- `e2e/helpers/standalone.ts` — lines 1–404; blob `ab94998af9c08316a126ef1c2b0ca8f8c269cb17`.
+- `e2e/helpers/team.ts` — lines 1–226; blob `c5b2fc62b0cb0a37a8231245b615ac6a513d046d`.
+- `e2e/helpers/test-narration.ts` — lines 1–187; blob `2299d56b0681c6b90180e62a417f07528299e627`.
+- `e2e/helpers/webview.ts` — lines 1–658; blob `5acec507ac0b5b28a8afcdf0528d1611b22d6386`.
+- `e2e/playwright.config.ts` — lines 1–55; blob `4e4683186ee24e5cdce49a35cf336e069f35b1a2`.
+- `e2e/run-config.ts` — lines 1–22; blob `1921baad5195765b91a6661afd2f75415c49be96`.
+- `e2e/tsconfig.json` — lines 1–21; blob `5fc3efce347e5591b3021362d0b3365b65cc5114`.
+
 
 ## Coverage totals
 
