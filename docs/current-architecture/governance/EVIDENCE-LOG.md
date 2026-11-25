@@ -1560,3 +1560,15 @@ The current-architecture index previously displayed only the historical module b
 - No source code, package manifest, dependency, workflow, GitHub setting or release state was modified.
 - No tests, build, typecheck, lint, package, dependency/SBOM generation, workflow dispatch, release rehearsal, OIDC operation or runtime experiment was executed.
 - No branch was merged or deleted during this documentation pass. The remaining target is one canonical `main` branch; PR/merge operations and branch deletion capability must be verified separately. The available connector exposes PR merge and ref update but no branch-delete operation.
+
+
+## 2026-11-26 — GOV-DOC-CONSOLIDATION-002 publication verification
+
+- Documentation PR [#1](https://github.com/K41-Origin/k41-nexus-prototype/pull/1) was squash-merged into `main`.
+- Merge commit: `beb404fe2aa14506926f6065186387ef734beaac`; verified `refs/heads/main` points to this commit.
+- The PR publishes 65 documentation files (8,294 additions, no deletions). No application source or workflow files were changed by this PR.
+- The updated governance README, Audit Register, Evidence Log, infrastructure module record, GitHub CI module record, infrastructure README, TESTING and CI/CD documents were fetched again from `main`; the BUILD-014 correction and consolidation session are present in the published versions.
+- PR #1 is CLOSED / MERGED. The canonical governance target is now `main`.
+- The security remediation branch remains separate because its CI workflow snapshot contains BUILD-014: three `continue-on-error` protocol/inventory checks are omitted from the final failure gate. Merging that branch before resolving this known CI gating defect would publish a known false-green path. No source fix was applied because this pass was authorized for verification/documentation consolidation, not an application/workflow patch.
+- The connector exposes branch creation/ref update but no branch-delete operation. Therefore branch deletion cannot be claimed or performed through the available interface. The remaining security branch requires BUILD-014 correction/verification and then merge; only after that can it be removed through a branch-delete-capable GitHub interface.
+- No tests, build, typecheck, lint, package, workflow dispatch, release rehearsal, OIDC operation or runtime experiment was executed in this documentation publication step.
