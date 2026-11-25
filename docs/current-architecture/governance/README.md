@@ -2,7 +2,7 @@
 
 **Status:** ACTIVE — governance baseline established; module records are populated as audits are verified.  
 **Initial module recorded:** `core/`  
-**Branch:** `docs/hybrid-llm-engine-direction`  
+**Governance publication branch (pre-consolidation):** `docs/hybrid-llm-engine-direction`; intended canonical branch after consolidation: `main`  
 **Documentation HEAD at the start of GOV-DOCGOV-001:** `02b3118edf38713cc55b581a916fd61dea8bfd1b`  
 **Current source verification snapshot:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
 **Webview source verification snapshot:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`
@@ -33,7 +33,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [Adapters audit record](modules/adapters.md) | VS Code adapter static audit coverage, A-01–A-10, source baseline and remaining integration gaps |
 | [E2E audit record](modules/e2e.md) | E2E inventory, assertion-review status, E2E-001–E2E-009 and cross-module coverage gaps |
 | [Scripts audit record](modules/scripts.md) | Complete 14/14 scripts inventory, source review, BUILD-001–BUILD-007 and tooling gaps |
-| [GitHub CI/release audit record](modules/github-ci.md) | Complete 10/10 `.github/` inventory, workflow permissions/triggers, secret boundaries, artifact provenance and BUILD-008–BUILD-013 |
+| [GitHub CI/release audit record](modules/github-ci.md) | Complete 10/10 `.github/` inventory, workflow permissions/triggers, secret boundaries, artifact provenance and BUILD-008–BUILD-014 |
 | [System dependency map](../SYSTEM-DEPENDENCY-MAP.md) | Single owner for evidence-backed cross-module import, runtime ownership, lifecycle, protocol and trust-boundary edges; static map IN PROGRESS |
 | [Infrastructure module record](modules/infrastructure.md) | Integrated build/package/dependency/test/CI audit; PARTIAL |
 | [System dependency map module record](modules/system-dependency-map.md) | Coverage/status pointer for the cross-module map |
