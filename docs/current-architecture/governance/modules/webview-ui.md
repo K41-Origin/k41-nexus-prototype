@@ -4,7 +4,7 @@
 **Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-012` (2026-11-25)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
 **Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
-**Latest source verification:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` (tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated: false`, per GOV-WEBVIEW-002/008 evidence)  
+**Latest source verification:** `main` — `b1104a808cf70382c2bd14a94d372d907a500cda` (tree `97940dabd84264b6281917b11928ebae6156752c`, `truncated: false`, GOV-GAP-CLOSURE-001)  
 **Inventory:** 459/459 tracked blobs reconciled; no path or blob-SHA differences from the baseline.  
 **Evidence:** [GOV-WEBVIEW-001](../EVIDENCE-LOG.md#2026-11-25--gov-webview-001-webview-ui-inventory-and-governance-reconciliation).
 
