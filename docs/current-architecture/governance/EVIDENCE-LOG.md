@@ -1301,3 +1301,23 @@ All 16 paths returned the expected updated content and blob SHA. The evidence-lo
 - No workflow dispatch, CI run, YAML parser, actionlint, test, build, lint, typecheck, OIDC request, deployment, release or package publication executed.
 - No application source or runtime files changed.
 - BUILD-008 and BUILD-009 remain OPEN: remediation exists on an unmerged branch and verification is pending.
+
+
+### GOV-GHCI-003 — post-publication verification
+
+The documentation branch was fetched after the remediation records were published. The following committed files were re-fetched and their blob SHAs verified:
+
+| Path | Verified blob SHA |
+|---|---|
+| `docs/current-architecture/github-ci/DEEP-AUDIT.md` | `4b38406653c7317693cb45d01dfd86b214e20815` |
+| `docs/current-architecture/github-ci/FILE-REFERENCE.md` | `1bd58cca0af919d4377304080d26a12abd82c701` |
+| `docs/current-architecture/github-ci/README.md` | `a0b7229e5e31f8da0c658d6c5d8987931439cb95` |
+| `docs/current-architecture/governance/modules/github-ci.md` | `c58d4bc21ee9aba6ff1b11cf4aacf7cbeb862235` |
+| `docs/current-architecture/governance/AUDIT-REGISTER.md` | `33f249d2b63260ef0bb35ca264e883d991f5a2cf` |
+| `docs/current-architecture/governance/EVIDENCE-LOG.md` (before this verification append) | `043104bcf3c8019dc9ca39a6d7b5bfc54fe6735d` |
+
+The source remediation branch was independently re-fetched: `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`. Complete recursive-tree comparison against `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` returned 856 entries on both trees, `truncated=false`, and exactly two changed blobs: `.github/workflows/ci.yml` and `.github/workflows/publish-extension.yml`. Their branch blob SHAs are `8dc8cdf30e2cb1857708a8bd601807c08df34368` and `0b408f04d6b7c47d1405b9259d257fd21bdcb15d`.
+
+Targeted static assertions by inspection confirmed: no Vercel secret names or preview jobs in CI; manual dispatch defaults to true and rejects false; both publisher jobs require `release.published`; only one `id-token: write` declaration exists and it belongs to `publish-npm`; build checkout has `persist-credentials: false`; publisher jobs contain no checkout; npm artifact integrity and release identity checks are present. These are static observations, not executed workflow behavior.
+
+This evidence-log entry itself must be fetched once after the commit to verify its final blob SHA and documentation branch HEAD. No workflow run or runtime verification was performed.
