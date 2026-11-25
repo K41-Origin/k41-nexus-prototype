@@ -479,3 +479,37 @@ Continue with the remaining 30 reported-review source rows, prioritizing the 14 
 - Review the 47 `FETCHED / INVENTORIED` test files at assertion level without executing them.
 - Continue ClientMessage/ServerMessage producer-consumer tracing and host lifecycle/reconnect analysis.
 - Retain the 143 binary-header-only assets and one unverified font as open validation limits.
+
+
+## 2026-11-25 — GOV-GOVERNANCE-001: audit continuity and no-duplication governance update
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Documentation branch inspected before update:** `docs/hybrid-llm-engine-direction` — `e9bce038d8cf7d32640148ebacb97c49298fe796`  
+**Source branch state checked:** `main` — `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Scope:** governance documentation only; no application source investigation or execution.
+
+### Governance/history reviewed
+
+- Governance README, AUDIT-REGISTER, AUDIT-METHOD and EVIDENCE-LOG.
+- Core, server and webview governance records; webview DEEP-AUDIT and FILE-REFERENCE.
+- Adapter README, DEEP-AUDIT and FILE-REFERENCE to reconcile the actual completed adapter audit against the stale register status.
+- Existing documented history through GOV-WEBVIEW-008 and adapter findings A-01–A-10.
+
+### Corrections and continuity controls
+
+1. Added a dedicated adapter governance record. The register had incorrectly described `adapters/` as NOT AUDITED despite the adapter deep audit documenting 8/8 source files reviewed and findings A-01–A-10. The new record explicitly labels this as DOC-RECORDED and leaves current-source SHA reconciliation OPEN.
+2. Corrected the webview governance session range to include GOV-WEBVIEW-008 and distinguished the historical source baseline from the later source verification snapshot at `56f354f...`.
+3. Replaced stale register continuation text that still requested review of seven source rows already completed in GOV-WEBVIEW-008. The actual remaining 47 assertion-level test reviews, protocol tracing, lifecycle/reconnect and binary/font gaps are now explicit.
+4. Added a mandatory SHA-first continuation gate: record source/docs refs separately, compare complete-tree path/blob identities, preserve historical baselines, inspect only changed or explicitly open files, distinguish test inventory from execution, and search existing findings before assigning IDs.
+5. Linked the adapter record from governance README and register. Historical audit entries and finding IDs were preserved.
+
+### Verification limits
+
+- This was a documentation reconciliation/update, not a new source audit.
+- No source tree was fetched or compared in this session; no current adapter SHA claim is made.
+- No tests, build, lint, typecheck, runtime, browser or VS Code host experiments were executed.
+- No application source, assets, manifests or configuration were changed.
+
+### Continuation pointer
+
+Resume with the 47 webview test files still marked `FETCHED / INVENTORIED` for assertion-level review, unless the user selects another scope. Do not repeat unchanged `REVIEWED` source files. Before any adapter source continuation, reconcile its 8 blob SHAs against the active source tree.
