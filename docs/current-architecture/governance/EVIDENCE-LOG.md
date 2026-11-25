@@ -407,3 +407,40 @@ Continue with the remaining 30 reported-review source rows, prioritizing the 14 
 
 - 16 reported-review source rows remain: 9 `characters/ui/` files and 7 other source files.
 - After those, continue the 47 inventoried-only tests, protocol producer-consumer tracing, host lifecycle/reconnect and binary/font evidence.
+
+
+## 2026-11-25 — GOV-WEBVIEW-007: character subsystem complete source review
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch:** `main`  
+**Source commit:** `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Recursive tree SHA:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Documentation branch before publication:** `docs/hybrid-llm-engine-direction` at `061e968ddc37aed8e062abb3c40a58990b8d0c77`  
+**Scope:** all 115 tracked files under `webview-ui/src/characters/`.
+
+### Governance and historical reconciliation
+
+- Re-read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, webview module record, DEEP-AUDIT and FILE-REFERENCE.
+- Tree-to-ledger reconciliation: 115/115 paths and blob SHAs match; 0 missing, 0 extra, 0 mismatches.
+- Breakdown: 33 source files, 81 PNG art assets, 1 wardrobe JSON.
+- Nine `REVIEWED REPORTED` UI files were fetched in full and statically reviewed; exact byte/SHA identity and line counts were recorded. All 33 source files now have REVIEWED evidence (including one file whose earlier review and EOF boundary evidence were retained).
+- The 81 PNGs remain at historical BINARY HEADER VERIFIED level (signature and 128×96 IHDR); full CRC/pixel validation was not performed. The wardrobe manifest remains historically parsed and consistency-checked.
+
+### Cross-reference observations
+
+- Character view keyboard shortcuts explicitly exclude text-entry targets; this does not alter or close `WV-C15`, which concerns the separate editor shortcut hook.
+- Pointer/undo-step listeners, RAF animation, ResizeObserver and document pointerdown listeners have explicit cleanup paths in the inspected UI.
+- Custom-item import catches PNG decode errors and revokes object URLs in `finally`. Existing wardrobe aggregate decode rejection risk remains `WV-C11` / `WV-WARD-01`.
+- No new stable finding ID was added; existing findings and states were preserved.
+
+### Execution and modification limits
+
+- Static source/document review only.
+- No tests, build, lint, typecheck, runtime, accessibility, pointer simulation, image decode or visual regression was executed.
+- No application source, test, configuration, dependency or asset file changed.
+
+### Next continuation
+
+- 7 reported-review source rows remain elsewhere in `webview-ui/src/`.
+- 7 `FETCHED / REVIEWED REPORTED` rows remain as a separate exact-coverage evidence gap.
+- 47 inventoried-only tests, protocol producer-consumer tracing, host lifecycle/reconnect and binary/font evidence remain open.
