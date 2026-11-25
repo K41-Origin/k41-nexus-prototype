@@ -285,3 +285,43 @@ Cross-reference source:
 - New status distribution: 199 REVIEWED source rows; 62 reported-review source rows; 7 TEST-INVENTORIED tests; 47 FETCHED / INVENTORIED tests; 143 binary header-only rows; 1 unverified TTF.
 - No tests/build/lint/typecheck/protocol generation/runtime or watcher experiment executed.
 - No application source, asset, dependency or configuration file modified.
+
+
+## 2026-11-25 — GOV-WEBVIEW-004: reported-review historical evidence reconciliation
+
+**Repository:** `K41-Origin/k41-nexus-prototype`  
+**Source branch/baseline:** `main` / `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Documentation branch starting point:** `docs/hybrid-llm-engine-direction` / `2614502f8983977ed850c1a8a9b840689c6aa183`  
+**Scope:** all 62 `FETCHED / REVIEWED REPORTED` and `REVIEWED REPORTED` source rows in webview-ui FILE-REFERENCE.  
+**Method:** re-read governance and audit history; inspect historical DEEP-AUDIT and FILE-REFERENCE revisions; compare each reported-review path/blob SHA against the complete source tree. No application source was modified.
+
+### Repository reconciliation
+
+- Recursive tree: `truncated: false`.
+- `webview-ui/`: 459 blob entries.
+- Reported-review subset: 62 paths.
+- Path/SHA comparison: 62 present, 62 SHA matches, 0 missing, 0 changed.
+
+### Historical evidence result
+
+The historical DEEP-AUDIT contains subsystem-level review claims but no file-by-file line-range manifest for these 62 rows. It explicitly records that some large UI fetch outputs were truncated and their corresponding ledger entries remain reported-review. Component/hook coverage is described by broad groups with variable exact coverage. Historical FILE-REFERENCE revisions preserve the reported-review statuses; the examined documentation commit titled `close component tail coverage gaps` did not add per-file line-range evidence for these rows.
+
+### Row breakdown
+
+| Group | Rows | Outcome |
+|---|---:|---|
+| `src/characters/ui/` | 9 | Historical group review reported; exact file coverage not evidenced |
+| `src/components/` | 32 | Prior inspection reported; exact line coverage/cross-references not evidenced |
+| `src/hooks/` | 14 | Prior inspection reported; lifecycle/cross-module gaps remain |
+| Other source files | 7 | Historical review claim reported; exact line coverage not evidenced |
+| **Total** | **62** | **SHA-reconciled; no row promoted to REVIEWED** |
+
+### Decision
+
+This session closes the historical **reconciliation** question, not the source-content review. All 62 rows remain in their reported-review statuses because the available historical evidence is insufficient to certify complete per-file coverage. FILE-REFERENCE rows now explicitly record that their SHA is reconciled while line-level verification remains open. This preserves historical work without converting an unverified claim into a verified review.
+
+### Execution limits
+
+- No 62-file full source reread was claimed or performed in this session.
+- No tests, build, lint, typecheck, or runtime experiment executed.
+- No application source, assets, configuration or dependencies modified.
