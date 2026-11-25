@@ -412,59 +412,59 @@ Statuses are conservative. REVIEWED REPORTED preserves previous session work wit
 | webview-ui/src/usage/usageStore.ts | 7330bf9bd856d32dfef20633f7dc391b4a2644e2 | 2842 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/src/usage/useUsageBridge.ts | 270909fcba42e615b95d6229b66d61b1224f9072 | 2168 | REVIEWED — prior subsystem audit; cross-module follow-up remains |
 | webview-ui/test/build-subpath.test.ts | 6531f84f343232b656cd9265d701a478babd4277 | 4933 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-003; not executed |
-| webview-ui/test/cardBar.test.ts | 39e3b000b1aef67abd7f0f342330af44437c0944 | 2615 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/castHistory.test.ts | 3de1c964733ca76f8472906d15572f1d4313ef85 | 2181 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/cardBar.test.ts | 39e3b000b1aef67abd7f0f342330af44437c0944 | 2615 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/castHistory.test.ts | 3de1c964733ca76f8472906d15572f1d4313ef85 | 2181 | TEST-INVENTORIED — assertion-level review complete; not executed |
 | webview-ui/test/castSync.test.ts | 2a0c507d8173811995c8b6578079d29b20acdc04 | 9866 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
 | webview-ui/test/characterRenderer.test.ts | 618af4fec0b4968feae3bddee3f4e16d64d42da4 | 11253 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
-| webview-ui/test/characterSheet.test.ts | 8e3c4de80cedafb49046afd15a6c578b1a51a04b | 7181 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/characterTemplatesVersion.test.ts | b34861e202e317340a3e6402f03602f4a6c8b8e0 | 1126 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/clipboardKeys.test.ts | 6fd711c2e492c7fa7695104c90ce18952e47373a | 4269 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/contextGauge.test.ts | a4b3cc4c4a96f3169afde059e3128af6df5924a1 | 2734 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/conversationsRecent.test.ts | 56e1c4a7d27821aec41b4c7c780217c0825f88d7 | 936 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/despawnSeat.test.ts | f9354dd17f64bde82d6990f9f77cfa75350f0557 | 3311 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/characterSheet.test.ts | 8e3c4de80cedafb49046afd15a6c578b1a51a04b | 7181 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/characterTemplatesVersion.test.ts | b34861e202e317340a3e6402f03602f4a6c8b8e0 | 1126 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/clipboardKeys.test.ts | 6fd711c2e492c7fa7695104c90ce18952e47373a | 4269 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/contextGauge.test.ts | a4b3cc4c4a96f3169afde059e3128af6df5924a1 | 2734 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/conversationsRecent.test.ts | 56e1c4a7d27821aec41b4c7c780217c0825f88d7 | 936 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/despawnSeat.test.ts | f9354dd17f64bde82d6990f9f77cfa75350f0557 | 3311 | TEST-INVENTORIED — assertion-level review complete; not executed |
 | webview-ui/test/dev-assets.test.ts | 44c181de7e7f63904143d6e7ccdf3b0fc33bb0b7 | 3507 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-003; not executed |
-| webview-ui/test/directoryStrip.test.ts | fdc1cc3089fc2eade4f468ee86c6c3393f570045 | 1524 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/edgeSwipe.test.ts | 01da285159b5c81c02a374dd02a5acc3658afa7e | 5852 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/editorActions.test.ts | b27ca7b3529a019a542fc0bc701d0672da662fff | 4289 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/editorState.test.ts | e2122f1b8c0da2e0390aef840a518602e0235ab0 | 2319 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/directoryStrip.test.ts | fdc1cc3089fc2eade4f468ee86c6c3393f570045 | 1524 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/edgeSwipe.test.ts | 01da285159b5c81c02a374dd02a5acc3658afa7e | 5852 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/editorActions.test.ts | b27ca7b3529a019a542fc0bc701d0672da662fff | 4289 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/editorState.test.ts | e2122f1b8c0da2e0390aef840a518602e0235ab0 | 2319 | TEST-INVENTORIED — assertion-level review complete; not executed |
 | webview-ui/test/existingAgents.test.ts | 11914967532cda8fa8bc62e84613e5f56bfdb80a | 7099 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
-| webview-ui/test/flowCopy.test.ts | 4d8c35241b72d6516dd3c101288b577631a6b017 | 6567 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/greeter.test.ts | 116ae19c1446e888eb763214d13249f48dec357f | 8863 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/greeterCharacter.test.ts | b164d53b18a95d88198afbcca6db780084312b2a | 1429 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/helperFollow.test.ts | f952914e490d06cbf12331b3f98465e41d4b2064 | 5637 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/inputArea.test.ts | af99bc832e212079e6865c1c20b3924ac5b7f83d | 1330 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/introBubbleGeometry.test.ts | bd969a0f7869f787f2a3833be47eec3bf08632cf | 7547 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/introTour.test.ts | 86fab0a9080ba5336818bcd014b81d18f2505642 | 8952 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/keyboardViewport.test.ts | c84215e44d8a718b1ea82cef06186777870b3bed | 3156 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/launchLatch.test.ts | b4eda6652c842ddee7e68a75f68469dd490d2e93 | 1069 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/launchMenus.test.ts | 958bcd3ea604559a65e47b5f3b9acd0762fee037 | 2753 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/layoutSerializer.test.ts | bdc28518315db12c7c0981701baff3d52ff67a89 | 5885 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/musicComposer.test.ts | ad5eb57cda316b2bc0dd5f99a332840e5246f8b4 | 7603 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/officeBlink.test.ts | ad40215944dbb2e5bec43e638130cfc28d5f040c | 2469 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/officeBlinkSprites.test.ts | 6b8b14673e493221060913b8d04f2cb992debfc5 | 2750 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/officeCanvasCursor.test.ts | 5bde5502619ceede4d3e6603a47885eada49151a | 6972 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/flowCopy.test.ts | 4d8c35241b72d6516dd3c101288b577631a6b017 | 6567 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/greeter.test.ts | 116ae19c1446e888eb763214d13249f48dec357f | 8863 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/greeterCharacter.test.ts | b164d53b18a95d88198afbcca6db780084312b2a | 1429 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/helperFollow.test.ts | f952914e490d06cbf12331b3f98465e41d4b2064 | 5637 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/inputArea.test.ts | af99bc832e212079e6865c1c20b3924ac5b7f83d | 1330 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/introBubbleGeometry.test.ts | bd969a0f7869f787f2a3833be47eec3bf08632cf | 7547 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/introTour.test.ts | 86fab0a9080ba5336818bcd014b81d18f2505642 | 8952 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/keyboardViewport.test.ts | c84215e44d8a718b1ea82cef06186777870b3bed | 3156 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/launchLatch.test.ts | b4eda6652c842ddee7e68a75f68469dd490d2e93 | 1069 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/launchMenus.test.ts | 958bcd3ea604559a65e47b5f3b9acd0762fee037 | 2753 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/layoutSerializer.test.ts | bdc28518315db12c7c0981701baff3d52ff67a89 | 5885 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/musicComposer.test.ts | ad5eb57cda316b2bc0dd5f99a332840e5246f8b4 | 7603 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/officeBlink.test.ts | ad40215944dbb2e5bec43e638130cfc28d5f040c | 2469 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/officeBlinkSprites.test.ts | 6b8b14673e493221060913b8d04f2cb992debfc5 | 2750 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/officeCanvasCursor.test.ts | 5bde5502619ceede4d3e6603a47885eada49151a | 6972 | TEST-INVENTORIED — assertion-level review complete; not executed |
 | webview-ui/test/onReconnect.test.ts | 344ffa982c77b11cba8529942ce55cc18febff83 | 1828 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
-| webview-ui/test/petEntity.test.ts | 0897047475e5b1cf3d1595b669d66962b983a34c | 13187 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/pieceItems.test.ts | 31a96bd13dee646e00dd70346f4679b58f8f53e1 | 1224 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/pixelFont.test.ts | 18531e885497d230b876dd6cf4bdc72ac1c5b158 | 2446 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/pixelGrid.test.ts | 9ad8c421ba795f37e127eb8f8d276ecd57aabc09 | 1313 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/pixelSnap.test.ts | e6e9e8a165b37c379832ebfecbb0473f5b6cdf33 | 1289 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/playerFit.test.ts | ffafbaecc2feac7a724bd171bb8d86f604beba9e | 2909 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/playerSheet.test.ts | 2142af5f2536c21bf3bfce214bd10b6454471cbf | 3845 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/recentCharacters.test.ts | 061396d8d16006d6fae1a4e8f045539babd657dd | 557 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/seatedIdle.test.ts | a82c8f9bb099e7ba81dc1abcd8482043658d844d | 4210 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/selectionButtons.test.ts | b58db130650c087b139bc4e833f594bfc78edae6 | 2640 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/selectionMath.test.ts | 110632affff46ab5a788e99770f191b83a9b7b86 | 7087 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/slideTransitions.test.ts | 43beb2021446681e7d2954107aef3da3a3cf319d | 1911 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/petEntity.test.ts | 0897047475e5b1cf3d1595b669d66962b983a34c | 13187 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/pieceItems.test.ts | 31a96bd13dee646e00dd70346f4679b58f8f53e1 | 1224 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/pixelFont.test.ts | 18531e885497d230b876dd6cf4bdc72ac1c5b158 | 2446 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/pixelGrid.test.ts | 9ad8c421ba795f37e127eb8f8d276ecd57aabc09 | 1313 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/pixelSnap.test.ts | e6e9e8a165b37c379832ebfecbb0473f5b6cdf33 | 1289 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/playerFit.test.ts | ffafbaecc2feac7a724bd171bb8d86f604beba9e | 2909 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/playerSheet.test.ts | 2142af5f2536c21bf3bfce214bd10b6454471cbf | 3845 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/recentCharacters.test.ts | 061396d8d16006d6fae1a4e8f045539babd657dd | 557 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/seatedIdle.test.ts | a82c8f9bb099e7ba81dc1abcd8482043658d844d | 4210 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/selectionButtons.test.ts | b58db130650c087b139bc4e833f594bfc78edae6 | 2640 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/selectionMath.test.ts | 110632affff46ab5a788e99770f191b83a9b7b86 | 7087 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/slideTransitions.test.ts | 43beb2021446681e7d2954107aef3da3a3cf319d | 1911 | TEST-INVENTORIED — assertion-level review complete; not executed |
 | webview-ui/test/subagentResync.test.ts | 186ac30aa58919e0affda0b8a25ba849bb3825a6 | 3875 | TEST-INVENTORIED — full test source and assertions inspected in GOV-WEBVIEW-002; not executed |
-| webview-ui/test/teammateSeating.test.ts | 4f84bd6b7ebea60bdad715d0ee9842198fca90c0 | 3900 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/terminalLinks.test.ts | 9454e202fc3d1a8c781824faac6769c7993b2a20 | 8848 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/touchGesture.test.ts | fce4e63d43ace5db03782479e4a7980f3f0ca94f | 16570 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/trackpad.test.ts | 8bf930c4a4bd3545c634fc62b0579bd60c7c7bb2 | 6320 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/usageBarView.test.ts | 6259843f93d04290a98b705a2093caa5c10065ea | 2773 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/usageStore.test.ts | 301c057bd160e6b02762a940c0ed6d54da3b5677 | 2562 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/wardrobeLabels.test.ts | 756676f90fa1195937dd4dd7db6fcbdf041481ca | 1723 | FETCHED / INVENTORIED — assertions catalogued; not executed |
-| webview-ui/test/workstations.test.ts | 331448e5cdc5ce20f27f682cc433e19c80f417c7 | 6992 | FETCHED / INVENTORIED — assertions catalogued; not executed |
+| webview-ui/test/teammateSeating.test.ts | 4f84bd6b7ebea60bdad715d0ee9842198fca90c0 | 3900 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/terminalLinks.test.ts | 9454e202fc3d1a8c781824faac6769c7993b2a20 | 8848 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/touchGesture.test.ts | fce4e63d43ace5db03782479e4a7980f3f0ca94f | 16570 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/trackpad.test.ts | 8bf930c4a4bd3545c634fc62b0579bd60c7c7bb2 | 6320 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/usageBarView.test.ts | 6259843f93d04290a98b705a2093caa5c10065ea | 2773 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/usageStore.test.ts | 301c057bd160e6b02762a940c0ed6d54da3b5677 | 2562 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/wardrobeLabels.test.ts | 756676f90fa1195937dd4dd7db6fcbdf041481ca | 1723 | TEST-INVENTORIED — assertion-level review complete; not executed |
+| webview-ui/test/workstations.test.ts | 331448e5cdc5ce20f27f682cc433e19c80f417c7 | 6992 | TEST-INVENTORIED — assertion-level review complete; not executed |
 | webview-ui/tsconfig.app.json | 23fe8cc3ddc9a92928117665db2ea1432b1605d7 | 767 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/tsconfig.json | 1ffef600d959ec9e396d5a260bd3f5b927b2cef8 | 119 | REVIEWED — root/package/build/config file content read; no dynamic execution |
 | webview-ui/tsconfig.node.json | a98025607ec565eca8fa09f18336ba2ced07939b | 834 | REVIEWED — root/package/build/config file content read; no dynamic execution |
