@@ -51,15 +51,15 @@ The 459 ledger rows currently classify as:
 
 | Ledger status | Files | Meaning |
 |---|---:|---|
-| `REVIEWED` | 196 | Prior review plus 53 complete source-file reviews recorded in GOV-WEBVIEW-002 |
-| `FETCHED / REVIEWED REPORTED` | 41 | Prior review reported; exact line-coverage reconciliation remains |
-| `REVIEWED REPORTED` | 24 | Prior review reported; exact line-coverage reconciliation remains |
-| `TEST-INVENTORIED` | 5 | Complete test source/assertions inspected; not executed |
-| `FETCHED / INVENTORIED` | 49 | Test files fetched/inventoried; complete assertion review remains; not executed |
+| `REVIEWED` | 199 | Prior review plus 53 complete source-file reviews in GOV-WEBVIEW-002 and three complete source-file reviews in GOV-WEBVIEW-003 |
+| `FETCHED / REVIEWED REPORTED` | 39 | Prior review reported; exact line-coverage reconciliation remains |
+| `REVIEWED REPORTED` | 23 | Prior review reported; exact line-coverage reconciliation remains |
+| `TEST-INVENTORIED` | 7 | Complete test source/assertions inspected in GOV-WEBVIEW-002/003; not executed |
+| `FETCHED / INVENTORIED` | 47 | Test files fetched/inventoried; complete assertion review remains; not executed |
 | `BINARY HEADER VERIFIED` | 143 | Header/signature/metadata checks only, as specified per file |
 | `NOT VERIFIED` | 1 | `public/fonts/FSPixelSansUnicode-Regular.ttf` internals remain unavailable |
 
-These categories sum to 459. The 65 remaining reported-review rows and 49 inventoried test rows are **not automatically unread files**; they are recorded work whose exact remaining evidence must be reconciled. GOV-WEBVIEW-002 completed 53 source-file reviews and inspected five test files without executing them. Do not repeat completed work wholesale. The single unverified font must remain open until its binary content is actually available.
+These categories sum to 459. The 62 remaining reported-review rows and 47 inventoried test rows are **not automatically unread files**; they are recorded work whose exact remaining evidence must be reconciled. GOV-WEBVIEW-002 completed 53 source-file reviews and inspected five test files; GOV-WEBVIEW-003 completed three additional source-file reviews and inspected two additional test files. No tests were executed. Do not repeat completed work wholesale. The single unverified font must remain open until its binary content is actually available.
 
 ## Documentation verification
 
@@ -73,11 +73,11 @@ Preserve existing `WV-` findings and their states in [DEEP-AUDIT.md](../../webvi
 
 The next work is:
 
-1. Reconcile exact line coverage for the remaining 65 `FETCHED / REVIEWED REPORTED` and `REVIEWED REPORTED` rows. Inspect only missing ranges and recorded gaps.
-2. Review the remaining 49 test files beyond inventory where needed; map assertions to implementation and keep execution separate.
+1. Reconcile exact line coverage for the remaining 62 `FETCHED / REVIEWED REPORTED` and `REVIEWED REPORTED` rows. Inspect only missing ranges and recorded gaps.
+2. Review the remaining 47 test files beyond inventory where needed; map assertions to implementation and keep execution separate.
 3. Continue ClientMessage/ServerMessage producer-consumer tracing, field validation, authorization, persistence and ordering through UI, adapter and server.
 4. Verify the font binary internals when retrievable; retain the existing limits on PNG header checks and runtime asset loading.
-5. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-APP-01`, `WV-TR-01`, `WV-RESYNC-01` and the `WV-C03/WV-C06` resize-listener cleanup evidence.
+5. Continue host lifecycle/disposal and reconnect consistency analysis, including `WV-APP-01`, `WV-TR-01`, `WV-RESYNC-01`, `WV-VITE-01` and the `WV-C03/WV-C06` resize-listener cleanup evidence.
 6. Keep runtime, browser, VS Code host, build, lint, typecheck and test verification open until explicitly authorized and actually performed.
 
 ## Explicit limitations
