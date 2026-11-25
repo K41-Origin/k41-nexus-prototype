@@ -3,6 +3,8 @@
 **Status:** ACTIVE — governance baseline established; module records are populated as audits are verified.  
 **Initial module recorded:** `core/`  
 **Branch:** `docs/hybrid-llm-engine-direction`  
+**Latest verified documentation HEAD before this reconciliation:** `02b3118edf38713cc55b581a916fd61dea8bfd1b`  
+**Current source verification snapshot:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
 **Webview source verification snapshot:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`
 
 This directory is the **single coordination layer** for repository audits. It does not replace technical module documentation. It controls how evidence, coverage, findings, dependencies, and unfinished work are recorded and connected.
@@ -32,6 +34,8 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 | [E2E audit record](modules/e2e.md) | E2E inventory, assertion-review status, E2E-001–E2E-009 and cross-module coverage gaps |
 | [Scripts audit record](modules/scripts.md) | Complete 14/14 scripts inventory, source review, BUILD-001–BUILD-007 and tooling gaps |
 | [GitHub CI/release audit record](modules/github-ci.md) | Complete 10/10 `.github/` inventory, workflow permissions/triggers, secret boundaries, artifact provenance and BUILD-008–BUILD-013 |
+| [System dependency map](../SYSTEM-DEPENDENCY-MAP.md) | Single owner for evidence-backed cross-module import, runtime ownership, lifecycle, protocol and trust-boundary edges; currently NOT AUDITED |
+| [Infrastructure audit documents](../infrastructure/README.md) | Build, dependency, testing and integrated CI/CD infrastructure status; currently NOT AUDITED as a consolidated scope |
 
 ## Existing technical records retained
 
@@ -47,7 +51,7 @@ When documents disagree, do not choose whichever sounds newer. Re-fetch the sour
 - [Scripts deep audit](../SCRIPTS-AUDIT.md), [scripts file reference](../SCRIPTS-FILE-REFERENCE.md) and [scripts overview](../SCRIPTS-README.md)
 - [GitHub CI/release deep audit](../github-ci/DEEP-AUDIT.md), [file reference](../github-ci/FILE-REFERENCE.md) and [overview](../github-ci/README.md)
 
-These documents are linked, not copied wholesale. The governance register points to the owning record for each detail.
+These documents are linked, not copied wholesale. The governance register points to the owning record for each detail. Legacy scripts navigation stubs under `scripts/` are aliases only; the canonical scripts records are `SCRIPTS-README.md`, `SCRIPTS-AUDIT.md` and `SCRIPTS-FILE-REFERENCE.md`.
 
 ## Rules
 
