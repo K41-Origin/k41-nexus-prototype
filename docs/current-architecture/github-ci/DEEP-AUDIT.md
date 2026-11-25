@@ -1,6 +1,6 @@
 # .github and CI/Release Deep Audit
 
-**Status:** STATIC AUDIT COMPLETE — 10/10 tracked blobs individually fetched, SHA-reconciled and reviewed. BUILD-008–BUILD-013 remain OPEN pending merge/runtime/settings verification; BUILD-008/009 remediation is implemented on `security/remediate-build-008-009`.  
+**Status:** STATIC AUDIT COMPLETE — 10/10 tracked blobs individually fetched, SHA-reconciled and reviewed. BUILD-008–BUILD-014 remain OPEN pending merge/runtime/settings verification; BUILD-008/009 remediation is implemented on `security/remediate-build-008-009`.  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
 **Source branch/commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
 **Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
