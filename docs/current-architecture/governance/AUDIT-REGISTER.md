@@ -1,6 +1,6 @@
 # Repository Audit Register
 
-**Status snapshot:** 2026-11-25 — GOV-GHCI-002 preview/release trust-boundary design review complete (BUILD-008/009 OPEN pending implementation); GOV-GHCI-001 `.github/` inventory remains 10/10; GOV-SCRIPTS-001 `scripts/` static audit complete (14/14; BUILD-001–BUILD-007 OPEN); source branch `main` points to `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; module baselines remain individually scoped below.  
+**Status snapshot:** 2026-11-25 — governance reconciliation session GOV-DOCGOV-001. Documentation branch HEAD at session start: `02b3118edf38713cc55b581a916fd61dea8bfd1b`; source branch `main`: `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`. Complete recursive tree comparison: 739/739 source paths and blob SHAs are identical between `main` and the documentation branch snapshot; 61 additional documentation blobs exist on the documentation branch. Module baselines remain individually scoped below.  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
 **Governance branch:** `docs/hybrid-llm-engine-direction`  
 **Source branch for current-state audit:** `main` unless a module record explicitly declares another baseline.
@@ -13,13 +13,14 @@ This register is the consolidated index. Detailed findings remain in their ownin
 |---|---|---|
 | `main` | `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` | Current application source reference at governance initialization |
 | `docs/hybrid-llm-engine-direction` | `189e28970ec5d05abd536a57a4adab53399c27fd` | Historical governance branch tip before GOV-WEBVIEW-010 publication |
-| `docs/hybrid-llm-engine-direction` | `08ee7fc7edddc358ba883cb4d25d6282becd10a8` | Governance branch tip verified before GOV-WEBVIEW-012 publication |
+| `docs/hybrid-llm-engine-direction` | `08ee7fc7edddc358ba883cb4d25d6282becd10a8` | Historical governance branch tip verified before GOV-WEBVIEW-012 publication |
+| `docs/hybrid-llm-engine-direction` | `02b3118edf38713cc55b581a916fd61dea8bfd1b` | Actual documentation branch HEAD verified at start of GOV-DOCGOV-001; subsequent reconciliation commits are recorded in the evidence log |
 | Core source snapshot | `d0d5de756bb531d4d1fd1d97ee22f092d9feaaf1` | Historical core inventory root; all 28 core blob SHAs reconciled |
 | Server source snapshot | `f1af3e0c36573e4317143969cf43dde642877ba6` | Canonical server audit baseline; all 135 server blob SHAs reconciled |
 | Webview UI source snapshot | `4dd14d612fd37d89ffbbc977959f572395c4eec8` | Canonical webview audit baseline; all 459 webview blob SHAs reconciled at the governance branch tip |
 | Adapter source verification | `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` | 8/8 adapter path/blob SHAs match historical baseline `4dd14d612fd37d89ffbbc977959f572395c4eec8` |
 
-The core, server and webview source blob identities have been reconciled at the stated snapshots. This does not imply runtime correctness, test success, or that divergent branch histories have been merged.
+The full `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b` tree (856 entries, 739 blobs, 117 trees, `truncated=false`) was compared against documentation branch snapshot `02b3118edf38713cc55b581a916fd61dea8bfd1b`: all 739 source paths exist on both branches with identical blob SHAs; no source additions, removals or content differences were found. The documentation branch contains 61 additional blobs. This verifies source snapshot identity, not runtime correctness, test success, or branch-history equivalence.
 
 ## Module status
 
@@ -29,11 +30,13 @@ The core, server and webview source blob identities have been reconciled at the 
 | `server/` | **AUDITED — 135/135 tracked files reconciled; source SHAs unchanged; 9/9 architecture docs fetched** | [Server governance record](modules/server.md), [deep audit](../server/DEEP-AUDIT.md), [file reference](../server/FILE-REFERENCE.md) | Preserve F-01–F-09; runtime/test verification remains open |
 | `webview-ui/` | **IN PROGRESS — 459/459 paths/SHA reconciled; 261 REVIEWED; 54 TEST-INVENTORIED; 0 FETCHED / INVENTORIED; 143 BINARY HEADER VERIFIED; 1 NOT VERIFIED; 34/34 ClientMessage and 46/46 ServerMessage variants statically traced; field-level validation/authorization/persistence/side-effect audit and cross-layer lifecycle/reconnect static trace complete** | [Webview governance record](modules/webview-ui.md), [deep audit](../webview-ui/DEEP-AUDIT.md), [file ledger](../webview-ui/FILE-REFERENCE.md) | Runtime verification of WV-RESYNC-01/02, WV-APP-01, WV-TR-01 and WV-PROTO-01/02/03 (authorization required); binary/font evidence and remaining cross-client questions |
 | `adapters/` | **STATIC AUDIT COMPLETE — 8/8 files reviewed and SHA-reconciled against main@56f354f; findings A-01–A-10 documented; dynamic verification open** | [Adapters governance record](modules/adapters.md), [deep audit](../adapters/DEEP-AUDIT.md), [file reference](../adapters/FILE-REFERENCE.md) | Continue targeted cross-module lifecycle/activation/disposal verification when authorized; do not repeat unchanged adapter source review |
-| `e2e/` | **IN PROGRESS — 47/47 blobs TREE-VERIFIED/SHA-RECONCILED/fetched; 21/21 specs / 152 assertions TEST-INVENTORIED; 25/25 harness files SOURCE-VERIFIED; E2E-001–E2E-009 OPEN** | [E2E governance record](modules/e2e.md), [deep audit](../e2e/DEEP-AUDIT.md), [file ledger](../e2e/FILE-REFERENCE.md) | Harness and targeted cross-module static review complete (GOV-E2E-003/004); continue scripts/CI; preserve E2E-001–E2E-009 |
+| `e2e/` | **IN PROGRESS — 47/47 blobs TREE-VERIFIED/SHA-RECONCILED/fetched; 21/21 specs / 152 assertions TEST-INVENTORIED; 25/25 harness files SOURCE-VERIFIED; E2E-001–E2E-009 OPEN** | [E2E governance record](modules/e2e.md), [deep audit](../e2e/DEEP-AUDIT.md), [file ledger](../e2e/FILE-REFERENCE.md) | Harness and targeted cross-module static review complete (GOV-E2E-003/004); preserve E2E-001–E2E-009; runtime/test execution remains open and requires authorization |
 | `scripts/` | **STATIC AUDIT COMPLETE — 14/14 blobs TREE-VERIFIED, SHA-RECONCILED, individually fetched and SOURCE-VERIFIED; BUILD-001–BUILD-007 OPEN** | [Scripts governance record](modules/scripts.md), [deep audit](../SCRIPTS-AUDIT.md), [file reference](../SCRIPTS-FILE-REFERENCE.md) | Preserve BUILD-001–BUILD-007; .github/ and CI/release static audit is complete (10/10; BUILD-008–BUILD-013 OPEN) |
 | `.github/` and CI/release | **STATIC AUDIT COMPLETE — 10/10 blobs TREE-VERIFIED, SHA-RECONCILED, individually fetched and SOURCE-VERIFIED; BUILD-008–BUILD-013 OPEN** | [GitHub CI/release governance record](modules/github-ci.md), [deep audit](../github-ci/DEEP-AUDIT.md), [file reference](../github-ci/FILE-REFERENCE.md) | Implement GOV-GHCI-002 controls when authorized; verify org branch rules, token/secret scopes, Environment protection, npm trusted publisher and artifact provenance |
 | Repository docs / ADRs | **PARTIAL** | Preliminary audit and module docs | Read remaining authoritative decisions before architecture proposals |
-| System dependency map | **NOT AUDITED** | [System dependency map](../SYSTEM-DEPENDENCY-MAP.md) | Build evidence-backed import/runtime/lifecycle edges after module audits |
+| System dependency map | **NOT AUDITED** | [System dependency map](../SYSTEM-DEPENDENCY-MAP.md) | Build evidence-backed import/runtime/lifecycle edges, reusing completed module evidence |
+| Infrastructure (build/dependencies/testing/integrated CI) | **NOT AUDITED as a consolidated scope**; `.github/` and `scripts/` have separate completed static audits | [Infrastructure index](../infrastructure/README.md), [CI/CD](../infrastructure/CI-CD.md), [build](../infrastructure/BUILD-SYSTEM.md), [dependencies](../infrastructure/DEPENDENCIES.md), [testing](../infrastructure/TESTING.md) | Complete integrated build/package/dependency/test mapping; do not repeat the scoped scripts and workflow reviews |
+| Architecture docs / ADR reconciliation | **PARTIAL** — architecture direction and three ADRs read; implementation conformance and unresolved decisions remain open | [Architecture direction](../../architecture/K41-HYBRID-LLM-ENGINE-DIRECTION.md), `docs/adr/` | Trace decisions to source contracts; resolve 12 open hybrid-engine design questions before specification freeze |
 
 **Status meanings:** AUDITED is limited to the explicitly stated evidence scope. It does not imply runtime correctness, security certification, tests passing, or absence of defects.
 
@@ -44,8 +47,10 @@ The core, server and webview source blob identities have been reconciled at the 
 3. `webview-ui/` + `adapters/` + `server/`: static cross-layer lifecycle/reconnect/state-reconciliation trace is recorded in GOV-WEBVIEW-012. Preserve WV-RESYNC-01/02, WV-APP-01, WV-TR-01, A-03/A-05/A-06 and F-01/F-03/F-04/F-05/F-09. Next work is design-contract clarification and authorized runtime verification; do not restart unchanged module reviews.
 4. `webview-ui/`: retrieve/verify the font binary internals when available. Existing 143 PNG/assets are header/signature-level only; do not label them fully decoded or runtime-validated.
 5. `e2e/`: complete tree/SHA inventory (GOV-E2E-001), assertion-level review (GOV-E2E-002, 21/21 specs, 152 tests), and full static fixture/helper/setup/config review (GOV-E2E-003, 25/25 files) are complete. Preserve E2E-001–E2E-009. Targeted lifecycle/hook/reconnect/persistence/test-hook trace is complete (GOV-E2E-004); scripts static audit is complete (14/14; BUILD-001–BUILD-007 OPEN); `.github/` inventory and trust-boundary design review are complete (GOV-GHCI-001/002; BUILD-008–BUILD-013 remain OPEN pending fixes/settings evidence). Do not restart without changed source or a named verification gap.
-6. Build the system dependency/lifecycle map from evidence-backed imports, producers/consumers and ownership edges.
-7. Tests/build/typecheck/lint/runtime experiments remain unexecuted unless explicitly authorized; record exact commands, environment and results if later authorized.
+6. Build the system dependency/lifecycle map from evidence-backed imports, producers/consumers and ownership edges; the map document now defines edge evidence and ownership but the map itself remains NOT AUDITED.
+7. Complete integrated infrastructure review (build system, dependency classification, test configuration and packaging); scoped `scripts/` and `.github/` audits are already complete and must not be repeated.
+8. Reconcile architecture direction/ADR decisions with implementation and record unresolved design decisions separately from implemented capabilities.
+9. Tests/build/typecheck/lint/runtime experiments remain unexecuted unless explicitly authorized; record exact commands, environment and results if later authorized.
 
 ## Finding ID namespaces
 
