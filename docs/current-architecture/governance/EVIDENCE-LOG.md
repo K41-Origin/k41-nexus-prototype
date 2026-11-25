@@ -597,3 +597,58 @@ Continue the 47 webview test files still marked `FETCHED / INVENTORIED` at asser
 ### Next continuation point
 
 Continue UI → adapter → server ClientMessage/ServerMessage tracing, field validation, authorization, persistence, side effects and handshake order. Then continue targeted lifecycle/reconnect and binary/font verification. Do not re-read unchanged REVIEWED source or TEST-INVENTORIED test files for the same question. Dynamic test execution remains outside scope unless explicitly authorized.
+
+
+## 2026-11-25 — GOV-WEBVIEW-010: control-plane producer-consumer trace
+
+**Repository:** K41-Origin/k41-nexus-prototype  
+**Source branch:** main — 56f354f2808ae5aba10b0e1d5892bd9fa7ca095b  
+**Source tree:** 2d02bb29bd5a3aa8f74fc6a2ed21027149817e50; 856 entries, 739 blobs, truncated=false  
+**Documentation branch before publication:** docs/hybrid-llm-engine-direction — 189e28970ec5d05abd536a57a4adab53399c27fd  
+**Scope:** UI → transport → adapter/server ingress for every ClientMessage; server/adapter producer → recipient/fan-out → UI consumer for every ServerMessage.
+
+### Governance reviewed before source inspection
+
+- governance/README.md
+- governance/AUDIT-REGISTER.md
+- governance/AUDIT-METHOD.md
+- governance/EVIDENCE-LOG.md
+- governance/modules/webview-ui.md, server.md and adapters.md
+- webview-ui/DEEP-AUDIT.md and FILE-REFERENCE.md
+- webview-ui/PROTOCOL-MATRIX.md, TRANSPORT.md and STATE-MANAGEMENT.md
+- Existing cross-module findings and continuation records were reconciled before assigning new IDs.
+
+### Repository and source evidence
+
+- Reconfirmed main at 56f354f2808ae5aba10b0e1d5892bd9fa7ca095b and complete recursive tree 2d02bb29bd5a3aa8f74fc6a2ed21027149817e50 (truncated=false).
+- Reconfirmed docs branch head before publication at 189e28970ec5d05abd536a57a4adab53399c27fd.
+- Webview source ledger entries for the selectively re-fetched producer/consumer files matched their current blob SHAs. Server (135 paths) and adapter (8 paths) remained reconciled to the same source baseline; no broad module restart was performed.
+- Re-fetched relevant UI, adapter and server source files and recorded their blob SHAs in webview-ui/DEEP-AUDIT.md section 17.
+- AsyncAPI remains the contract source of truth: 34 ClientMessage and 46 ServerMessage variants. All 80 variants now have static route/producer/consumer/delivery mapping in PROTOCOL-MATRIX.md sections 9–11.
+- Corrected a stale route description: App emits focusAgent in both runtimes; the standalone server intentionally no-ops it because local drawer/tab focus is handled in App.
+
+### Findings added
+
+- WV-PROTO-01 — Area mapping mutation is persisted without notifying other connected clients. Static evidence shows sender-local optimistic update, no areaMappingsLoaded/store broadcast on save, handshake-only snapshot, and per-client OfficeState seat selection. Conditional multi-client divergence risk; Medium severity, High confidence, OPEN.
+- WV-PROTO-02 — External asset directory reload is delivered only to the requesting client. The shared asset cache is mutated, but updated directory/sprite messages use the requesting socket callback; existing peers can retain stale UI asset state until reconnect. Low severity, High confidence, OPEN.
+- Both findings are static, not runtime reproduced. Their multi-client effects remain conditional on multiple connected standalone clients and the intended consistency contract.
+- WV-C08 and server F-08 remain the canonical schema-validation findings; this session adds examples and route mapping, not a duplicate validation finding. WV-APP-01, WV-RESYNC-01, WV-TR-01 and adapter A-01–A-10 remain unchanged.
+
+### Documentation published
+
+1. webview-ui/PROTOCOL-MATRIX.md — complete ClientMessage producer/ingress map, ServerMessage producer/recipient map, validation/authorization/fan-out summary, correction for focusAgent, and WV-PROTO-01/02. Blob SHA: 2753367c3d44c2599522bb248b0ca919a1f4dfcf.
+2. webview-ui/DEEP-AUDIT.md — section 17 with source baseline, selected source blob SHAs, full trace result, findings, verification limits and continuation. Blob SHA: da7bd6876a75277bd789b47e0dcd351c712e115b.
+3. governance/modules/webview-ui.md — session range through GOV-WEBVIEW-010, consolidated trace status, new finding references and revised continuation. Blob SHA: 11d2c5a87121d975a4232051dcfb830cc33e885a.
+4. governance/AUDIT-REGISTER.md — consolidated webview status and continuation updated; stale docs-branch pre-publication pointer corrected to 189e28970ec5d05abd536a57a4adab53399c27fd. Blob SHA: 2d3947ecc0b00167b1039749a86b8b6959c687bc.
+5. This EVIDENCE-LOG.md entry is append-only.
+
+### Verification limits
+
+- SOURCE-VERIFIED / TREE-VERIFIED / DOC-RECORDED only. Static routing does not prove runtime delivery or multi-client consistency.
+- No tests, build, lint, typecheck, protocol generation, browser/VS Code runtime, multi-client WebSocket, PTY or reconnect experiment was executed.
+- No application source, tests, dependencies, package manifests, assets or configuration were modified.
+- Documentation changes were limited to the five owning audit documents above; no source implementation change was made.
+
+### Next continuation point
+
+Complete the field-level validation/authorization and side-effect matrix using WV-C08 and F-08 as canonical findings. Confirm intended multi-client semantics for WV-PROTO-01/02 before proposing implementation changes. Then continue targeted lifecycle/disposal/reconnect analysis. Runtime verification remains unauthorized and OPEN.
