@@ -57,7 +57,7 @@ All 8 integration files were individually fetched and statically reviewed for th
 
 | Path | Mode | Bytes | Lines | Blob SHA | Remediation review |
 |---|---:|---:|---:|---|---|
-| `.github/workflows/ci.yml` | 100644 | 16,167 | 451 | `8dc8cdf30e2cb1857708a8bd601807c08df34368` | TREE-VERIFIED / SOURCE-VERIFIED — privileged preview jobs removed |
-| `.github/workflows/publish-extension.yml` | 100644 | 6,627 | 238 | `0b408f04d6b7c47d1405b9259d257fd21bdcb15d` | TREE-VERIFIED / SOURCE-VERIFIED — release-only isolated publisher design |
+| `.github/workflows/ci.yml` | 100644 | 16,167 | 450 | `8dc8cdf30e2cb1857708a8bd601807c08df34368` | TREE-VERIFIED / SOURCE-VERIFIED — privileged preview jobs removed |
+| `.github/workflows/publish-extension.yml` | 100644 | 6,627 | 237 | `0b408f04d6b7c47d1405b9259d257fd21bdcb15d` | TREE-VERIFIED / SOURCE-VERIFIED — release-only isolated publisher design |
 
 These are branch-specific remediation identities, not replacements for the historical `main@56f354f` audit baseline above. The workflow files were fetched after the final branch update. No workflow parser, actionlint, tests, build, lint, typecheck or runtime execution was performed.
