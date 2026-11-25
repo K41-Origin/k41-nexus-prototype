@@ -1,6 +1,6 @@
 # .github and CI/Release Deep Audit
 
-**Status:** STATIC AUDIT COMPLETE — 10/10 tracked blobs individually fetched, SHA-reconciled and reviewed. BUILD-008–BUILD-013 are OPEN.  
+**Status:** STATIC AUDIT COMPLETE — 10/10 tracked blobs individually fetched, SHA-reconciled and reviewed. BUILD-008–BUILD-013 remain OPEN pending merge/runtime/settings verification; BUILD-008/009 remediation is implemented on `security/remediate-build-008-009`.  
 **Repository:** `K41-Origin/k41-nexus-prototype`  
 **Source branch/commit:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
 **Source tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` — 856 entries, 739 blobs, 117 trees, `truncated=false`.  
@@ -14,7 +14,7 @@ Re-read governance README, AUDIT-REGISTER, AUDIT-METHOD, EVIDENCE-LOG, scripts m
 
 **Included:** every tracked blob beneath `.github/`; all four workflows reviewed in full; issue templates, PR template, Dependabot and funding metadata; targeted cross-reference to `package.json`, `scripts/npm-package-contract.mjs`, `scripts/publish-npm-package.mjs`, `scripts/verify-npm-package.mjs` and `scripts/verify-vsix-package.mjs`; read-only repository workflow/release/ruleset/branch metadata.
 
-**Excluded:** workflow dispatch, actual CI execution, build/test/lint/typecheck, release/publish, secret-value inspection, marketplace/npm/Vercel account settings, organization settings not exposed through the connected GitHub API. No repository source or workflow was modified.
+**Excluded:** workflow dispatch, actual CI execution, build/test/lint/typecheck, release/publish, secret-value inspection, marketplace/npm/Vercel account settings, organization settings not exposed through the connected GitHub API. No repository source or workflow was modified during the original audit. A separate, explicitly authorized remediation branch is documented in §10.
 
 ## 2. Complete inventory and repository state
 
@@ -32,7 +32,7 @@ Repository metadata observations:
 
 | Workflow | Trigger | Primary behavior |
 |---|---|---|
-| `ci.yml` | `pull_request` to main and `push` to main; ignores markdown, LICENSE and FUNDING-only changes | Protocol validation/generation drift, typecheck, lint, webview/server tests, package smoke, 3-OS × 3-shard E2E, dependency audit, Allure artifact upload, PR Vercel report preview |
+| `ci.yml` | `pull_request` to main and `push` to main; ignores markdown, LICENSE and FUNDING-only changes | Protocol validation/generation drift, typecheck, lint, webview/server tests, package smoke, 3-OS × 3-shard E2E, dependency audit and Allure artifact upload; PR Vercel preview deployment removed in remediation branch |
 | `pr-title.yml` | `pull_request_target`: opened, edited, synchronize | Semantic PR title check |
 | `publish-extension.yml` | `release.published` and `workflow_dispatch` | VS Code Marketplace/Open VSX VSIX publication; npm trusted publication only on release event; GitHub release VSIX asset |
 | `update-badges.yml` | schedule every 8 hours and `workflow_dispatch` | Reads marketplace/release/npm stats and writes three external Gist badges |
@@ -235,3 +235,45 @@ A safe boundary must ensure untrusted code never executes in a process/job that 
 - Not verified: Vercel token scope, registry token scopes, npm trusted-publisher settings, Environment protection rules, authorized manual-dispatch users, org-level branch policies, actual workflow execution.
 
 No workflow, test, build, lint, typecheck, publish, dispatch, deployment or runtime operation was executed. No application source, workflow, package manifest, dependency or configuration was modified.
+
+## 10. BUILD-008/009 remediation implementation snapshot
+
+**Remediation branch:** `security/remediate-build-008-009`  
+**Branch HEAD at static verification:** `86d3b1dbddae7605e5e2092886c12982f8e4bf58`  
+**Base source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Scope:** two workflow files only. No application source, package manifest, dependency or script changed.
+
+### BUILD-008 — PR preview secret exposure removed by suspension
+
+- `.github/workflows/ci.yml` no longer contains `deploy-preview-precheck` or `deploy-preview`; all Vercel secret references, write-capable PR permissions, PR checkout in the deploy job, PR-controlled `npm ci`/report preparation in a Vercel-credential-bearing job, and automated Vercel PR comments were removed from this workflow.
+- Existing unprivileged CI, E2E and Allure artifact production remain. The PR-hosted Vercel report preview is intentionally **disabled**, not replaced by a privileged `workflow_run` deployer. This is a security-first mitigation; it trades preview convenience for removal of the secret-bearing PR execution path.
+- The repository's Vercel secrets may still exist in GitHub settings; this workflow no longer references them. Secret scope, access history and possible historical exposure are not known.
+
+### BUILD-009 — release-only publication with isolated publisher jobs
+
+- `workflow_dispatch` now defaults `dry_run: true`; a manual dispatch with false is rejected. Publisher jobs are guarded to run only for `release.published`, so a manual ref can build and verify artifacts but cannot publish.
+- `build-and-verify` has `contents: read`, checkout uses `persist-credentials: false`, and the job has no Marketplace/Open VSX secrets and no `id-token: write`. It verifies release commit ancestry, preserves npm release identity/version checks, runs package/test verification, and uploads one run-scoped artifact containing the VSIX, npm tarball and integrity metadata.
+- `publish-vsix` consumes that artifact without checkout or repository scripts. Marketplace/Open VSX PATs are supplied only to their respective publish action steps; GitHub release upload receives GITHUB_TOKEN only in its own step.
+- `publish-npm` consumes the same artifact without checkout or repository scripts. It alone has `id-token: write`, is assigned the `npm-publish` Environment, pins setup-node/download-artifact actions to resolved commit SHAs, installs npm 11.5.1 with lifecycle scripts disabled, verifies SHA-512 integrity and idempotent publication decision, then publishes the tarball with provenance.
+- High-trust action refs used in publisher jobs were resolved from their upstream version tags and pinned to commits: setup-node `949feb2413d6458794dcd2491c4babbbce0c15c1`, download-artifact `9000827ccba6bdab643e8b6fd33ac0654aef8333`, HaaLeo publish extension `1b8df468b849f76a143b8c18bf0ffa2075398d12`, and softprops release `8a0cd651e5b2365bd640854a3fa5dfc70e4875f3`. This targeted pinning does not close repository-wide BUILD-011.
+- BUILD-013 remains a separate finding; release identity preflight is retained in the unprivileged build job, but BUILD-013 is not reclassified or closed here.
+
+### Static verification performed
+
+- Branch tree retrieved completely: 856 entries, `truncated=false`.
+- Only the two intended `.github/workflows/` blobs differ from the base snapshot in this remediation branch; new blob SHAs are recorded in FILE-REFERENCE.md.
+- Both changed workflows were re-fetched from the remediation branch after the final workflow update.
+- Static checks by inspection: no Vercel secret reference or deploy job remains in `ci.yml`; manual dispatch cannot satisfy publisher-job event guards; `id-token: write` exists only in the isolated npm publisher job; publisher jobs do not checkout repository source.
+- No YAML parser, workflow linter, GitHub Actions run, tests, build, typecheck, lint, OIDC request, deployment, release or package publication was executed.
+
+### Verification plan and closure gates
+
+1. **Pre-merge static validation:** run a YAML/workflow parser and actionlint; verify expressions, job dependency graph, artifact paths, action outputs, shell quoting, npm CLI compatibility and permissions. Resolve all failures before merge.
+2. **BUILD-008 PR negative test:** open a test PR and inspect the run's expanded jobs/permissions. Confirm no Vercel secret is injected, no deploy job exists, no write permission exists beyond the workflow's read-only default, and no Vercel API request/comment occurs. Confirm Allure CI artifacts remain available if required.
+3. **BUILD-009 manual negative tests:** dispatch from a non-main branch with default dry_run=true and confirm build/verification only; dispatch with dry_run=false and confirm explicit rejection. Confirm neither publisher job starts, no VSCE/Open VSX secret is available, and no OIDC token can be requested by the build job.
+4. **BUILD-009 release positive test in a controlled staging/release rehearsal:** create a release from a main ancestor with a matching package tag/version; verify build artifact upload, VSIX artifact digest/contents, npm SHA-512 metadata, publisher job isolation, Marketplace/Open VSX publication and npm provenance. Use staging credentials/packages first where supported; do not test against production registries without explicit release approval.
+5. **GitHub settings gate:** configure and verify `npm-publish` Environment required reviewers and allowed deployment refs; verify npm trusted publisher exactly matches repository, workflow filename and Environment; verify VSCE_PAT/Open VSX token scope; confirm Actions default token permissions and organization rulesets. A workflow reference to an Environment does not itself configure its protection rules.
+6. **Credential hygiene:** review workflow history and Vercel access logs for the former exposure window; rotate Vercel credentials if scope/history cannot rule out exposure. Remove unused Vercel secrets only after preview suspension is accepted.
+7. **Post-merge verification:** retrieve merged workflow blobs, record exact run IDs/attempts, job permissions, artifact IDs/digests, registry outcomes and npm provenance URL. Close BUILD-008 only after the no-secret PR negative test; close BUILD-009 only after manual negative tests and release-path positive verification plus settings evidence.
+
+**Current disposition:** remediation implemented on branch, not merged; BUILD-008 and BUILD-009 remain OPEN pending static parser validation, settings verification and authorized workflow evidence.
