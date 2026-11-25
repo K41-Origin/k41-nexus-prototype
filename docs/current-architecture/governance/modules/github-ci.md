@@ -1,6 +1,6 @@
 # GitHub Workflows and CI/Release Audit Record
 
-**Status:** STATIC AUDIT + TRUST-BOUNDARY DESIGN REVIEW COMPLETE — 10/10 `.github/` blobs and 8 targeted integration files SOURCE-VERIFIED; BUILD-008–BUILD-013 remain OPEN pending implementation/settings evidence.  
+**Status:** STATIC AUDIT COMPLETE — 10/10 historical `.github/` blobs reviewed; BUILD-008/009 remediation implemented on `security/remediate-build-008-009` (not merged; OPEN pending verification); BUILD-010–BUILD-013 OPEN.  
 **Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`, `truncated=false`.  
 **Documentation snapshot before publication:** `docs/hybrid-llm-engine-direction@7b56bcd278311bfdb782acacdd80080f74d7e87a`.  
 **Detailed owner:** [GitHub CI/release deep audit](../../github-ci/DEEP-AUDIT.md).  
@@ -15,8 +15,8 @@
 
 ## Findings
 Preserve BUILD-008–BUILD-013 in [DEEP-AUDIT.md](../../github-ci/DEEP-AUDIT.md):
-- BUILD-008: same-repository PR-controlled code executes in Vercel-secret-bearing preview deployment job; OPEN.
-- BUILD-009: manual workflow dispatch can publish VSIX from a ref not verified as main; additionally, `npm pack` can invoke package `prepack` scripts while `id-token:write` is available in the npm job. The added npm OIDC execution edge is part of BUILD-009, not a new finding; OPEN.
+- BUILD-008: historical finding was PR-controlled execution in a Vercel-secret-bearing preview job. Remediation branch removes the preview precheck/deploy jobs and all Vercel references from `ci.yml`; preview feature is suspended. OPEN pending PR negative-test evidence and merge.
+- BUILD-009: remediation branch makes manual dispatch build/verify-only, release-gates publisher jobs, separates unprivileged artifact build from VSIX/npm publisher jobs, confines `id-token:write` to the isolated npm publisher, disables checkout credential persistence in the build job, and verifies artifact integrity/idempotency. OPEN pending negative/positive workflow tests and Environment/npm trusted-publisher settings.
 - BUILD-010: required-check aggregate is not shown as enforced by repository branch policy; OPEN pending org-level policy verification.
 - BUILD-011: GitHub Actions dependencies use mutable tags rather than full commit SHA pins; OPEN.
 - BUILD-012: badge workflow omits explicit GITHUB_TOKEN permissions; OPEN.
@@ -24,7 +24,7 @@ Preserve BUILD-008–BUILD-013 in [DEEP-AUDIT.md](../../github-ci/DEEP-AUDIT.md)
 - Existing BUILD-001–BUILD-007 remain in the scripts audit; no IDs reused.
 
 ## Next action
-Implement the GOV-GHCI-002 design only after explicit authorization. Before closure, verify organization rulesets, repository Actions defaults, Vercel/registry secret scopes, protected Environment rules, npm trusted-publisher configuration and artifact provenance; then run authorized workflow verification. Runtime execution remains unauthorized.
+Review remediation branch `security/remediate-build-008-009` and complete the verification gates in [DEEP-AUDIT.md §10](../../github-ci/DEEP-AUDIT.md). BUILD-008 preview deployment is intentionally suspended. Before closure, verify PR/manual negative tests, release positive rehearsal, organization rulesets, Actions defaults, Vercel/registry secret scopes, `npm-publish` Environment protection, npm trusted publisher and artifact provenance. No workflow was dispatched in the remediation session.
 
 
 ## Trust-boundary design review — GOV-GHCI-002
@@ -34,3 +34,14 @@ Implement the GOV-GHCI-002 design only after explicit authorization. Before clos
 - Checkout credential correction: actions/checkout@v7 stores the token-bearing Git config in a separate RUNNER_TEMP file referenced from repository Git config. The token value itself is not directly stored in .git/config; default persistence still makes the credential available to same-job processes.
 - Design assessment complete is not remediation: BUILD-008/009 remain OPEN because no workflow/source changes or runtime verification were authorized. See [DEEP-AUDIT.md §9](../../github-ci/DEEP-AUDIT.md) and [FILE-REFERENCE.md](../../github-ci/FILE-REFERENCE.md).
 
+
+
+## Remediation branch snapshot
+
+- Branch: `security/remediate-build-008-009`
+- HEAD: `86d3b1dbddae7605e5e2092886c12982f8e4bf58`
+- Base: `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`
+- `ci.yml`: `8dc8cdf30e2cb1857708a8bd601807c08df34368` — privileged PR preview deployment removed.
+- `publish-extension.yml`: `0b408f04d6b7c47d1405b9259d257fd21bdcb15d` — release-only isolated publishers; manual verification-only.
+- No application source, package manifest, dependency or package script changed.
+- Remediation is not closure: both findings remain OPEN until branch merge and their respective verification gates pass.
