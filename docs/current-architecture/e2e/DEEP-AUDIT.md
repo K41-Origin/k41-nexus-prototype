@@ -210,11 +210,23 @@ The complete contents of all 25 non-spec harness files were reviewed at `main@56
 - **Impact:** a crashed/interrupted VS Code download can leave a persistent cache lock that blocks subsequent E2E setup on a reused workspace/cache.
 - **Remaining uncertainty:** impact depends on cache persistence and abnormal process termination; no stale lock was created or tested.
 
+#### E2E-009 — Mock Claude scenario queue claim is not atomic across concurrent processes
+
+- **Severity:** Low
+- **Confidence:** Medium
+- **State:** OPEN
+- **Verification:** STATIC-FINDING
+- **Evidence:** `e2e/fixtures/mock-claude-runner.cjs:39-63`, blob `6072b23f637ec2cd3518965f0fabc97f230e9051`; queue append in `e2e/helpers/mock-claude.ts:278-284`, blob `90754501c25ee2b7af4720b00646b557eade48e9`.
+- **Trigger / precondition:** two or more mock Claude child processes sharing the same isolated HOME start and claim scenarios concurrently.
+- **Technical explanation:** each runner performs a separate synchronous read of `scenario-queue.json`, takes the first element, then rewrites the remaining array. There is no inter-process lock, atomic claim/rename, or compare-and-swap. Two processes can therefore read the same head before either write completes; one scenario may be consumed twice and/or a queue update may overwrite another claim. Playwright's single worker limits parallel test workers, but does not serialize multiple child processes launched within one test.
+- **Impact:** multi-agent/team or concurrently launched mock sessions can receive the wrong scenario, duplicate a scenario, or lose a queued scenario, making E2E behavior nondeterministic under that precondition.
+- **Remaining uncertainty:** no test call-site was shown to launch competing claimers in the same instant in this static pass; no concurrency stress or runtime reproduction was performed.
+
 ### Review result and retained findings
 
 - Full static source review: **25/25** fixture/helper/setup/config files.
 - Assertion review: retained **21/21** spec files / **152/152** test declarations as GOV-E2E-002 evidence; not repeated here.
-- Findings **E2E-001–E2E-008** remain OPEN. E2E-001/E2E-002 process/port issues and E2E-003–E2E-006 assertion gaps are preserved unchanged; E2E-007/E2E-008 are new and distinct.
+- Findings **E2E-001–E2E-009** remain OPEN. E2E-001/E2E-002 process/port issues and E2E-003–E2E-006 assertion gaps are preserved unchanged; E2E-007/E2E-008 and E2E-009 are new and distinct.
 - No test/build/lint/typecheck/install/browser/VS Code/PTY/runtime experiment was executed.
 
 ## 8. Cross-module integration and coverage boundaries
@@ -223,11 +235,46 @@ The E2E layer is a consumer of, not a source of truth for, application contracts
 
 | E2E touchpoint / gap | Existing owner and IDs | Audit interpretation |
 |---|---|---|
-| VS Code host activation, agent restore/removal and terminal/webview disposal | adapters: A-03, A-05, A-06; server: F-01, F-03, F-05 | E2E contains lifecycle and panel-reload scenarios, but does not establish all activation/deactivation, repeated-view, shutdown and timer-cancellation invariants. |
+| VS Code host activation, agent restore/removal and terminal/webview disposal | adapters: A-03, A-05, A-06; server: F-01, F-03, F-04, F-05, F-09 | E2E contains lifecycle and panel-reload scenarios, but does not establish all activation/deactivation, repeated-view, shutdown and timer-cancellation invariants. |
 | Standalone reconnect, snapshot replay and queued commands | webview: WV-RESYNC-01, WV-RESYNC-02, WV-APP-01, WV-TR-01 | `standalone/ui.spec.ts` checks the connection indicator across a host stop/restart; it does not fully assert stale-seat reconciliation or classification/cancellation of queued ClientMessages. |
 | Multi-client consistency and shared-state fan-out | webview: WV-PROTO-01, WV-PROTO-02, WV-PROTO-03 | Current E2E does not provide a comprehensive two-client consistency matrix for shared mappings/assets/config mutations. The README also defers producer/viewer relay scenarios. |
 | Runtime message validation and authorization | core AsyncAPI contract; server F-08; webview WV-C08 | E2E exercises selected valid and invalid user flows, but is not a complete malformed-payload/schema-validation matrix. Reuse the completed protocol audit; do not duplicate it here. |
 | CLI/package distribution | root `package.json`, scripts and CI/release | The standalone fixture launches local `dist/cli.js`; this does not by itself prove the published npm package installation path. Continue under scripts/package/CI governance. |
+
+### 8.1 Lifecycle and hook execution
+
+**Lifecycle ownership trace**
+
+- **VS Code:** `PixelAgentsViewProvider` constructs the runtime/store/server. `resolveWebviewView` installs iframe and terminal listeners, flushes buffered broadcasts on `webviewReady`, restores agents and registers their sessions. New terminal agents are registered after launch; the terminal-close listener explicitly unregisters before generic removal. Provider disposal calls `pixelAgentsServer.stop()` without awaiting, then disposes runtime/store. Preserve adapter **A-03/A-05/A-06** and server **F-01/F-03/F-05/F-09**; these are ownership boundaries, not newly duplicated findings.
+- **Standalone:** `admitTerminalAgent` inserts the agent, registers the session route, broadcasts terminal-open and attaches an exit callback that unregisters then closes the agent. CLI shutdown awaits PTY shutdown, chooses `runtime.stop()` for the external PTY-host case or `runtime.dispose()` for in-process PTYs, then calls the synchronous server stop path. Preserve **F-03/F-05**.
+- **Shared gap:** generic `AgentRuntime.removeAgent()` does not guarantee session-router unregister; selected host callbacks do it explicitly. This is exactly the existing **F-03/A-03** invariant gap. `HookEventHandler.dispose()` clears the SessionRouter but not the pending SessionEnd grace timeout, which is the new server-owned **F-09** above.
+
+**Hook execution trace**
+
+1. The mock Claude runner reads the isolated `.claude/settings.json` hook entries, matches the installed Pixel Agents command, and invokes that command with the hook payload on stdin. `ClaudeMockScenarioBuilder` can also schedule hook emissions alongside JSONL writes.
+2. The installed `claude-hook.js` reads stdin and fans the event out to every live server registry entry using that server's token. This is a separate process boundary; its completion is best-effort and exits zero even when delivery fails.
+3. `httpServer.ts` enforces Bearer authentication and body-size limits, but the hook route only gates on truthy `session_id` and `hook_event_name` before calling the runtime callback. It replies `ok`; it is not a semantic acknowledgement that the provider normalized or acted on the event.
+4. `HookEventHandler.handleEvent(_providerId, event)` normalizes with the handler's bound provider and silently drops unrecognized events. The incoming provider ID is not used: preserve existing **F-04**. `SessionRouter` resolves known sessions, stores unknown SessionStart events as pending, buffers events for not-yet-registered agents, and flushes on registration. `AgentRuntime` applies the tracked-project/Watch-All gate before adopting an external session.
+5. Hooks provide low-latency lifecycle/status signals; JSONL polling remains the source for detailed tool text/context. E2E hook tests using `sendHookEvent()` call the authenticated HTTP endpoint directly and therefore bypass the installed hook script/registry fan-out. Mock-runner `emitHook` scenarios exercise that separate process boundary. Treat these as different coverage layers, not interchangeable proof.
+
+### 8.2 Reconnect and state reconciliation
+
+- **Standalone control plane:** `WebSocketTransport` queues every ClientMessage while the socket is not OPEN. On reconnect, it notifies state subscribers before flushing the old queue; `onReconnect` sends a fresh `webviewReady` snapshot request, after which previously queued commands are flushed. Preserve **WV-RESYNC-02** (no command expiry/classification/idempotency/acknowledgement) and **WV-RESYNC-01** (seat/layout reconciliation). `handleWebviewReady` sends existing agents, layout, activity replay and live terminal announcements in an intentional order.
+- **VS Code:** `PostMessageTransport` does not reconnect like a socket. A new iframe resets the provider's ready flag/buffer and receives a fresh `webviewReady` hydration. The `agentCreated` event emitted during restore can precede authoritative `existingAgents` seat metadata; preserve the existing **WV-RESYNC-01** extension recorded by GOV-WEBVIEW-012.
+- E2E checks of the connection indicator/host restart do not by themselves establish stale-command replay safety, multi-client consistency, or seat reconciliation. No reconnect fault injection was performed.
+
+### 8.3 Persistence and restart boundary
+
+- `AgentStateStore.persist()` projects runtime state through `toPersistedAgent()` into namespace-specific `FileStateAdapter` files (`vscode-state.json` / `standalone-state.json`). The projection preserves identity, transcript path, directory/team/look metadata and persisted background-spawn records; transient active tool maps, permission state and turn activity are not persisted.
+- Restore paths recreate fresh `AgentState` scaffolding and start JSONL watching at the existing file's end. The existing `initialReadOffset.test.ts` explicitly verifies resumed sessions replay none of their past; `resendAgentActivity` replays only current in-memory tool/status state. Thus a WebSocket reconnect within one server can replay live activity, while a **process restart** restores identity/look/team/background-spawn state but intentionally starts foreground activity at rest rather than replaying historical tool records. This is a documented behavioral trade-off, not a new finding in this pass; its desired UX contract should be explicit.
+- `PERSISTENCE.md` already records that atomic rename prevents torn reads but does not prevent lost updates across independent process read-modify-write cycles. No duplicate persistence finding is created. The E2E fixture uses isolated HOME and does not prove cross-process shared-config concurrency.
+
+### 8.4 Test-hook boundary and assertion strength
+
+- Both VS Code and standalone fixtures set `window.__PIXEL_AGENTS_E2E = true` with Playwright `addInitScript` before the app/webview frame initializes. `App.tsx` installs `window.__pixelAgentsTestHooks` only when `isE2E` is true; message logs and editor-specific drivers are similarly gated. These hooks are test observability/control seams, not backend authorization.
+- Read hooks expose richer state than some current assertions consume: `getPets()` includes IDs/names/types, and `getFurniture()` includes type and coordinates, while **E2E-006** checks only pet count and **E2E-004** checks only furniture count. The existing findings remain valid; the missing assertions are not caused by a lack of instrumentation.
+- `selectAgent` and `petClick` invoke state actions directly; `editorTileAction` / `editorDrop` call editor handlers but bypass canvas pixel-to-tile geometry. `getTileCenter` is available for specs that need real pointer gestures. Tests using direct hooks verify handler/state behavior, not the complete pointer/DOM interaction path. Existing E2E test design should continue distinguishing these categories.
+- The E2E flag is injected by the harness; production sessions do not set it by default. No browser/runtime test was run in this audit.
 
 ### Explicit suite gaps already documented in `e2e/README.md`
 
@@ -247,7 +294,7 @@ The README's pre-release manual smoke also calls out real Claude JSONL/MCP behav
 - **SHA-RECONCILED:** all 47 E2E path/blob-SHA pairs match between source and documentation branch snapshots.
 - **FETCHED:** all 47 blobs fetched individually.
 - **TEST-INVENTORIED:** assertion-level review complete for 21/21 spec files; 152 declarations and 152 area tags match the generated README inventory.
-- **STATIC-FINDING:** E2E-001, E2E-002, E2E-007 and E2E-008; assertion-quality STATIC-FINDINGs E2E-003–E2E-006.
+- **STATIC-FINDING:** E2E-001, E2E-002, E2E-007, E2E-008 and E2E-009; assertion-quality STATIC-FINDINGs E2E-003–E2E-006. Cross-module server finding F-09 is recorded in the server owner document.
 - **TEST-EXECUTED:** none.
 - **RUNTIME-REPRODUCED:** none.
 
@@ -259,4 +306,4 @@ No install, test, build, lint, typecheck, browser, VS Code host, PTY, hook fault
 2. Finish full source review of every fixture/helper/configuration file and trace the scenario queue, child-process lifetime, temporary-directory ownership, artifact paths and failure cleanup end to end.
 3. Cross-check test hooks and key test paths against the relevant source in webview-ui, server and adapters, reopening only files needed for a named E2E contract.
 4. Inspect `scripts/run-e2e.mjs`, `scripts/generate-e2e-inventory.mjs`, report generation and CI workflows under the scripts and `.github/` audit scopes.
-5. Keep E2E-001/E2E-002 open until source change plus appropriate authorized verification evidence exists. No runtime execution is authorized by this audit record.
+5. Preserve E2E-001–E2E-009 and canonical F-01/F-03/F-04/F-05/F-09, A-03/A-05/A-06 and WV-RESYNC-01/02. Continue with scripts/ and .github/ under their owning audit scopes. No runtime execution is authorized by this audit record.
