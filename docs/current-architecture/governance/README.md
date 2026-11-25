@@ -3,7 +3,7 @@
 **Status:** ACTIVE — governance baseline established; module records are populated as audits are verified.  
 **Initial module recorded:** `core/`  
 **Branch:** `docs/hybrid-llm-engine-direction`  
-**Latest verified governance commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`
+**Webview source verification snapshot:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`
 
 This directory is the **single coordination layer** for repository audits. It does not replace technical module documentation. It controls how evidence, coverage, findings, dependencies, and unfinished work are recorded and connected.
 
