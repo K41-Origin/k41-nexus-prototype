@@ -395,3 +395,74 @@ This promotes the 32 previously reported component rows to REVIEWED. Together wi
 ### Next continuation point
 
 Continue webview source audit with the remaining **30 reported-review rows**: 14 hooks, 9 character UI files and 7 other source files. After source coverage, continue test assertion review (47 inventoried-only files), ClientMessage/ServerMessage producer-consumer tracing, host lifecycle/reconnect verification and outstanding binary/font evidence. Do not repeat the 54 component files unless a source SHA changes or a specific cross-module question requires it.
+
+
+## 13. Incremental static review — GOV-WEBVIEW-006 (2026-11-25)
+
+**Source baseline:** `main` at `56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`  
+**Recursive tree:** `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50` (`truncated: false`)  
+**Scope:** all `webview-ui/src/hooks/` tracked source files.
+
+### Coverage and SHA reconciliation
+
+- The complete source tree contains **24 hook files**.
+- All 24 paths and blob SHAs reconcile exactly with `FILE-REFERENCE.md`: no missing path, extra path or SHA mismatch.
+- Ten hook files were already `REVIEWED` from GOV-WEBVIEW-002 and were not redundantly re-reviewed.
+- The remaining 14 `REVIEWED REPORTED` files were individually re-fetched in full and statically reviewed in this session. The ledger now records all 24/24 hooks as `REVIEWED`.
+- No source SHA changed from the recorded ledger baseline.
+
+### Newly verified hook files
+
+| File | Blob SHA | Lines |
+|---|---|---:|
+| `webview-ui/src/hooks/useDismiss.ts` | `0910f0925e6afa283fed7ca25895ff19eea22e80` | 25 |
+| `webview-ui/src/hooks/useEditorActions.ts` | `386b839a124ffad437c8a3cd9c3460e2826c0d00` | 798 |
+| `webview-ui/src/hooks/useEditorKeyboard.ts` | `44ccc408d1a264b45e99cb2c1056650910d3c8c7` | 108 |
+| `webview-ui/src/hooks/useFurnitureColorActions.ts` | `8fbaa9bc141aaf2daeabc809da7132e6b1e36519` | 102 |
+| `webview-ui/src/hooks/useHoverPin.ts` | `ed9f946d644ba8133beaec95e307b95136127304` | 50 |
+| `webview-ui/src/hooks/useIntroTour.ts` | `4fc18a2eef5bb2b73bcf6a4bf5facfc17d25a28d` | 92 |
+| `webview-ui/src/hooks/useIsMobile.ts` | `6325a2b4dceaba556eaf113e1121dce279b8e93e` | 36 |
+| `webview-ui/src/hooks/useKeyboardViewport.ts` | `7263411c15fa91fef5f4e944ea938b214ea3293e` | 93 |
+| `webview-ui/src/hooks/useLaunchActions.ts` | `88d01bb2f03bade7f4f8030e25a34e90687bfbca` | 31 |
+| `webview-ui/src/hooks/useLongPress.ts` | `fb7c29dcdc42d2369d9237f654a2bb245aaa30d9` | 70 |
+| `webview-ui/src/hooks/usePageBackground.ts` | `7bd272f4950a26b3908d4ae238ac9055459d44a6` | 23 |
+| `webview-ui/src/hooks/usePresence.ts` | `141a990f9c8ac9047b621b11e86ced25af7c3dfc` | 40 |
+| `webview-ui/src/hooks/useRosterLaunch.ts` | `4988aca1cecc1b3f2f94de7fb2530449af4e567a` | 133 |
+| `webview-ui/src/hooks/useSlidePanel.ts` | `2cf4ab0013cae1d82615759e51844e9f02bb7b98` | 79 |
+
+### Cross-reference observations
+
+- `App.tsx:365–375` enables `useEditorKeyboard` whenever edit mode is active and the Characters view is closed. The listener is attached to `window` and does not exclude editable event targets.
+- `office/editor/EditorToolbar.tsx:734–744` and `:818–831` render text inputs for adding and renaming Areas while the editor toolbar is present. Their key events bubble to the window listener.
+- `useEditorActions.ts` owns edit/undo/redo/save callbacks and debounced transport persistence; `useFurnitureColorActions.ts` composes the color-pick state transitions. No runtime or transport timing was exercised.
+- `useKeyboardViewport` delegates keyboard classification to the pure `mobile/keyboardViewport.ts`; the existing `keyboardViewport.test.ts` covers helper samples, not the hook's browser event lifecycle.
+- `useIntroTour` drives the pure `introTourState.ts` reducer; `introTour.test.ts` inventories reducer invariants, not React effect/wire integration.
+- Launch-menu state and launch-latch behavior are split into pure reducers/helpers (`launchMenus.ts`, `launchLatch.ts`); existing launch-latch tests do not execute `useRosterLaunch` or terminal lifecycle behavior.
+
+### New static findings
+
+#### WV-C15 — Editor shortcuts also receive key events from text inputs
+
+- **Severity:** Medium. **Confidence:** High.
+- **Evidence:** `webview-ui/src/hooks/useEditorKeyboard.ts:16–20, 58–79` installs a `window` keydown listener while `isEditMode` is true and dispatches Escape, Delete/Backspace, R/T and undo/redo actions without checking `event.target` or editable state. `webview-ui/src/App.tsx:365–375` activates this hook during editor mode. `webview-ui/src/office/editor/EditorToolbar.tsx:734–744, 818–831` contains text inputs for Area creation and renaming.
+- **Technical explanation:** keyboard events from those inputs bubble to `window`; typing Backspace/Delete can invoke deletion of a selected furniture item, R/T can invoke editor actions, and Escape can also advance/close the editor state while the input handles its own Escape behavior.
+- **Impact:** unintended layout mutation or editor-mode changes while the user is editing text in the Area controls.
+- **Verification:** `SOURCE-VERIFIED` / `STATIC-FINDING`; not runtime reproduced and no test executed.
+- **Remaining uncertainty:** exact user-visible outcome depends on focus, selection and active tool at the time of the key event.
+
+#### WV-C16 — Ctrl/Cmd+Shift+Z redo check is case-sensitive to lowercase z
+
+- **Severity:** Low. **Confidence:** High.
+- **Evidence:** `webview-ui/src/hooks/useEditorKeyboard.ts:71–79`, specifically the redo branch checks `e.key === 'z'` while also requiring `e.shiftKey`.
+- **Technical explanation:** standard KeyboardEvent `key` reports uppercase `"Z"` when Shift is held for the Z key. The Shift+Z redo branch therefore does not match that key value; Ctrl/Cmd+Y remains a separate redo path.
+- **Impact:** the conventional Ctrl+Shift+Z / Cmd+Shift+Z redo shortcut may not work; the alternative Ctrl/Cmd+Y path remains available where supported.
+- **Verification:** `SOURCE-VERIFIED` / `STATIC-FINDING`; behavior not runtime reproduced.
+- **Remaining uncertainty:** browser/OS keyboard mapping and platform shortcut conventions should be confirmed in the target host before prioritizing a change.
+
+### Execution limits
+
+Static source and documentation review only. No tests, build, lint, typecheck, browser/VS Code runtime, keyboard simulation, or application-source modification was performed.
+
+### Next continuation point
+
+Continue the remaining **16 reported-review source rows**: 9 files under `webview-ui/src/characters/ui/` and 7 other source files. Then proceed with the 47 inventoried-only tests, protocol producer-consumer tracing, host lifecycle/reconnect, and outstanding binary/font evidence. The `components/` (54/54) and `hooks/` (24/24) source scopes are complete at this source baseline.
