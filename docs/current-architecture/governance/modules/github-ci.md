@@ -14,7 +14,7 @@
 - Workflow runs: API returned zero; releases: API returned empty; repository rulesets empty; main branch metadata `protected:false`. Organization-level enforcement and secret values/scopes remain unverified.
 
 ## Findings
-Preserve BUILD-008–BUILD-013 in [DEEP-AUDIT.md](../../github-ci/DEEP-AUDIT.md):
+Preserve BUILD-008–BUILD-014 in [DEEP-AUDIT.md](../../github-ci/DEEP-AUDIT.md):
 - BUILD-008: historical finding was PR-controlled execution in a Vercel-secret-bearing preview job. Remediation branch removes the preview precheck/deploy jobs and all Vercel references from `ci.yml`; preview feature is suspended. OPEN pending PR negative-test evidence and merge.
 - BUILD-009: remediation branch makes manual dispatch build/verify-only, release-gates publisher jobs, separates unprivileged artifact build from VSIX/npm publisher jobs, confines `id-token:write` to the isolated npm publisher, disables checkout credential persistence in the build job, and verifies artifact integrity/idempotency. OPEN pending negative/positive workflow tests and Environment/npm trusted-publisher settings.
 - BUILD-010: required-check aggregate is not shown as enforced by repository branch policy; OPEN pending org-level policy verification.
@@ -25,7 +25,7 @@ Preserve BUILD-008–BUILD-013 in [DEEP-AUDIT.md](../../github-ci/DEEP-AUDIT.md)
 - Existing BUILD-001–BUILD-007 remain in the scripts audit; no IDs reused.
 
 ## Next action
-Review remediation branch `security/remediate-build-008-009`, address BUILD-014, and complete the verification gates in [DEEP-AUDIT.md §10](../../github-ci/DEEP-AUDIT.md). BUILD-008 preview deployment is intentionally suspended. Before closure, verify PR/manual negative tests, release positive rehearsal, organization rulesets, Actions defaults, Vercel/registry secret scopes, `npm-publish` Environment protection, npm trusted publisher and artifact provenance. No workflow was dispatched in the remediation session.
+Merge remediation branch `security/remediate-build-008-009` into `main` only after reconciliation; complete BUILD-014 remediation and the verification gates in [DEEP-AUDIT.md §10](../../github-ci/DEEP-AUDIT.md). BUILD-008 preview deployment is intentionally suspended. Before closure, verify PR/manual negative tests, release positive rehearsal, organization rulesets, Actions defaults, Vercel/registry secret scopes, `npm-publish` Environment protection, npm trusted publisher and artifact provenance. No workflow was dispatched in the remediation session.
 
 
 ## Trust-boundary design review — GOV-GHCI-002
