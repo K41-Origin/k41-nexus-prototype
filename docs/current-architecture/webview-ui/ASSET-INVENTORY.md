@@ -97,8 +97,8 @@
 | Screenshot.jpg | JPEG SOF dimensions 1308×521; tree size 111,189 bytes | Header/dimensions verified |
 | favicon.ico | ICO directory has 3 entries: 16×16, 32×32, 48×48; 32-bit entries | Header/directory verified |
 | fonts/FSPixelSansUnicode-Regular.ttf | Git tree size 1,077,160 bytes; base64 fetch returned empty content | NOT VERIFIED — sfnt tables, glyph coverage and metadata not inspected |
-| assets/default-layout-1.json | Inventoried; schema/content validation belongs to layout audit | Content audit pending |
-| manifest.webmanifest | Inventoried; referenced icon/manifest semantics require final cross-check | Content audit pending |
+| assets/default-layout-1.json | Parsed; version/grid/tile counts and furniture coordinate bounds checked | Structural validation complete; semantic/runtime validation open |
+| manifest.webmanifest | Parsed; declared PNG icon paths and IHDR dimensions cross-checked | Structural/reference validation complete; browser/runtime validation open |
 
 ## Asset manifests
 
@@ -116,6 +116,10 @@ Furniture manifests: BIN, BOOKSHELF, CACTUS, CLOCK, COFFEE, COFFEE_TABLE, CUSHIO
 - Furniture records: 36; every record's col/row coordinates are integer values inside the grid bounds.
 - public/manifest.webmanifest parsed successfully and declares two PNG icons: icons/icon-256.png?v=2 (256×256) and icons/icon-512.png?v=2 (512×512). Both files' PNG IHDR dimensions match the declared sizes.
 - This is structural validation only. Furniture placement collision/overlap rules, tile semantic validity and runtime deserialization were not executed.
+
+## Reconciled validation status
+
+The earlier table entries marked these two JSON files as pending are superseded by the structural validation results below. The layout and web manifest checks are recorded in this document; they do not establish semantic correctness of every asset field or successful browser/runtime loading.
 
 ## Validation boundary
 
