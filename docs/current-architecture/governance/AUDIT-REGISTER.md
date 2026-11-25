@@ -37,7 +37,7 @@ The core, server and webview source blob identities have been reconciled at the 
 
 ## Current open workstreams
 
-1. Continue `webview-ui/` from the 16 remaining reported-review source rows (9 character UI files and 7 other source files), reconnect/seat reconciliation, protocol, test-inventory and binary gaps. The 54 component files and 24 hooks are fully source-reviewed; do not repeat them without changed SHAs or a new cross-module question.
+1. Continue `webview-ui/` from the 7 remaining reported-review source rows and 7 fetched/reported-review rows, then reconcile tests, reconnect/seat behavior, protocol and binary/font evidence. The 54 component files, 24 hooks and all 33 character source files are fully source-reviewed; the 115-file character subtree is path/SHA reconciled.
 2. Audit `adapters/` as the next major module, correlating it with completed core/server/webview records.
 3. Review test suites and scripts as evidence of intended behavior, not as proof of correctness until executed.
 4. Build the system dependency/lifecycle map from source references and runtime observations.
