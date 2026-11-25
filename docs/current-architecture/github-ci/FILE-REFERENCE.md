@@ -1,6 +1,7 @@
 # .github File Reference
 
-**Status:** COMPLETE — 10/10 blobs individually fetched and reviewed.  
+**Historical main inventory:** COMPLETE — 10/10 blobs individually fetched and reviewed.
+**Remediation snapshot:** `security/remediate-build-008-009@4d29e1654b0d6a7bd3dacf3773e02265ab0069a1`; all four workflow blobs changed and were re-fetched after remediation.  
 **Source:** `main@56f354f2808ae5aba10b0e1d5892bd9fa7ca095b`; tree `2d02bb29bd5a3aa8f74fc6a2ed21027149817e50`.  
 **Documentation snapshot before publication:** `docs/hybrid-llm-engine-direction@7b56bcd278311bfdb782acacdd80080f74d7e87a`.  
 **Comparison:** source/docs branch .github path+blob-SHA pairs 10/10 identical; 0 added, 0 removed, 0 changed.
@@ -13,10 +14,10 @@
 | `.github/ISSUE_TEMPLATE/feature_request.yml` | 100644 | 1,652 | 54 | `231488cd4ca2df7bbc466755dd3206f11c95975b` | SOURCE-VERIFIED |
 | `.github/dependabot.yml` | 100644 | 814 | 27 | `58ddf528590ac1c90104f05e5641459feaa53827` | SOURCE-VERIFIED |
 | `.github/pull_request_template.md` | 100644 | 1,049 | 45 | `e380dd4e0d876c1f7ea43303e2ae2e61f6c3cdcf` | SOURCE-VERIFIED |
-| `.github/workflows/ci.yml` | 100644 | 24,588 | 683 | `79cbf4d0835327f67fec623b3b41651f41ed72f4` | SOURCE-VERIFIED |
-| `.github/workflows/pr-title.yml` | 100644 | 712 | 33 | `ee43fc0a6a2c6beb914756a0b8877a24abcd75d3` | SOURCE-VERIFIED |
-| `.github/workflows/publish-extension.yml` | 100644 | 4,850 | 154 | `713dc93fbd4a8f5d2c5f37cebdbf37587615205d` | SOURCE-VERIFIED |
-| `.github/workflows/update-badges.yml` | 100644 | 5,041 | 129 | `1c46d700a07cece5a31ff618ccc9804a95b78553` | SOURCE-VERIFIED |
+| `.github/workflows/ci.yml` | 100644 | 17,569 | 461 | `2fe25e0ce88cb75838729c58eb3da6d00db3613a` | SOURCE-VERIFIED |
+| `.github/workflows/pr-title.yml` | 100644 | 755 | 33 | `3f3c1b4b2401d1b4b63670d55664bb2e3a507eb9` | SOURCE-VERIFIED |
+| `.github/workflows/publish-extension.yml` | 100644 | 9,488 | 238 | `fb11a0777aa136657dfb962a331b04d25c5c2dcb` | SOURCE-VERIFIED |
+| `.github/workflows/update-badges.yml` | 100644 | 5,201 | 132 | `d3bf738fd3e51ec44fc800eaf05f54997dffd2b1` | SOURCE-VERIFIED |
 
 ## Coverage
 
@@ -34,7 +35,7 @@
 
 | Path | Mode | Bytes | Lines | Blob SHA | Review scope |
 |---|---:|---:|---:|---|---|
-| `package.json` | 100644 | 6,020 | 182 | `66efe28fd2927466c5f8283c6e26fe63da427079` | Root lifecycle/script entry points: `prepare`, `vercel:prepare`, tests and package verification |
+| `package.json` | 100644 | 5,961 | 181 | `e35a0486bed33310ba73b61f0737b76f20f77cc7` | Root lifecycle/script entry points: `prepare`, `vercel:prepare`, tests and package verification |
 | `server/package.json` | 100644 | 479 | 23 | `f3e7e63e1920d6804eec70c5104914c436269351` | Workspace lifecycle/script surface |
 | `webview-ui/package.json` | 100644 | 1,113 | 44 | `3729872b2736eaf6b66c608c1b40f4e24c25d2fb` | Workspace lifecycle/script surface |
 | `scripts/assemble-vercel-output.mjs` | 100644 | 2,672 | 89 | `70391faa6cb171577bb02aff6e4a6e13963399ae` | Static Vercel output and config generation |
@@ -61,3 +62,18 @@ All 8 integration files were individually fetched and statically reviewed for th
 | `.github/workflows/publish-extension.yml` | 100644 | 6,627 | 237 | `0b408f04d6b7c47d1405b9259d257fd21bdcb15d` | TREE-VERIFIED / SOURCE-VERIFIED — release-only isolated publisher design |
 
 These are branch-specific remediation identities, not replacements for the historical `main@56f354f` audit baseline above. The workflow files were fetched after the final branch update. No workflow parser, actionlint, tests, build, lint, typecheck or runtime execution was performed.
+
+
+## Remediation branch deltas — BUILD-008–BUILD-014
+
+| Path | Remediation blob SHA | Result |
+|---|---|---|
+| `.github/workflows/ci.yml` | `2fe25e0ce88cb75838729c58eb3da6d00db3613a` | BUILD-014 checks are blocking and included in the final gate; all Actions are pinned by full commit SHA. |
+| `.github/workflows/pr-title.yml` | `3f3c1b4b2401d1b4b63670d55664bb2e3a507eb9` | Semantic PR action pinned by full commit SHA. |
+| `.github/workflows/publish-extension.yml` | `fb11a0777aa136657dfb962a331b04d25c5c2dcb` | BUILD-008/009 boundary mitigation retained; all actions pinned; shared release identity preflight protects both publisher jobs (BUILD-013). |
+| `.github/workflows/update-badges.yml` | `d3bf738fd3e51ec44fc800eaf05f54997dffd2b1` | Badge action pinned; explicit `contents: read` workflow permission (BUILD-012). |
+| `package.json` | `e35a0486bed33310ba73b61f0737b76f20f77cc7` | Removed stale `import-tileset` entry (BUILD-005). |
+
+Action tag references were resolved to upstream GitHub tag commits before pinning: checkout v7 `3d3c42e5aac5ba805825da76410c181273ba90b1`; setup-node v7 `949feb2413d6458794dcd2491c4babbbce0c15c1`; upload-artifact v7 `cf430e030ddbb5b0abf93d22962f4752f3646cd9`; cache v5 `caa296126883cff596d87d8935842f9db880ef25`; semantic-pull-request v6 `66e72920af32222769c386d81f89656ebcb6d6d5`; dynamic-badges v1.8.0 `0e50b8bad39e7e1afd3e4e9c2b7dd145fad07501`. Existing publisher actions were already pinned.
+
+All changes are SOURCE-VERIFIED from the remediation branch; no workflow run or parser/linter execution is available. BUILD-008–BUILD-014 remain OPEN pending verification and settings gates.
