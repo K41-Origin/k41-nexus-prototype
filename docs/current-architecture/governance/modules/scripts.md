@@ -34,5 +34,5 @@ Preserve BUILD-001 through BUILD-007 in the deep audit:
 
 Existing E2E-001/E2E-002 are cross-referenced for related process-stop and port-allocation patterns; no duplicate IDs were created.
 
-## Next action
-Continue with `.github/` workflow and CI/release audit. Preserve all BUILD IDs and existing E2E/server/adapters/webview finding IDs. Runtime verification remains unauthorized.
+## Cross-scope continuation
+The `.github/` and CI/release audit is now recorded separately in [GitHub CI/release module record](github-ci.md), with BUILD-008–BUILD-014. This scripts record owns BUILD-001–BUILD-007; preserve all IDs and existing E2E/server/adapters/webview finding IDs. Runtime verification remains unauthorized.
