@@ -1419,3 +1419,8 @@ Documentation branch HEAD after publication: `23e6987fc97226bea3819af12952fc2af0
 All 14 updated/created files returned non-empty content and the expected source-snapshot/status references where applicable. The evidence-log blob above is the pre-verification version; this append must be fetched once after commit to establish its final blob SHA and final documentation branch HEAD.
 
 No runtime or toolchain verification was performed; this publication check verifies documentation commits and content identities only.
+
+
+### GOV-INFRA-001 — evidence correction and final re-fetch
+
+During final SHA spot-check, the `server/vitest.config.ts` blob SHA transcribed in the Build System table was corrected to the directly fetched value `b8d6265259e3abcec1d93945bbf42c43618b62d0`. The corrected `infrastructure/BUILD-SYSTEM.md` was re-fetched after publication; its final blob SHA is `dc971936695c9fd59503a46f68b8cad98f19453c`. This replaces the earlier Build System blob SHA `fe9e281102a6f3ba4ba7a51e0d4811d83e46fe46` in the post-publication table above. No source finding or implementation conclusion changed.
