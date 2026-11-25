@@ -17,7 +17,9 @@ The repository audit is coordinated through [Audit Governance](governance/README
 | [Server](server/DEEP-AUDIT.md) | Server runtime audit findings and verification limitations |
 | [Webview UI](webview-ui/DEEP-AUDIT.md) | Deep static audit progress and findings |
 | [Adapters](adapters/README.md) | Host-specific integration audit |
-| [System dependency map](SYSTEM-DEPENDENCY-MAP.md) | Cross-module dependency and lifecycle evidence |
+| [System dependency map](SYSTEM-DEPENDENCY-MAP.md) | Cross-module dependency, runtime ownership, protocol and trust-boundary evidence — static map in progress |
+| [Infrastructure](infrastructure/README.md) | Integrated build, dependencies, tests and CI/CD audit |
+| [Architecture/ADR reconciliation](ARCHITECTURE-ADR-RECONCILIATION.md) | Current implementation vs future Hybrid LLM Engine direction and existing ADRs |
 
 ## Audit rules
 
