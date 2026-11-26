@@ -1,7 +1,7 @@
 # Webview UI Module Audit Record
 
-**Status:** AUDIT CLOSED — STATIC FILE AUDIT COMPLETE at `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; 459/459 tracked paths and blob SHAs reconcile, with 261 REVIEWED, 54 TEST-INVENTORIED and 144 CLOSED BY SCOPE ACCEPTANCE. No file-level audit gaps remain. Existing WV findings and runtime/cross-client verification remain open as separate engineering follow-ups and do not block this file-audit closure.  
-**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-012` (2026-11-25)  
+**Status:** AUDIT CLOSED — STATIC FILE AUDIT COMPLETE at `main@2e35f6df56d32a528c13a9d2f5d65e5db470c644` (tree `dc626a57bc6e0afe64a1dae78e90302adf99af47`); 459/459 tracked paths and blob SHAs reconcile, with 261 REVIEWED, 54 TEST-INVENTORIED and 144 CLOSED BY SCOPE ACCEPTANCE. No file-level audit gaps remain. Existing WV findings and runtime/cross-client verification remain open as separate engineering follow-ups and do not block this file-audit closure.  
+**Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-012`, plus `GOV-WEBVIEW-CLOSE-001` (2026-11-25/26)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
 **Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
 **Latest source verification:** `main` — `b1104a808cf70382c2bd14a94d372d907a500cda` (tree `97940dabd84264b6281917b11928ebae6156752c`, `truncated: false`, GOV-GAP-CLOSURE-001)  
