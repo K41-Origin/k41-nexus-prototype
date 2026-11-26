@@ -933,3 +933,14 @@ Reopen this item only if font integrity, provenance, Unicode coverage or runtime
 **Still OPEN — full validation:** all 132 unique PNG IDAT streams have not been decompressed and reconstructed; JPEG entropy-coded pixels have not been decoded; ICO embedded image pixels have not been decoded; no browser/runtime rendering test was performed. The current environment lacks a local repository checkout and a complete binary-decoder workflow for the entire set. The next verification requires a local checkout or binary archive and a standards-compliant decoder, with exact versions and per-blob results recorded.
 
 No asset or application source was modified. No test suite, build or browser runtime was executed.
+
+
+## 19. Binary display assets — closed by scope acceptance (GOV-ASSET-SCOPE-003, 2026-11-26)
+
+**Disposition: CLOSED BY SCOPE ACCEPTANCE — VISUAL/PRESENTATION-ONLY ASSETS.** The user explicitly directed that the 143 binary assets be treated as display-only assets, using the same scope-acceptance disposition as `FSPixelSansUnicode-Regular.ttf`. The scope comprises 141 PNG paths (132 unique blobs), one JPEG and one ICO. This closes the requested asset-audit workstream without requiring full pixel decoding or browser/runtime rendering.
+
+**Evidence retained, without promotion:** TREE-VERIFIED path/blob-SHA/size reconciliation is recorded in GOV-ASSET-CRC-002; all 132 unique PNG blobs have recorded chunk structure/CRC checks; ICO directory bounds and three embedded PNG chunk CRCs were checked; JPEG marker structure and dimensions were checked; one PNG passed a custom single-file zlib/scanline probe. None of these records establishes complete decoding/rendering of all assets. `webview-ui/public/assets/pets/gitcat/pet.png` retains its recorded two-byte trailing-zero observation after IEND.
+
+**Acceptance boundary:** this is DOC-RECORDED scope acceptance, not SOURCE-VERIFIED pixel correctness, TEST-EXECUTED, or RUNTIME-REPRODUCED rendering. Full PNG IDAT/scanline decoding, JPEG entropy decoding, ICO embedded pixel decoding, pixel-content inspection and browser/runtime loading are removed from the required audit exit criteria. Reopen only if pixel integrity, provenance, visual fidelity/accessibility or runtime rendering becomes an explicit requirement. JSON layout/manifest validation and asset-consumer mapping remain separately scoped.
+
+No binary asset or application source was modified. No tests, build, lint, typecheck or runtime experiment was executed as part of this disposition.
