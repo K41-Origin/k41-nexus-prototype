@@ -4,7 +4,7 @@
 
 **Application/source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; tree `97940dabd84264b6281917b11928ebae6156752c`, 933 entries, `truncated=false`. Current verification: `main@2e35f6df56d32a528c13a9d2f5d65e5db470c644`; tree `dc626a57bc6e0afe64a1dae78e90302adf99af47`, 933 entries, `truncated=false`; all 425 source-tree blobs under the audited roots are unchanged from the source snapshot.  
 **Workflow remediation snapshot:** `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`; PR #2 diff against main contains only `.github/workflows/ci.yml` and `.github/workflows/publish-extension.yml`.  
-**Dependency graph:** package-lock closure mapped in GOV-DEPMAP-002; exhaustive source import/call graph and runtime lifecycle remain OPEN.
+**Dependency graph:** npm lockfile closure mapped in GOV-DEPMAP-002; source import graph statically inventoried across 334 code modules in GOV-DEPMAP-003; symbol-level call paths, bundle reachability and runtime lifecycle remain OPEN.
 
 This is the single owner for cross-module edges. Module deep audits continue to own detailed findings; this map references rather than duplicates them.
 
