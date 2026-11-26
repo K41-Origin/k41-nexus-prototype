@@ -1,6 +1,6 @@
 # Infrastructure — Current Architecture
 
-**Status:** PARTIAL — integrated static infrastructure map published. Build/package flow and test/CI topology are statically mapped; direct dependency classes are mapped; exhaustive transitive dependency/bundle verification and runtime execution remain OPEN.
+**Status:** PARTIAL — integrated static infrastructure map published. Build/package flow and test/CI topology are statically mapped; npm lockfile transitive closure and source import inventory (334 modules) are mapped; bundle/package and runtime verification remain OPEN.
 
 ## Document ownership
 
@@ -26,7 +26,7 @@ See [repository audit register](../governance/AUDIT-REGISTER.md), [infrastructur
 ## Remaining work
 
 1. Inspect generated build outputs, bundle externals and npm/VSIX contents when execution is authorized.
-2. Complete transitive dependency, license, SBOM and optional native dependency analysis.
+2. Compare source imports with esbuild/Vite metafiles and package outputs; complete SBOM/license evidence and optional native dependency platform analysis.
 3. Execute the prescribed test/build/typecheck/lint/package matrix only with authorization and record exact commands/results.
 4. Verify GitHub Environment, rulesets, token/secret scopes, npm trusted publisher and actual release provenance.
 5. Reconcile the CI workflow's aggregate check with actual branch protection/organization policy; preserve BUILD-010. Correct the non-blocking protocol/inventory checks tracked by BUILD-014.
