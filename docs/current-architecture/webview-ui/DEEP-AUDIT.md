@@ -920,3 +920,16 @@ The user explicitly accepted treating `webview-ui/public/fonts/FSPixelSansUnicod
 The prior retrieval attempts did not provide the binary bytes needed for internal parsing. Accordingly, no claim is made about SFNT structure, table bounds/checksums, name records, cmap coverage, glyph integrity, parser acceptance or browser rendering. The closure is an explicit reduction of audit scope and acceptance of the residual uncertainty, not a SOURCE-VERIFIED or RUNTIME-REPRODUCED result.
 
 Reopen this item only if font integrity, provenance, Unicode coverage or runtime rendering becomes an explicit requirement. This disposition does not alter the separate 143 binary-asset validation boundary or other webview runtime gaps.
+
+
+## 18. Full binary decode continuation — GOV-ASSET-CRC-002 (2026-11-26)
+
+**Current tree and identity reconciliation — TREE-VERIFIED:** `main@23ff5a79578d91960fac8e3c00113c733bd37352`; recursive tree `eb64051f24732382c0d5c1d4a43261f2681d1ad2`, `truncated=false`. The asset scope contains 143 paths (141 PNG, one JPEG, one ICO). All 143 path/blob-SHA/size records match FILE-REFERENCE. Comparing with prior baseline tree `97940dabd84264b6281917b11928ebae6156752c` found zero changed asset blobs.
+
+**Existing binary evidence carries forward:** all 132 unique PNG blobs / 141 paths have chunk CRC and structural verification recorded in GOV-ASSET-CRC-001; ICO directory and its three embedded PNG chunk CRCs are verified; JPEG SOI/SOF0/SOS/EOI markers and dimensions are verified.
+
+**Additional single-file probe:** a custom zlib/PNG scanline decoder consumed `webview-ui/public/apple-touch-icon-precomposed.png` (SHA `9d7154cbc4ef79c2cf08efa054120c9886c38fdf`): 256×256 RGBA8, 256 rows and 65,536 pixels; no zlib checksum, scanline length or filter error was raised. This is limited programmatic evidence for one unique PNG blob, not a substitute for an independent standards-compliant decoder.
+
+**Still OPEN — full validation:** all 132 unique PNG IDAT streams have not been decompressed and reconstructed; JPEG entropy-coded pixels have not been decoded; ICO embedded image pixels have not been decoded; no browser/runtime rendering test was performed. The current environment lacks a local repository checkout and a complete binary-decoder workflow for the entire set. The next verification requires a local checkout or binary archive and a standards-compliant decoder, with exact versions and per-blob results recorded.
+
+No asset or application source was modified. No test suite, build or browser runtime was executed.
