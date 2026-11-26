@@ -1680,3 +1680,22 @@ The current-architecture index previously displayed only the historical module b
 **Documentation updated:** `webview-ui/FILE-REFERENCE.md`, `webview-ui/ASSET-INVENTORY.md`, `webview-ui/DEEP-AUDIT.md`, `governance/modules/webview-ui.md`, and `governance/AUDIT-REGISTER.md`. This evidence-log entry records the user decision and scope boundary. Reopen only if pixel integrity, provenance, visual fidelity/accessibility or runtime rendering becomes an explicit requirement. JSON layout/manifest checks and asset-consumer mapping remain separately scoped.
 
 No application source, binary asset, test, package, configuration or dependency file was changed. No tests, build, lint, typecheck or runtime experiment was executed.
+
+
+## 2026-11-26 — GOV-WEBVIEW-CLOSE-001: webview static file audit closed
+
+**Repository snapshot:** `K41-Origin/k41-nexus-prototype`, branch `main`, HEAD `f6464594f950b9af49274b8e1724e4d3e96c0271`; recursive tree SHA `f6464594f950b9af49274b8e1724e4d3e96c0271`, 933 entries, `truncated=false`. Webview subtree: 459 blobs. Fresh comparison with `webview-ui/FILE-REFERENCE.md`: 459/459 matches, zero missing, zero extra, zero SHA mismatches. Current source blobs across `core/src/`, `server/src/`, `webview-ui/src/`, `adapters/` and `scripts/` total 425 and match `main@b1104a808cf70382c2bd14a94d372d907a500cda` with zero additions/removals/changes.
+
+**Ledger closure:** 261 REVIEWED; 54 TEST-INVENTORIED (not executed); 143 binary display assets CLOSED BY SCOPE ACCEPTANCE; one TTF CLOSED BY SCOPE ACCEPTANCE. The TTF row label in FILE-REFERENCE was aligned to the existing explicit scope-acceptance decision. All 459 rows are classified and no file-level audit gap remains. Webview file audit status is now AUDIT CLOSED. Existing WV findings and browser/reconnect/cross-client/runtime verification remain OPEN as separate follow-up work; they do not block file-audit closure.
+
+No application source, test, binary asset, package or configuration changed. No tests/build/lint/typecheck/runtime experiment was executed.
+
+## 2026-11-26 — GOV-DEPMAP-003/004: source import inventory and terminal process ownership
+
+**Snapshot:** `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; recursive tree 933 entries, `truncated=false`. Source roots contain 425 blobs and are unchanged from `main@b1104a808cf70382c2bd14a94d372d907a500cda`. All 334 TS/JS code modules were fetched for static import inventory: adapters 8, core 27, server 74, webview UI 214, scripts 11. Build/test config and manifest files were additionally inspected, including esbuild, Vite, Vitest, Playwright, TypeScript and npm entry configuration.
+
+**Static graph outcome:** core remains the lowest source layer; server imports core/Node/server-local modules; adapter composes core/server with VS Code; webview imports core and webview-local/React/xterm modules but no server/adapter implementation; scripts are Node/tooling dependencies. Vite's Node config imports core asset build/loader and reaches pngjs through the core PNG decoder; this is not proof pngjs enters browser output. Native PTY module resolution uses variable `require(id)` for `@lydell/node-pty` then `node-pty`, so it is not represented as a normal static import edge. The lockfile transitive closure remains the prior GOV-DEPMAP-002 evidence.
+
+**Terminal/process ownership outcome:** VS Code owns embedded terminal processes through `vscode.window.createTerminal`; standalone default owns one PTY per agent inside the server process; development-only `--pty-host` starts a detached host process that owns PTYs across server restarts via a versioned Unix-socket protocol. Terminal WebSocket detach does not terminate PTY; host/server shutdown semantics are statically traced and documented with source paths/SHAs in SYSTEM-DEPENDENCY-MAP.md.
+
+**Remaining OPEN:** source-to-bundle/metafile and npm/VSIX comparison; SBOM/license/native platform proof; symbol-level call paths where a specific behavior requires them; runtime PTY, socket, shutdown/restart, persistence and multi-process reproduction. No tests, build, typecheck, lint, package, dependency installation, CI dispatch or runtime experiment was executed. No application source changed.
