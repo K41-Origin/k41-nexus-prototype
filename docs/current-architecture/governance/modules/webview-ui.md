@@ -82,7 +82,7 @@ The following is the authoritative continuation pointer; older continuation note
 1. GOV-WEBVIEW-011 completed the per-field validation, authorization/read-only, persistence and side-effect matrix for all 34 ClientMessage variants. Reuse `WV-C08` / `F-08`; do not repeat this work.
 2. GOV-WEBVIEW-012 completed the static cross-layer lifecycle/reconnect/state-reconciliation trace. Do not repeat the producer-consumer or lifecycle trace without changed source or a named evidence gap.
 3. Preserve `WV-PROTO-01/02/03`, `WV-APP-01`, `WV-RESYNC-01/02`, `WV-TR-01`, `WV-VITE-01`, `WV-C03/WV-C06`, `WV-C12`–`WV-C17` and `WV-TEST-01` as open static/test-quality findings or verification questions in the deep audit.
-4. Obtain the TTF binary and validate SFNT tables/glyph coverage. PNG chunk CRC integrity is now verified for 132 unique blobs/141 paths; full IDAT pixel decompression and browser loading remain OPEN.
+4. Complete full binary decoding for the 143 in-scope assets: decompress/reconstruct all 132 unique PNG blobs, decode the JPEG entropy stream and all three ICO embedded images. Existing CRC/structure checks are verified; full pixel decode and browser loading remain OPEN. The TTF is CLOSED BY SCOPE ACCEPTANCE and is not part of this 143-asset scope.
 5. Perform browser, cross-client and reconnect runtime verification only when explicitly authorized; record environment and exact observations.
 6. Integrated infrastructure review and system dependency/lifecycle mapping are owned by their respective documents and the repository audit register.
 
@@ -91,7 +91,7 @@ The following is the authoritative continuation pointer; older continuation note
 - Static source and documentation investigation only.
 - No tests, build, lint, typecheck, protocol generation or runtime experiments executed.
 - No application source, assets, package manifest or configuration changed.
-- Binary header verification does not establish full image integrity. The TTF item is separately closed by scope acceptance only; this does not establish font-file integrity.
+- PNG chunk CRC/structure verification does not establish successful IDAT decompression or pixel correctness. JPEG marker verification does not establish entropy/pixel decode. ICO directory/embedded-PNG CRC checks do not establish pixel decode. The TTF item is separately closed by scope acceptance only; this does not establish font-file integrity.
 - The audit is not complete merely because all paths and SHAs reconcile.
 
 
