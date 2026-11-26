@@ -1633,3 +1633,22 @@ The current-architecture index previously displayed only the historical module b
 - No local checkout, shell, package installation, YAML parser/actionlint, image decoder, font parser, browser/VS Code host or runtime execution capability is available in this session. Git clone previously failed DNS resolution; GitHub connector exposes read/write repository operations but no workflow dispatch action. No Actions runs/check-runs exist to inspect.
 - No application-source fixes or runtime findings were closed. BUILD-001–BUILD-013, runtime lifecycle/cross-process behavior, full binary pixel/font validation and source import graph remain OPEN pending executable verification and remediation.
 - Documentation changes are published on `main`; each updated file must be re-fetched after this session's commits before the documentation publication verification is complete.
+
+
+## GOV-WEBVIEW-013 — Font audit item closed by scope acceptance (2026-11-26)
+
+**User decision:** The user explicitly requested that the audit status for `FSPixelSansUnicode-Regular.ttf` be changed to closed, accepting it as a file containing a font without requiring further internal validation.
+
+**Recorded identity (TREE-VERIFIED / DOC-RECORDED):**
+- Repository: `K41-Origin/k41-nexus-prototype`
+- Branch snapshot before this documentation update: `main`
+- Source commit: `b1104a808cf70382c2bd14a94d372d907a500cda`
+- Path: `webview-ui/public/fonts/FSPixelSansUnicode-Regular.ttf`
+- Blob SHA: `767a03d1f7417bbfdde1b42ce580b7dcdbd2cc9e`
+- Recorded size: 1,077,160 bytes
+
+**Evidence boundary:** GitHub Base64 retrieval returned empty content; raw blob retrieval could not decode non-UTF-8 binary bytes. No font parser or runtime rendering check was performed. SFNT table integrity, checksums, name records, cmap/Unicode coverage and glyph integrity remain technically unverified.
+
+**Disposition:** `CLOSED BY SCOPE ACCEPTANCE`. This closes the audit task by explicit scope decision only. It is not `SOURCE-VERIFIED`, `TEST-EXECUTED` or `RUNTIME-REPRODUCED`, and must not be described as technical validation. Reopen only if integrity, provenance, Unicode coverage or runtime rendering becomes an explicit requirement.
+
+**Unchanged gaps:** The separate 143 binary-asset validation boundary and all other webview runtime/cross-process gaps remain open.
