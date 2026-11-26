@@ -2,7 +2,7 @@
 
 **Status:** STATIC MAP IN PROGRESS — major compile-time, host composition, protocol, persistence and trust-boundary edges are SOURCE-VERIFIED; npm lockfile transitive closure is mapped (GOV-DEPMAP-002); source import inventory across 334 code modules and terminal/process ownership are statically mapped (GOV-DEPMAP-003/004). Bundle/metafile comparison, symbol-level call graph and runtime lifecycle remain OPEN.
 
-**Application/source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; tree `97940dabd84264b6281917b11928ebae6156752c`, 933 entries, `truncated=false`. Current verification: `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; tree `f6464594f950b9af49274b8e1724e4d3e96c0271`, 933 entries, `truncated=false`; all 425 source-tree blobs under the audited roots are unchanged from the source snapshot.  
+**Application/source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; tree `97940dabd84264b6281917b11928ebae6156752c`, 933 entries, `truncated=false`. Current verification: `main@2e35f6df56d32a528c13a9d2f5d65e5db470c644`; tree `dc626a57bc6e0afe64a1dae78e90302adf99af47`, 933 entries, `truncated=false`; all 425 source-tree blobs under the audited roots are unchanged from the source snapshot.  
 **Workflow remediation snapshot:** `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`; PR #2 diff against main contains only `.github/workflows/ci.yml` and `.github/workflows/publish-extension.yml`.  
 **Dependency graph:** package-lock closure mapped in GOV-DEPMAP-002; exhaustive source import/call graph and runtime lifecycle remain OPEN.
 
@@ -152,7 +152,7 @@ No tests, build, typecheck, lint, generation, package, CI dispatch, network expe
 
 ## 10. Source import graph — GOV-DEPMAP-003 (2026-11-26)
 
-**Coverage:** the complete recursive tree at `main@f6464594f950b9af49274b8e1724e4d3e96c0271` was not truncated. Static imports/exports and literal dynamic-import/require edges were inventoried from all 334 TypeScript/JavaScript source modules in the application/tooling roots:
+**Coverage:** the complete recursive tree at `main@2e35f6df56d32a528c13a9d2f5d65e5db470c644` (tree `dc626a57bc6e0afe64a1dae78e90302adf99af47`) was not truncated. Static imports/exports and literal dynamic-import/require edges were inventoried from all 334 TypeScript/JavaScript source modules in the application/tooling roots:
 
 | Root | Code modules fetched |
 |---|---:|
