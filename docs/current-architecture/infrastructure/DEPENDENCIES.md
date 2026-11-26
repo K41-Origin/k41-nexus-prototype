@@ -1,6 +1,6 @@
 # Dependency Inventory
 
-**Status:** PARTIAL — direct declarations and npm lockfile transitive closure statically mapped (GOV-DEPMAP-002); exhaustive source import/use mapping and bundle verification remain OPEN.
+**Status:** PARTIAL — direct declarations and npm lockfile transitive closure statically mapped (GOV-DEPMAP-002); source import inventory across 334 code modules statically mapped (GOV-DEPMAP-003); bundle/metafile, package-output and runtime verification remain OPEN.
 
 **Lockfile source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; package-lock blob `e183f6eced2e598496010a79c56a19f32e3dbe83`.
 **Security workflow snapshot:** `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`.
@@ -95,3 +95,10 @@ The lock graph was traversed from each package/workspace root, resolving nested 
 The union contains 810 reachable installed package paths. Two additional `node_modules/` entries (`pixel-agents` and `webview-ui`) are workspace-link records, not unresolved external packages. The lockfile records 643 distinct package names; nested duplicate instances are retained where npm resolution requires them.
 
 **Interpretation:** this closes the static transitive dependency *lockfile-resolution* inventory for the current committed lockfile. It does not prove that `npm ci` succeeds, that every package is imported/reachable in shipped bundles, that optional native binaries install on every OS/ABI, or that licenses/vulnerabilities are acceptable. Source import-to-package usage, esbuild/Vite metafile comparison, tarball/VSIX closure, SBOM and installed-runtime verification remain OPEN.
+
+
+## Source import inventory — GOV-DEPMAP-003
+
+The repository source import graph has now been statically inventoried across 334 TypeScript/JavaScript modules in `adapters/` (8), `core/src/` (27), `server/src/` (74), `webview-ui/src/` (214) and `scripts/` (11). The cross-layer direction and build-only asset edges are owned by [System Dependency Map](../SYSTEM-DEPENDENCY-MAP.md#10-source-import-graph--gov-depmap-003-2026-11-26). This inventory complements, but does not replace, the 816-record npm lockfile closure in GOV-DEPMAP-002.
+
+**Still OPEN:** compare source imports and variable runtime module lookup with esbuild/Vite metafiles and actual npm/VSIX contents; verify runtime external package reachability, optional native PTY installation, SBOM and license evidence. No build, package, dependency install or runtime verification was executed.
