@@ -56,12 +56,12 @@ The 459 ledger rows currently classify as:
 | `REVIEWED REPORTED` | 0 | All 9 character UI rows directly reviewed in GOV-WEBVIEW-007 |
 | `TEST-INVENTORIED` | 54 | All 54 test files have assertion-level inventory/review evidence (7 prior + 47 in GOV-WEBVIEW-009); not executed |
 | `FETCHED / INVENTORIED` | 0 | No remaining test files in this status after GOV-WEBVIEW-009 |
-| `PNG CHUNK CRC VERIFIED` | 141 paths / 132 unique blobs | Signature, chunk bounds, IHDR/IDAT/IEND and every chunk CRC verified; IDAT pixel decompression remains OPEN |
+| `CLOSED BY SCOPE ACCEPTANCE` | 143 paths (141 PNG, one JPEG, one ICO) | Accepted as visual/presentation-only assets; structural evidence retained, full decode/rendering not claimed or required |
 | `ICO STRUCTURE VERIFIED` | 1 | Directory bounds and 3 embedded PNG chunk CRCs verified |
 | `JPEG MARKERS VERIFIED` | 1 | SOI/SOF0/SOS/EOI and dimensions verified; pixel decode remains OPEN |
 | `CLOSED BY SCOPE ACCEPTANCE` | 1 | `public/fonts/FSPixelSansUnicode-Regular.ttf` accepted as a font asset for inventory purposes; internal structure and rendering were not validated |
 
-These categories sum to 459. GOV-WEBVIEW-005 directly reviewed the 32 component rows previously left as reported-review; together with the 22 component rows already REVIEWED, `src/components/` is 54/54 REVIEWED. GOV-WEBVIEW-006 directly reviewed the 14 remaining reported-review hook rows; together with the 10 previously REVIEWED hook rows, `src/hooks/` is 24/24 REVIEWED. All seven previously fetched/reported source rows elsewhere in webview source were directly reviewed in GOV-WEBVIEW-008; they were the same seven rows described in the earlier continuation note, not a second independent group. The 9 character UI rows are also directly reviewed. All 54 test files now have assertion-level inventory/review evidence; the 47 formerly inventoried-only files were completed in GOV-WEBVIEW-009. No tests were executed. Do not repeat completed work wholesale. The font audit item is closed by explicit scope acceptance (2026-11-26), not by technical validation; do not represent its internals or rendering as verified. Reopen only if font integrity, provenance, Unicode coverage or runtime rendering becomes an explicit requirement. Full pixel decompression/browser loading for PNG/JPEG assets also remains open.
+These categories sum to 459. GOV-WEBVIEW-005 directly reviewed the 32 component rows previously left as reported-review; together with the 22 component rows already REVIEWED, `src/components/` is 54/54 REVIEWED. GOV-WEBVIEW-006 directly reviewed the 14 remaining reported-review hook rows; together with the 10 previously REVIEWED hook rows, `src/hooks/` is 24/24 REVIEWED. All seven previously fetched/reported source rows elsewhere in webview source were directly reviewed in GOV-WEBVIEW-008; they were the same seven rows described in the earlier continuation note, not a second independent group. The 9 character UI rows are also directly reviewed. All 54 test files now have assertion-level inventory/review evidence; the 47 formerly inventoried-only files were completed in GOV-WEBVIEW-009. No tests were executed. Do not repeat completed work wholesale. The font audit item is closed by explicit scope acceptance (2026-11-26), not by technical validation; do not represent its internals or rendering as verified. Reopen only if font integrity, provenance, Unicode coverage or runtime rendering becomes an explicit requirement. The 143 binary display assets are also closed by scope acceptance; full pixel decoding/browser loading are not required or claimed.
 
 ## Documentation verification
 
@@ -82,7 +82,7 @@ The following is the authoritative continuation pointer; older continuation note
 1. GOV-WEBVIEW-011 completed the per-field validation, authorization/read-only, persistence and side-effect matrix for all 34 ClientMessage variants. Reuse `WV-C08` / `F-08`; do not repeat this work.
 2. GOV-WEBVIEW-012 completed the static cross-layer lifecycle/reconnect/state-reconciliation trace. Do not repeat the producer-consumer or lifecycle trace without changed source or a named evidence gap.
 3. Preserve `WV-PROTO-01/02/03`, `WV-APP-01`, `WV-RESYNC-01/02`, `WV-TR-01`, `WV-VITE-01`, `WV-C03/WV-C06`, `WV-C12`–`WV-C17` and `WV-TEST-01` as open static/test-quality findings or verification questions in the deep audit.
-4. Complete full binary decoding for the 143 in-scope assets: decompress/reconstruct all 132 unique PNG blobs, decode the JPEG entropy stream and all three ICO embedded images. Existing CRC/structure checks are verified; full pixel decode and browser loading remain OPEN. The TTF is CLOSED BY SCOPE ACCEPTANCE and is not part of this 143-asset scope.
+4. The 143 binary display assets (141 PNG paths / 132 unique blobs, one JPEG, one ICO) are CLOSED BY SCOPE ACCEPTANCE under GOV-ASSET-SCOPE-003. Full pixel/entropy decoding and browser rendering are not required or claimed. The TTF remains separately CLOSED BY SCOPE ACCEPTANCE.
 5. Perform browser, cross-client and reconnect runtime verification only when explicitly authorized; record environment and exact observations.
 6. Integrated infrastructure review and system dependency/lifecycle mapping are owned by their respective documents and the repository audit register.
 
@@ -91,7 +91,7 @@ The following is the authoritative continuation pointer; older continuation note
 - Static source and documentation investigation only.
 - No tests, build, lint, typecheck, protocol generation or runtime experiments executed.
 - No application source, assets, package manifest or configuration changed.
-- PNG chunk CRC/structure verification does not establish successful IDAT decompression or pixel correctness. JPEG marker verification does not establish entropy/pixel decode. ICO directory/embedded-PNG CRC checks do not establish pixel decode. The TTF item is separately closed by scope acceptance only; this does not establish font-file integrity.
+- The 143 display assets and TTF are closed by scope acceptance only. Existing PNG CRC/structure, JPEG marker/dimension and ICO directory/embedded-PNG CRC evidence is preserved, but no claim is made of full pixel/entropy decoding, font-file integrity or browser/runtime rendering.
 - The audit is not complete merely because all paths and SHAs reconcile.
 
 
@@ -117,3 +117,8 @@ The following is the authoritative continuation pointer; older continuation note
 1. Determine the intended policy for commands issued during control-plane disconnection and the authoritative order for VS Code agent restore/snapshot/layout.
 2. Preserve and cross-link `WV-RESYNC-01/02`, `WV-APP-01`, `WV-TR-01`, `WV-PROTO-01/02/03` and adapter/server lifecycle findings.
 3. Runtime reproduction requires explicit authorization. Do not repeat the completed producer-consumer or field-level protocol audits.
+
+
+### Binary display-asset scope decision — GOV-ASSET-SCOPE-003
+
+The 143 binary paths are accepted as visual/presentation-only assets. This is a deliberate scope reduction, not a technical finding that every pixel stream is valid. Full decoders and runtime rendering are not required for closure. Existing evidence and the gitcat trailing-byte observation remain recorded in ASSET-INVENTORY.md and DEEP-AUDIT.md. Reopen only on an explicit requirement for pixel integrity, provenance, visual fidelity/accessibility or runtime rendering.
