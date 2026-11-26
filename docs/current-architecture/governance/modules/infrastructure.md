@@ -1,6 +1,6 @@
 # Infrastructure Audit Record
 
-**Status:** PARTIAL — integrated static infrastructure review published at source snapshot `security/remediate-build-008-009@86d3b1dbddae7605e5e2092886c12982f8e4bf58`. Build graph and test/CI configuration are statically mapped; direct and lockfile-transitive dependency resolution statically mapped (GOV-DEPMAP-002); source import reachability, runtime/package/bundle verification remain OPEN.
+**Status:** PARTIAL — integrated static infrastructure review published. Build graph and test/CI configuration are statically mapped; direct and lockfile-transitive dependency resolution mapped (GOV-DEPMAP-002); source import inventory across 334 code modules mapped (GOV-DEPMAP-003); runtime/package/bundle verification remain OPEN.
 
 ## Ownership
 
@@ -16,7 +16,8 @@
 
 - Root package and lockfile: npm workspaces `server` and `webview-ui`; lockfile v3, 816 package records.
 - Build: AsyncAPI generation/validation → TypeScript/lint → esbuild extension/CLI/hooks/PTy/uninstall outputs → Vite webview/asset sidecars → npm/VSIX package lifecycle.
-- Dependencies: root production Fastify dependencies are external CLI runtime requirements; native PTY is optional/external; server and webview workspaces carry their own dependency groups; pngjs is a build/bundle reachability question rather than a proven packaging defect.
+- Dependencies: root production Fastify dependencies are external CLI runtime requirements; native PTY is optional/external and resolved through variable require; server and webview workspaces carry their own dependency groups; pngjs is reached by core asset decoding and the Node Vite asset pipeline, while actual bundle/package placement remains unverified.
+- Source import map: 334 TS/JS modules across core/server/webview/adapters/scripts have been statically inventoried. Cross-layer edges and terminal/process ownership are documented in SYSTEM-DEPENDENCY-MAP.md (GOV-DEPMAP-003/004).
 - Tests: Vitest webview/server, Node package-contract, Playwright E2E; no dedicated core test project. CI maps protocol drift, static checks, unit tests, package smoke, npm audit and a 3-OS × 3-shard E2E matrix; however, AsyncAPI validation, generated-message drift and E2E inventory drift are advisory due to `continue-on-error` and omission from the final gate (BUILD-014).
 - CI/CD: existing CI/release static review is reused; BUILD-008/009 remediation remains on the separate security branch pending merge and verification. BUILD-010–BUILD-014 remain OPEN. Settings and actual workflow outcomes remain OPEN.
 
