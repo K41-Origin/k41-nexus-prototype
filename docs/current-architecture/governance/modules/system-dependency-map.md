@@ -1,6 +1,6 @@
 # System Dependency Map Audit Record
 
-**Status:** STATIC MAP IN PROGRESS — npm lockfile transitive closure mapped (GOV-DEPMAP-002); source import inventory covers 334 code modules and terminal/process ownership is SOURCE-VERIFIED (GOV-DEPMAP-003/004); bundle/metafile comparison, symbol-level call graph and runtime lifecycle remain OPEN. Current verification: `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; source blobs unchanged from the recorded application baseline.
+**Status:** STATIC MAP IN PROGRESS — npm lockfile transitive closure mapped (GOV-DEPMAP-002); source import inventory covers 334 code modules and terminal/process ownership is SOURCE-VERIFIED (GOV-DEPMAP-003/004); bundle/metafile comparison, symbol-level call graph and runtime lifecycle remain OPEN. Current verification: `main@2e35f6df56d32a528c13a9d2f5d65e5db470c644` (tree `dc626a57bc6e0afe64a1dae78e90302adf99af47`); source blobs unchanged from the recorded application baseline.
 
 ## Owner
 
