@@ -1,6 +1,6 @@
 # Webview UI — Deep Static Audit
 
-**Status:** IN PROGRESS — not approved as complete.  
+**Status:** STATIC FILE AUDIT CLOSED — documented static findings and runtime verification remain OPEN as separate follow-up scope.  
 **Repository:** K41-Origin/k41-nexus-prototype  
 **Historical baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
 **Latest source verification:** `main@b1104a808cf70382c2bd14a94d372d907a500cda` (tree `97940dabd84264b6281917b11928ebae6156752c`, `truncated=false`).  
