@@ -704,7 +704,7 @@ The blob SHA for every row is recorded in [FILE-REFERENCE.md](FILE-REFERENCE.md)
 
 1. Continue the ClientMessage/ServerMessage producer-consumer trace through UI, adapter and server, focusing on field-level validation, authorization, persistence, side effects and handshake ordering. Reuse `WV-C08`, `WV-APP-01`, `WV-RESYNC-01` and `WV-TR-01`; do not duplicate them.
 2. Continue targeted lifecycle/disposal/reconnect analysis across webview, adapter and server.
-3. Retrieve the unverified font binary internals when available; preserve the 143 assets as header/signature-level evidence only.
+3. Font audit item closed by scope acceptance (not technical validation); preserve the 143 other binary assets at their recorded validation levels.
 4. Test execution remains unauthorized and open; request explicit authorization before running tests or other dynamic checks.
 
 
@@ -905,3 +905,18 @@ Selected source blobs fetched from `main`: `core/asyncapi.yaml` ff1247118819fe68
 - Static only. No tests, builds, lint, typecheck, browser/VS Code runtime, WebSocket drop/reconnect, PTY attach, fault injection or multi-client experiment was executed. No application source, test, asset, dependency or config was modified.
 - The complete recursive tree was freshly retrieved in this session: 856 entries, 739 blobs, 117 trees, `truncated=false`. This supersedes the GOV-WEBVIEW-011 note that a fresh tree retrieval was unavailable at that earlier time; that historical note is not erased.
 - Next: resolve the intended offline command policy and snapshot ordering through design evidence, then obtain explicit authorization for targeted runtime reproduction. Preserve WV-RESYNC-01/02, WV-APP-01, WV-TR-01, WV-PROTO-01/02/03 and A-03/A-05/A-06/F-01/F-03/F-05. Do not repeat the 34-message field matrix.
+
+
+## 17. Font audit disposition — closed by scope acceptance (2026-11-26)
+
+**Disposition: CLOSED BY SCOPE ACCEPTANCE — NOT TECHNICALLY VERIFIED.**
+
+The user explicitly accepted treating `webview-ui/public/fonts/FSPixelSansUnicode-Regular.ttf` as a font asset and requested closure of this audit item without further internal validation. The recorded asset identity remains:
+
+- Tree path: `webview-ui/public/fonts/FSPixelSansUnicode-Regular.ttf`
+- Blob SHA: `767a03d1f7417bbfdde1b42ce580b7dcdbd2cc9e`
+- Recorded size: 1,077,160 bytes
+
+The prior retrieval attempts did not provide the binary bytes needed for internal parsing. Accordingly, no claim is made about SFNT structure, table bounds/checksums, name records, cmap coverage, glyph integrity, parser acceptance or browser rendering. The closure is an explicit reduction of audit scope and acceptance of the residual uncertainty, not a SOURCE-VERIFIED or RUNTIME-REPRODUCED result.
+
+Reopen this item only if font integrity, provenance, Unicode coverage or runtime rendering becomes an explicit requirement. This disposition does not alter the separate 143 binary-asset validation boundary or other webview runtime gaps.
