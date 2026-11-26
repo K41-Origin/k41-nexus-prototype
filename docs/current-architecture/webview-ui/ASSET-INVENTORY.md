@@ -1,7 +1,7 @@
 # Webview UI — Public Asset Metadata Inventory
 
 **Baseline:** 4dd14d612fd37d89ffbbc977959f572395c4eec8  
-**Scope:** 60 PNG files under `webview-ui/public`; 141 PNG paths across public assets and character art were fetched as base64 and all 132 unique PNG blobs passed chunk CRC/structure checks. Full pixel decompression remains OPEN.
+**Scope:** 60 PNG files under `webview-ui/public`; 143 binary paths (141 PNG, one JPEG, one ICO) are CLOSED BY SCOPE ACCEPTANCE as visual/presentation-only assets. Existing structural checks are retained as evidence; full pixel decoding and runtime rendering are not required or claimed.
 
 ## PNG inventory
 
@@ -9,93 +9,93 @@
 
 | File (relative to public/) | IHDR dimensions | Result |
 |---|---:|---|
-| apple-touch-icon-precomposed.png | 256×256 | PNG chunk CRC verified; full pixel decode pending |
-| apple-touch-icon.png | 256×256 | PNG chunk CRC verified; full pixel decode pending |
-| banner.png | 1456×480 | PNG chunk CRC verified; full pixel decode pending |
-| characters.png | 1200×144 | PNG chunk CRC verified; full pixel decode pending |
-| office.png | 1039×653 | PNG chunk CRC verified; full pixel decode pending |
-| icons/icon-256.png | 256×256 | PNG chunk CRC verified; full pixel decode pending |
-| icons/icon-512.png | 512×512 | PNG chunk CRC verified; full pixel decode pending |
+| apple-touch-icon-precomposed.png | 256×256 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| apple-touch-icon.png | 256×256 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| banner.png | 1456×480 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| characters.png | 1200×144 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| office.png | 1039×653 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| icons/icon-256.png | 256×256 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| icons/icon-512.png | 512×512 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
 
 ### Carpets
 
 | File (relative to public/) | IHDR dimensions | Result |
 |---|---:|---|
-| assets/carpets/carpet_0.png | 64×64 | PNG chunk CRC verified; full pixel decode pending |
-| assets/carpets/carpet_1.png | 64×64 | PNG chunk CRC verified; full pixel decode pending |
-| assets/carpets/carpet_2.png | 64×64 | PNG chunk CRC verified; full pixel decode pending |
+| assets/carpets/carpet_0.png | 64×64 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/carpets/carpet_1.png | 64×64 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/carpets/carpet_2.png | 64×64 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
 
 ### Floors
 
 | File (relative to public/) | IHDR dimensions | Result |
 |---|---:|---|
-| assets/floors/floor_0.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_1.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_2.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_3.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_4.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_5.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_6.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_7.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/floors/floor_8.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
+| assets/floors/floor_0.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_1.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_2.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_3.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_4.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_5.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_6.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_7.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/floors/floor_8.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
 
 ### Furniture
 
 | File (relative to public/) | IHDR dimensions | Result |
 |---|---:|---|
-| assets/furniture/BIN/BIN.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/BOOKSHELF/BOOKSHELF.png | 32×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/CACTUS/CACTUS.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/CLOCK/CLOCK.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/COFFEE/COFFEE.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/COFFEE_TABLE/COFFEE_TABLE.png | 32×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/CUSHIONED_BENCH/CUSHIONED_BENCH.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_BACK.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_FRONT.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_SIDE.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/DESK/DESK_FRONT.png | 48×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/DESK/DESK_SIDE.png | 16×64 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/DOUBLE_BOOKSHELF/DOUBLE_BOOKSHELF.png | 32×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/HANGING_PLANT/HANGING_PLANT.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/LARGE_PAINTING/LARGE_PAINTING.png | 32×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/LARGE_PLANT/LARGE_PLANT.png | 32×48 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PC/PC_BACK.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PC/PC_FRONT_OFF.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PC/PC_FRONT_ON_1.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PC/PC_FRONT_ON_2.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PC/PC_FRONT_ON_3.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PC/PC_SIDE.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PLANT/PLANT.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/PLANT_2/PLANT_2.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/POT/POT.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/SMALL_PAINTING/SMALL_PAINTING.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/SMALL_PAINTING_2/SMALL_PAINTING_2.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/SMALL_TABLE/SMALL_TABLE_FRONT.png | 32×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/SMALL_TABLE/SMALL_TABLE_SIDE.png | 16×48 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/SOFA/SOFA_BACK.png | 32×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/SOFA/SOFA_FRONT.png | 32×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/SOFA/SOFA_SIDE.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/TABLE_FRONT/TABLE_FRONT.png | 48×64 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/WHITEBOARD/WHITEBOARD.png | 32×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/WOODEN_BENCH/WOODEN_BENCH.png | 16×16 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_BACK.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_FRONT.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
-| assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_SIDE.png | 16×32 | PNG chunk CRC verified; full pixel decode pending |
+| assets/furniture/BIN/BIN.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/BOOKSHELF/BOOKSHELF.png | 32×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/CACTUS/CACTUS.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/CLOCK/CLOCK.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/COFFEE/COFFEE.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/COFFEE_TABLE/COFFEE_TABLE.png | 32×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/CUSHIONED_BENCH/CUSHIONED_BENCH.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_BACK.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_FRONT.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/CUSHIONED_CHAIR/CUSHIONED_CHAIR_SIDE.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/DESK/DESK_FRONT.png | 48×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/DESK/DESK_SIDE.png | 16×64 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/DOUBLE_BOOKSHELF/DOUBLE_BOOKSHELF.png | 32×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/HANGING_PLANT/HANGING_PLANT.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/LARGE_PAINTING/LARGE_PAINTING.png | 32×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/LARGE_PLANT/LARGE_PLANT.png | 32×48 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PC/PC_BACK.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PC/PC_FRONT_OFF.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PC/PC_FRONT_ON_1.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PC/PC_FRONT_ON_2.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PC/PC_FRONT_ON_3.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PC/PC_SIDE.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PLANT/PLANT.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/PLANT_2/PLANT_2.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/POT/POT.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/SMALL_PAINTING/SMALL_PAINTING.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/SMALL_PAINTING_2/SMALL_PAINTING_2.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/SMALL_TABLE/SMALL_TABLE_FRONT.png | 32×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/SMALL_TABLE/SMALL_TABLE_SIDE.png | 16×48 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/SOFA/SOFA_BACK.png | 32×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/SOFA/SOFA_FRONT.png | 32×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/SOFA/SOFA_SIDE.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/TABLE_FRONT/TABLE_FRONT.png | 48×64 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/WHITEBOARD/WHITEBOARD.png | 32×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/WOODEN_BENCH/WOODEN_BENCH.png | 16×16 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_BACK.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_FRONT.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/furniture/WOODEN_CHAIR/WOODEN_CHAIR_SIDE.png | 16×32 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
 
 ### Pets and wall
 
 | File (relative to public/) | IHDR dimensions | Result |
 |---|---:|---|
-| assets/pets/claudio/pet.png | 96×96 | PNG chunk CRC verified; full pixel decode pending |
-| assets/pets/gitcat/pet.png | 96×96 | PNG chunk CRC verified; full pixel decode pending |
-| assets/walls/wall_0.png | 64×128 | PNG chunk CRC verified; full pixel decode pending |
+| assets/pets/claudio/pet.png | 96×96 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/pets/gitcat/pet.png | 96×96 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
+| assets/walls/wall_0.png | 64×128 | CLOSED BY SCOPE ACCEPTANCE — visual-only; structural CRC evidence retained; pixel decode not claimed |
 
 ## Other binary and metadata files
 
 | File | Evidence | Status |
 |---|---|---|
-| Screenshot.jpg | JPEG SOF dimensions 1308×521; tree size 111,189 bytes | SOI/SOF0/SOS/EOI markers verified; entropy/pixel decode pending |
-| favicon.ico | ICO directory has 3 entries: 16×16, 32×32, 48×48; 32-bit entries | Directory bounds and embedded PNG chunk CRCs verified; pixel decode pending |
+| Screenshot.jpg | JPEG SOF dimensions 1308×521; tree size 111,189 bytes | CLOSED BY SCOPE ACCEPTANCE — visual-only; marker/dimension evidence retained; entropy decode not claimed |
+| favicon.ico | ICO directory has 3 entries: 16×16, 32×32, 48×48; 32-bit entries | CLOSED BY SCOPE ACCEPTANCE — visual-only; directory/embedded CRC evidence retained; pixel decode not claimed |
 | fonts/FSPixelSansUnicode-Regular.ttf | Git tree size 1,077,160 bytes; blob SHA recorded | CLOSED BY SCOPE ACCEPTANCE — accepted as font asset; internal integrity/glyph coverage not validated |
 | assets/default-layout-1.json | Parsed; version/grid/tile counts and furniture coordinate bounds checked | Structural validation complete; semantic/runtime validation open |
 | manifest.webmanifest | Parsed; declared PNG icon paths and IHDR dimensions cross-checked | Structural/reference validation complete; browser/runtime validation open |
@@ -154,3 +154,12 @@ The 141 PNG paths represent 132 unique PNG blobs. The previously recorded CRC/st
 **Full decode remains OPEN.** The current execution path did not provide a local repository checkout or a usable binary decoder for processing the complete asset set. A custom single-file PNG decompression/scanline probe was exercised on `webview-ui/public/apple-touch-icon-precomposed.png` (blob `9d7154cbc4ef79c2cf08efa054120c9886c38fdf`): 256×256 RGBA8, 256 scanlines and 65,536 pixels were consumed without a zlib/scanline error. This is one-file programmatic evidence only, not a standards-library validation of the 132 unique blobs.
 
 No claim is made that all PNG IDAT streams, JPEG entropy-coded pixels, ICO embedded image pixels or browser rendering have been fully decoded. Next step: obtain a local checkout or binary asset archive and run a standards-compliant image decoder over all 132 unique PNG blobs, the JPEG and each ICO embedded image; record exact decoder/version/results and inspect any decode warnings or non-canonical trailing bytes.
+
+
+## Scope disposition — GOV-ASSET-SCOPE-003 (2026-11-26)
+
+**Disposition: CLOSED BY SCOPE ACCEPTANCE — VISUAL/PRESENTATION-ONLY ASSETS.** By explicit user decision, all 143 in-scope binary assets (141 PNG paths, one JPEG and one ICO) are treated as display assets only, under the same scope-acceptance model used for `FSPixelSansUnicode-Regular.ttf`. Full pixel decoding, entropy-stream decoding, embedded ICO pixel decoding, visual anomaly inspection and browser/runtime rendering are not required closure gates for this audit scope.
+
+This is a scope decision, not a claim of complete technical validation. Existing evidence remains valid within its actual boundary: all 132 unique PNG blobs passed recorded chunk-structure/CRC checks; the ICO directory and embedded PNG chunk CRCs were checked; JPEG marker structure and dimensions were checked; one PNG received a custom single-file decompression probe. These checks do not establish full decoding or rendering of every asset. The two trailing zero bytes after IEND in `assets/pets/gitcat/pet.png` remain a documented non-canonical tail, not a reproduced rendering defect.
+
+Reopen only if pixel integrity, asset provenance, standards-compliant full decoding, accessibility/visual fidelity, or runtime rendering becomes an explicit requirement. JSON layout/manifest validation and asset consumer mapping retain their separate documented scope and are not included in this 143-path closure.
