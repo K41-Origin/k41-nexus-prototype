@@ -1,8 +1,8 @@
 # System Dependency Map
 
-**Status:** STATIC MAP IN PROGRESS — major compile-time, host composition, protocol, persistence and trust-boundary edges are SOURCE-VERIFIED; npm lockfile transitive closure is mapped (GOV-DEPMAP-002). Exhaustive source import/call graph and runtime lifecycle remain OPEN.
+**Status:** STATIC MAP IN PROGRESS — major compile-time, host composition, protocol, persistence and trust-boundary edges are SOURCE-VERIFIED; npm lockfile transitive closure is mapped (GOV-DEPMAP-002); source import inventory across 334 code modules and terminal/process ownership are statically mapped (GOV-DEPMAP-003/004). Bundle/metafile comparison, symbol-level call graph and runtime lifecycle remain OPEN.
 
-**Application/source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; tree `97940dabd84264b6281917b11928ebae6156752c`, 933 entries, `truncated=false`.  
+**Application/source snapshot:** `main@b1104a808cf70382c2bd14a94d372d907a500cda`; tree `97940dabd84264b6281917b11928ebae6156752c`, 933 entries, `truncated=false`. Current verification: `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; tree `f6464594f950b9af49274b8e1724e4d3e96c0271`, 933 entries, `truncated=false`; all 425 source-tree blobs under the audited roots are unchanged from the source snapshot.  
 **Workflow remediation snapshot:** `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`; PR #2 diff against main contains only `.github/workflows/ci.yml` and `.github/workflows/publish-extension.yml`.  
 **Dependency graph:** package-lock closure mapped in GOV-DEPMAP-002; exhaustive source import/call graph and runtime lifecycle remain OPEN.
 
@@ -147,3 +147,68 @@ The union contains 810 reachable installed package paths. Two additional `node_m
 6. Keep all dynamic edges OPEN until observed. Do not infer lifecycle correctness from constructor wiring.
 
 No tests, build, typecheck, lint, generation, package, CI dispatch, network experiment, PTY experiment or runtime reproduction was performed. No application source changed.
+
+
+## 10. Source import graph — GOV-DEPMAP-003 (2026-11-26)
+
+**Coverage:** the complete recursive tree at `main@f6464594f950b9af49274b8e1724e4d3e96c0271` was not truncated. Static imports/exports and literal dynamic-import/require edges were inventoried from all 334 TypeScript/JavaScript source modules in the application/tooling roots:
+
+| Root | Code modules fetched |
+|---|---:|
+| `adapters/` | 8 |
+| `core/src/` | 27 |
+| `server/src/` | 74 |
+| `webview-ui/src/` | 214 |
+| `scripts/` | 11 |
+| **Total** | **334** |
+
+Build/test entry configuration and manifests were additionally fetched for esbuild, Vite, Vitest, Playwright, TypeScript and npm. All 425 tracked blobs under `core/src/`, `server/src/`, `webview-ui/src/`, `adapters/` and `scripts/` match the prior source tree at `main@b1104a808cf70382c2bd14a94d372d907a500cda`: zero additions, removals or changed SHAs. This reuses historical source review evidence; unchanged files were not treated as newly re-reviewed for their behavior.
+
+**Layer edges established:**
+
+- `core/src/` is the lowest shared source layer. Its imports remain internal to core plus Node facilities and `pngjs`; no upward source imports into `server/`, `webview-ui/` or `adapters/` were found in the fetched core modules.
+- `server/src/` imports core contracts/domain/asset helpers, Node built-ins and server-local services. Its `vscode` references in the existing server type/watcher boundary are type-level adapter contracts, not evidence of a browser/server runtime import.
+- `adapters/vscode/` composes VS Code API with core contracts and concrete server runtime/persistence/provider services. This is a direct source dependency on server implementation, not only a host facade.
+- `webview-ui/src/` imports core contracts/pure domain helpers, React/React DOM, xterm and webview-local UI/office/transport modules. No direct source import from `server/` or `adapters/` was found; communication remains through postMessage or WebSocket transports.
+- `scripts/` is Node/tooling-oriented and imports Node built-ins plus AsyncAPI/parser/modelina, semver and package/test utilities as applicable.
+
+**Important transitive boundary:** `webview-ui/vite.config.ts` imports `core/src/assets/build.ts` and `core/src/assets/loader.ts` in the Node build process. The core asset loader reaches `pngDecoder.ts` and `pngjs`. This is a build-time Node dependency and is not proof that `pngjs` or filesystem modules enter the browser bundle. The standalone server's asset loader also reaches the core PNG decoder at server runtime. The final Vite/esbuild bundles have not been inspected.
+
+**External/runtime dependency families observed:** React/React DOM; xterm browser and headless/serialize packages; Fastify and its CORS/static/WebSocket plugins; AsyncAPI modelina/parser; Vite/React/Tailwind/Vitest/Allure/Playwright tooling; Node built-ins; and the VS Code host API. Native PTY packages are a special case: `ptyModule.ts` resolves `@lydell/node-pty` then `node-pty` through a variable `require(id)`, so this edge is not a normal static import and must be checked against the lockfile/package platform matrix. The npm lockfile closure itself remains the completed GOV-DEPMAP-002 evidence.
+
+**Limits:** this is a static source import inventory and layer map, not a compiler AST call graph, bundler metafile, tree-shaking/reachability report, SBOM, tarball/VSIX inspection or runtime dependency proof. Variable-based runtime lookup and platform-specific native install behavior remain separately bounded.
+
+## 11. Terminal and process ownership — GOV-DEPMAP-004 (2026-11-26)
+
+### VS Code embedded surface
+
+- `adapters/vscode/agentManager.ts:60-104` creates a `vscode.window.createTerminal`, optionally shows it and sends the provider launch command with `terminal.sendText`. VS Code owns the terminal process lifecycle.
+- `adapters/vscode/vscodeTerminalAdapter.ts:1-14` only exposes VS Code's active/all terminal handles through the core adapter contract; it does not spawn or kill the process itself.
+- The embedded server does not receive a PTY manager; terminal routes are not registered for the embedded host. Adapter/server cleanup relationships remain subject to existing A-03/A-05/A-06 and F-03/F-05 findings.
+
+### Standalone default — in-process PTY
+
+- `server/src/cli.ts:230-266,301-330,511-533` selects a disabled manager for `--no-terminal`, a `PtySessionManager` by default, or the development host mode; it injects the selected `TerminalSessions` implementation into `PixelAgentsServer`.
+- `PtySessionManager.create` calls the dynamically resolved PTY module's `spawn` once per agent; `PtySession` mirrors output through headless xterm and owns exit/data listeners. `dispose` sends the default termination signal then escalates to SIGKILL after the grace period; `disposeAll` waits for exits or its bounded backstop.
+- `terminalRoutes.ts:49-92,98-159` authenticates and attaches only to an existing session. Terminal socket close removes listeners only; it does not kill the PTY. Agent close/process exit and server shutdown are the process-ending paths.
+- CLI graceful shutdown awaits `ptyManager.shutdown()`; in-process PTYs are terminated before runtime disposal. The server's own `PixelAgentsServer.stop()` still calls Fastify close without awaiting it (existing F-05 boundary).
+
+### Development-only detached PTY host
+
+- `--pty-host` selects `RemotePtySessions`; if no host socket is listening, `startPtyHostProcess` starts `node dist/pty-host.js` with `detached: true`, log-file stdio, then `unref()`. The host runs the same `PtySessionManager` and owns the actual PTY children.
+- The server communicates over a local Unix-domain socket with a versioned line-JSON protocol. `RemotePtySessions.shutdown()` detaches its session listeners and ends the socket; it intentionally leaves PTYs alive. A subsequent server reconnects and reattaches survivors. Loss of the host process ends the remote sessions; host SIGTERM/SIGINT closes its listener and disposes every PTY.
+- The host has an idle-exit timer and is a development-only output; `dist/pty-host.js` is excluded from the published package allowlist according to the existing build/package map.
+
+**Evidence:** `agentManager.ts` blob `30020b3e34d2d83fa4536e0d27f55c9e4fe3295c`; `vscodeTerminalAdapter.ts` `b7f7b6019655d76a0c03ed95a24a52e1a0a18b18`; `cli.ts` `2ab60f30b17b856d17c68435337663aab000b7e7`; `ptySessionManager.ts` `f48f6de4fb552e52d21402d7bf5db5e712eba550`; `ptyModule.ts` `958db26ea120353e8d3dea01b794fbf8a2f1c875`; `remotePtySessions.ts` `022c4df100edafa7dedbf397d2b099d3d14e7dab`; `ptyHost.ts` `007b00c81d0acaeb61cee2ae79f23103866aaa60`; `ptyHostMain.ts` `5be0b6debf80e2c292a25752252611d1f048b388`; `terminalRoutes.ts` `434ac1db106d593577409b42e872331ac54e4323`; `terminalSessions.ts` `f01b0343624eb05b2608619fedfef16c53f766f3`; `httpServer.ts` `ad5104a14233aa29834e008833a0f21458fc887b`; `server.ts` `e3616e30f635ce5074a62829cd518af455b24009`.
+
+**Verification boundary:** SOURCE-VERIFIED static ownership/call edges only. No PTY process, terminal socket, detach/reattach, host crash, signal or shutdown experiment was run. Preserve existing lifecycle findings; do not mark dynamic ownership/recovery RUNTIME-REPRODUCED.
+
+## 12. Continuation and remaining gaps
+
+1. Compare the source import map with actual esbuild/Vite metafiles and produced npm/VSIX contents; establish which external packages remain runtime requirements and which code is bundled.
+2. Complete symbol-level call-path questions only where a named cross-module behavior requires them; do not expand into a redundant whole-repository function graph.
+3. Verify native PTY resolution/install/spawn across supported OS/Node/ABI combinations and test both in-process and detached-host lifecycle when execution is authorized.
+4. Preserve F-01–F-09, A-01–A-10, WV-RESYNC-01/02 and existing protocol/security findings. Verify multi-process persistence, teardown, hook delivery, auth/TLS/proxy and registry settings dynamically.
+5. Inspect generated outputs, bundle metadata, SBOM/licenses, tarball and VSIX only after authorized build/package execution.
+
+No tests, build, typecheck, lint, generation, package, CI dispatch, network experiment, PTY experiment or runtime reproduction was performed in this mapping pass. No application source changed.
