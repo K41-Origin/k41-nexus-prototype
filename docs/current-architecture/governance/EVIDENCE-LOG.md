@@ -1665,3 +1665,18 @@ The current-architecture index previously displayed only the historical module b
 **Additional programmatic probe:** one PNG blob, `webview-ui/public/apple-touch-icon-precomposed.png` (`9d7154cbc4ef79c2cf08efa054120c9886c38fdf`), was passed through a custom zlib/PNG scanline decoder: 256×256 RGBA8; all 256 scanlines and 65,536 pixels were consumed without a zlib checksum, scanline-size or filter error. This is single-blob evidence only; it does not upgrade the remaining 131 unique PNG blobs.
 
 **Disposition:** FULL VALIDATION REMAINS OPEN. No complete decompression/reconstruction of all PNG blobs, JPEG entropy decode, ICO embedded pixel decode or browser/runtime loading was completed. The available execution path lacks a local checkout and a complete batch binary-decoding workflow. Continue with a local checkout or binary archive and a standards-compliant decoder; record decoder/version and per-blob outcomes. No source assets were changed and no tests/build/browser runtime were executed.
+
+
+## 2026-11-26 — GOV-ASSET-SCOPE-003: 143 binary display assets closed by scope acceptance
+
+**User decision:** The user explicitly directed that all 143 binary assets be treated as visual/presentation-only assets and their audit status be closed, using the same scope-acceptance model as `FSPixelSansUnicode-Regular.ttf`.
+
+**Repository snapshot:** `K41-Origin/k41-nexus-prototype`, canonical branch `main`; latest verified HEAD before this documentation update: `493d172173f1fff6ce6f5d81879ac31fea6913c8`; recursive tree `07e842d6439257d1d6a8acc13d5f7eae85a92631`, 933 entries, `truncated=false`. The 143-path asset set is 141 PNG paths (132 unique blob SHAs), one JPEG and one ICO. Prior reconciliation in GOV-ASSET-CRC-002 recorded 143/143 path/blob-SHA/size matches and zero target-asset changes against the prior CRC baseline.
+
+**Disposition:** `CLOSED BY SCOPE ACCEPTANCE`. Full PNG IDAT/scanline decoding, JPEG entropy decoding, ICO embedded pixel decoding, exhaustive pixel inspection and browser/runtime rendering are no longer required closure gates for these assets. This is not a claim that all assets have been fully decoded or rendered.
+
+**Evidence retained:** all 132 unique PNG blobs passed recorded chunk structure/CRC checks; ICO directory bounds and three embedded PNG chunk CRCs were checked; JPEG SOI/SOF0/SOS/EOI marker structure and 1308×521 dimensions were checked; one PNG passed a custom single-file zlib/scanline probe. The non-canonical two-byte trailing-zero observation in `webview-ui/public/assets/pets/gitcat/pet.png` remains recorded and was not reproduced as a rendering defect.
+
+**Documentation updated:** `webview-ui/FILE-REFERENCE.md`, `webview-ui/ASSET-INVENTORY.md`, `webview-ui/DEEP-AUDIT.md`, `governance/modules/webview-ui.md`, and `governance/AUDIT-REGISTER.md`. This evidence-log entry records the user decision and scope boundary. Reopen only if pixel integrity, provenance, visual fidelity/accessibility or runtime rendering becomes an explicit requirement. JSON layout/manifest checks and asset-consumer mapping remain separately scoped.
+
+No application source, binary asset, test, package, configuration or dependency file was changed. No tests, build, lint, typecheck or runtime experiment was executed.
