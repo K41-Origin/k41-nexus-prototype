@@ -1,6 +1,6 @@
 # Webview UI Module Audit Record
 
-**Status:** IN PROGRESS — complete tracked-file inventory/SHA reconciliation; 34/34 ClientMessage and 46/46 ServerMessage variants statically traced; field-level validation/authorization/persistence/side-effect static audit completed in GOV-WEBVIEW-011; static lifecycle/reconnect/state-reconciliation trace completed in GOV-WEBVIEW-012; runtime/cross-client verification remains open.  
+**Status:** AUDIT CLOSED — STATIC FILE AUDIT COMPLETE at `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; 459/459 tracked paths and blob SHAs reconcile, with 261 REVIEWED, 54 TEST-INVENTORIED and 144 CLOSED BY SCOPE ACCEPTANCE. No file-level audit gaps remain. Existing WV findings and runtime/cross-client verification remain open as separate engineering follow-ups and do not block this file-audit closure.  
 **Audit sessions:** `GOV-WEBVIEW-001` through `GOV-WEBVIEW-012` (2026-11-25)  
 **Source baseline:** `4dd14d612fd37d89ffbbc977959f572395c4eec8`  
 **Historical verification commit:** `8fc045de9ddae905cc131498d918ddbd64cc8bca`  
@@ -83,7 +83,7 @@ The following is the authoritative continuation pointer; older continuation note
 2. GOV-WEBVIEW-012 completed the static cross-layer lifecycle/reconnect/state-reconciliation trace. Do not repeat the producer-consumer or lifecycle trace without changed source or a named evidence gap.
 3. Preserve `WV-PROTO-01/02/03`, `WV-APP-01`, `WV-RESYNC-01/02`, `WV-TR-01`, `WV-VITE-01`, `WV-C03/WV-C06`, `WV-C12`–`WV-C17` and `WV-TEST-01` as open static/test-quality findings or verification questions in the deep audit.
 4. The 143 binary display assets (141 PNG paths / 132 unique blobs, one JPEG, one ICO) are CLOSED BY SCOPE ACCEPTANCE under GOV-ASSET-SCOPE-003. Full pixel/entropy decoding and browser rendering are not required or claimed. The TTF remains separately CLOSED BY SCOPE ACCEPTANCE.
-5. Perform browser, cross-client and reconnect runtime verification only when explicitly authorized; record environment and exact observations.
+5. File audit is CLOSED. Browser, cross-client and reconnect runtime verification is a separate follow-up only when explicitly authorized; it does not reopen file audit unless source identity changes or a new file-level question is raised.
 6. Integrated infrastructure review and system dependency/lifecycle mapping are owned by their respective documents and the repository audit register.
 
 ## Explicit limitations
@@ -122,3 +122,10 @@ The following is the authoritative continuation pointer; older continuation note
 ### Binary display-asset scope decision — GOV-ASSET-SCOPE-003
 
 The 143 binary paths are accepted as visual/presentation-only assets. This is a deliberate scope reduction, not a technical finding that every pixel stream is valid. Full decoders and runtime rendering are not required for closure. Existing evidence and the gitcat trailing-byte observation remain recorded in ASSET-INVENTORY.md and DEEP-AUDIT.md. Reopen only on an explicit requirement for pixel integrity, provenance, visual fidelity/accessibility or runtime rendering.
+
+
+## File audit closure — GOV-WEBVIEW-CLOSE-001 (2026-11-26)
+
+The webview file audit is **CLOSED**. The current complete tree and FILE-REFERENCE ledger reconcile 459/459 paths and blob SHAs with no missing, extra or changed webview blobs. The 459 ledger rows are fully classified: 261 REVIEWED, 54 TEST-INVENTORIED, and 144 CLOSED BY SCOPE ACCEPTANCE (143 display binaries plus the TTF). No file remains FETCHED / INVENTORIED or otherwise awaiting review.
+
+This closure is limited to file audit coverage. Preserve all existing static findings and dynamic verification questions in DEEP-AUDIT.md. Their runtime verification remains OPEN and separately authorized; they are not unresolved file-audit tasks.
