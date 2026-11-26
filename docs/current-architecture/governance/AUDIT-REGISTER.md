@@ -1,6 +1,6 @@
 # Repository Audit Register
 
-**Status snapshot:** 2026-11-26 — GOV-WEBVIEW-CLOSE-001 and GOV-DEPMAP-003. Latest verified canonical `main` HEAD/tree: `f6464594f950b9af49274b8e1724e4d3e96c0271`; recursive tree 933 entries, `truncated=false`. Historical module baselines remain individually scoped below.  
+**Status snapshot:** 2026-11-26 — GOV-WEBVIEW-CLOSE-001 and GOV-DEPMAP-003/004. Latest verified canonical snapshot before this documentation-only update: `main@2e35f6df56d32a528c13a9d2f5d65e5db470c644`; recursive tree `dc626a57bc6e0afe64a1dae78e90302adf99af47`, 933 entries, `truncated=false`. Source blobs remain unchanged from the recorded application baseline. Historical module baselines remain individually scoped below.  
 **Repository:** `K41-Origin/k41-nexus-prototype`
 **Latest source snapshots:** `main@b1104a808cf70382c2bd14a94d372d907a500cda` (933 tree entries, `truncated=false`); workflow remediation `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`. See GOV-INFRA-001, GOV-DEPMAP-001, GOV-ADR-001 and GOV-GAP-CLOSURE-001 in the evidence log.  
 **Governance publication branch:** `docs/hybrid-llm-engine-direction` (historical; PR #1 merged); canonical branch: `main`.  
