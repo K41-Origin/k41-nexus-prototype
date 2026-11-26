@@ -1652,3 +1652,16 @@ The current-architecture index previously displayed only the historical module b
 **Disposition:** `CLOSED BY SCOPE ACCEPTANCE`. This closes the audit task by explicit scope decision only. It is not `SOURCE-VERIFIED`, `TEST-EXECUTED` or `RUNTIME-REPRODUCED`, and must not be described as technical validation. Reopen only if integrity, provenance, Unicode coverage or runtime rendering becomes an explicit requirement.
 
 **Unchanged gaps:** The separate 143 binary-asset validation boundary and all other webview runtime/cross-process gaps remain open.
+
+
+## GOV-ASSET-CRC-002 — Current asset snapshot and full-decode continuation (2026-11-26)
+
+**Repository state:** `main@23ff5a79578d91960fac8e3c00113c733bd37352`; recursive tree `eb64051f24732382c0d5c1d4a43261f2681d1ad2`, `truncated=false`, 933 entries.
+
+**Scope and reconciliation:** 143 binary asset paths are present: 141 PNG, one JPEG and one ICO. The TTF is excluded under the separate GOV-WEBVIEW-013 scope-acceptance decision. Current tree paths, blob SHAs and sizes were compared against FILE-REFERENCE: 143/143 match. Compared with prior CRC baseline tree `97940dabd84264b6281917b11928ebae6156752c`, there are zero changed/added/removed target asset blobs.
+
+**Evidence carried forward:** 132 unique PNG blobs / 141 paths have valid chunk CRC and structural checks recorded in GOV-ASSET-CRC-001. ICO directory bounds and its three embedded PNG chunk CRCs are verified. JPEG marker structure and dimensions are verified.
+
+**Additional programmatic probe:** one PNG blob, `webview-ui/public/apple-touch-icon-precomposed.png` (`9d7154cbc4ef79c2cf08efa054120c9886c38fdf`), was passed through a custom zlib/PNG scanline decoder: 256×256 RGBA8; all 256 scanlines and 65,536 pixels were consumed without a zlib checksum, scanline-size or filter error. This is single-blob evidence only; it does not upgrade the remaining 131 unique PNG blobs.
+
+**Disposition:** FULL VALIDATION REMAINS OPEN. No complete decompression/reconstruction of all PNG blobs, JPEG entropy decode, ICO embedded pixel decode or browser/runtime loading was completed. The available execution path lacks a local checkout and a complete batch binary-decoding workflow. Continue with a local checkout or binary archive and a standards-compliant decoder; record decoder/version and per-blob outcomes. No source assets were changed and no tests/build/browser runtime were executed.
