@@ -137,14 +137,15 @@ The union contains 810 reachable installed package paths. Two additional `node_m
 
 **Interpretation:** this closes the static transitive dependency *lockfile-resolution* inventory for the current committed lockfile. It does not prove that `npm ci` succeeds, that every package is imported/reachable in shipped bundles, that optional native binaries install on every OS/ABI, or that licenses/vulnerabilities are acceptable. Source import-to-package usage, esbuild/Vite metafile comparison, tarball/VSIX closure, SBOM and installed-runtime verification remain OPEN.
 
-## 9. Known gaps and continuation
+## 9. Known gaps and continuation (superseded by GOV-DEPMAP-003/004)
 
-1. Build the exhaustive source import/call graph (including script/config imports) and compare it to bundler output/metafiles; the npm lockfile transitive resolution graph is now mapped in infrastructure/DEPENDENCIES.md.
-2. Trace all server route registrations and all terminal process ownership edges where not already covered by module deep audits.
-3. Verify actual generated protocol parity and built npm/VSIX contents only when execution is authorized.
-4. Clarify multi-window/multi-process persistence ownership and runtime teardown; preserve F-01–F-09, A-01–A-10 and WV lifecycle findings.
-5. Verify real network/auth/TLS/proxy behavior and registry/Environment policy only with authorized runtime/settings access.
-6. Keep all dynamic edges OPEN until observed. Do not infer lifecycle correctness from constructor wiring.
+The source import inventory and terminal/process ownership work previously listed as pending are now recorded in §§10–11. Remaining work is:
+
+1. Compare the mapped source import graph with esbuild/Vite metafiles and actual npm/VSIX outputs.
+2. Verify generated protocol parity and package contents only after authorized build/package execution.
+3. Verify multi-window/multi-process persistence, runtime teardown and reconnect behavior dynamically; preserve F-01–F-09, A-01–A-10 and WV lifecycle findings.
+4. Verify real network/auth/TLS/proxy behavior and registry/Environment policy only with authorized runtime/settings access.
+5. Keep dynamic edges OPEN until observed. Do not infer lifecycle correctness from constructor wiring.
 
 No tests, build, typecheck, lint, generation, package, CI dispatch, network experiment, PTY experiment or runtime reproduction was performed. No application source changed.
 
