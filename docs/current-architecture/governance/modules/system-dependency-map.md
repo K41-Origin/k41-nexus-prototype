@@ -1,6 +1,6 @@
 # System Dependency Map Audit Record
 
-**Status:** STATIC MAP IN PROGRESS — major host composition, protocol, persistence, provider, transport and infrastructure edges are SOURCE-VERIFIED; npm lockfile transitive closure is now mapped (GOV-DEPMAP-002); exhaustive source import/call and runtime lifecycle edges remain OPEN. Latest source snapshots: `main@b1104a808cf70382c2bd14a94d372d907a500cda`; remediation branch `security/remediate-build-008-009@1b71acd07b48d56527d0ad72e4d5e23713b390a7`.
+**Status:** STATIC MAP IN PROGRESS — npm lockfile transitive closure mapped (GOV-DEPMAP-002); source import inventory covers 334 code modules and terminal/process ownership is SOURCE-VERIFIED (GOV-DEPMAP-003/004); bundle/metafile comparison, symbol-level call graph and runtime lifecycle remain OPEN. Current verification: `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; source blobs unchanged from the recorded application baseline.
 
 ## Owner
 
@@ -16,6 +16,8 @@
 - Persistence: StateAdapter → FileStateAdapter, host namespaces, shared config and external Claude state.
 - Provider: HookProvider contract → provider registry (Claude only) → HTTP hook endpoint → AgentRuntime.
 - Trust boundaries: standalone token/Host/origin checks and read-only gate for unprivileged WebSocket clients.
+- Source import graph: 334 TS/JS modules across adapters (8), core (27), server (74), webview UI (214) and scripts (11) statically inventoried; cross-layer directions and Node/build-only edges summarized in SYSTEM-DEPENDENCY-MAP.md (GOV-DEPMAP-003).
+- Terminal/process ownership: VS Code-owned terminal, standalone in-process PTY and development detached PTY-host modes mapped with source paths/SHAs (GOV-DEPMAP-004).
 - CI: workflow-to-script/build/test/release graph including unmerged BUILD-008/009 remediation branch.
 
 ## Evidence classes
@@ -24,9 +26,9 @@ Every edge in the owning map identifies source commit, source path, line range a
 
 ## Open work
 
-1. Exhaustive transitive import/call graph and bundler output comparison.
-2. Detailed terminal PTY process/terminal socket ownership map where module docs do not already provide it.
-3. Runtime lifecycle, reconnect, persistence race and multi-process behavior.
+1. Compare the completed static source import map with esbuild/Vite metafiles and actual package/VSIX contents.
+2. Resolve only named symbol-level call paths that are needed to explain cross-module behavior; avoid a redundant repository-wide function graph.
+3. Runtime lifecycle, reconnect, PTY process, persistence race and multi-process behavior.
 4. Actual package, VSIX, OIDC, registry and external service evidence.
 5. External GitHub/Environment/ruleset/secret settings.
 
