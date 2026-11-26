@@ -944,3 +944,14 @@ No asset or application source was modified. No test suite, build or browser run
 **Acceptance boundary:** this is DOC-RECORDED scope acceptance, not SOURCE-VERIFIED pixel correctness, TEST-EXECUTED, or RUNTIME-REPRODUCED rendering. Full PNG IDAT/scanline decoding, JPEG entropy decoding, ICO embedded pixel decoding, pixel-content inspection and browser/runtime loading are removed from the required audit exit criteria. Reopen only if pixel integrity, provenance, visual fidelity/accessibility or runtime rendering becomes an explicit requirement. JSON layout/manifest validation and asset-consumer mapping remain separately scoped.
 
 No binary asset or application source was modified. No tests, build, lint, typecheck or runtime experiment was executed as part of this disposition.
+
+
+## 20. Webview file audit closure — GOV-WEBVIEW-CLOSE-001 (2026-11-26)
+
+**Disposition: AUDIT CLOSED — STATIC FILE AUDIT COMPLETE.** Current canonical verification snapshot is `main@f6464594f950b9af49274b8e1724e4d3e96c0271`; recursive tree SHA `f6464594f950b9af49274b8e1724e4d3e96c0271`, 933 entries, `truncated=false`. The webview subtree contains 459 blobs. A fresh path/blob-SHA comparison against `FILE-REFERENCE.md` found 459/459 matches, zero missing, zero extra and zero SHA mismatches. Comparison of all 425 source-tree blobs across `core/src/`, `server/src/`, `webview-ui/src/`, `adapters/` and `scripts/` against the earlier source snapshot `main@b1104a808cf70382c2bd14a94d372d907a500cda` found zero added, removed or changed blobs; the current webview 459-file ledger also has zero changed identities against its recorded baseline.
+
+**Final ledger distribution (459 paths):** 261 `REVIEWED`; 54 `TEST-INVENTORIED` (assertion-level inspection, not execution); 143 binary display paths `CLOSED BY SCOPE ACCEPTANCE`; one TTF `CLOSED BY SCOPE ACCEPTANCE`. The TTF ledger label was aligned with its already-recorded governance decision. No `FETCHED / INVENTORIED`, `REVIEWED REPORTED` or other file-level review gap remains.
+
+**Closure boundary:** this closes the webview file-audit workstream, not every known technical finding or runtime verification. Preserve `WV-RESYNC-01/02`, `WV-APP-01`, `WV-TR-01`, `WV-PROTO-01/02/03`, `WV-C08/F-08`, `WV-VITE-01`, `WV-C03/WV-C06`, `WV-C12`–`WV-C17` and `WV-TEST-01` with their existing states. Browser, reconnect, cross-client, test execution and other runtime evidence remain separate follow-up work and do not reopen the completed file audit unless a source SHA changes or a new file-level question is raised.
+
+No application source, test, asset, package or configuration file changed. No tests, build, lint, typecheck, browser/VS Code runtime or network experiment was executed.
