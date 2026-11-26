@@ -1699,3 +1699,25 @@ No application source, test, binary asset, package or configuration changed. No 
 **Terminal/process ownership outcome:** VS Code owns embedded terminal processes through `vscode.window.createTerminal`; standalone default owns one PTY per agent inside the server process; development-only `--pty-host` starts a detached host process that owns PTYs across server restarts via a versioned Unix-socket protocol. Terminal WebSocket detach does not terminate PTY; host/server shutdown semantics are statically traced and documented with source paths/SHAs in SYSTEM-DEPENDENCY-MAP.md.
 
 **Remaining OPEN:** source-to-bundle/metafile and npm/VSIX comparison; SBOM/license/native platform proof; symbol-level call paths where a specific behavior requires them; runtime PTY, socket, shutdown/restart, persistence and multi-process reproduction. No tests, build, typecheck, lint, package, dependency installation, CI dispatch or runtime experiment was executed. No application source changed.
+
+
+## 2026-11-26 — GOV-PUBLISH-VERIFY-002: verify webview closure and dependency-map publication
+
+**Pre-publication snapshot:** `main@956135562f5df932f1c5300944deb4032005bb72`; recursive tree `f3cc11a2c4fee5ebe6f6d890355dc6a4b722f911`, 933 entries, `truncated=false`.
+
+**Reconciliation repeated after the documentation changes:** current `webview-ui/` tree contains 459 blobs; FILE-REFERENCE contains 459 rows; missing=0, extra=0, blob-SHA mismatches=0. The 459 statuses remain 261 REVIEWED, 54 TEST-INVENTORIED and 144 CLOSED BY SCOPE ACCEPTANCE. The 425 blobs across core/server/webview/adapters/scripts match the recorded source baseline: added=0, removed=0, changed=0.
+
+**Published documents fetched back from canonical `main` and blob SHAs verified:**
+
+- `webview-ui/FILE-REFERENCE.md`: `21cf5617d0a0bfbbf23191e43ae06c4c613fe125`
+- `webview-ui/DEEP-AUDIT.md`: `5839ac8e61bf5f2d743f10aa7a54c0808f5c42ab`
+- `webview-ui/DEPENDENCIES.md`: `be8f7c719b4f682be972100b9e166ba893e6c482`
+- `governance/modules/webview-ui.md`: `aef8cdaa1c5814c6ecc63de399ea86abc50011e2`
+- `governance/AUDIT-REGISTER.md`: `cc9aed2aafe3d4751d70ca08a7f3be833aebb37a`
+- `SYSTEM-DEPENDENCY-MAP.md`: `8a9a2c8f38ea7a24e5e547265cac25b8e3b486da`
+- `governance/modules/system-dependency-map.md`: `deda4edc6a6f575e049fafe4fe58c9aae4cad147`
+- `infrastructure/DEPENDENCIES.md`: `e055441d6a8851f555a829ab29d795ef1796748c`
+- `governance/modules/infrastructure.md`: `476049e1628bd280dc04ac8ad9f58633dd9e47fa`
+- `infrastructure/README.md`: `f58b81efcb62638d16f8495abd8c9ba9ac72d291`
+
+**Outcome:** webview file audit closure and source dependency/process ownership documentation are published and fetched back. The dependency map remains IN PROGRESS only for bundle/metafile/package comparison, narrowly scoped symbol-level call paths and authorized runtime lifecycle verification. No tests/build/lint/typecheck/package/runtime experiment was executed.
